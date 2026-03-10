@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy a House | RentEase9ja</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <header>
+            <div class="navbar">
+                <div class="logo-area">
+                    <a href="index.html">
+                        <img src="logo.png" alt="RentEase9ja Logo" class="logo-img">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Marketplace</a></li>
+                        <li><a href="buy.html" style="color: var(--brand-blue);">Buy a House</a></li>
+                        <li><a href="rent.html">Rent a House</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="#" class="download-nav-btn" onclick="redirectToApp()">Download App</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="hero" style="height: 45vh; background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000');">
+            <div class="hero-content">
+                <h1>Buy a House</h1>
+                <p>Explore verified homes and lands available for purchase in Nigeria.</p>
+            </div>
+        </section>
+
+        <section class="marketplace">
+            <div class="listings-grid">
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=600" alt="Land">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> VERIFIED</span>
+                        <button class="wishlist-btn">❤️</button>
+                    </div>
+                    <div class="property-info">
+                        <h3>N6.5M</h3>
+                        <p class="title">Commercial Land</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</p>
+                    </div>
+                </div>
+
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=600" alt="Duplex">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> VERIFIED</span>
+                        <button class="wishlist-btn">❤️</button>
+                    </div>
+                    <div class="property-info">
+                        <h3>N45M</h3>
+                        <p class="title">Modern 4 Bedroom Duplex</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Lekki, Lagos</p>
+                    </div>
+                </div>
+
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&q=80&w=600" alt="Estate Land">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> VERIFIED</span>
+                        <button class="wishlist-btn">❤️</button>
+                    </div>
+                    <div class="property-info">
+                        <h3>N120M</h3>
+                        <p class="title">Prime Estate Land</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Epe, Lagos</p>
+                    </div>
+                </div>
+
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=600" alt="Mansion">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> VERIFIED</span>
+                        <button class="wishlist-btn">❤️</button>
+                    </div>
+                    <div class="property-info">
+                        <h3>N250M</h3>
+                        <p class="title">Luxury 5 Bedroom Mansion</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Maitama, Abuja</p>
+                    </div>
+                </div>
+
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&q=80&w=600" alt="Bungalow">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> VERIFIED</span>
+                        <button class="wishlist-btn">❤️</button>
+                    </div>
+                    <div class="property-info">
+                        <h3>N15M</h3>
+                        <p class="title">3 Bedroom Bungalow</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Ibadan, Oyo</p>
+                    </div>
+                </div>
+
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&q=80&w=600" alt="Penthouse">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> VERIFIED</span>
+                        <button class="wishlist-btn">❤️</button>
+                    </div>
+                    <div class="property-info">
+                        <h3>N85M</h3>
+                        <p class="title">Luxury Penthouse</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Victoria Island, Lagos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logo.png" alt="RentEase9ja" class="footer-logo">
+                <p>Simplifying Real Estate in Nigeria. Secure. Transparent. Easy.</p>
+            </div>
+            <div class="footer-col">
+                <h3>About <span class="brand-text">RentEase9ja</span></h3>
+                <p>We are a property technology company dedicated to bridging the trust gap in the Nigerian real estate market. Every listing is verified for your peace of mind.</p>
+                <a href="aboutus.html" class="read-more-link">Read more →</a>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Marketplace</a></li>
+                    <li><a href="buy.html">Buy a House</a></li>
+                    <li><a href="rent.html">Rent a House</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@rentease9ja6" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/rentease9ja" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+                <h3 style="margin-top: 20px; font-size: 16px;">Download Our App</h3>
+                <div class="footer-app-badges" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" style="height: 35px;"></a>
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" style="height: 35px;"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 RentEase9ja Nigeria. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function redirectToApp() {
+            alert("To view full details or purchase properties, please download the RentEase9ja App.");
+        }
+    </script>
+</body>
+</html>
