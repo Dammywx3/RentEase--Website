@@ -16,7 +16,12 @@
                 <a href="index.html">
                     <img src="logo.png" alt="RentEase9ja Logo" class="logo-img">
                 </a>
-                <nav>
+
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <nav id="nav-menu">
                     <ul>
                         <li><a href="index.html" style="color: var(--brand-blue);">Marketplace</a></li>
                         <li><a href="buy.html">Buy a House</a></li>
@@ -28,7 +33,7 @@
             </div>
         </header>
 
-        <section class="hero">
+        <section class="hero" style="padding-top: 100px;">
             <div class="hero-content">
                 <h1>Find your perfect place on <span class="brand-text">RentEase9ja</span></h1>
                 <p>Nigeria's safest, most trusted way to Buy, Rent, and Sell properties.</p>
@@ -192,6 +197,13 @@
     </footer>
 
     <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
         function redirectToApp() {
             alert("To view full details, message agents, or list properties, please download the RentEase9ja App.");
         }

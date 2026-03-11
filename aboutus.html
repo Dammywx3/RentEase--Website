@@ -19,7 +19,12 @@
                         <img src="logo.png" alt="RentEase9ja Logo" class="logo-img">
                     </a>
                 </div>
-                <nav>
+
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <nav id="nav-menu">
                     <ul>
                         <li><a href="index.html">Marketplace</a></li>
                         <li><a href="buy.html">Buy a House</a></li>
@@ -159,6 +164,13 @@
     </footer>
 
     <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
         function redirectToApp() {
             alert("To access support or manage listings, please download the RentEase9ja App.");
         }

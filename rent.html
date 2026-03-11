@@ -18,7 +18,12 @@
                         <img src="logo.png" alt="RentEase9ja Logo" class="logo-img">
                     </a>
                 </div>
-                <nav>
+
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <nav id="nav-menu">
                     <ul>
                         <li><a href="index.html">Marketplace</a></li>
                         <li><a href="buy.html">Buy a House</a></li>
@@ -139,7 +144,7 @@
             </div>
             <div class="footer-col">
                 <h3>About <span class="brand-text">RentEase9ja</span></h3>
-                <p>We are a property technology company dedicated to bridging the trust gap in the Nigerian real estate market. Every listing is verified for your peace of mind.</p>
+                <p>We are a property technology company dedicated to bridging the trust gap in the Nigerian real estate market.</p>
                 <a href="aboutus.html" class="read-more-link">Read more →</a>
             </div>
             <div class="footer-col">
@@ -169,6 +174,13 @@
     </footer>
 
     <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
         function redirectToApp() {
             alert("To view full details or rent properties, please download the RentEase9ja App.");
         }
