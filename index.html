@@ -4,9 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RentEase9ja | Marketplace</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Mobile adjustments for the new footer legal links */
+        @media (max-width: 768px) {
+            .footer-bottom-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .legal-links {
+                display: flex;
+                gap: 15px;
+            }
+            .desktop-divider {
+                display: none;
+            }
+        }
+        @media (min-width: 769px) {
+            .footer-bottom-content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -23,7 +49,7 @@
 
                 <nav id="nav-menu">
                     <ul>
-                        <li><a href="index.html" style="color: var(--brand-blue);">Marketplace</a></li>
+                        <li><a href="index.html" style="color: var(--buy-orange);">Marketplace</a></li>
                         <li><a href="buy.html">Buy House</a></li>
                         <li><a href="rent.html">Rent House</a></li>
                         <li><a href="land.html">Buy Land</a></li>
@@ -170,22 +196,14 @@
             <div class="footer-col">
                 <h3>About <span class="brand-text">RentEase9ja</span></h3>
                 <p>We are a property technology company dedicated to bridging the trust gap in the Nigerian market.</p>
-                <a href="aboutus.html" class="read-more-link">Read more →</a>
-            </div>
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul class="footer-links" style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 10px;"><a href="index.html" style="color: #bbb; text-decoration: none;">Marketplace</a></li>
-                    <li style="margin-bottom: 10px;"><a href="buy.html" style="color: #bbb; text-decoration: none;">Buy House</a></li>
-                    <li style="margin-bottom: 10px;"><a href="rent.html" style="color: #bbb; text-decoration: none;">Rent House</a></li>
-                    <li style="margin-bottom: 10px;"><a href="land.html" style="color: #bbb; text-decoration: none;">Buy Land</a></li>
-                </ul>
+                <a href="aboutus.html" class="read-more-link" style="color: var(--brand-blue); text-decoration: none; font-weight: 600;">Read more →</a>
             </div>
             <div class="footer-col">
                 <h3>Follow Us</h3>
                 <div class="social-links">
                     <a href="https://www.tiktok.com/@rentease9ja6" target="_blank"><i class="fab fa-tiktok"></i></a>
                     <a href="https://www.instagram.com/rentease9ja" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/rentease9ja?s=21" target="_blank"><i class="fab fa-x-twitter"></i></a>
                 </div>
                 <div class="footer-app-badges" style="display: flex; gap: 10px; margin-top: 20px;">
                     <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" style="height: 40px;"></a>
@@ -193,8 +211,16 @@
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 RentEase9ja Nigeria. All Rights Reserved.</p>
+        <div class="footer-bottom" style="text-align: center; padding-top: 30px; color: #666; font-size: 13px;">
+            <div class="footer-bottom-content">
+                <p style="margin: 0;">&copy; 2026 RentEase9ja Nigeria. All Rights Reserved.</p>
+                <span class="desktop-divider" style="margin: 0 15px;">|</span>
+                <div class="legal-links">
+                    <a href="privacy.html" style="color: #888; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
+                    <span style="margin: 0 10px; color: #555;">&bull;</span>
+                    <a href="terms.html" style="color: #888; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
+                </div>
+            </div>
         </div>
     </footer>
 

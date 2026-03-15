@@ -13,12 +13,43 @@ footer { flex-shrink: 0; background-color: #1a1a1a; color: #f1f1f1; padding: 50p
 
 .brand-text { font-weight: 700; color: inherit; }
 
+/* Ensure transitions are smooth for all interactive elements */
+a, button, .app-btn, .btn-light-brand, .download-nav-btn, .property-card {
+    transition: all 0.3s ease;
+}
+
+/* ========================================= */
+/* --- GLOBAL HOVER EFFECTS (The Orange Pop) --- */
+/* ========================================= */
+
+/* 1. Text & Icon Links (Turns Orange) */
+/* Added :not(.download-nav-btn) so it doesn't break the button's white text */
+nav#nav-menu a:not(.download-nav-btn):hover,
+.social-links a:hover,
+.footer-links a:hover,
+.footer-bottom a:hover,
+.contact-info-box a:hover,
+.read-more-link:hover,
+.wishlist-btn:hover {
+    color: var(--buy-orange) !important;
+}
+
+/* 2. Buttons (Background turns Orange + Lifts up slightly + White text) */
+nav#nav-menu a.download-nav-btn:hover,
+.app-btn:hover,
+.btn-light-brand:hover {
+    background: var(--buy-orange) !important;
+    color: #fff !important; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 87, 34, 0.3); /* Adds a soft orange glow */
+}
+
 /* --- Navbar --- */
 .navbar { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    padding: 10px 8%; 
+    padding: 10px 2%; 
     background: #fff; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.06); 
     position: sticky; 
@@ -36,8 +67,7 @@ footer { flex-shrink: 0; background-color: #1a1a1a; color: #f1f1f1; padding: 50p
 }
 
 nav#nav-menu ul { display: flex; list-style: none; gap: 25px; align-items: center; }
-nav#nav-menu a { text-decoration: none; color: #555; font-weight: 600; font-size: 14px; transition: 0.3s; }
-nav#nav-menu a:hover { color: var(--brand-blue); }
+nav#nav-menu a { text-decoration: none; color: #555; font-weight: 600; font-size: 14px; }
 .download-nav-btn { background: var(--rent-green); color: #fff !important; padding: 10px 22px; border-radius: 8px; }
 
 /* --- Standard Hero Section (Desktop) --- */
@@ -108,21 +138,20 @@ nav#nav-menu a:hover { color: var(--brand-blue); }
     border-left: 5px solid var(--brand-blue);
 }
 .contact-info-box a { color: var(--brand-blue); text-decoration: none; font-weight: 600; }
-.contact-info-box a:hover { text-decoration: underline; }
 
 /* --- Marketplace --- */
 .marketplace { padding: 80px 8%; background-color: #f9f9f9; }
 .section-header { text-align: center; margin-bottom: 60px; }
 .listings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
-.property-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
-.property-card:hover { transform: translateY(-10px); }
+.property-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); cursor: pointer; }
+.property-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
 .img-container { position: relative; height: 250px; background-color: #eee; }
 .img-container img { width: 100%; height: 100%; object-fit: cover; }
 .status-tag { position: absolute; bottom: 15px; left: 15px; padding: 6px 12px; color: #fff; font-weight: 700; font-size: 11px; border-radius: 6px; }
 .rent { background: var(--rent-green); }
 .buy { background: var(--buy-orange); }
 .verified-tag { position: absolute; top: 15px; left: 15px; background: var(--brand-blue); color: #fff; padding: 6px 12px; font-size: 11px; font-weight: 700; border-radius: 6px; }
-.wishlist-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 40px; height: 40px; }
+.wishlist-btn { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;}
 .property-info { padding: 25px; }
 .property-info h3 { font-size: 24px; margin-bottom: 5px; }
 
@@ -188,34 +217,34 @@ nav#nav-menu a:hover { color: var(--brand-blue); }
     /* --- SIDE-BY-SIDE MOBILE APP MOCKUP FIX --- */
     .mockup-container { 
         display: flex; 
-        flex-direction: row; /* Forces items side-by-side */
+        flex-direction: row; 
         align-items: center; 
         justify-content: space-between;
         gap: 15px; 
         padding: 40px 10px; 
     }
     .mockup-text {
-        flex: 1; /* Takes up available space */
-        text-align: left; /* Aligns text left for better readability side-by-side */
+        flex: 1; 
+        text-align: left; 
     }
     .mockup-text h2 { font-size: 1.4rem !important; margin-bottom: 10px; line-height: 1.2; }
     .mockup-text p { font-size: 0.9rem; margin-bottom: 15px; }
     .qr-area { 
         display: flex; 
         flex-direction: column; 
-        align-items: flex-start; /* Aligns QR code to the left */
+        align-items: flex-start; 
         margin-top: 10px; 
     }
     .qr-area img { width: 80px; margin-bottom: 5px; }
     .qr-area p { font-size: 0.8rem; margin: 0; }
     .mockup-image {
-        flex: 1; /* Takes up available space */
+        flex: 1; 
         display: flex;
-        justify-content: flex-end; /* Aligns image to the right */
+        justify-content: flex-end; 
     }
     .phone-mockup { 
         width: 100%; 
-        max-width: 160px; /* Limits the max width so it doesn't overlap text */
+        max-width: 160px; 
         border-radius: 20px; 
         border: 4px solid #333; 
         margin: 0;

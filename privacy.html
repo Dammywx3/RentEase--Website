@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | RentEase9ja</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Privacy Policy Specific Styles --- */
+        .policy-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+            background-color: #fff;
+        }
+
+        .policy-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .policy-header h1 {
+            font-size: 2.5rem;
+            color: var(--brand-blue);
+            margin-bottom: 15px;
+        }
+
+        .policy-meta {
+            display: inline-block;
+            background: #f4f7f6;
+            color: #555;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .scope-banner {
+            background: #fff8f5;
+            border: 1px solid #ffdecb;
+            border-left: 4px solid var(--buy-orange);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .scope-banner strong { 
+            display: block; 
+            font-size: 13px; 
+            font-weight: 700; 
+            color: var(--buy-orange); 
+            margin-bottom: 5px; 
+            text-transform: uppercase; 
+            letter-spacing: .5px; 
+        }
+
+        .toc {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .toc h3 {
+            font-size: 1.1rem;
+            color: var(--brand-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .toc ol {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 30px;
+            counter-reset: toc;
+            margin-left: 0; /* Override style.css ul margin */
+        }
+        
+        .toc li {
+            counter-increment: toc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            margin-bottom: 0; /* Override style.css li margin */
+        }
+        
+        .toc li::before {
+            content: counter(toc, decimal-leading-zero);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--rent-green);
+            background: #e8f5e9;
+            padding: 2px 6px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        
+        .toc a { color: #444; text-decoration: none; transition: 0.2s; }
+        .toc a:hover { color: var(--brand-blue); font-weight: 600; }
+
+        .policy-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 120px; /* Accounts for sticky header */
+        }
+        
+        .section-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        
+        .section-num {
+            width: 40px; height: 40px;
+            background: var(--brand-blue);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .policy-section h2 { font-size: 1.6rem; color: #222; margin: 0; }
+        .policy-section p { font-size: 1.05rem; color: #555; line-height: 1.8; margin-bottom: 15px; }
+        
+        .policy-list {
+            list-style: none;
+            margin: 20px 0 0 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .policy-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 15px;
+            background: #f8fbfa;
+            border-radius: 10px;
+            border-left: 3px solid var(--rent-green);
+            margin-bottom: 0;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .highlight-box {
+            background: #eef5fa;
+            border: 1px solid #d0e3f1;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            color: var(--brand-blue);
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .contact-box {
+            background: var(--brand-blue);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+            color: #fff;
+        }
+        
+        .contact-box h3 { font-size: 1.8rem; color: #fff; margin-bottom: 15px; }
+        .contact-box p { color: rgba(255,255,255,0.8); margin-bottom: 25px; }
+        
+        .contact-link {
+            display: inline-block;
+            background: var(--rent-green);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 14px 30px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+        .contact-link:hover { background: #3d8c40; transform: translateY(-2px); }
+
+        .divider { border: none; border-top: 1px solid #eee; margin: 50px 0; }
+
+        /* Mobile Adjustments for Privacy Policy */
+        @media (max-width: 768px) {
+            .policy-wrap { padding: 40px 15px; }
+            .policy-header h1 { font-size: 2rem; }
+            .toc ol { grid-template-columns: 1fr; }
+            .policy-section h2 { font-size: 1.4rem; }
+            .contact-box { padding: 30px 20px; }
+            .footer-bottom-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .legal-links {
+                display: flex;
+                gap: 15px;
+            }
+            .desktop-divider {
+                display: none;
+            }
+        }
+        @media (min-width: 769px) {
+            .footer-bottom-content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        
+        <header>
+            <div class="navbar">
+                <div class="logo-area">
+                    <a href="index.html">
+                        <img src="logo.png" alt="RentEase9ja Logo" class="logo-img">
+                    </a>
+                </div>
+
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html">Marketplace</a></li>
+                        <li><a href="buy.html">Buy House</a></li>
+                        <li><a href="rent.html">Rent House</a></li>
+                        <li><a href="land.html">Buy Land</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="#" class="download-nav-btn" onclick="redirectToApp()">Download App</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="policy-wrap">
+            
+            <div class="policy-header">
+                <h1>Privacy Policy</h1>
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 20px;">How RentEase9ja collects, uses, and protects your personal information.</p>
+                <div class="policy-meta">
+                    <i class="far fa-calendar-alt"></i> Effective Date: February 24, 2026 | Applies to iOS & Android Apps
+                </div>
+            </div>
+
+            <div class="scope-banner">
+                <div style="font-size: 24px; margin-top: 2px;">📋</div>
+                <div>
+                    <strong>Who This Policy Covers</strong>
+                    <p style="font-size: 0.95rem; color: #555; margin: 0;">This Privacy Policy applies to all users of the RentEase9ja mobile application, including <strong>Tenants</strong>, <strong>Agents</strong>, and <strong>Landlords</strong>. By downloading or using the app, you agree to the practices described here.</p>
+                </div>
+            </div>
+
+            <div class="toc">
+                <h3>Contents</h3>
+                <ol>
+                    <li><a href="#s1">Information We Collect</a></li>
+                    <li><a href="#s2">How We Use Your Data</a></li>
+                    <li><a href="#s3">Data Sharing</a></li>
+                    <li><a href="#s4">Data Security</a></li>
+                    <li><a href="#s5">Data Retention</a></li>
+                    <li><a href="#s6">Children's Privacy</a></li>
+                    <li><a href="#s7">Your Rights (NDPR)</a></li>
+                    <li><a href="#s8">Third-Party Services</a></li>
+                    <li><a href="#s9">Changes to This Policy</a></li>
+                    <li><a href="#s10">Contact Us</a></li>
+                </ol>
+            </div>
+
+            <div class="policy-section" id="s1">
+                <div class="section-header">
+                    <div class="section-num">01</div>
+                    <h2>Information We Collect</h2>
+                </div>
+                <p>We collect information you provide directly when you create an account, complete identity verification, list a property, make a payment, or communicate through the platform. This includes:</p>
+                <ul class="policy-list">
+                    <li><span>👤</span><span><strong>Identity data:</strong> Full name, email address, phone number, profile photo, and date of birth.</span></li>
+                    <li><span>🪪</span><span><strong>Verification data:</strong> Government-issued ID (NIN, Voter's Card, Passport), BVN, and live selfie images used strictly for KYC compliance.</span></li>
+                    <li><span>🏡</span><span><strong>Property data:</strong> Listing details, photos, videos, and address information provided by agents and landlords.</span></li>
+                    <li><span>💳</span><span><strong>Financial data:</strong> Payment method details (processed by Paystack), wallet transaction history, escrow records, and payout account details.</span></li>
+                    <li><span>📱</span><span><strong>Device & usage data:</strong> Device model, OS version, app usage patterns, and crash logs for performance improvement.</span></li>
+                    <li><span>💬</span><span><strong>Communications:</strong> Messages sent between users within the app's encrypted chat system.</span></li>
+                </ul>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s2">
+                <div class="section-header">
+                    <div class="section-num">02</div>
+                    <h2>How We Use Your Data</h2>
+                </div>
+                <p>We use the information we collect solely to operate, improve, and secure the RentEase9ja platform. Specifically:</p>
+                <ul class="policy-list">
+                    <li><span>✅</span><span>Verify your identity and maintain the integrity of our user registry.</span></li>
+                    <li><span>✅</span><span>Facilitate property listings, rental applications, tenancy agreements, and escrow payments.</span></li>
+                    <li><span>✅</span><span>Process and disburse payments through our escrow and wallet infrastructure.</span></li>
+                    <li><span>✅</span><span>Send transaction confirmations, account alerts, and security notifications.</span></li>
+                    <li><span>✅</span><span>Detect, investigate, and prevent fraudulent transactions and platform abuse.</span></li>
+                    <li><span>✅</span><span>Provide customer support and respond to your enquiries.</span></li>
+                </ul>
+                <div class="highlight-box">
+                    <strong>We do not sell your data.</strong> We do not sell, rent, or trade your personal information to third-party advertisers or marketing companies under any circumstances.
+                </div>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s3">
+                <div class="section-header">
+                    <div class="section-num">03</div>
+                    <h2>Data Sharing</h2>
+                </div>
+                <p>We do not share your personal information with third parties except in the following limited circumstances:</p>
+                <ul class="policy-list">
+                    <li><span>🔁</span><span><strong>Between platform users:</strong> Agents, landlords, and tenants see only the profile information necessary to complete a rental or purchase transaction.</span></li>
+                    <li><span>💰</span><span><strong>Payment processors:</strong> Paystack processes all card transactions. We share only the minimum required data (amount, reference). We do not store full card numbers.</span></li>
+                    <li><span>⚖️</span><span><strong>Legal compliance:</strong> We may disclose information when required by Nigerian law, court order, or to comply with Anti-Money Laundering (AML) and NDPR regulations.</span></li>
+                    <li><span>🛡️</span><span><strong>Fraud prevention:</strong> We may share data with fraud prevention services to protect all users on the platform.</span></li>
+                </ul>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s4">
+                <div class="section-header">
+                    <div class="section-num">04</div>
+                    <h2>Data Security</h2>
+                </div>
+                <p>We implement industry-standard security measures to protect your information from unauthorised access, alteration, disclosure, or destruction:</p>
+                <ul class="policy-list">
+                    <li><span>🔒</span><span>All data is encrypted in transit using TLS 1.3 and at rest using AES-256 encryption.</span></li>
+                    <li><span>🔑</span><span>User messages are end-to-end encrypted. We cannot read the content of your private conversations.</span></li>
+                    <li><span>🛡️</span><span>Payment data is handled exclusively by PCI-DSS compliant processors (Paystack). We never store raw card details.</span></li>
+                    <li><span>📲</span><span>Multi-factor authentication (MFA) and biometric login options are available to all users.</span></li>
+                </ul>
+                <p style="margin-top:20px;">Despite our best efforts, no method of transmission or storage is 100% secure. We encourage you to use a strong password and never share your login credentials.</p>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s5">
+                <div class="section-header">
+                    <div class="section-num">05</div>
+                    <h2>Data Retention</h2>
+                </div>
+                <p>We retain your personal data for as long as your account is active or as needed to provide services. Specific retention periods:</p>
+                <ul class="policy-list">
+                    <li><span>📅</span><span><strong>Account data</strong> is retained for the life of your account plus 12 months after deletion, to resolve any disputes.</span></li>
+                    <li><span>📅</span><span><strong>Transaction records</strong> are retained for 7 years in compliance with Nigerian financial regulations.</span></li>
+                    <li><span>📅</span><span><strong>KYC documents</strong> are retained for 5 years in compliance with the Money Laundering (Prevention & Prohibition) Act 2022.</span></li>
+                </ul>
+                <p style="margin-top:20px;">You may request deletion of your account at any time. Upon deletion, we anonymise your data within 30 days, except where legal retention obligations apply.</p>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s6">
+                <div class="section-header">
+                    <div class="section-num">06</div>
+                    <h2>Children's Privacy</h2>
+                </div>
+                <p>RentEase9ja is intended for users who are <strong>18 years of age or older</strong>. We do not knowingly collect personal information from children under 18. If you believe a minor has created an account, please contact us immediately at <a href="mailto:privacy@rentease9ja.com" style="color:var(--brand-blue);font-weight:600;">privacy@rentease9ja.com</a> and we will promptly delete the account and associated data.</p>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s7">
+                <div class="section-header">
+                    <div class="section-num">07</div>
+                    <h2>Your Rights Under the NDPR</h2>
+                </div>
+                <p>Under the Nigeria Data Protection Regulation (NDPR 2019), you have the following rights regarding your personal data:</p>
+                <ul class="policy-list">
+                    <li><span>📂</span><span><strong>Right of Access:</strong> Request a copy of all personal data we hold about you.</span></li>
+                    <li><span>✏️</span><span><strong>Right of Rectification:</strong> Correct any inaccurate or incomplete information in your profile.</span></li>
+                    <li><span>🗑️</span><span><strong>Right of Erasure:</strong> Request deletion of your personal data (subject to legal retention requirements).</span></li>
+                    <li><span>🚫</span><span><strong>Right to Object:</strong> Object to certain types of processing, including profiling.</span></li>
+                    <li><span>📦</span><span><strong>Right to Portability:</strong> Receive your data in a structured, machine-readable format.</span></li>
+                </ul>
+                <p style="margin-top:20px;">To exercise any of these rights, email <a href="mailto:privacy@rentease9ja.com" style="color:var(--brand-blue);font-weight:600;">privacy@rentease9ja.com</a>. We will respond within 30 days.</p>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s8">
+                <div class="section-header">
+                    <div class="section-num">08</div>
+                    <h2>Third-Party Services</h2>
+                </div>
+                <p>The app integrates with the following third-party services, each with their own privacy policies:</p>
+                <ul class="policy-list">
+                    <li><span>💳</span><span><strong>Paystack</strong> — Payment processing.</span></li>
+                    <li><span>📡</span><span><strong>ZegoCloud</strong> — In-app voice and video calls.</span></li>
+                    <li><span>☁️</span><span><strong>Cloudinary</strong> — Secure media (photo/video) storage.</span></li>
+                    <li><span>🔥</span><span><strong>Firebase</strong> — Push notifications.</span></li>
+                </ul>
+                <p style="margin-top:20px;">We only share data with these providers to the extent necessary to deliver our services. We require all third-party processors to treat your data in accordance with this policy.</p>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s9">
+                <div class="section-header">
+                    <div class="section-num">09</div>
+                    <h2>Changes to This Policy</h2>
+                </div>
+                <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Effective Date" at the top and notify you via the app or email at least <strong>30 days before</strong> material changes take effect. Continued use of the app after the effective date constitutes acceptance of the revised policy.</p>
+            </div>
+
+            <hr class="divider"/>
+
+            <div class="policy-section" id="s10">
+                <div class="section-header">
+                    <div class="section-num">10</div>
+                    <h2>Contact Us</h2>
+                </div>
+                <p>If you have any questions, concerns, or requests regarding this Privacy Policy or the handling of your personal data, please reach out to our Data Protection team.</p>
+            </div>
+
+            <div class="contact-box">
+                <h3>Get in Touch</h3>
+                <p>Our Data Protection team responds within 2 business days.</p>
+                <a class="contact-link" href="mailto:privacy@rentease9ja.com">privacy@rentease9ja.com</a>
+                <p style="margin-top:20px; font-size: 0.9rem; color: rgba(255,255,255,0.6);">
+                    RentEase9ja · Lagos, Nigeria · NDPR Compliant
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logo.png" alt="RentEase9ja" class="footer-logo">
+                <p>Simplifying Real Estate in Nigeria. Secure. Transparent. Easy.</p>
+            </div>
+            <div class="footer-col">
+                <h3>About <span class="brand-text">RentEase9ja</span></h3>
+                <p>We are a property technology company dedicated to bridging the trust gap in the Nigerian real estate market. Every listing is verified for your peace of mind.</p>
+                <a href="aboutus.html" class="read-more-link" style="color: var(--brand-blue); text-decoration: none; font-weight: 600;">Read more →</a>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@rentease9ja6" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/rentease9ja" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/rentease9ja?s=21" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                </div>
+                <h3 style="margin-top: 20px; font-size: 16px;">Download Our App</h3>
+                <div class="footer-app-badges" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" style="height: 35px;"></a>
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" style="height: 35px;"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align: center; padding-top: 30px; color: #666; font-size: 13px;">
+            <div class="footer-bottom-content">
+                <p style="margin: 0;">&copy; 2026 RentEase9ja Nigeria. All Rights Reserved.</p>
+                <span class="desktop-divider" style="margin: 0 15px;">|</span>
+                <div class="legal-links">
+                    <a href="privacy.html" style="color: #888; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
+                    <span style="margin: 0 10px; color: #555;">&bull;</span>
+                    <a href="terms.html" style="color: #888; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        function redirectToApp() {
+            alert("Please download the RentEase9ja App.");
+        }
+    </script>
+</body>
+</html>
