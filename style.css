@@ -40,7 +40,7 @@ nav#nav-menu a { text-decoration: none; color: #555; font-weight: 600; font-size
 nav#nav-menu a:hover { color: var(--brand-blue); }
 .download-nav-btn { background: var(--rent-green); color: #fff !important; padding: 10px 22px; border-radius: 8px; }
 
-/* --- Hero Section (Desktop) --- */
+/* --- Standard Hero Section (Desktop) --- */
 .hero { 
     height: 60vh; 
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2000'); 
@@ -55,6 +55,60 @@ nav#nav-menu a:hover { color: var(--brand-blue); }
 }
 .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; }
 .app-btn { background: #000; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 10px; margin: 10px; font-weight: 700; display: inline-block; }
+
+/* --- Video Hero Section Styles (About Us) --- */
+.video-hero {
+    position: relative;
+    height: 40vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+}
+.hero-content h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; }
+.hero-content p { font-size: 1.2rem; }
+
+/* --- About Us Text Content (Desktop) --- */
+.about-text-content { padding: 80px 15%; background-color: #fff; }
+.about-text-content h2 { color: var(--brand-blue); font-size: 2.2rem; margin: 40px 0 20px; }
+.about-text-content h3 { color: #333; font-size: 1.5rem; margin: 30px 0 15px; }
+.about-text-content p { font-size: 1.1rem; color: #555; margin-bottom: 20px; line-height: 1.8; }
+.about-text-content ul { margin: 0 0 30px 40px; }
+.about-text-content li { font-size: 1.1rem; color: #555; margin-bottom: 10px; }
+
+.contact-info-box {
+    background-color: #f4f7f6;
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 60px;
+    border-left: 5px solid var(--brand-blue);
+}
+.contact-info-box a { color: var(--brand-blue); text-decoration: none; font-weight: 600; }
+.contact-info-box a:hover { text-decoration: underline; }
 
 /* --- Marketplace --- */
 .marketplace { padding: 80px 8%; background-color: #f9f9f9; }
@@ -94,7 +148,9 @@ nav#nav-menu a:hover { color: var(--brand-blue); }
 .social-links a { color: #fff; font-size: 28px; }
 .footer-bottom { text-align: center; padding-top: 30px; color: #666; font-size: 13px; }
 
-/* --- MOBILE RESPONSIVE FIXES --- */
+/* ========================================= */
+/* --- MOBILE RESPONSIVE FIXES (Max 768px) --- */
+/* ========================================= */
 @media screen and (max-width: 768px) {
     .navbar { padding: 10px 5%; height: 75px; }
     .logo-img { height: 45px; }
@@ -117,18 +173,53 @@ nav#nav-menu a:hover { color: var(--brand-blue); }
     nav#nav-menu ul li { width: 100%; text-align: center; border-bottom: 1px solid #eee; }
     nav#nav-menu a { padding: 15px; font-size: 16px; display: block; }
 
+    /* Standard Hero Fixes */
     .hero { height: 55vh !important; padding-top: 20px !important; }
     .hero h1 { font-size: 1.9rem !important; line-height: 1.2; }
+
+    /* Video Hero Fixes */
+    .video-hero { height: 50vh !important; padding: 0 20px; }
+    .video-hero .hero-content h1 { font-size: 2rem !important; }
+    .video-hero .hero-content p { font-size: 1rem !important; }
 
     .cta-buttons { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .app-btn { width: 85%; margin: 5px 0; }
 
-    .mockup-container { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; padding: 40px 15px; }
-    .mockup-text h2 { font-size: 2rem !important; margin-bottom: 15px; }
-    .mockup-text p { font-size: 1rem; max-width: 95%; margin: 0 auto; }
-    .qr-area { display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
-    .qr-area img { width: 120px; margin-bottom: 10px; }
-    .phone-mockup { width: 90%; max-width: 280px; margin: 0 auto; border-radius: 30px; border: 6px solid #333; }
+    /* --- SIDE-BY-SIDE MOBILE APP MOCKUP FIX --- */
+    .mockup-container { 
+        display: flex; 
+        flex-direction: row; /* Forces items side-by-side */
+        align-items: center; 
+        justify-content: space-between;
+        gap: 15px; 
+        padding: 40px 10px; 
+    }
+    .mockup-text {
+        flex: 1; /* Takes up available space */
+        text-align: left; /* Aligns text left for better readability side-by-side */
+    }
+    .mockup-text h2 { font-size: 1.4rem !important; margin-bottom: 10px; line-height: 1.2; }
+    .mockup-text p { font-size: 0.9rem; margin-bottom: 15px; }
+    .qr-area { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; /* Aligns QR code to the left */
+        margin-top: 10px; 
+    }
+    .qr-area img { width: 80px; margin-bottom: 5px; }
+    .qr-area p { font-size: 0.8rem; margin: 0; }
+    .mockup-image {
+        flex: 1; /* Takes up available space */
+        display: flex;
+        justify-content: flex-end; /* Aligns image to the right */
+    }
+    .phone-mockup { 
+        width: 100%; 
+        max-width: 160px; /* Limits the max width so it doesn't overlap text */
+        border-radius: 20px; 
+        border: 4px solid #333; 
+        margin: 0;
+    }
 
     /* --- SIDE-BY-SIDE MOBILE LISTINGS FIX --- */
     .marketplace { padding: 40px 10px; }
@@ -158,41 +249,11 @@ nav#nav-menu a:hover { color: var(--brand-blue); }
     .wishlist-btn { width: 30px; height: 30px; top: 10px; right: 10px; font-size: 12px; }
 
     /* --- ABOUT US MOBILE OPTIMIZATION --- */
-    .about-text-content {
-        padding: 30px 20px !important; 
-    }
-
-    .about-text-content h2 {
-        font-size: 1.6rem !important;
-        margin-top: 30px !important;
-        line-height: 1.3;
-    }
-
-    .about-text-content h3 {
-        font-size: 1.3rem !important;
-        margin-top: 20px !important;
-    }
-
-    .about-text-content p {
-        font-size: 1rem !important;
-        line-height: 1.7 !important;
-        margin-bottom: 15px !important;
-        color: #444;
-    }
-
-    .about-text-content ul {
-        margin-left: 15px !important;
-        margin-bottom: 20px !important;
-    }
-
-    .about-text-content li {
-        font-size: 1rem !important;
-        margin-bottom: 10px !important;
-    }
-
-    .contact-info-box {
-        padding: 25px 20px !important;
-        margin-top: 40px !important;
-        border-radius: 15px !important;
-    }
+    .about-text-content { padding: 30px 20px !important; }
+    .about-text-content h2 { font-size: 1.6rem !important; margin-top: 30px !important; line-height: 1.3; }
+    .about-text-content h3 { font-size: 1.3rem !important; margin-top: 20px !important; }
+    .about-text-content p { font-size: 1rem !important; line-height: 1.7 !important; margin-bottom: 15px !important; color: #444; }
+    .about-text-content ul { margin-left: 15px !important; margin-bottom: 20px !important; }
+    .about-text-content li { font-size: 1rem !important; margin-bottom: 10px !important; }
+    .contact-info-box { padding: 25px 20px !important; margin-top: 40px !important; border-radius: 15px !important; }
 }

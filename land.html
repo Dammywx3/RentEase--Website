@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Land | RentEase9ja</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="content-wrapper">
+        
+        <header>
+            <div class="navbar">
+                <div class="logo-area">
+                    <a href="index.html">
+                        <img src="logo.png" alt="RentEase9ja Logo" class="logo-img">
+                    </a>
+                </div>
+
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html">Marketplace</a></li>
+                        <li><a href="buy.html">Buy House</a></li>
+                        <li><a href="rent.html">Rent House</a></li>
+                        <li><a href="land.html" style="color: var(--buy-orange);">Buy Land</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="#" class="download-nav-btn" onclick="redirectToApp()">Download App</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000'); background-size: cover; background-position: center;">
+            <div style="text-align: center; color: #fff; padding: 20px;">
+                <h1>Invest in <span style="color: var(--buy-orange);">Prime Land</span></h1>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">Secure your piece of the future. Browse verified plots across Nigeria.</p>
+                <a href="#" class="app-btn" onclick="redirectToApp()">Explore Land on App</a>
+            </div>
+        </section>
+
+        <section class="marketplace">
+            <div class="section-header">
+                <h2>Featured Land for Sale</h2>
+                <p>Top investment opportunities for residential, commercial, and agricultural use.</p>
+            </div>
+
+            <div class="listings-grid">
+                
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=800" alt="Lekki Plot">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> Verified Docs</span>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="property-info">
+                        <h3>₦45,000,000</h3>
+                        <p class="title" style="font-weight: 600; margin-bottom: 5px;">600sqm Residential Plot</p>
+                        <p class="location" style="color: #666; font-size: 0.9rem; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> Ibeju-Lekki, Lagos</p>
+                        <div style="display: flex; gap: 15px; font-size: 0.85rem; color: #555; border-top: 1px solid #eee; padding-top: 10px;">
+                            <span><i class="fas fa-ruler-combined"></i> 600 sqm</span>
+                            <span><i class="fas fa-file-contract"></i> C of O</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800" alt="Abuja Plot">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <span class="verified-tag"><i class="fas fa-check-circle"></i> Verified Docs</span>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="property-info">
+                        <h3>₦120,000,000</h3>
+                        <p class="title" style="font-weight: 600; margin-bottom: 5px;">1,200sqm Commercial Land</p>
+                        <p class="location" style="color: #666; font-size: 0.9rem; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> Wuse II, Abuja</p>
+                        <div style="display: flex; gap: 15px; font-size: 0.85rem; color: #555; border-top: 1px solid #eee; padding-top: 10px;">
+                            <span><i class="fas fa-ruler-combined"></i> 1,200 sqm</span>
+                            <span><i class="fas fa-file-contract"></i> R of O</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card" onclick="redirectToApp()">
+                    <div class="img-container">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800" alt="Ogun Farmland">
+                        <span class="status-tag buy">FOR SALE</span>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="property-info">
+                        <h3>₦8,500,000 / Acre</h3>
+                        <p class="title" style="font-weight: 600; margin-bottom: 5px;">10 Acres Farmland</p>
+                        <p class="location" style="color: #666; font-size: 0.9rem; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> Ewekoro, Ogun State</p>
+                        <div style="display: flex; gap: 15px; font-size: 0.85rem; color: #555; border-top: 1px solid #eee; padding-top: 10px;">
+                            <span><i class="fas fa-ruler-combined"></i> 10 Acres</span>
+                            <span><i class="fas fa-file-contract"></i> Registered Survey</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn-light-brand" style="background: var(--buy-orange); color: #fff;" onclick="redirectToApp()">View All Land on App</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logo.png" alt="RentEase9ja" class="footer-logo">
+                <p>Simplifying Real Estate in Nigeria. Secure. Transparent. Easy.</p>
+            </div>
+            <div class="footer-col">
+                <h3>About <span class="brand-text">RentEase9ja</span></h3>
+                <p>We are a property technology company dedicated to bridging the trust gap in the Nigerian market.</p>
+                <a href="aboutus.html" style="color: var(--brand-blue); text-decoration: none; font-weight: 600;">Read more →</a>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links" style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><a href="index.html" style="color: #bbb; text-decoration: none;">Marketplace</a></li>
+                    <li style="margin-bottom: 10px;"><a href="buy.html" style="color: #bbb; text-decoration: none;">Buy House</a></li>
+                    <li style="margin-bottom: 10px;"><a href="rent.html" style="color: #bbb; text-decoration: none;">Rent House</a></li>
+                    <li style="margin-bottom: 10px;"><a href="land.html" style="color: #bbb; text-decoration: none;">Buy Land</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@rentease9ja6" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/rentease9ja" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" style="height: 40px;"></a>
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" style="height: 40px;"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 RentEase9ja Nigeria. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        function redirectToApp() {
+            alert("To view full land details or contact the agent, please download the RentEase9ja App.");
+        }
+    </script>
+</body>
+</html>
