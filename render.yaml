@@ -1,0 +1,19 @@
+services:
+  - type: static
+    name: rentease9ja
+    env: static
+    routes:
+      # 1. Handle the homepage (rentease9ja.com)
+      - source: /
+        destination: /index.html
+
+      # 2. Pretty URLs: Rewrite any path (like /buy) to its .html file (/buy.html)
+      # This rule covers ALL your files: land, aboutus, privacy, etc.
+      - source: ^/(?!(?:.*?\..*))(.+)
+        destination: /$1.html
+
+      # 3. Optional: Redirect actual .html URLs back to the pretty version
+      # If someone types rentease9ja.com/buy.html, it sends them to /buy
+      - source: /(.*)\.html
+        destination: /$1
+        type: redirect

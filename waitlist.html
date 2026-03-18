@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist | RentEase9ja</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Mobile adjustments for the new footer legal links */
+        @media (max-width: 768px) {
+            .footer-bottom-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .legal-links {
+                display: flex;
+                gap: 15px;
+            }
+            .desktop-divider {
+                display: none;
+            }
+        }
+        @media (min-width: 769px) {
+            .footer-bottom-content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        /* --- Specific Styles for the Waitlist Section --- */
+        .waitlist-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 5%;
+            background-color: #f9f9f9;
+        }
+
+        .waitlist-container {
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            border-top: 5px solid var(--brand-blue);
+        }
+
+        .waitlist-container h1 {
+            color: var(--brand-blue);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .waitlist-container p {
+            color: #555;
+            font-size: 1.05rem;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 15px;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .waitlist-form input:focus {
+            border-color: var(--buy-orange);
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+        }
+
+        .btn-submit {
+            background-color: var(--brand-blue);
+            color: #fff;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--buy-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 87, 34, 0.3);
+        }
+
+        .features {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            font-size: 0.9rem;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            background: #f4f7f6;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* Waitlist Mobile Adjustments */
+        @media (max-width: 768px) {
+            .waitlist-section { padding: 50px 15px; }
+            .waitlist-container { padding: 40px 20px; }
+            .waitlist-container h1 { font-size: 1.8rem; }
+            .input-wrapper { flex-direction: column; gap: 20px; }
+            .btn-submit { width: 100%; }
+            .features { flex-direction: column; align-items: stretch; }
+            .feature { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        
+        <header>
+            <div class="navbar">
+                <div class="logo-area">
+                    <a href="/">
+                        <img src="logo.png" alt="RentEase9ja Logo" class="logo-img">
+                    </a>
+                </div>
+
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="/">Marketplace</a></li>
+                        <li><a href="/buy">Buy House</a></li>
+                        <li><a href="/rent">Rent House</a></li>
+                        <li><a href="/land">Buy Land</a></li>
+                        <li><a href="/aboutus">About Us</a></li>
+                        <li><a href="/waitlist" class="download-nav-btn">Join Waitlist</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="waitlist-section">
+            <div class="waitlist-container">
+                <h1>The Rental Game is Changing</h1>
+                <p>Join Nigeria's safest and most trusted platform to Buy, Rent, and Sell properties. Enjoy monthly payments for any property type with zero hidden charges.</p>
+                
+                <form class="waitlist-form" action="#" method="POST">
+                    <input type="text" name="name" placeholder="Enter your full name" required>
+                    
+                    <div class="input-wrapper">
+                        <input type="email" name="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn-submit">Notify Me</button>
+                    </div>
+                </form>
+
+                <div class="features">
+                    <div class="feature"><i class="fas fa-check-circle" style="color: var(--buy-orange);"></i> Get Early Access</div>
+                    <div class="feature"><i class="fas fa-check-circle" style="color: var(--buy-orange);"></i> Zero Agency Fees</div>
+                    <div class="feature"><i class="fas fa-check-circle" style="color: var(--buy-orange);"></i> Verified Properties</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logo.png" alt="RentEase9ja" class="footer-logo">
+                <p>Simplifying Real Estate in Nigeria. Secure. Transparent. Easy.</p>
+            </div>
+            <div class="footer-col">
+                <h3>About <span class="brand-text">RentEase9ja</span></h3>
+                <p>We are a property technology company dedicated to bridging the trust gap in the Nigerian real estate market. Every listing is verified for your peace of mind.</p>
+                <a href="/aboutus" class="read-more-link" style="color: var(--brand-blue); text-decoration: none; font-weight: 600;">Read more →</a>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@rentease9ja6" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/rentease9ja" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/rentease9ja?s=21" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                </div>
+                <h3 style="margin-top: 20px; font-size: 16px;">Download Our App</h3>
+                <div class="footer-app-badges" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" style="height: 35px;"></a>
+                    <a href="#" onclick="redirectToApp()"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" style="height: 35px;"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align: center; padding-top: 30px; color: #666; font-size: 13px;">
+            <div class="footer-bottom-content">
+                <p style="margin: 0;">&copy; 2026 RentEase9ja Nigeria. All Rights Reserved.</p>
+                <span class="desktop-divider" style="margin: 0 15px;">|</span>
+                <div class="legal-links">
+                    <a href="/privacy" style="color: #888; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Privacy Policy</a>
+                    <span style="margin: 0 10px; color: #555;">&bull;</span>
+                    <a href="/terms" style="color: #888; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        function redirectToApp() {
+            // Updated alert message to reflect the waitlist status
+            alert("The RentEase9ja App is launching soon! Please join our waitlist to be notified.");
+        }
+    </script>
+</body>
+</html>
