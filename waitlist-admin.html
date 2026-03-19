@@ -240,8 +240,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
   <div class="login-card">
     <div class="login-logo">Rent<span>Ease</span> 9ja</div>
     <div class="login-sub">Waitlist Admin Dashboard</div>
-    <input class="login-input" type="url" id="api-url" placeholder="API URL (e.g. https://api.rentease9ja.com/v1)" value="https://avril-gangwayed-refractedly.ngrok-free.dev/v1"/>
-    <input class="login-input" type="password" id="admin-key" placeholder="Admin Secret Key"/>
+    <input class="login-input" type="password" id="admin-key" placeholder="Enter Admin Secret Key"/>
     <button class="login-btn" onclick="login()">Access Dashboard</button>
     <div class="login-err" id="login-err">Invalid secret or server unreachable.</div>
   </div>
@@ -370,23 +369,22 @@ let activeFilter = 'All';
 
 // ── Auth ──────────────────────────────────────────────────────────────────────
 
+const ADMIN_SECRET       = 'RentEase9ja@Admin2026';
+const URL_LIST           = 'https://avril-gangwayed-refractedly.ngrok-free.dev/v1/waitlist/admin/list';
+const URL_LAUNCH         = 'https://avril-gangwayed-refractedly.ngrok-free.dev/v1/waitlist/admin/launch';
+const URL_DELETE         = 'https://avril-gangwayed-refractedly.ngrok-free.dev/v1/waitlist/admin';
+
 async function login() {
-  const url = document.getElementById('api-url').value.trim().replace(/\/$/, '');
-  const key = document.getElementById('admin-key').value.trim();
-  if (!url || !key) {
-    showLoginErr('Please fill in both fields.');
-    return;
-  }
+  const key = ADMIN_SECRET;
 
   try {
-    const res = await fetch(`${url}/waitlist/admin/list`, {
+    const res = await fetch(URL_LIST, {
       headers: { 'x-admin-secret': key, 'ngrok-skip-browser-warning': '1' }
     });
     if (res.status === 401) { showLoginErr('Invalid admin secret.'); return; }
     if (!res.ok) { showLoginErr(`Server error: ${res.status}`); return; }
 
-    API_BASE  = url;
-    ADMIN_KEY = key;
+    ADMIN_KEY = ADMIN_SECRET;
 
     const data = await res.json();
     allEntries = data.entries ?? [];
@@ -419,7 +417,7 @@ function showLoginErr(msg) {
 
 async function loadData() {
   try {
-    const res = await fetch(`${API_BASE}/waitlist/admin/list`, {
+    const res = await fetch(URL_LIST, {
       headers: { 'x-admin-secret': ADMIN_KEY, 'ngrok-skip-browser-warning': '1' }
     });
     const data = await res.json();
@@ -553,7 +551,7 @@ async function sendLaunch() {
   document.getElementById('launch-btn-text').textContent = '⏳ Sending…';
 
   try {
-    const res = await fetch(`${API_BASE}/waitlist/admin/launch`, {
+    const res = await fetch(URL_LAUNCH, {
       method:  'POST',
       headers: {
         'Content-Type':           'application/json',
@@ -600,7 +598,7 @@ async function deleteEntry(id, name) {
   if (!confirm(`Delete ${name} from the waitlist? This cannot be undone.`)) return;
 
   try {
-    const res = await fetch(`${API_BASE}/waitlist/admin/${id}`, {
+    const res = await fetch(`${URL_DELETE}/${id}`, {
       method:  'DELETE',
       headers: { 'x-admin-secret': ADMIN_KEY, 'ngrok-skip-browser-warning': '1' },
     });
@@ -615,11 +613,9 @@ async function deleteEntry(id, name) {
   }
 }
 
-// Allow Enter key on login
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
-    login();
-  }
+// Auto-login on page load
+window.addEventListener('load', () => {
+  login();
 });
 </script>
 </body>
