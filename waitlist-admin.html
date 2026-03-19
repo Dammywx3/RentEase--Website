@@ -428,11 +428,48 @@ textarea.field-input{resize:vertical;min-height:90px;line-height:1.5;}
 .fade-in{animation:fadeIn .3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
+/* ── MOBILE ── */
+.hamburger{
+  display:none;background:var(--surface2);border:1px solid var(--border);
+  color:var(--text);font-size:18px;width:36px;height:36px;
+  border-radius:8px;cursor:pointer;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:40;backdrop-filter:blur(4px);
+}
+.overlay.show{display:block;}
+
 @media(max-width:900px){
-  .sidebar{transform:translateX(-100%);}
+  .hamburger{display:flex;}
+  .sidebar{
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+    z-index:60;
+    box-shadow:8px 0 40px rgba(0,0,0,.4);
+  }
+  .sidebar.open{transform:translateX(0);}
   .main-content{margin-left:0;}
   .kpi-grid{grid-template-columns:1fr 1fr;}
   .charts-row,.launch-grid{grid-template-columns:1fr;}
+  .topbar{padding:0 16px;}
+  .page{padding:16px;}
+  .launch-form-card,.launch-info-card{padding:20px 16px;}
+  table{font-size:12px;}
+  th,td{padding:9px 10px;}
+  /* Hide less important columns on small screens */
+  th:nth-child(4),td:nth-child(4),
+  th:nth-child(6),td:nth-child(6){display:none;}
+}
+
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:1fr 1fr;}
+  .kpi-val{font-size:26px;}
+  .toolbar{flex-wrap:wrap;}
+  .filter-pill{font-size:11px;padding:6px 10px;}
+  /* Hide even more columns */
+  th:nth-child(7),td:nth-child(7){display:none;}
 }
 </style>
 </head>
@@ -495,8 +532,10 @@ textarea.field-input{resize:vertical;min-height:90px;line-height:1.5;}
   <div class="main-content">
 
     <!-- Topbar -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
     <div class="topbar">
       <div class="topbar-left">
+        <button class="hamburger" onclick="toggleSidebar()" id="hamburger">☰</button>
         <span class="topbar-crumb">Waitlist</span>
         <span class="topbar-crumb"> / </span>
         <span class="topbar-title" id="topbar-title">Overview</span>
@@ -911,6 +950,22 @@ async function deleteEntry(id, name) {
     }
   } catch(e) { alert('Delete failed. Try again.'); }
 }
+
+// ── SIDEBAR MOBILE ───────────────────────────────────────────────────────────
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.querySelector('.sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+// Close sidebar when a nav item is tapped on mobile
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    if (window.innerWidth <= 900) closeSidebar();
+  });
+});
 
 // ── THEME TOGGLE ─────────────────────────────────────────────────────────────
 function toggleTheme() {
