@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Waitlist Admin — RentEase 9ja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A1628; --surface:#111E33; --surface2:#172540;
+  --border:#1E2F4A; --blue:#1A5FBF; --blue-soft:#5B9EF5;
+  --green:#2E9E5B; --green-soft:#4DC87A;
+  --orange:#F4791E; --red:#EF4444; --gold:#F0B429;
+  --text:#E8F0FF; --muted:#6B85A8;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* ── Login ── */
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(26,95,191,.25) 0%,transparent 60%),var(--bg);
+}
+.login-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:40px;width:380px;text-align:center;
+}
+.login-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.login-logo span{color:var(--green-soft);}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:32px;}
+.login-input{
+  width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);
+  border-radius:10px;padding:13px 16px;font-size:14px;font-family:'DM Sans',sans-serif;
+  color:var(--text);outline:none;margin-bottom:14px;transition:border-color .2s;
+}
+.login-input:focus{border-color:rgba(91,158,245,.5);}
+.login-btn{
+  width:100%;height:48px;background:linear-gradient(135deg,var(--blue),var(--green));
+  border:none;border-radius:10px;cursor:pointer;font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:800;color:#fff;letter-spacing:.3px;
+  transition:opacity .2s;
+}
+.login-btn:hover{opacity:.9;}
+.login-err{font-size:12px;color:#FCA5A5;margin-top:10px;display:none;}
+
+/* ── Dashboard ── */
+#dashboard{display:none;}
+
+header{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 32px;position:sticky;top:0;z-index:100;
+}
+.header-inner{
+  max-width:1200px;margin:0 auto;height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}
+.brand span{color:var(--green-soft);}
+.header-right{display:flex;align-items:center;gap:12px;}
+.refresh-btn{
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  color:var(--muted);font-size:13px;font-weight:600;
+  padding:7px 16px;border-radius:8px;cursor:pointer;transition:background .2s,color .2s;
+}
+.refresh-btn:hover{background:rgba(255,255,255,.08);color:var(--text);}
+.logout-btn{
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);
+  color:#FCA5A5;font-size:13px;font-weight:600;
+  padding:7px 16px;border-radius:8px;cursor:pointer;transition:background .2s;
+}
+.logout-btn:hover{background:rgba(239,68,68,.18);}
+
+.main{max-width:1200px;margin:0 auto;padding:32px;}
+
+/* ── Stats row ── */
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-bottom:28px;
+}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:20px 22px;position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--accent);
+}
+.stat-card.total{--accent:linear-gradient(90deg,var(--blue),var(--blue-soft));}
+.stat-card.pending{--accent:linear-gradient(90deg,var(--orange),var(--gold));}
+.stat-card.notified{--accent:linear-gradient(90deg,var(--green),var(--green-soft));}
+.stat-card.roles{--accent:linear-gradient(90deg,#8B5CF6,#A78BFA);}
+.stat-val{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.stat-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;}
+
+/* ── Launch section ── */
+.launch-panel{
+  background:linear-gradient(135deg,rgba(26,95,191,.12),rgba(46,158,91,.08));
+  border:1px solid rgba(91,158,245,.2);
+  border-radius:20px;padding:28px 32px;margin-bottom:28px;
+}
+.launch-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.launch-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text);}
+.launch-sub{font-size:13px;color:var(--muted);margin-top:2px;}
+.launch-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.field-label{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.field-input{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:10px;padding:11px 14px;font-size:13px;font-family:'DM Sans',sans-serif;
+  color:var(--text);outline:none;transition:border-color .2s;
+}
+.field-input:focus{border-color:rgba(91,158,245,.4);}
+textarea.field-input{resize:vertical;min-height:80px;grid-column:1/-1;}
+.launch-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.launch-btn{
+  background:linear-gradient(135deg,var(--blue),var(--green));
+  border:none;border-radius:10px;cursor:pointer;
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:800;
+  color:#fff;padding:12px 28px;
+  box-shadow:0 4px 20px rgba(26,95,191,.3);
+  transition:transform .15s,box-shadow .15s,opacity .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.launch-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 24px rgba(26,95,191,.4);}
+.launch-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+.launch-result{
+  margin-top:14px;padding:12px 16px;border-radius:10px;font-size:13px;display:none;
+}
+.launch-result.success{background:rgba(46,158,91,.1);border:1px solid rgba(77,200,122,.25);color:#7DE0A0;}
+.launch-result.error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#FCA5A5;}
+.launch-result.show{display:block;}
+
+/* ── Filter + search bar ── */
+.table-toolbar{
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;
+}
+.search-input{
+  flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;font-size:13px;font-family:'DM Sans',sans-serif;
+  color:var(--text);outline:none;transition:border-color .2s;
+}
+.search-input::placeholder{color:var(--muted);}
+.search-input:focus{border-color:rgba(91,158,245,.4);}
+.filter-btn{
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--muted);font-size:12px;font-weight:600;
+  padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s;
+  white-space:nowrap;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:rgba(91,158,245,.12);border-color:rgba(91,158,245,.35);color:var(--blue-soft);
+}
+.count-badge{
+  font-size:12px;font-weight:700;color:var(--muted);
+  background:var(--surface2);border:1px solid var(--border);
+  padding:6px 14px;border-radius:8px;white-space:nowrap;
+}
+
+/* ── Table ── */
+.table-wrap{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:var(--surface2);}
+th{
+  padding:12px 16px;text-align:left;
+  font-size:11px;font-weight:700;letter-spacing:.6px;
+  text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+td{
+  padding:13px 16px;font-size:13px;color:var(--text);
+  border-bottom:1px solid rgba(30,47,74,.5);
+  vertical-align:middle;
+}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+
+.role-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;
+  text-transform:uppercase;letter-spacing:.4px;
+}
+.role-badge.Tenant{background:rgba(26,95,191,.15);color:#A8C8FF;border:1px solid rgba(91,158,245,.25);}
+.role-badge.Agent{background:rgba(46,158,91,.15);color:#7DE0A0;border:1px solid rgba(77,200,122,.25);}
+.role-badge.Landlord{background:rgba(244,121,30,.15);color:#FFBA80;border:1px solid rgba(244,121,30,.25);}
+
+.notif-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;
+}
+.notif-badge.yes{background:rgba(46,158,91,.15);color:#7DE0A0;border:1px solid rgba(77,200,122,.2);}
+.notif-badge.no{background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--border);}
+
+.del-btn{
+  background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);
+  color:#FCA5A5;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;
+  cursor:pointer;transition:background .2s;
+}
+.del-btn:hover{background:rgba(239,68,68,.18);}
+
+/* ── Empty + Loading states ── */
+.table-state{text-align:center;padding:60px 20px;color:var(--muted);}
+.table-state .icon{font-size:36px;display:block;margin-bottom:12px;}
+.spinner{
+  width:28px;height:28px;border:3px solid rgba(255,255,255,.1);
+  border-top-color:var(--blue-soft);border-radius:50%;
+  animation:spin .7s linear infinite;display:inline-block;margin-bottom:12px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Breakdown mini charts ── */
+.breakdown-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+.breakdown-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;
+}
+.breakdown-title{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.bar-item{margin-bottom:10px;}
+.bar-label-row{display:flex;justify-content:space-between;margin-bottom:4px;font-size:12px;}
+.bar-label{color:var(--text);font-weight:600;}
+.bar-count{color:var(--muted);}
+.bar-track{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;transition:width .6s ease;}
+
+@media(max-width:900px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .launch-fields{grid-template-columns:1fr;}
+  .breakdown-row{grid-template-columns:1fr;}
+  table{font-size:12px;}
+  th,td{padding:10px 12px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Login ── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Rent<span>Ease</span> 9ja</div>
+    <div class="login-sub">Waitlist Admin Dashboard</div>
+    <input class="login-input" type="url" id="api-url" placeholder="API URL (e.g. https://api.rentease9ja.com/v1)" value="https://avril-gangwayed-refractedly.ngrok-free.dev/v1"/>
+    <input class="login-input" type="password" id="admin-key" placeholder="Admin Secret Key"/>
+    <button class="login-btn" onclick="login()">Access Dashboard</button>
+    <div class="login-err" id="login-err">Invalid secret or server unreachable.</div>
+  </div>
+</div>
+
+<!-- ── Dashboard ── -->
+<div id="dashboard">
+  <header>
+    <div class="header-inner">
+      <div class="brand">Rent<span>Ease</span> 9ja <span style="font-size:13px;color:var(--muted);font-family:'DM Sans'">/ Waitlist Admin</span></div>
+      <div class="header-right">
+        <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card total">
+        <div class="stat-val" id="stat-total">—</div>
+        <div class="stat-label">Total Signups</div>
+      </div>
+      <div class="stat-card pending">
+        <div class="stat-val" id="stat-pending">—</div>
+        <div class="stat-label">Not Yet Notified</div>
+      </div>
+      <div class="stat-card notified">
+        <div class="stat-val" id="stat-notified">—</div>
+        <div class="stat-label">Launch Email Sent</div>
+      </div>
+      <div class="stat-card roles">
+        <div class="stat-val" id="stat-last">—</div>
+        <div class="stat-label">Last Signup</div>
+      </div>
+    </div>
+
+    <!-- Breakdown charts -->
+    <div class="breakdown-row" id="breakdown-row" style="display:none;">
+      <div class="breakdown-card">
+        <div class="breakdown-title">By Role</div>
+        <div id="role-bars"></div>
+      </div>
+      <div class="breakdown-card">
+        <div class="breakdown-title">By State</div>
+        <div id="state-bars"></div>
+      </div>
+    </div>
+
+    <!-- Launch panel -->
+    <div class="launch-panel">
+      <div class="launch-header">
+        <div>
+          <div class="launch-title">🚀 Send Launch Email</div>
+          <div class="launch-sub">Sends to everyone who hasn't been notified yet. Safe to run multiple times — already-notified people are skipped.</div>
+        </div>
+      </div>
+      <div class="launch-fields">
+        <div>
+          <div class="field-label">Email Subject</div>
+          <input class="field-input" id="launch-subject" type="text" placeholder="🚀 RentEase 9ja Is Live — Your Early Access Is Ready" value="🚀 RentEase 9ja Is Live — Your Early Access Is Ready"/>
+        </div>
+        <div>
+          <div class="field-label">Custom Message (optional)</div>
+          <input class="field-input" id="launch-msg" type="text" placeholder="Add a personal note to the launch email…"/>
+        </div>
+      </div>
+      <div class="launch-actions">
+        <button class="launch-btn" id="launch-btn" onclick="sendLaunch()">
+          <span id="launch-btn-text">📧 Send to All Pending (<span id="pending-count">0</span>)</span>
+        </button>
+        <span style="font-size:12px;color:var(--muted);">Sent in batches of 10 · Already notified are skipped</span>
+      </div>
+      <div class="launch-result" id="launch-result"></div>
+    </div>
+
+    <!-- Table toolbar -->
+    <div class="table-toolbar">
+      <input class="search-input" id="search" type="text" placeholder="Search by name, email, state…" oninput="renderTable()"/>
+      <button class="filter-btn active" data-role="All" onclick="setFilter(this)">All</button>
+      <button class="filter-btn" data-role="Tenant" onclick="setFilter(this)">🏠 Tenants</button>
+      <button class="filter-btn" data-role="Agent" onclick="setFilter(this)">🏢 Agents</button>
+      <button class="filter-btn" data-role="Landlord" onclick="setFilter(this)">🔑 Landlords</button>
+      <button class="filter-btn" data-role="Notified" onclick="setFilter(this)">✅ Notified</button>
+      <button class="filter-btn" data-role="Pending" onclick="setFilter(this)">⏳ Pending</button>
+      <div class="count-badge" id="count-badge">— entries</div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>State</th>
+            <th>Joined</th>
+            <th>Notified</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr><td colspan="9">
+            <div class="table-state">
+              <div class="spinner"></div>
+              <div>Loading waitlist…</div>
+            </div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /dashboard -->
+
+<script>
+let API_BASE   = '';
+let ADMIN_KEY  = '';
+let allEntries = [];
+let activeFilter = 'All';
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+
+async function login() {
+  const url = document.getElementById('api-url').value.trim().replace(/\/$/, '');
+  const key = document.getElementById('admin-key').value.trim();
+  if (!url || !key) {
+    showLoginErr('Please fill in both fields.');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${url}/waitlist/admin/list`, {
+      headers: { 'x-admin-secret': key, 'ngrok-skip-browser-warning': '1' }
+    });
+    if (res.status === 401) { showLoginErr('Invalid admin secret.'); return; }
+    if (!res.ok) { showLoginErr(`Server error: ${res.status}`); return; }
+
+    API_BASE  = url;
+    ADMIN_KEY = key;
+
+    const data = await res.json();
+    allEntries = data.entries ?? [];
+
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display    = 'block';
+    updateStats(data.stats);
+    renderTable();
+
+  } catch (err) {
+    showLoginErr('Could not connect to the server. Check the API URL.');
+  }
+}
+
+function logout() {
+  ADMIN_KEY  = '';
+  allEntries = [];
+  document.getElementById('dashboard').style.display    = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-key').value = '';
+}
+
+function showLoginErr(msg) {
+  const el = document.getElementById('login-err');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+// ── Load data ─────────────────────────────────────────────────────────────────
+
+async function loadData() {
+  try {
+    const res = await fetch(`${API_BASE}/waitlist/admin/list`, {
+      headers: { 'x-admin-secret': ADMIN_KEY, 'ngrok-skip-browser-warning': '1' }
+    });
+    const data = await res.json();
+    allEntries = data.entries ?? [];
+    updateStats(data.stats);
+    renderTable();
+  } catch (err) {
+    console.error('Refresh failed', err);
+  }
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+function updateStats(stats) {
+  if (!stats) return;
+  document.getElementById('stat-total').textContent    = stats.total ?? 0;
+  document.getElementById('stat-pending').textContent  = stats.pending ?? 0;
+  document.getElementById('stat-notified').textContent = stats.notified ?? 0;
+  document.getElementById('pending-count').textContent = stats.pending ?? 0;
+
+  const last = stats.lastAdded
+    ? new Date(stats.lastAdded).toLocaleDateString('en-GB', { day:'numeric', month:'short' })
+    : '—';
+  document.getElementById('stat-last').textContent = last;
+
+  // Breakdown bars
+  const total = stats.total || 1;
+  renderBars('role-bars',  stats.byRole  ?? {}, total, ['#5B9EF5','#4DC87A','#FFBA80','#A78BFA']);
+  renderBars('state-bars', stats.byState ?? {}, total, ['#5B9EF5','#4DC87A','#FFBA80','#F87171','#A78BFA','#FCD34D']);
+  document.getElementById('breakdown-row').style.display = 'grid';
+}
+
+function renderBars(containerId, data, total, colors) {
+  const el = document.getElementById(containerId);
+  const sorted = Object.entries(data).sort((a,b) => b[1] - a[1]).slice(0, 8);
+  el.innerHTML = sorted.map(([label, count], i) => `
+    <div class="bar-item">
+      <div class="bar-label-row">
+        <span class="bar-label">${label || 'Unknown'}</span>
+        <span class="bar-count">${count}</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${Math.round((count/total)*100)}%;background:${colors[i % colors.length]};"></div>
+      </div>
+    </div>`).join('');
+}
+
+// ── Table ─────────────────────────────────────────────────────────────────────
+
+function setFilter(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = btn.dataset.role;
+  renderTable();
+}
+
+function renderTable() {
+  const query = (document.getElementById('search')?.value ?? '').toLowerCase();
+  let rows = allEntries.filter(e => {
+    const matchesSearch =
+      !query ||
+      ((e.first_name ?? '') + ' ' + (e.last_name ?? '')).toLowerCase().includes(query) ||
+      e.email.toLowerCase().includes(query) ||
+      (e.state ?? '').toLowerCase().includes(query);
+
+    const matchesFilter =
+      activeFilter === 'All'      ? true :
+      activeFilter === 'Notified' ? e.notified :
+      activeFilter === 'Pending'  ? !e.notified :
+      e.role === activeFilter;
+
+    return matchesSearch && matchesFilter;
+  });
+
+  document.getElementById('count-badge').textContent = `${rows.length} entr${rows.length === 1 ? 'y' : 'ies'}`;
+
+  const tbody = document.getElementById('table-body');
+
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="9">
+      <div class="table-state">
+        <span class="icon">🔍</span>
+        <div>No entries found</div>
+      </div>
+    </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = rows.map((e, i) => {
+    const name    = [e.first_name, e.last_name].filter(Boolean).join(' ');
+    const joined  = new Date(e.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+    const notifBadge = e.notified
+      ? `<span class="notif-badge yes">✓ Sent</span>`
+      : `<span class="notif-badge no">Pending</span>`;
+
+    return `<tr>
+      <td style="color:var(--muted);font-size:12px;">${i + 1}</td>
+      <td style="font-weight:600;">${name}</td>
+      <td style="color:var(--muted);">${e.email}</td>
+      <td style="color:var(--muted);">${e.phone ?? '—'}</td>
+      <td><span class="role-badge ${e.role}">${e.role}</span></td>
+      <td style="color:var(--muted);">${e.state ?? '—'}</td>
+      <td style="color:var(--muted);font-size:12px;">${joined}</td>
+      <td>${notifBadge}</td>
+      <td>
+        <button class="del-btn" onclick="deleteEntry('${e.id}', '${name}')">Delete</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ── Launch email ──────────────────────────────────────────────────────────────
+
+async function sendLaunch() {
+  const pending = parseInt(document.getElementById('pending-count').textContent) || 0;
+  if (pending === 0) {
+    showLaunchResult('Everyone has already been notified! No pending emails.', 'error');
+    return;
+  }
+
+  const confirmed = confirm(
+    `Send launch emails to ${pending} people who haven't been notified yet?\n\nThis cannot be undone.`
+  );
+  if (!confirmed) return;
+
+  const btn     = document.getElementById('launch-btn');
+  const subject = document.getElementById('launch-subject').value.trim();
+  const msg     = document.getElementById('launch-msg').value.trim();
+
+  btn.disabled = true;
+  document.getElementById('launch-btn-text').textContent = '⏳ Sending…';
+
+  try {
+    const res = await fetch(`${API_BASE}/waitlist/admin/launch`, {
+      method:  'POST',
+      headers: {
+        'Content-Type':           'application/json',
+        'x-admin-secret':         ADMIN_KEY,
+        'ngrok-skip-browser-warning': '1',
+      },
+      body: JSON.stringify({
+        subject:       subject || undefined,
+        customMessage: msg     || undefined,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      const failNote = data.failed > 0
+        ? ` (${data.failed} failed — click Refresh to retry)`
+        : '';
+      showLaunchResult(`✅ Done! ${data.sent} launch emails sent successfully.${failNote}`, 'success');
+      await loadData(); // Refresh stats
+    } else {
+      showLaunchResult(`❌ Error: ${data.message ?? 'Something went wrong.'}`, 'error');
+    }
+
+  } catch (err) {
+    showLaunchResult('❌ Network error. Check your connection and try again.', 'error');
+  } finally {
+    btn.disabled = false;
+    document.getElementById('launch-btn-text').innerHTML =
+      `📧 Send to All Pending (<span id="pending-count">${document.getElementById('stat-pending').textContent}</span>)`;
+  }
+}
+
+function showLaunchResult(msg, type) {
+  const el = document.getElementById('launch-result');
+  el.textContent = msg;
+  el.className = `launch-result ${type} show`;
+  setTimeout(() => el.classList.remove('show'), 8000);
+}
+
+// ── Delete entry ──────────────────────────────────────────────────────────────
+
+async function deleteEntry(id, name) {
+  if (!confirm(`Delete ${name} from the waitlist? This cannot be undone.`)) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/waitlist/admin/${id}`, {
+      method:  'DELETE',
+      headers: { 'x-admin-secret': ADMIN_KEY, 'ngrok-skip-browser-warning': '1' },
+    });
+    if (res.ok) {
+      allEntries = allEntries.filter(e => e.id !== id);
+      document.getElementById('stat-total').textContent =
+        parseInt(document.getElementById('stat-total').textContent) - 1;
+      renderTable();
+    }
+  } catch (err) {
+    alert('Delete failed. Try again.');
+  }
+}
+
+// Allow Enter key on login
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+    login();
+  }
+});
+</script>
+</body>
+</html>
