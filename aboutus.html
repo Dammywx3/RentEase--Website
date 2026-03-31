@@ -32,6 +32,29 @@
                 flex-wrap: wrap;
             }
         }
+
+        /* --- NEW CSS FOR ABOUT US MEDIA --- */
+        .about-media-single {
+            width: 100%;
+            max-width: 800px; /* Keeps it from getting too wide on large screens */
+            border-radius: 12px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+        .about-media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .about-media-grid img, .about-media-grid video {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -72,6 +95,9 @@
         <section class="about-text-content">
             <h2>Welcome to RentEase 9ja</h2>
             <p>RentEase 9ja is a modern real estate and rental platform built to make property search, property listing, and rental transactions easier, faster, and more transparent in Nigeria.</p>
+            
+            <img src="image1.png" alt="Welcome to RentEase 9ja" class="about-media-single">
+
             <p>We created RentEase 9ja to solve the common problems people face in the housing market — delayed responses, scattered listings, poor communication, stressful property search, and lack of trust in the renting process. Our goal is to bring landlords, agents, and tenants together on one reliable digital platform where renting and managing properties becomes simple and efficient.</p>
             <p>Whether you are searching for your next apartment, listing a property for rent, managing multiple units, or handling client inquiries as an agent, RentEase 9ja is designed to give you the tools you need in one place.</p>
 
@@ -86,20 +112,38 @@
                 <li>Communicate directly within the platform</li>
                 <li>Simplify the rental journey from search to agreement</li>
             </ul>
+            
+            <video autoplay loop muted playsinline class="about-media-single">
+                <source src="video2.mp4" type="video/mp4">
+            </video>
+
             <p>Our platform is built for convenience, structure, and better user experience, while also supporting the real needs of Nigeria’s fast-growing property market.</p>
 
-            <h2>Our Mission</h2>
-            <p>Our mission is to simplify real estate access in Nigeria by building a trusted digital platform that makes renting, listing, and managing properties smarter, safer, and more efficient for everyone.</p>
-
-            <h2>Our Vision</h2>
-            <p>Our vision is to become one of the most trusted and widely used property technology platforms in Nigeria, helping millions of people find homes, secure spaces for business, and manage rental properties with confidence.</p>
+            <div class="about-media-grid">
+                <div>
+                    <h2>Our Mission</h2>
+                    <p>Our mission is to simplify real estate access in Nigeria by building a trusted digital platform that makes renting, listing, and managing properties smarter, safer, and more efficient for everyone.</p>
+                    <img src="image2.png" alt="Our Mission" class="about-media-single" style="margin-top: 10px;">
+                </div>
+                <div>
+                    <h2>Our Vision</h2>
+                    <p>Our vision is to become one of the most trusted and widely used property technology platforms in Nigeria, helping millions of people find homes, secure spaces for business, and manage rental properties with confidence.</p>
+                    <img src="image3.png" alt="Our Vision" class="about-media-single" style="margin-top: 10px;">
+                </div>
+            </div>
 
             <h2>Why RentEase 9ja Exists</h2>
             <p>Finding a good property should not feel confusing or stressful. Listing properties should not be disorganized. Communication between tenants, agents, and landlords should not be difficult.</p>
+            
+            <img src="image4.png" alt="Why RentEase Exists" class="about-media-single">
+
             <p>RentEase 9ja exists to improve how real estate works by using technology to reduce friction, increase clarity, and create a better experience for all parties involved.</p>
             <p>We believe that with the right tools, the rental process can be more transparent, more professional, and far less stressful.</p>
 
             <h2>Who We Serve</h2>
+            
+            <img src="image5.png" alt="Who We Serve" class="about-media-single">
+
             <h3>Tenants</h3>
             <p>We help tenants search for properties more easily, explore options, communicate with agents or property representatives, and move through the rental process with greater confidence.</p>
             <h3>Agents</h3>
@@ -109,6 +153,11 @@
 
             <h2>What Makes Us Different</h2>
             <p>At RentEase 9ja, we are focused on creating a platform that is not only useful, but practical for the Nigerian market.</p>
+            
+            <video autoplay loop muted playsinline class="about-media-single">
+                <source src="video3.mp4" type="video/mp4">
+            </video>
+
             <p>What makes us different includes:</p>
             <ul>
                 <li>A user-friendly property discovery experience</li>
@@ -131,6 +180,9 @@
             <p>As RentEase 9ja grows, we will keep building features that solve real problems for real users.</p>
 
             <h2>Building the Future of Renting in Nigeria</h2>
+            
+            <img src="image6.png" alt="The Future of Renting" class="about-media-single">
+
             <p>Technology is changing every industry, and real estate should not be left behind. RentEase 9ja is part of that transformation.</p>
             <p>We are building a platform that supports the future of renting and property management in Nigeria — a future where searching, listing, communicating, and closing rental deals can all happen with greater ease and trust.</p>
             <p>At RentEase 9ja, we believe everyone deserves a better property experience.</p>
