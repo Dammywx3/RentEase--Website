@@ -5,9 +5,10 @@ import CtaBand from '../components/CtaBand.astro';
 
 // NOTE: Replace names, roles, bios, photos and links with real data.
 // For photos, drop images in public/team/ and set `photo: '/team/name.webp'`.
+// Names & photos are placeholders — swap in the real founders.
 const founders = [
-  { initials: 'AD', name: 'Founder Name', role: 'Founder & CEO', bio: 'Leads product and vision. [Replace with a short founder bio: background, why RentEase 9ja, what they own.]', photo: '', x: '#', linkedin: '#' },
-  { initials: 'CO', name: 'Co-founder Name', role: 'Co-founder & CTO', bio: 'Leads engineering and the platform. [Replace with a short bio.]', photo: '', x: '#', linkedin: '#' },
+  { initials: 'RE', name: 'Founder Name', role: 'Founder & CEO', bio: 'Leads RentEase 9ja’s vision and product. Building the trust layer Nigerian real estate has always lacked, where every listing is verified, every agent is real, and no tenant loses money to fraud again.', photo: '', x: '#', linkedin: '#' },
+  { initials: 'RE', name: 'Co-founder Name', role: 'Co-founder & CTO', bio: 'Leads engineering and the platform. Architecting the end-to-end system, verified listings, in-app chat, escrow-style payments and digital agreements, that powers safe property deals across Nigeria.', photo: '', x: '#', linkedin: '#' },
 ];
 
 const team = [
@@ -18,9 +19,9 @@ const team = [
 ];
 
 const posts = [
-  { tag: 'Update', date: 'Coming soon', title: 'Why we are building RentEase 9ja', excerpt: '[Replace: a short post about the trust gap in Nigerian real estate and our mission.]', href: '#' },
-  { tag: 'Product', date: 'Coming soon', title: 'How verification works on RentEase 9ja', excerpt: '[Replace: a post explaining KYC, document checks, and escrow.]', href: '#' },
-  { tag: 'Community', date: 'Coming soon', title: 'Meet the agents joining at launch', excerpt: '[Replace: a post spotlighting early agents and landlords.]', href: '#' },
+  { tag: 'Update', date: 'Launch series', title: 'Why we are building RentEase 9ja', excerpt: 'Renting in Nigeria runs on trust that too often breaks: fake listings, agents who vanish, and deposits paid in cash with no receipts. We are building a platform where every property deal is verified, documented, and protected from search to signing.', href: '#' },
+  { tag: 'Product', date: 'Launch series', title: 'How verification works on RentEase 9ja', excerpt: 'Before a listing goes live we check ownership and title documents, and every agent and landlord passes identity (KYC) verification. Payments move through a secure, escrow-style flow released only on key handover, and every deal is backed by a digital agreement.', href: '#' },
+  { tag: 'Community', date: 'Launch series', title: 'Meet the agents joining at launch', excerpt: 'We are onboarding verified agents and landlords across 14 cities ahead of launch. Founding agents earn a verified blue badge, receive qualified leads, and pay zero platform fees for their first months, building a network seekers can finally trust.', href: '#' },
 ];
 ---
 <Base
