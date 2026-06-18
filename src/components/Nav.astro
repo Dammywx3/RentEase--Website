@@ -1,0 +1,87 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/rent', label: 'Rent' },
+  { href: '/buy', label: 'Buy' },
+  { href: '/land', label: 'Land' },
+  { href: '/how-it-works', label: 'How it works' },
+  { href: '/for-developers', label: 'For Developers' },
+  { href: '/aboutus', label: 'About' },
+];
+const { active = '' } = Astro.props;
+---
+<header class="site-header" id="site-header">
+  <nav class="navbar container" aria-label="Primary">
+    <a href="/" class="brand" aria-label="RentEase 9ja home">
+      <img src="/logo.webp" alt="RentEase 9ja" width="150" height="42" />
+    </a>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-menu" id="nav-menu">
+      <ul>
+        {links.map((l) => (
+          <li><a href={l.href} class:list={[{ 'is-active': active === l.href }]}>{l.label}</a></li>
+        ))}
+      </ul>
+      <a href="/waitlist" class="btn btn-primary nav-cta">Join Waitlist</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(255,255,255,.78);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow .3s ease;
+  }
+  .site-header.scrolled { box-shadow: 0 6px 24px rgba(15,23,42,.07); }
+  .navbar { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+  .brand img { height: 52px; width: auto; }
+  .nav-menu { display: flex; align-items: center; gap: 30px; }
+  .nav-menu ul { display: flex; align-items: center; gap: 26px; }
+  .nav-menu a { font-weight: 600; font-size: .95rem; color: var(--text-2); transition: var(--transition); }
+  .nav-menu a:hover, .nav-menu a.is-active { color: var(--brand-blue); }
+  .nav-cta { padding: 10px 20px; font-size: .9rem; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: var(--transition); }
+  .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 920px) {
+    .hamburger { display: flex; }
+    .nav-menu {
+      position: absolute; top: 80px; left: 0; right: 0;
+      flex-direction: column; gap: 6px; align-items: stretch;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 14px var(--gutter) 24px;
+      box-shadow: 0 16px 30px rgba(15,23,42,.12);
+      transform: translateY(-12px); opacity: 0; pointer-events: none;
+      transition: var(--transition);
+    }
+    .nav-menu.open { transform: none; opacity: 1; pointer-events: auto; }
+    .nav-menu ul { flex-direction: column; align-items: stretch; gap: 2px; }
+    .nav-menu a { padding: 13px 6px; display: block; border-bottom: 1px solid var(--border); }
+    .nav-cta { margin-top: 12px; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header');
+  const burger = document.getElementById('hamburger');
+  const menu = document.getElementById('nav-menu');
+  burger?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(!!open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

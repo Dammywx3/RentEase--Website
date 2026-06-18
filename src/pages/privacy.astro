@@ -1,0 +1,102 @@
+---
+import Legal from '../layouts/Legal.astro';
+
+const toc = [
+  { id: 's1', label: 'Information We Collect' },
+  { id: 's2', label: 'How We Use Your Data' },
+  { id: 's3', label: 'Data Sharing' },
+  { id: 's4', label: 'Data Security' },
+  { id: 's5', label: 'Data Retention' },
+  { id: 's6', label: "Children's Privacy" },
+  { id: 's7', label: 'Your Rights (NDPR)' },
+  { id: 's8', label: 'Third-Party Services' },
+  { id: 's9', label: 'Changes to This Policy' },
+  { id: 's10', label: 'Contact Us' },
+];
+
+const sections = [
+  { num: '01', id: 's1', title: 'Information We Collect', body: `
+    <p>We collect information you provide directly when you create an account, complete identity verification, list a property, make a payment, or communicate through the platform. This includes:</p>
+    <ul>
+      <li><strong>Identity data:</strong> Full name, email address, phone number, profile photo, and date of birth.</li>
+      <li><strong>Verification data:</strong> Government-issued ID (NIN, Voter's Card, Passport), BVN, and live selfie images used strictly for KYC compliance.</li>
+      <li><strong>Property data:</strong> Listing details, photos, videos, and address information provided by agents and landlords.</li>
+      <li><strong>Financial data:</strong> Payment method details (processed by Paystack), wallet transaction history, escrow records, and payout account details.</li>
+      <li><strong>Device &amp; usage data:</strong> Device model, OS version, app usage patterns, and crash logs for performance improvement.</li>
+      <li><strong>Communications:</strong> Messages sent between users within the app's encrypted chat system.</li>
+    </ul>` },
+  { num: '02', id: 's2', title: 'How We Use Your Data', body: `
+    <p>We use the information we collect solely to operate, improve, and secure the RentEase 9ja platform. Specifically:</p>
+    <ul>
+      <li>Verify your identity and maintain the integrity of our user registry.</li>
+      <li>Facilitate property listings, rental applications, tenancy agreements, and escrow payments.</li>
+      <li>Process and disburse payments through our escrow and wallet infrastructure.</li>
+      <li>Send transaction confirmations, account alerts, and security notifications.</li>
+      <li>Detect, investigate, and prevent fraudulent transactions and platform abuse.</li>
+      <li>Provide customer support and respond to your enquiries.</li>
+    </ul>
+    <div class="highlight"><strong>We do not sell your data.</strong> We do not sell, rent, or trade your personal information to third-party advertisers or marketing companies under any circumstances.</div>` },
+  { num: '03', id: 's3', title: 'Data Sharing', body: `
+    <p>We do not share your personal information with third parties except in the following limited circumstances:</p>
+    <ul>
+      <li><strong>Between platform users:</strong> Agents, landlords, and tenants see only the profile information necessary to complete a rental or purchase transaction.</li>
+      <li><strong>Payment processors:</strong> Paystack processes all card transactions. We share only the minimum required data (amount, reference). We do not store full card numbers.</li>
+      <li><strong>Legal compliance:</strong> We may disclose information when required by Nigerian law, court order, or to comply with Anti-Money Laundering (AML) and NDPR regulations.</li>
+      <li><strong>Fraud prevention:</strong> We may share data with fraud prevention services to protect all users on the platform.</li>
+    </ul>` },
+  { num: '04', id: 's4', title: 'Data Security', body: `
+    <p>We implement industry-standard security measures to protect your information from unauthorised access, alteration, disclosure, or destruction:</p>
+    <ul>
+      <li>All data is encrypted in transit using TLS 1.3 and at rest using AES-256 encryption.</li>
+      <li>User messages are end-to-end encrypted. We cannot read the content of your private conversations.</li>
+      <li>Payment data is handled exclusively by PCI-DSS compliant processors (Paystack). We never store raw card details.</li>
+      <li>Multi-factor authentication (MFA) and biometric login options are available to all users.</li>
+    </ul>
+    <p>Despite our best efforts, no method of transmission or storage is 100% secure. We encourage you to use a strong password and never share your login credentials.</p>` },
+  { num: '05', id: 's5', title: 'Data Retention', body: `
+    <p>We retain your personal data for as long as your account is active or as needed to provide services. Specific retention periods:</p>
+    <ul>
+      <li><strong>Account data</strong> is retained for the life of your account plus 12 months after deletion, to resolve any disputes.</li>
+      <li><strong>Transaction records</strong> are retained for 7 years in compliance with Nigerian financial regulations.</li>
+      <li><strong>KYC documents</strong> are retained for 5 years in compliance with the Money Laundering (Prevention &amp; Prohibition) Act 2022.</li>
+    </ul>
+    <p>You may request deletion of your account at any time. Upon deletion, we anonymise your data within 30 days, except where legal retention obligations apply.</p>` },
+  { num: '06', id: 's6', title: "Children's Privacy", body: `
+    <p>RentEase 9ja is intended for users who are <strong>18 years of age or older</strong>. We do not knowingly collect personal information from children under 18. If you believe a minor has created an account, please contact us immediately at <a href="mailto:privacy@rentease9ja.com">privacy@rentease9ja.com</a> and we will promptly delete the account and associated data.</p>` },
+  { num: '07', id: 's7', title: 'Your Rights Under the NDPR', body: `
+    <p>Under the Nigeria Data Protection Regulation (NDPR 2019), you have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong>Right of Access:</strong> Request a copy of all personal data we hold about you.</li>
+      <li><strong>Right of Rectification:</strong> Correct any inaccurate or incomplete information in your profile.</li>
+      <li><strong>Right of Erasure:</strong> Request deletion of your personal data (subject to legal retention requirements).</li>
+      <li><strong>Right to Object:</strong> Object to certain types of processing, including profiling.</li>
+      <li><strong>Right to Portability:</strong> Receive your data in a structured, machine-readable format.</li>
+    </ul>
+    <p>To exercise any of these rights, email <a href="mailto:privacy@rentease9ja.com">privacy@rentease9ja.com</a>. We will respond within 30 days.</p>` },
+  { num: '08', id: 's8', title: 'Third-Party Services', body: `
+    <p>The app integrates with the following third-party services, each with their own privacy policies:</p>
+    <ul>
+      <li><strong>Paystack</strong> — Payment processing.</li>
+      <li><strong>ZegoCloud</strong> — In-app voice and video calls.</li>
+      <li><strong>Cloudinary</strong> — Secure media (photo/video) storage.</li>
+      <li><strong>Firebase</strong> — Push notifications.</li>
+    </ul>
+    <p>We only share data with these providers to the extent necessary to deliver our services. We require all third-party processors to treat your data in accordance with this policy.</p>` },
+  { num: '09', id: 's9', title: 'Changes to This Policy', body: `
+    <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Effective Date" at the top and notify you via the app or email at least <strong>30 days before</strong> material changes take effect. Continued use of the app after the effective date constitutes acceptance of the revised policy.</p>` },
+  { num: '10', id: 's10', title: 'Contact Us', body: `
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or the handling of your personal data, please reach out to our Data Protection team.</p>` },
+];
+---
+<Legal
+  title="Privacy Policy | RentEase 9ja"
+  description="How RentEase 9ja collects, uses, and protects your personal information — NDPR compliant."
+  active="/privacy"
+  heading="Privacy Policy"
+  intro="How RentEase 9ja collects, uses, and protects your personal information."
+  effective="Effective February 24, 2026 · Applies to iOS & Android apps"
+  scope={{ title: 'Who this policy covers', text: "This Privacy Policy applies to all users of the RentEase 9ja app, including <strong>Tenants</strong>, <strong>Agents</strong>, and <strong>Landlords</strong>. By downloading or using the app, you agree to the practices described here." }}
+  toc={toc}
+  sections={sections}
+  contact={{ title: 'Get in touch', text: 'Our Data Protection team responds within 2 business days.', email: 'privacy@rentease9ja.com', note: 'RentEase 9ja · Lagos, Nigeria · NDPR Compliant' }}
+/>

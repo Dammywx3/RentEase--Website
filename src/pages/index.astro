@@ -1,0 +1,382 @@
+---
+import Base from '../layouts/Base.astro';
+import ListingCard from '../components/ListingCard.astro';
+
+const stats = [
+  { value: '1,200+', label: 'Verified listings', note: '[REPLACE]' },
+  { value: '15+', label: 'Cities covered', note: '[REPLACE]' },
+  { value: '8,500+', label: 'People on waitlist', note: '[REPLACE]' },
+  { value: '4.8★', label: 'Early-user rating', note: '[REPLACE]' },
+];
+
+const steps = [
+  { icon: 'fa-magnifying-glass', title: 'Discover verified homes', text: 'Browse listings that are checked for real documents and real owners — no ghost agents, no fake photos.' },
+  { icon: 'fa-comments', title: 'Chat & book a viewing', text: 'Message verified agents in-app, schedule viewings, and make offers — everything in one thread.' },
+  { icon: 'fa-shield-halved', title: 'Pay & move in safely', text: 'Pay rent and fees through secure escrow-style payments with digital agreements that protect both sides.' },
+];
+
+const audiences = [
+  { icon: 'fa-house-user', title: 'Renters & Buyers', text: 'Find a verified home without the runaround or the scams.', perks: ['Verified listings only', 'In-app chat & viewings', 'Secure rent payments', 'Digital tenancy agreements'], href: '/rent', cta: 'Find a home' },
+  { icon: 'fa-building-user', title: 'Landlords & Agents', text: 'List once, reach thousands of serious, verified seekers.', perks: ['Free verified listings', 'Qualified leads & offers', 'Manage units & tenants', 'On-time digital rent collection'], href: '/waitlist', cta: 'List a property' },
+  { icon: 'fa-helmet-safety', title: 'Property Developers', text: 'Sell estates and plots faster with trust built in.', perks: ['Showcase whole estates', 'Document-verified plots', 'Buyer demand analytics', 'Dedicated sales support'], href: '/for-developers', cta: 'Partner with us' },
+];
+
+const listings = [
+  { image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900', price: '₦1,200,000 / yr', title: 'Modern 2-Bedroom Flat', location: 'Lekki, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '2 beds' }, { icon: 'fa-bath', label: '2 baths' }] },
+  { image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=900', price: '₦45,000,000', title: 'Modern 4-Bedroom Duplex', location: 'Maitama, Abuja', kind: 'buy', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-ruler-combined', label: '450 sqm' }] },
+  { image: 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=900', price: '₦8,500,000', title: '600sqm Residential Plot', location: 'Ibeju-Lekki, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '600 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
+];
+
+const appFeatures = [
+  { icon: 'fa-circle-check', text: 'Verified listings & agents' },
+  { icon: 'fa-comments', text: 'In-app chat, calls & viewings' },
+  { icon: 'fa-wallet', text: 'Secure wallet & rent payments' },
+  { icon: 'fa-file-signature', text: 'Digital tenancy agreements' },
+  { icon: 'fa-bell', text: 'Rent reminders & receipts' },
+  { icon: 'fa-headset', text: '24/7 in-app support' },
+];
+
+const testimonials = [
+  { quote: 'I found a verified flat and paid rent without ever worrying about being scammed. This is what Nigeria needed.', name: 'Adaeze O.', role: 'Tenant, Lagos', note: '[REPLACE]' },
+  { quote: 'My listings get serious, verified leads. I closed two units in my first month on RentEase 9ja.', name: 'Tunde A.', role: 'Agent, Abuja', note: '[REPLACE]' },
+  { quote: 'We listed an entire estate and the document verification gave buyers real confidence.', name: 'Grace E.', role: 'Property Developer', note: '[REPLACE]' },
+];
+
+const faqs = [
+  { q: 'What is RentEase 9ja?', a: 'RentEase 9ja is a property platform for Nigeria where you can rent, buy, and sell verified homes and land — with in-app chat, secure payments, and digital agreements that protect everyone.' },
+  { q: 'How do you verify listings?', a: 'Every listing goes through checks on ownership and documents before it goes live, and agents are identity-verified, so you only deal with real people and real properties.' },
+  { q: 'Is it safe to pay rent through the app?', a: 'Yes. Payments run through a secure, escrow-style flow with digital receipts and agreements, so funds and terms are protected on both sides.' },
+  { q: 'How much does it cost to list a property?', a: 'Creating a verified listing is free for landlords and agents during launch. Premium tools for high-volume agents and developers are available.' },
+  { q: 'When is the app launching?', a: 'We are onboarding early users now. Join the waitlist to get first access and launch updates.' },
+];
+---
+<Base active="/">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow reveal"><span class="dot"></span> Launching soon · onboarding agents now</span>
+        <h1 class="reveal" data-delay="1">Rent, buy & sell property in Nigeria — <span class="gradient-text">the safe way.</span></h1>
+        <p class="reveal" data-delay="2">Verified listings, real agents, secure rent payments, and digital agreements. Everything you need to find or fill a home, in one trusted app.</p>
+        <div class="hero-cta reveal" data-delay="3">
+          <a href="/waitlist" class="btn btn-primary">Join the waitlist <i class="fas fa-arrow-right"></i></a>
+          <a href="/rent" class="btn btn-ghost">Explore listings</a>
+        </div>
+        <ul class="hero-trust reveal" data-delay="4">
+          <li><i class="fas fa-circle-check"></i> Verified listings</li>
+          <li><i class="fas fa-lock"></i> Secure payments</li>
+          <li><i class="fas fa-user-shield"></i> Real, vetted agents</li>
+        </ul>
+      </div>
+      <div class="hero-media reveal" data-delay="2">
+        <img src="/mockup.webp" alt="RentEase 9ja mobile app" width="320" height="650" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section section--surface stats-sec">
+    <div class="container grid grid-4">
+      {stats.map((s, i) => (
+        <div class="stat reveal" data-delay={i}>
+          <div class="stat-val gradient-text">{s.value}</div>
+          <div class="stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- PROBLEM → SOLUTION -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">The problem</span>
+        <h2>Renting in Nigeria is broken. We fixed it.</h2>
+        <p>Fake listings, ghost agents, cash that disappears, and zero accountability. RentEase 9ja replaces all of it with trust by design.</p>
+      </div>
+      <div class="grid grid-2 ps-grid">
+        <div class="ps-card pain reveal">
+          <h3><i class="fas fa-triangle-exclamation"></i> The old way</h3>
+          <ul>
+            <li>Fake photos & listings that don't exist</li>
+            <li>Agents you can't verify or trust</li>
+            <li>Cash payments with no receipts or protection</li>
+            <li>No agreements — disputes with no proof</li>
+            <li>Endless calls, no real information</li>
+          </ul>
+        </div>
+        <div class="ps-card gain reveal" data-delay="1">
+          <h3><i class="fas fa-circle-check"></i> The RentEase 9ja way</h3>
+          <ul>
+            <li>Every listing checked for real docs & owners</li>
+            <li>Identity-verified agents and landlords</li>
+            <li>Secure, escrow-style payments with receipts</li>
+            <li>Digital tenancy agreements that protect both sides</li>
+            <li>In-app chat, viewings & offers in one place</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From search to keys in three steps</h2>
+      </div>
+      <div class="grid grid-3">
+        {steps.map((s, i) => (
+          <div class="step reveal" data-delay={i}>
+            <span class="step-num">{i + 1}</span>
+            <div class="step-icon"><i class={`fas ${s.icon}`}></i></div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIENCES -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Built for everyone</span>
+        <h2>One platform, every side of the deal</h2>
+      </div>
+      <div class="grid grid-3">
+        {audiences.map((a, i) => (
+          <div class="aud card reveal" data-delay={i}>
+            <div class="aud-icon"><i class={`fas ${a.icon}`}></i></div>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+            <ul>
+              {a.perks.map((p) => (<li><i class="fas fa-check"></i> {p}</li>))}
+            </ul>
+            <a href={a.href} class="aud-link">{a.cta} <i class="fas fa-arrow-right"></i></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED LISTINGS -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Featured</span>
+        <h2>A taste of what's inside</h2>
+        <p>Verified homes and land across Nigeria. Full details, chat, and booking live in the app.</p>
+      </div>
+      <div class="grid grid-3">
+        {listings.map((l, i) => (
+          <div class="reveal" data-delay={i}><ListingCard {...l} /></div>
+        ))}
+      </div>
+      <div class="center-cta reveal"><a href="/rent" class="btn btn-ghost">Browse all listings <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+  </section>
+
+  <!-- APP SHOWCASE -->
+  <section class="section section--dark app-sec">
+    <div class="container app-inner">
+      <div class="app-copy reveal">
+        <span class="eyebrow">The app</span>
+        <h2>Your whole rental journey, in one app</h2>
+        <p>Search, chat, view, pay, and sign — without leaving RentEase 9ja. Built for Nigerian renters, landlords, and agents.</p>
+        <ul class="app-features">
+          {appFeatures.map((f) => (<li><i class={`fas ${f.icon}`}></i> {f.text}</li>))}
+        </ul>
+        <div class="app-actions">
+          <a href="/waitlist" class="btn btn-primary">Join the waitlist</a>
+          <div class="qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.rentease9ja.com/waitlist" alt="Scan to join the waitlist" width="92" height="92" loading="lazy" />
+            <span>Scan to join</span>
+          </div>
+        </div>
+      </div>
+      <div class="app-media reveal" data-delay="1">
+        <img src="/mockup.webp" alt="RentEase 9ja app screens" width="300" height="610" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACTION / INVESTORS -->
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Traction & vision</span>
+        <h2>Building the trust layer for Nigerian real estate</h2>
+        <p>Nigeria's housing market is huge, fragmented, and starved of trust. RentEase 9ja is building the verified, end-to-end platform to own that gap.</p>
+      </div>
+      <div class="grid grid-4 invest-stats">
+        <div class="i-stat reveal"><div class="i-val gradient-text">$X.XB</div><div class="i-label">Annual rental market [REPLACE]</div></div>
+        <div class="i-stat reveal" data-delay="1"><div class="i-val gradient-text">8,500+</div><div class="i-label">Waitlist signups [REPLACE]</div></div>
+        <div class="i-stat reveal" data-delay="2"><div class="i-val gradient-text">15+</div><div class="i-label">Cities at launch [REPLACE]</div></div>
+        <div class="i-stat reveal" data-delay="3"><div class="i-val gradient-text">XX%</div><div class="i-label">MoM growth [REPLACE]</div></div>
+      </div>
+      <div class="invest-cta reveal">
+        <a href="mailto:partnerships@rentease9ja.com?subject=Investor%20enquiry" class="btn btn-primary">Request investor deck</a>
+        <a href="/aboutus" class="btn btn-ghost">Read our story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Loved by early users</span>
+        <h2>Trust you can feel</h2>
+      </div>
+      <div class="grid grid-3">
+        {testimonials.map((t, i) => (
+          <figure class="quote card reveal" data-delay={i}>
+            <div class="stars">★★★★★</div>
+            <blockquote>{t.quote}</blockquote>
+            <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--mist">
+    <div class="container faq-wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions, answered</h2>
+      </div>
+      <div class="faq reveal">
+        {faqs.map((f) => (
+          <details>
+            <summary>{f.q} <i class="fas fa-plus"></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container final-inner reveal">
+      <h2>Find your next home the safe way.</h2>
+      <p>Join thousands of Nigerians getting first access to RentEase 9ja.</p>
+      <div class="final-actions">
+        <a href="/waitlist" class="btn btn-light">Join the waitlist <i class="fas fa-arrow-right"></i></a>
+        <a href="/how-it-works" class="btn btn-on-dark">See how it works</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* HERO */
+  .hero { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--bg), var(--mist)); padding-block: clamp(48px, 7vw, 90px); }
+  .hero-glow { position: absolute; top: -30%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(43,182,115,.16), transparent 65%); pointer-events: none; }
+  .hero-glow::after { content: ''; position: absolute; bottom: -40%; left: -30%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(30,78,140,.14), transparent 65%); }
+  .hero-inner { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(30px, 5vw, 70px); }
+  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-green); box-shadow: 0 0 0 4px rgba(43,182,115,.18); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .hero-copy h1 { margin: 20px 0 18px; }
+  .hero-copy > p { font-size: 1.18rem; color: var(--text-2); max-width: 540px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 30px 0 26px; }
+  .hero-trust { display: flex; gap: 22px; flex-wrap: wrap; color: var(--text-2); font-weight: 600; font-size: .92rem; }
+  .hero-trust i { color: var(--brand-green); margin-right: 6px; }
+  .hero-media { display: flex; justify-content: center; }
+  .hero-media img { width: clamp(240px, 32vw, 340px); height: auto; filter: drop-shadow(0 40px 70px rgba(15,23,42,.28)); }
+  @media (max-width: 920px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-copy > p { margin-inline: auto; }
+    .hero-cta, .hero-trust { justify-content: center; }
+    .hero-media { order: -1; margin-bottom: 8px; }
+    .hero-media img { width: 220px; }
+  }
+
+  /* STATS */
+  .stats-sec { padding-block: clamp(40px, 5vw, 64px); }
+  .stat { text-align: center; }
+  .stat-val { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.03em; }
+  .stat-label { color: var(--text-muted); font-weight: 600; margin-top: 6px; font-size: .95rem; }
+
+  /* PROBLEM/SOLUTION */
+  .ps-card { padding: 32px; border-radius: var(--r-lg); border: 1px solid var(--border); }
+  .ps-card h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .ps-card ul { display: flex; flex-direction: column; gap: 12px; }
+  .ps-card li { position: relative; padding-left: 4px; color: var(--text-2); }
+  .ps-card.pain { background: #fff; }
+  .ps-card.pain h3 i { color: var(--danger); }
+  .ps-card.pain li { opacity: .85; }
+  .ps-card.gain { background: var(--surface); box-shadow: var(--shadow-card); }
+  .ps-card.gain h3 i { color: var(--brand-green); }
+  .ps-card.gain li { font-weight: 500; color: var(--text); }
+
+  /* STEPS */
+  .step { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 34px 28px; box-shadow: var(--shadow-card); }
+  .step-num { position: absolute; top: 22px; right: 26px; font-family: var(--font-display); font-weight: 800; font-size: 2.4rem; color: var(--border); line-height: 1; }
+  .step-icon { width: 58px; height: 58px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--brand-gradient); margin-bottom: 20px; }
+  .step h3 { margin-bottom: 10px; }
+  .step p { color: var(--text-muted); }
+
+  /* AUDIENCES */
+  .aud { padding: 32px 28px; display: flex; flex-direction: column; }
+  .aud-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 1.4rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 18px; }
+  .aud h3 { margin-bottom: 8px; }
+  .aud > p { color: var(--text-muted); margin-bottom: 18px; }
+  .aud ul { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+  .aud li { color: var(--text-2); font-size: .95rem; }
+  .aud li i { color: var(--brand-green); margin-right: 8px; }
+  .aud-link { margin-top: auto; font-weight: 700; color: var(--brand-blue); display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); }
+  .aud-link:hover { gap: 12px; }
+
+  .center-cta { text-align: center; margin-top: 44px; }
+
+  /* APP SHOWCASE */
+  .app-inner { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: clamp(30px, 5vw, 64px); }
+  .app-copy > p { color: var(--on-dark-2); font-size: 1.1rem; margin: 16px 0 26px; max-width: 520px; }
+  .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 30px; }
+  .app-features li { color: var(--on-dark); font-weight: 500; }
+  .app-features i { color: var(--brand-green); margin-right: 10px; }
+  .app-actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .qr { display: flex; align-items: center; gap: 12px; color: var(--on-dark-2); font-size: .85rem; }
+  .qr img { border-radius: 10px; border: 3px solid #fff; }
+  .app-media { display: flex; justify-content: center; }
+  .app-media img { width: clamp(220px, 28vw, 300px); height: auto; filter: drop-shadow(0 40px 70px rgba(0,0,0,.4)); }
+  @media (max-width: 920px) { .app-inner { grid-template-columns: 1fr; text-align: center; } .app-copy > p { margin-inline: auto; } .app-features { max-width: 420px; margin-inline: auto; } .app-actions { justify-content: center; } .app-media { order: -1; } .app-media img { width: 220px; } }
+  @media (max-width: 480px) { .app-features { grid-template-columns: 1fr; } }
+
+  /* INVESTORS */
+  .invest-stats { margin-bottom: 40px; }
+  .i-stat { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 26px 18px; box-shadow: var(--shadow-sm); }
+  .i-val { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 3.4vw, 2.6rem); letter-spacing: -.03em; }
+  .i-label { color: var(--text-muted); font-size: .9rem; margin-top: 6px; }
+  .invest-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* TESTIMONIALS */
+  .quote { padding: 30px 28px; display: flex; flex-direction: column; }
+  .stars { color: #F5A623; letter-spacing: 2px; margin-bottom: 14px; }
+  .quote blockquote { font-size: 1.05rem; color: var(--text); line-height: 1.6; margin-bottom: 20px; }
+  .quote figcaption { margin-top: auto; display: flex; flex-direction: column; }
+  .quote figcaption strong { color: var(--text); }
+  .quote figcaption span { color: var(--text-muted); font-size: .88rem; }
+
+  /* FAQ */
+  .faq-wrap { max-width: 820px; }
+  .faq details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 4px 22px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
+  .faq summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; cursor: pointer; list-style: none; padding: 18px 0; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--text); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary i { color: var(--brand-blue); transition: var(--transition); flex-shrink: 0; }
+  .faq details[open] summary i { transform: rotate(45deg); }
+  .faq details p { color: var(--text-muted); padding: 0 0 20px; line-height: 1.7; }
+
+  /* FINAL CTA */
+  .final-cta { background: var(--brand-gradient); color: #fff; padding-block: clamp(56px, 8vw, 96px); text-align: center; }
+  .final-inner h2 { color: #fff; }
+  .final-inner p { color: rgba(255,255,255,.9); font-size: 1.12rem; margin: 14px 0 28px; }
+  .final-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>

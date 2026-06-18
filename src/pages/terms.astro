@@ -1,0 +1,109 @@
+---
+import Legal from '../layouts/Legal.astro';
+
+const toc = [
+  { id: 't1', label: 'Eligibility & Accounts' },
+  { id: 't2', label: 'Platform Services' },
+  { id: 't3', label: 'Agent-Specific Terms' },
+  { id: 't4', label: 'Payments & Escrow' },
+  { id: 't5', label: 'Prohibited Activities' },
+  { id: 't6', label: 'Intellectual Property' },
+  { id: 't7', label: 'Disclaimers & Liability' },
+  { id: 't8', label: 'Termination' },
+  { id: 't9', label: 'Governing Law' },
+  { id: 't10', label: 'Contact Us' },
+];
+
+const sections = [
+  { num: '01', id: 't1', title: 'Eligibility & Accounts', body: `
+    <p>To use RentEase 9ja you must:</p>
+    <ul>
+      <li>Be at least <strong>18 years of age</strong>.</li>
+      <li>Provide accurate, current, and complete information during registration.</li>
+      <li>Complete identity verification (KYC) to access core features such as listing properties, signing tenancy agreements, or making escrow payments.</li>
+      <li>Keep your login credentials secure. You are responsible for all activity that occurs under your account.</li>
+    </ul>
+    <p>Agents must additionally complete the platform's professional verification process — including NIN, BVN, face-match, and phone OTP — before publishing listings. Verified Agents receive a Blue Badge confirming their identity on the platform.</p>` },
+  { num: '02', id: 't2', title: 'Platform Services', body: `
+    <p>RentEase 9ja provides a technology platform that connects property agents, landlords, and tenants. The platform facilitates but is not directly responsible for:</p>
+    <ul>
+      <li>The listing, renting, or sale of properties.</li>
+      <li>The generation and digital signing of tenancy and sales agreements.</li>
+      <li>Escrow-protected rent and purchase payments.</li>
+      <li>Digital key handover coordination and deal registry logging.</li>
+      <li>Maintenance request management between tenants and agents.</li>
+    </ul>
+    <div class="highlight">RentEase 9ja is a marketplace platform. We do not own, manage, or physically inspect any properties listed on the platform. All representations about a property are the sole responsibility of the listing Agent or Landlord.</div>` },
+  { num: '03', id: 't3', title: 'Agent-Specific Terms', body: `
+    <p>Agents are held to a higher standard of accuracy and professionalism on the platform:</p>
+    <ul>
+      <li>All property listings must be authentic and legally available. Listing fake or unavailable properties is grounds for immediate account termination.</li>
+      <li>Agents are solely responsible for ensuring the accuracy of all documentation, pricing, and property condition information.</li>
+      <li>Commission disbursements are processed only upon successful QR-code key handover confirmation. Attempting to circumvent the escrow system is a violation of these Terms.</li>
+      <li>Agents must maintain the confidentiality of all tenant lead data obtained through the platform. Exporting or selling lead data is strictly prohibited.</li>
+      <li>Agents are subject to reviews and ratings by tenants. Manipulation of reviews is prohibited.</li>
+    </ul>` },
+  { num: '04', id: 't4', title: 'Payments & Escrow', body: `
+    <p>All financial transactions on the platform are governed by the following rules:</p>
+    <ul>
+      <li><strong>Escrow:</strong> Tenant payments are held in escrow and are not released to the agent/landlord until key handover is confirmed via QR code. This protects both parties.</li>
+      <li><strong>Payment processors:</strong> Payments are processed by Paystack. By making a payment, you also agree to Paystack's terms of service.</li>
+      <li><strong>Withdrawals:</strong> Agents may request payout to a verified bank account. We reserve the right to delay or withhold disbursements in cases of suspected fraud or ongoing disputes.</li>
+      <li><strong>Refunds:</strong> Refund eligibility depends on the specific circumstances of a transaction. Contact support within 48 hours of a disputed payment.</li>
+    </ul>
+    <div class="warn"><strong>Important:</strong> RentEase 9ja is not a bank or financial institution. We do not provide financial advice or guarantee returns on any transaction. All payments are subject to Nigerian financial regulations.</div>` },
+  { num: '05', id: 't5', title: 'Prohibited Activities', body: `
+    <p>The following are strictly prohibited on the RentEase 9ja platform:</p>
+    <ul>
+      <li>Listing properties you do not have authority to rent or sell.</li>
+      <li>Creating fake or duplicate accounts to circumvent bans or verification requirements.</li>
+      <li>Collecting payments from tenants outside the platform's escrow system to avoid commission tracking.</li>
+      <li>Harassing, threatening, or discriminating against other users.</li>
+      <li>Reverse-engineering, scraping, or attempting to extract data from the platform.</li>
+      <li>Posting false reviews or manipulating the rating system.</li>
+      <li>Any activity that violates Nigerian law, including money laundering or fraud.</li>
+    </ul>
+    <p>Violations will result in suspension or permanent termination of your account, and may be reported to relevant Nigerian authorities.</p>` },
+  { num: '06', id: 't6', title: 'Intellectual Property', body: `
+    <p>The RentEase 9ja name, logo, app design, source code, proprietary algorithms, and all platform content are the exclusive intellectual property of RentEase 9ja and its licensors. You may not:</p>
+    <ul>
+      <li>Copy, modify, or redistribute any part of the platform without written permission.</li>
+      <li>Use the RentEase 9ja brand or trademarks in any way that implies endorsement without consent.</li>
+      <li>Attempt to reverse-engineer, decompile, or disassemble the mobile application.</li>
+    </ul>
+    <p>Content you upload (property photos, documents) remains your property. By uploading, you grant RentEase 9ja a non-exclusive licence to display and process that content solely for the purpose of operating the platform.</p>` },
+  { num: '07', id: 't7', title: 'Disclaimers & Limitation of Liability', body: `
+    <p>RentEase 9ja provides the platform on an <strong>"as-is"</strong> and <strong>"as-available"</strong> basis. We do not warrant that the service will be uninterrupted, error-free, or free from harmful components.</p>
+    <p>To the fullest extent permitted by law, RentEase 9ja is not liable for:</p>
+    <ul>
+      <li>Disputes between agents, landlords, and tenants regarding property conditions, lease terms, or payments.</li>
+      <li>Losses arising from your reliance on information provided by other users.</li>
+      <li>Indirect, consequential, or incidental damages arising from your use of the platform.</li>
+      <li>Service interruptions caused by third-party providers or force majeure events.</li>
+    </ul>` },
+  { num: '08', id: 't8', title: 'Termination', body: `
+    <p>Either you or RentEase 9ja may terminate these Terms at any time.</p>
+    <ul>
+      <li><strong>By you:</strong> You may delete your account from within the app at any time. Pending transactions will be settled before deletion is complete.</li>
+      <li><strong>By us:</strong> We may suspend or permanently terminate your account without prior notice if you breach these Terms, engage in fraudulent activity, or pose a risk to other users or the platform.</li>
+    </ul>
+    <p>Upon termination, your right to use the platform ceases immediately. Sections relating to intellectual property, liability, and governing law survive termination.</p>` },
+  { num: '09', id: 't9', title: 'Governing Law & Dispute Resolution', body: `
+    <p>These Terms are governed by the <strong>Laws of the Federal Republic of Nigeria</strong>. Any dispute arising from or related to these Terms that cannot be resolved informally will be referred to arbitration through the <strong>Lagos Multi-Door Courthouse (LMDC)</strong>, whose decision shall be final and binding on both parties.</p>
+    <p>Before initiating formal proceedings, we encourage users to contact our support team at <a href="mailto:support@rentease9ja.com">support@rentease9ja.com</a> to resolve the matter informally.</p>` },
+  { num: '10', id: 't10', title: 'Contact Us', body: `
+    <p>For questions about these Terms, please contact our legal team. We aim to respond within 2 business days.</p>` },
+];
+---
+<Legal
+  title="Terms of Service | RentEase 9ja"
+  description="The agreement that governs your use of the RentEase 9ja platform — for tenants, agents, and landlords."
+  active="/terms"
+  heading="Terms of Service"
+  intro="The agreement that governs your use of the RentEase 9ja platform."
+  effective="Last revised February 24, 2026 · Version 2.6.0"
+  scope={{ title: 'Binding agreement', text: 'By downloading, installing, or using the RentEase 9ja app, you agree to be bound by these Terms of Service. If you do not agree, please do not use the app. These terms apply to all users — Tenants, Agents, and Landlords.' }}
+  toc={toc}
+  sections={sections}
+  contact={{ title: 'Questions about these terms?', text: 'Our support team is ready to help clarify anything.', email: 'support@rentease9ja.com', note: 'RentEase 9ja · Lagos, Nigeria · Governed by Nigerian Law' }}
+/>

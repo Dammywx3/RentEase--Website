@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ListingCard from '../components/ListingCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const filters = ['All', 'Residential', 'Commercial', 'Agricultural', 'C of O', 'Lagos', 'Abuja'];
+
+const listings = [
+  { image: 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=900', price: '₦8,500,000', title: '600sqm Residential Plot', location: 'Ibeju-Lekki, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '600 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
+  { image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900', price: '₦120,000,000', title: '1,200sqm Commercial Land', location: 'Wuse II, Abuja', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '1,200 sqm' }, { icon: 'fa-file-contract', label: 'R of O' }] },
+  { image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=900', price: '₦8,500,000 / acre', title: '10 Acres Farmland', location: 'Ewekoro, Ogun', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '10 acres' }, { icon: 'fa-file-contract', label: 'Reg. Survey' }] },
+  { image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=900', price: '₦25,000,000', title: '800sqm Estate Plot', location: 'Epe, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '800 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
+  { image: 'https://images.unsplash.com/photo-1500076656116-558758c991c1?q=80&w=900', price: '₦15,000,000', title: '500sqm Residential Plot', location: 'Kuje, Abuja', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '500 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
+  { image: 'https://images.unsplash.com/photo-1542621334-a254cf47733d?q=80&w=900', price: '₦60,000,000', title: '1 Acre Waterfront Land', location: 'Ikoyi, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '1 acre' }, { icon: 'fa-water', label: 'Waterfront' }] },
+];
+---
+<Base
+  title="Buy Verified Land in Nigeria | RentEase 9ja"
+  description="Invest in document-verified land across Nigeria — residential, commercial, and agricultural plots with C of O and registered surveys, on RentEase 9ja."
+  active="/land"
+>
+  <PageHero
+    eyebrow="Land & plots"
+    title="Invest in land with <span class='gradient-text'>verified documents.</span>"
+    subtitle="C of O, R of O, registered surveys — every plot is document-checked so your investment is built on solid ground."
+  >
+    <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
+  </PageHero>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="filters reveal">
+        {filters.map((f, i) => (<button class:list={['chip', { active: i === 0 }]}>{f}</button>))}
+      </div>
+      <div class="grid grid-3" style="margin-top: 30px;">
+        {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
+      </div>
+      <p class="note reveal">Showing a sample of verified plots. Full inventory and document checks live in the app.</p>
+    </div>
+  </section>
+
+  <CtaBand title="Secure your piece of the future." text="Join the waitlist to browse verified plots and view documents in-app." />
+</Base>
+
+<style>
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .chip { padding: 9px 18px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--surface); color: var(--text-2); font-weight: 600; font-size: .9rem; transition: var(--transition); }
+  .chip:hover { border-color: rgba(30,78,140,.3); color: var(--brand-blue); }
+  .chip.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+  .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
+</style>

@@ -1,0 +1,155 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const does = [
+  'Discover available properties with ease',
+  'List residential and commercial properties',
+  'Connect tenants with agents and property owners',
+  'Manage property inquiries and offers',
+  'Schedule property viewings',
+  'Communicate directly within the platform',
+  'Simplify the rental journey from search to agreement',
+];
+
+const serve = [
+  { icon: 'fa-house-user', title: 'Tenants', text: 'Search properties easily, explore options, communicate with verified agents, and move through the rental process with confidence.' },
+  { icon: 'fa-user-tie', title: 'Agents', text: 'Showcase listings, manage inquiries, respond to offers, and handle client engagement more efficiently.' },
+  { icon: 'fa-building-user', title: 'Landlords & Managers', text: 'Present properties professionally, track interest, manage available units, and connect with serious prospects.' },
+];
+
+const values = [
+  { icon: 'fa-shield-halved', title: 'Transparency', text: 'Clear information and verified data at every step.' },
+  { icon: 'fa-bolt', title: 'Simplicity', text: 'Tools built around real rental workflows, not paperwork.' },
+  { icon: 'fa-handshake', title: 'Trust', text: 'Verification and accountability for everyone involved.' },
+  { icon: 'fa-arrow-trend-up', title: 'Progress', text: 'Continuously improving our technology and service.' },
+];
+---
+<Base
+  title="About RentEase 9ja | Simplifying Real Estate in Nigeria"
+  description="RentEase 9ja is a modern property platform built to make searching, listing, and renting easier, faster, and more transparent across Nigeria."
+  active="/aboutus"
+>
+  <PageHero
+    eyebrow="About us"
+    title="Simplifying real estate in <span class='gradient-text'>Nigeria.</span>"
+    subtitle="RentEase 9ja is a modern real estate platform built to make property search, listing, and rental transactions easier, faster, and more transparent."
+  />
+
+  <section class="section section--surface">
+    <div class="container narrow">
+      <div class="prose reveal">
+        <p>We created RentEase 9ja to solve the common problems people face in the housing market — delayed responses, scattered listings, poor communication, stressful searches, and a lack of trust in the renting process. Our goal is to bring landlords, agents, and tenants together on one reliable digital platform where renting and managing properties becomes simple and efficient.</p>
+      </div>
+      <img src="/image1.webp" alt="The RentEase 9ja experience" class="media reveal" loading="lazy" width="900" height="540" />
+    </div>
+  </section>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="grid grid-2 mv">
+        <div class="mv-card card reveal">
+          <span class="eyebrow">Our mission</span>
+          <p>To simplify real estate access in Nigeria by building a trusted digital platform that makes renting, listing, and managing properties smarter, safer, and more efficient for everyone.</p>
+        </div>
+        <div class="mv-card card reveal" data-delay="1">
+          <span class="eyebrow">Our vision</span>
+          <p>To become one of the most trusted and widely used property technology platforms in Nigeria — helping millions find homes, secure spaces for business, and manage properties with confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>One platform for the whole journey</h2>
+      </div>
+      <ul class="does grid grid-2 reveal">
+        {does.map((d) => (<li><i class="fas fa-circle-check"></i> {d}</li>))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Who we serve</span>
+        <h2>Built for everyone in the deal</h2>
+      </div>
+      <div class="grid grid-3">
+        {serve.map((s, i) => (
+          <div class="serve card reveal" data-delay={i % 3}>
+            <div class="s-icon"><i class={`fas ${s.icon}`}></i></div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we stand for</span>
+        <h2>The future of renting in Nigeria</h2>
+        <p>We are not just building another property app — we are building a smarter, more trusted rental ecosystem.</p>
+      </div>
+      <div class="grid grid-4">
+        {values.map((v, i) => (
+          <div class="value reveal" data-delay={i % 4}>
+            <div class="v-icon"><i class={`fas ${v.icon}`}></i></div>
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--mist">
+    <div class="container narrow">
+      <div class="contact card reveal">
+        <h2>Get in touch</h2>
+        <p>Whether you have a question, need support, or want to partner with us, we'd love to hear from you.</p>
+        <ul class="contact-list">
+          <li><i class="fas fa-headset"></i> Support: <a href="mailto:support@rentease9ja.com">support@rentease9ja.com</a></li>
+          <li><i class="fas fa-circle-info"></i> General: <a href="mailto:info@rentease9ja.com">info@rentease9ja.com</a></li>
+          <li><i class="fas fa-handshake"></i> Partnerships: <a href="mailto:partnerships@rentease9ja.com">partnerships@rentease9ja.com</a></li>
+          <li><i class="fas fa-location-dot"></i> Nigeria · Mon–Fri, 9:00 AM – 5:00 PM</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Be part of the journey." text="Join the waitlist and help us build a better property experience for Nigeria." />
+</Base>
+
+<style>
+  .narrow { max-width: 860px; }
+  .prose p { font-size: 1.15rem; color: var(--text-2); line-height: 1.8; }
+  .media { width: 100%; border-radius: var(--r-xl); margin-top: 32px; box-shadow: var(--shadow-card); aspect-ratio: 5 / 3; object-fit: cover; }
+  .mv-card { padding: 34px 30px; }
+  .mv-card p { color: var(--text-2); font-size: 1.08rem; line-height: 1.7; margin-top: 14px; }
+  .does { gap: 14px 30px; }
+  .does li { display: flex; align-items: flex-start; gap: 12px; color: var(--text-2); font-weight: 500; }
+  .does i { color: var(--brand-green); margin-top: 3px; }
+  .serve { padding: 30px 28px; }
+  .s-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 1.35rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 16px; }
+  .serve h3 { margin-bottom: 8px; }
+  .serve p { color: var(--text-muted); }
+  .value { text-align: center; }
+  .v-icon { width: 60px; height: 60px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--brand-gradient); margin: 0 auto 16px; }
+  .value h3 { margin-bottom: 6px; font-size: 1.15rem; }
+  .value p { color: var(--text-muted); font-size: .95rem; }
+  .contact { padding: 40px 36px; }
+  .contact h2 { margin-bottom: 10px; }
+  .contact > p { color: var(--text-muted); margin-bottom: 22px; }
+  .contact-list { display: flex; flex-direction: column; gap: 14px; }
+  .contact-list li { display: flex; align-items: center; gap: 12px; color: var(--text-2); }
+  .contact-list i { color: var(--brand-blue); width: 20px; }
+  .contact-list a { color: var(--brand-blue); font-weight: 600; }
+</style>

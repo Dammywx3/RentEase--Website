@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const {
+  title = 'RentEase 9ja — Rent, Buy & Sell Property in Nigeria, Safely',
+  description = "Nigeria's safest, most trusted property platform. Verified listings, real agents, secure rent payments, and digital agreements — all in one app.",
+  active = '',
+  ogImage = '/og-cover.png',
+  noFooter = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://www.rentease9ja.com').href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'RentEase 9ja',
+  url: 'https://www.rentease9ja.com',
+  logo: 'https://www.rentease9ja.com/logo.webp',
+  description,
+  sameAs: [
+    'https://x.com/rentease9ja',
+    'https://www.instagram.com/rentease9ja',
+    'https://www.tiktok.com/@rentease_9ja',
+  ],
+  areaServed: 'NG',
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#1E4E8C" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RentEase 9ja" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site ?? 'https://www.rentease9ja.com').href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rentease9ja" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <Nav active={active} />
+    <main>
+      <slot />
+    </main>
+    {!noFooter && <Footer />}
+
+    <script>
+      // Scroll reveal
+      const els = document.querySelectorAll('.reveal');
+      if (els.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

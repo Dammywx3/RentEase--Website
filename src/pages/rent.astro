@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ListingCard from '../components/ListingCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const filters = ['All', 'Lagos', 'Abuja', 'Port Harcourt', 'Self-contain', '1 Bed', '2 Bed', '3+ Bed'];
+
+const listings = [
+  { image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=900', price: '₦800,000 / yr', title: 'Self-Contain Studio', location: 'Port Harcourt, Rivers', kind: 'rent', meta: [{ icon: 'fa-bed', label: '1 bed' }, { icon: 'fa-bath', label: '1 bath' }] },
+  { image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=900', price: '₦1,200,000 / yr', title: 'Modern 2-Bedroom Flat', location: 'Lekki, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '2 beds' }, { icon: 'fa-bath', label: '2 baths' }] },
+  { image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=900', price: '₦2,500,000 / yr', title: 'Modern 3-Bedroom Flat', location: 'Wuse II, Abuja', kind: 'rent', meta: [{ icon: 'fa-bed', label: '3 beds' }, { icon: 'fa-bath', label: '3 baths' }] },
+  { image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=900', price: '₦1,800,000 / yr', title: 'Serviced 2-Bedroom Apartment', location: 'Victoria Island, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '2 beds' }, { icon: 'fa-couch', label: 'Furnished' }] },
+  { image: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=900', price: '₦3,500,000 / yr', title: 'Luxury 4-Bedroom Terrace', location: 'Maitama, Abuja', kind: 'rent', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-car', label: 'Parking' }] },
+  { image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=900', price: '₦950,000 / yr', title: 'Cosy Mini Flat', location: 'Yaba, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '1 bed' }, { icon: 'fa-bath', label: '1 bath' }] },
+];
+---
+<Base
+  title="Rent a Verified Home in Nigeria | RentEase 9ja"
+  description="Browse verified rental homes across Lagos, Abuja, Port Harcourt and more. Real listings, vetted agents, secure rent payments — only on RentEase 9ja."
+  active="/rent"
+>
+  <PageHero
+    eyebrow="Rentals"
+    title="Rent a verified home, <span class='gradient-text'>stress-free.</span>"
+    subtitle="No fake listings. No ghost agents. Just verified rentals with secure payments and digital agreements across Nigeria."
+  >
+    <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
+  </PageHero>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="filters reveal">
+        {filters.map((f, i) => (<button class:list={['chip', { active: i === 0 }]}>{f}</button>))}
+      </div>
+      <div class="grid grid-3" style="margin-top: 30px;">
+        {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
+      </div>
+      <p class="note reveal">Showing a sample of verified rentals. Full inventory, chat, and booking live in the app.</p>
+    </div>
+  </section>
+
+  <CtaBand title="Your verified home is waiting." text="Join the waitlist to browse the full catalogue and book viewings in-app." />
+</Base>
+
+<style>
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .chip { padding: 9px 18px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--surface); color: var(--text-2); font-weight: 600; font-size: .9rem; transition: var(--transition); }
+  .chip:hover { border-color: rgba(30,78,140,.3); color: var(--brand-blue); }
+  .chip.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+  .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
+</style>

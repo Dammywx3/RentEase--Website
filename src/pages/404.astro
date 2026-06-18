@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found | RentEase 9ja" description="The page you're looking for doesn't exist.">
+  <section class="nf">
+    <div class="container nf-inner">
+      <div class="code gradient-text">404</div>
+      <h1>This page took a wrong turn.</h1>
+      <p>The page you're looking for doesn't exist or has moved. Let's get you back home.</p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn-primary">Back to home <i class="fas fa-arrow-right"></i></a>
+        <a href="/rent" class="btn btn-ghost">Browse rentals</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { min-height: 64vh; display: grid; place-items: center; text-align: center; background: linear-gradient(180deg, var(--bg), var(--mist)); padding-block: 80px; }
+  .code { font-family: var(--font-display); font-weight: 800; font-size: clamp(5rem, 16vw, 10rem); line-height: 1; letter-spacing: -.04em; }
+  .nf h1 { margin: 8px 0 14px; }
+  .nf p { color: var(--text-muted); font-size: 1.1rem; max-width: 460px; margin: 0 auto 28px; }
+  .nf-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>

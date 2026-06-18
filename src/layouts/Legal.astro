@@ -1,0 +1,88 @@
+---
+import Base from './Base.astro';
+const { title, description, active, heading, intro, effective, scope, toc = [], sections = [], contact } = Astro.props;
+---
+<Base title={title} description={description} active={active}>
+  <section class="page-hero light">
+    <div class="ph-glow" aria-hidden="true"></div>
+    <div class="container ph-inner reveal">
+      <h1>{heading}</h1>
+      {intro && <p>{intro}</p>}
+      {effective && <div class="meta"><i class="far fa-calendar"></i> {effective}</div>}
+    </div>
+  </section>
+
+  <div class="policy container">
+    {scope && (
+      <aside class="scope reveal">
+        <div class="scope-ico"><i class="fas fa-clipboard-list"></i></div>
+        <div><strong>{scope.title}</strong><p set:html={scope.text} /></div>
+      </aside>
+    )}
+
+    {toc.length > 0 && (
+      <nav class="toc reveal" aria-label="Contents">
+        <h3>Contents</h3>
+        <ol>{toc.map((t) => (<li><a href={`#${t.id}`}>{t.label}</a></li>))}</ol>
+      </nav>
+    )}
+
+    {sections.map((s) => (
+      <section class="psec reveal" id={s.id}>
+        <div class="psec-head"><span class="num">{s.num}</span><h2>{s.title}</h2></div>
+        <div class="psec-body" set:html={s.body} />
+      </section>
+    ))}
+
+    {contact && (
+      <div class="contact-box reveal">
+        <h3>{contact.title}</h3>
+        <p>{contact.text}</p>
+        <a class="contact-link" href={`mailto:${contact.email}`}>{contact.email}</a>
+        {contact.note && <p class="cnote" set:html={contact.note} />}
+      </div>
+    )}
+  </div>
+</Base>
+
+<style>
+  .page-hero { position: relative; overflow: hidden; padding-block: clamp(48px, 7vw, 80px); text-align: center; background: linear-gradient(180deg, var(--bg), var(--mist)); }
+  .ph-glow { position: absolute; top: -40%; right: -10%; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(43,182,115,.12), transparent 65%); pointer-events: none; }
+  .ph-inner { position: relative; max-width: 760px; }
+  .ph-inner p { font-size: 1.12rem; color: var(--text-2); margin: 14px auto 0; max-width: 600px; }
+  .meta { display: inline-block; margin-top: 20px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: .88rem; font-weight: 600; padding: 8px 16px; border-radius: var(--r-pill); }
+
+  .policy { max-width: 860px; padding-block: clamp(40px, 6vw, 72px); }
+  .scope { display: flex; gap: 16px; align-items: flex-start; background: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--brand-blue); border-radius: var(--r-md); padding: 22px 24px; margin-bottom: 40px; }
+  .scope-ico { font-size: 1.3rem; color: var(--brand-blue); margin-top: 2px; }
+  .scope strong { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--brand-blue); margin-bottom: 6px; }
+  .scope p { font-size: .95rem; color: var(--text-2); }
+
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px 30px; margin-bottom: 48px; box-shadow: var(--shadow-sm); }
+  .toc h3 { font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--brand-blue); margin-bottom: 18px; }
+  .toc ol { list-style: none; counter-reset: toc; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; }
+  .toc li { counter-increment: toc; display: flex; gap: 10px; align-items: center; font-size: .95rem; }
+  .toc li::before { content: counter(toc, decimal-leading-zero); font-size: 11px; font-weight: 700; color: var(--brand-green); background: var(--brand-green-soft, #E6F4EA); padding: 2px 6px; border-radius: 6px; flex-shrink: 0; }
+  .toc a { color: var(--text-2); transition: var(--transition); }
+  .toc a:hover { color: var(--brand-blue); }
+
+  .psec { margin-bottom: 44px; scroll-margin-top: 100px; }
+  .psec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .num { width: 40px; height: 40px; flex-shrink: 0; background: var(--brand-gradient); color: #fff; font-family: var(--font-display); font-weight: 800; border-radius: var(--r-sm); display: grid; place-items: center; }
+  .psec-head h2 { font-size: 1.5rem; margin: 0; }
+  .psec-body :global(p) { color: var(--text-2); line-height: 1.8; margin-bottom: 14px; }
+  .psec-body :global(ul) { display: flex; flex-direction: column; gap: 12px; margin: 16px 0; }
+  .psec-body :global(li) { display: flex; gap: 12px; align-items: flex-start; background: var(--surface-2); border: 1px solid var(--border); border-left: 3px solid var(--brand-blue); border-radius: var(--r-sm); padding: 14px 16px; color: var(--text-2); }
+  .psec-body :global(a) { color: var(--brand-blue); font-weight: 600; }
+  .psec-body :global(.highlight) { background: #EAF1FA; border: 1px solid #D0E0F2; border-radius: var(--r-md); padding: 18px 20px; color: var(--brand-blue); font-weight: 500; }
+  .psec-body :global(.warn) { background: #FEF2F2; border: 1px solid #FAD1D1; border-radius: var(--r-md); padding: 18px 20px; color: #B91C1C; font-weight: 500; }
+
+  .contact-box { background: var(--brand-gradient); color: #fff; border-radius: var(--r-xl); padding: 40px; text-align: center; margin-top: 56px; }
+  .contact-box h3 { color: #fff; font-size: 1.6rem; margin-bottom: 10px; }
+  .contact-box > p { color: rgba(255,255,255,.85); margin-bottom: 22px; }
+  .contact-link { display: inline-block; background: #fff; color: var(--brand-blue); font-weight: 700; padding: 13px 28px; border-radius: var(--r-pill); transition: var(--transition); }
+  .contact-link:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.2); }
+  .cnote { margin-top: 20px; font-size: .9rem; color: rgba(255,255,255,.7); }
+
+  @media (max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }
+</style>

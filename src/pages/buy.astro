@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ListingCard from '../components/ListingCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const filters = ['All', 'Lagos', 'Abuja', 'Duplex', 'Bungalow', 'Mansion', 'Penthouse'];
+
+const listings = [
+  { image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=900', price: '₦45,000,000', title: 'Modern 4-Bedroom Duplex', location: 'Lekki, Lagos', kind: 'buy', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-ruler-combined', label: '450 sqm' }] },
+  { image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=900', price: '₦250,000,000', title: 'Luxury 5-Bedroom Mansion', location: 'Maitama, Abuja', kind: 'buy', meta: [{ icon: 'fa-bed', label: '5 beds' }, { icon: 'fa-car', label: 'BQ + Parking' }] },
+  { image: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?q=80&w=900', price: '₦15,000,000', title: '3-Bedroom Bungalow', location: 'Ibadan, Oyo', kind: 'buy', meta: [{ icon: 'fa-bed', label: '3 beds' }, { icon: 'fa-ruler-combined', label: '300 sqm' }] },
+  { image: 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=900', price: '₦85,000,000', title: 'Luxury Penthouse', location: 'Victoria Island, Lagos', kind: 'buy', meta: [{ icon: 'fa-bed', label: '3 beds' }, { icon: 'fa-couch', label: 'Furnished' }] },
+  { image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900', price: '₦120,000,000', title: 'Contemporary 5-Bed Villa', location: 'Banana Island, Lagos', kind: 'buy', meta: [{ icon: 'fa-bed', label: '5 beds' }, { icon: 'fa-water-ladder', label: 'Pool' }] },
+  { image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=900', price: '₦38,000,000', title: '4-Bedroom Semi-Detached', location: 'Gwarinpa, Abuja', kind: 'buy', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-ruler-combined', label: '350 sqm' }] },
+];
+---
+<Base
+  title="Buy Property in Nigeria with Confidence | RentEase 9ja"
+  description="Buy verified homes across Nigeria. Every listing is document-checked, every seller verified, with secure transactions on RentEase 9ja."
+  active="/buy"
+>
+  <PageHero
+    eyebrow="For sale"
+    title="Buy property with <span class='gradient-text'>real confidence.</span>"
+    subtitle="Every home is document-verified and every seller identity-checked, so you invest without the fear of fraud."
+  >
+    <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
+  </PageHero>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="filters reveal">
+        {filters.map((f, i) => (<button class:list={['chip', { active: i === 0 }]}>{f}</button>))}
+      </div>
+      <div class="grid grid-3" style="margin-top: 30px;">
+        {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
+      </div>
+      <p class="note reveal">Showing a sample of verified homes for sale. Full inventory and secure offers live in the app.</p>
+    </div>
+  </section>
+
+  <CtaBand title="Buy your next property the safe way." text="Join the waitlist for full listings, document checks, and secure transactions." />
+</Base>
+
+<style>
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .chip { padding: 9px 18px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--surface); color: var(--text-2); font-weight: 600; font-size: .9rem; transition: var(--transition); }
+  .chip:hover { border-color: rgba(30,78,140,.3); color: var(--brand-blue); }
+  .chip.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+  .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
+</style>

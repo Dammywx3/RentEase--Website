@@ -1,0 +1,28 @@
+---
+const {
+  title = 'Find your next home the safe way.',
+  text = 'Join thousands of Nigerians getting first access to RentEase 9ja.',
+  primaryLabel = 'Join the waitlist',
+  primaryHref = '/waitlist',
+  secondaryLabel = 'See how it works',
+  secondaryHref = '/how-it-works',
+} = Astro.props;
+---
+<section class="cta-band">
+  <div class="container cta-inner reveal">
+    <h2>{title}</h2>
+    <p>{text}</p>
+    <div class="cta-actions">
+      <a href={primaryHref} class="btn btn-light">{primaryLabel} <i class="fas fa-arrow-right"></i></a>
+      {secondaryLabel && <a href={secondaryHref} class="btn btn-on-dark">{secondaryLabel}</a>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band { background: var(--brand-gradient); color: #fff; padding-block: clamp(56px, 8vw, 96px); text-align: center; }
+  .cta-inner { max-width: 720px; }
+  .cta-inner h2 { color: #fff; }
+  .cta-inner p { color: rgba(255,255,255,.92); font-size: 1.12rem; margin: 14px 0 28px; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>
