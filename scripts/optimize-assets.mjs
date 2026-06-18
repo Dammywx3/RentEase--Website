@@ -11,7 +11,7 @@ const raw = join(root, 'raw-assets'); // unoptimized source images (not deployed
 const kb = (p) => existsSync(p) ? Math.round(statSync(p).size / 1024) : 0;
 
 const jobs = [
-  { src: 'logo.png', out: 'logo.webp', width: 420 },
+  { src: 'logo.png', out: 'logo.webp', width: 620, trim: true }, // trim surrounding whitespace so it reads larger
   { src: 'mockup.png', out: 'mockup.webp', width: 760 },
   { src: 'image1.png', out: 'image1.webp', width: 1200 },
 ];
@@ -21,7 +21,9 @@ for (const j of jobs) {
   if (!existsSync(srcPath)) { console.log(`skip ${j.src} (missing)`); continue; }
   const outPath = join(pub, j.out);
   const before = kb(srcPath);
-  await sharp(srcPath).resize({ width: j.width, withoutEnlargement: true }).webp({ quality: 82 }).toFile(outPath);
+  let pipe = sharp(srcPath);
+  if (j.trim) pipe = pipe.trim({ threshold: 10 });
+  await pipe.resize({ width: j.width, withoutEnlargement: true }).webp({ quality: 86 }).toFile(outPath);
   console.log(`${j.src} (${before}KB) → ${j.out} (${kb(outPath)}KB)`);
 }
 

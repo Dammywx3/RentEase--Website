@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 
 const features = [
-  { icon: 'fa-id-card', title: 'Verified identity', text: 'Every agent and landlord passes strict KYC verification. No ghosts, no scams — just real properties and real people.' },
+  { icon: 'fa-id-card', title: 'Verified identity', text: 'Every agent and landlord passes strict KYC verification. No ghosts, no scams, just real properties and real people.' },
   { icon: 'fa-shield-halved', title: 'Escrow protection', text: 'Rent and fees are held safely in a neutral escrow wallet, released only when the property is successfully handed over.' },
   { icon: 'fa-file-signature', title: 'Digital contracts', text: 'Sign legally-binding tenancy agreements from your phone. Documents are stored securely in the cloud forever.' },
 ];
@@ -15,7 +15,7 @@ const roles = [
 ---
 <Base
   title="Join the RentEase 9ja Waitlist | Early Access"
-  description="Join 1,200+ Nigerians on the RentEase 9ja waitlist. Be first to access Nigeria's safest, fully digital property platform — verified listings, escrow payments, digital leases."
+  description="Join 1,200+ Nigerians on the RentEase 9ja waitlist. Be first to access Nigeria's safest, fully digital property platform, verified listings, escrow payments, digital leases."
   active="/waitlist"
 >
   <section class="wl-hero">
@@ -70,7 +70,7 @@ const roles = [
           </div>
 
           <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">
-            <span class="btn-text">Join the waitlist — free</span>
+            <span class="btn-text">Join the waitlist, free</span>
             <span class="btn-spinner" aria-hidden="true"></span>
           </button>
           <p class="form-note">Join <span>1,200+</span> Nigerians already on the list. No spam.</p>
@@ -128,6 +128,20 @@ const roles = [
             <ul>{r.perks.map((p) => (<li><i class="fas fa-circle-check"></i> {p}</li>))}</ul>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container">
+      <div class="referral reveal">
+        <div class="ref-icon"><i class="fas fa-gift"></i></div>
+        <div class="ref-body">
+          <span class="eyebrow">Refer & earn</span>
+          <h2>Sign up, invite friends, earn rewards</h2>
+          <p>Join the waitlist and you get a personal invite link. Every friend who signs up moves you up the list and unlocks launch perks, free months and fee waivers for early Founding Members.</p>
+        </div>
+        <a href="#top" class="btn btn-primary ref-cta" onclick="document.getElementById('fname')?.focus()">Get my invite link <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -203,6 +217,14 @@ const roles = [
   .role ul { display: flex; flex-direction: column; gap: 10px; }
   .role li { color: var(--text-2); font-size: .95rem; }
   .role li i { color: var(--brand-green); margin-right: 8px; }
+
+  .referral { display: flex; align-items: center; gap: 28px; background: var(--brand-gradient-soft); border: 1px solid var(--border); border-radius: var(--r-xl); padding: clamp(28px, 4vw, 44px); }
+  .ref-icon { flex-shrink: 0; width: 64px; height: 64px; border-radius: var(--r-lg); display: grid; place-items: center; font-size: 1.6rem; color: #fff; background: var(--brand-gradient); box-shadow: var(--shadow-glow); }
+  .ref-body { flex: 1; }
+  .ref-body h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 10px 0 8px; }
+  .ref-body p { color: var(--text-2); max-width: 640px; }
+  .ref-cta { flex-shrink: 0; }
+  @media (max-width: 760px) { .referral { flex-direction: column; text-align: center; align-items: center; } .ref-body p { margin-inline: auto; } }
 
   .wl-bottom { background: var(--brand-gradient); color: #fff; text-align: center; padding-block: clamp(56px, 8vw, 90px); }
   .wl-bottom h2 { color: #fff; }

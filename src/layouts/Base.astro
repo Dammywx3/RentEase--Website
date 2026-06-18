@@ -4,8 +4,8 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
 const {
-  title = 'RentEase 9ja — Rent, Buy & Sell Property in Nigeria, Safely',
-  description = "Nigeria's safest, most trusted property platform. Verified listings, real agents, secure rent payments, and digital agreements — all in one app.",
+  title = 'RentEase 9ja: Rent, Buy & Sell Property in Nigeria, Safely',
+  description = "Nigeria's safest, most trusted property platform. Verified listings, real agents, secure rent payments, and digital agreements, all in one app.",
   active = '',
   ogImage = '/og-cover.png',
   noFooter = false,
@@ -80,6 +80,19 @@ const jsonLd = {
         }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
         els.forEach((el) => io.observe(el));
       }
+    </script>
+
+    <!-- Adigun: RentEase 9ja AI assistant (Tawk.to), available site-wide -->
+    <script is:inline>
+      var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/6a2eb6a6ccc4ac1d4891bba9/1jr3c7sja';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+      })();
     </script>
   </body>
 </html>

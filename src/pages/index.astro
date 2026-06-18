@@ -3,15 +3,15 @@ import Base from '../layouts/Base.astro';
 import ListingCard from '../components/ListingCard.astro';
 
 const stats = [
-  { value: '1,200+', label: 'Verified listings', note: '[REPLACE]' },
-  { value: '15+', label: 'Cities covered', note: '[REPLACE]' },
-  { value: '8,500+', label: 'People on waitlist', note: '[REPLACE]' },
-  { value: '4.8★', label: 'Early-user rating', note: '[REPLACE]' },
+  { value: '800+', label: 'On the waitlist' },
+  { value: '14', label: 'Cities at launch' },
+  { value: '100%', label: 'Listings verified' },
+  { value: '24/7', label: 'In-app support' },
 ];
 
 const steps = [
-  { icon: 'fa-magnifying-glass', title: 'Discover verified homes', text: 'Browse listings that are checked for real documents and real owners — no ghost agents, no fake photos.' },
-  { icon: 'fa-comments', title: 'Chat & book a viewing', text: 'Message verified agents in-app, schedule viewings, and make offers — everything in one thread.' },
+  { icon: 'fa-magnifying-glass', title: 'Discover verified homes', text: 'Browse listings that are checked for real documents and real owners, no ghost agents, no fake photos.' },
+  { icon: 'fa-comments', title: 'Chat & book a viewing', text: 'Message verified agents in-app, schedule viewings, and make offers, everything in one thread.' },
   { icon: 'fa-shield-halved', title: 'Pay & move in safely', text: 'Pay rent and fees through secure escrow-style payments with digital agreements that protect both sides.' },
 ];
 
@@ -43,7 +43,7 @@ const testimonials = [
 ];
 
 const faqs = [
-  { q: 'What is RentEase 9ja?', a: 'RentEase 9ja is a property platform for Nigeria where you can rent, buy, and sell verified homes and land — with in-app chat, secure payments, and digital agreements that protect everyone.' },
+  { q: 'What is RentEase 9ja?', a: 'RentEase 9ja is a property platform for Nigeria where you can rent, buy, and sell verified homes and land, with in-app chat, secure payments, and digital agreements that protect everyone.' },
   { q: 'How do you verify listings?', a: 'Every listing goes through checks on ownership and documents before it goes live, and agents are identity-verified, so you only deal with real people and real properties.' },
   { q: 'Is it safe to pay rent through the app?', a: 'Yes. Payments run through a secure, escrow-style flow with digital receipts and agreements, so funds and terms are protected on both sides.' },
   { q: 'How much does it cost to list a property?', a: 'Creating a verified listing is free for landlords and agents during launch. Premium tools for high-volume agents and developers are available.' },
@@ -57,8 +57,8 @@ const faqs = [
     <div class="container hero-inner">
       <div class="hero-copy">
         <span class="eyebrow reveal"><span class="dot"></span> Launching soon · onboarding agents now</span>
-        <h1 class="reveal" data-delay="1">Rent, buy & sell property in Nigeria — <span class="gradient-text">the safe way.</span></h1>
-        <p class="reveal" data-delay="2">Verified listings, real agents, secure rent payments, and digital agreements. Everything you need to find or fill a home, in one trusted app.</p>
+        <h1 class="reveal" data-delay="1">Rent, buy & sell property in Nigeria, <span class="gradient-text">the safe way.</span></h1>
+        <p class="reveal" data-delay="2"><strong>Nigeria's first end-to-end digital property platform.</strong> Verified listings, real agents, secure rent payments, and digital agreements, all in one trusted app.</p>
         <div class="hero-cta reveal" data-delay="3">
           <a href="/waitlist" class="btn btn-primary">Join the waitlist <i class="fas fa-arrow-right"></i></a>
           <a href="/rent" class="btn btn-ghost">Explore listings</a>
@@ -102,7 +102,7 @@ const faqs = [
             <li>Fake photos & listings that don't exist</li>
             <li>Agents you can't verify or trust</li>
             <li>Cash payments with no receipts or protection</li>
-            <li>No agreements — disputes with no proof</li>
+            <li>No agreements, disputes with no proof</li>
             <li>Endless calls, no real information</li>
           </ul>
         </div>
@@ -186,7 +186,7 @@ const faqs = [
       <div class="app-copy reveal">
         <span class="eyebrow">The app</span>
         <h2>Your whole rental journey, in one app</h2>
-        <p>Search, chat, view, pay, and sign — without leaving RentEase 9ja. Built for Nigerian renters, landlords, and agents.</p>
+        <p>Search, chat, view, pay, and sign, without leaving RentEase 9ja. Built for Nigerian renters, landlords, and agents.</p>
         <ul class="app-features">
           {appFeatures.map((f) => (<li><i class={`fas ${f.icon}`}></i> {f.text}</li>))}
         </ul>

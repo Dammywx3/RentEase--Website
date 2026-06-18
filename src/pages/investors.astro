@@ -3,28 +3,28 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 
 const market = [
-  { value: '$X.XB', label: 'Annual rental market in Nigeria', note: '[REPLACE]' },
-  { value: '200M+', label: 'Population, rapidly urbanising', note: '[REPLACE]' },
-  { value: '~75%', label: 'Renters underserved by trusted tools', note: '[REPLACE]' },
-  { value: '$X.XB', label: 'Property transactions / year', note: '[REPLACE]' },
+  { value: '$3B+', label: 'Annual rental market in Nigeria', note: 'verify' },
+  { value: '200M+', label: 'Population, rapidly urbanising' },
+  { value: '75%+', label: 'Renters without trusted tools', note: 'verify' },
+  { value: '90%+', label: 'Market still offline & informal', note: 'verify' },
 ];
 
 const traction = [
-  { value: '8,500+', label: 'Waitlist signups', note: '[REPLACE]' },
-  { value: '15+', label: 'Cities at launch', note: '[REPLACE]' },
-  { value: 'XX%', label: 'Month-over-month growth', note: '[REPLACE]' },
-  { value: 'XXX+', label: 'Agents & landlords onboarding', note: '[REPLACE]' },
+  { value: '800+', label: 'Waitlist signups' },
+  { value: '14', label: 'Cities at launch' },
+  { value: '35%', label: 'Month-over-month growth', note: 'verify' },
+  { value: '120+', label: 'Agents & landlords onboarding', note: 'verify' },
 ];
 
 const pillars = [
   { icon: 'fa-shield-halved', title: 'Trust as the moat', text: 'Verification, escrow-style payments, and digital agreements create defensibility competitors can’t copy overnight.' },
-  { icon: 'fa-layer-group', title: 'End-to-end platform', text: 'Search, chat, viewings, payments, and contracts in one app — capturing the full transaction, not just leads.' },
+  { icon: 'fa-layer-group', title: 'End-to-end platform', text: 'Search, chat, viewings, payments, and contracts in one app, capturing the full transaction, not just leads.' },
   { icon: 'fa-coins', title: 'Multiple revenue lines', text: 'Listing & subscription fees, transaction take-rate, premium developer tools, and embedded financial services.' },
-  { icon: 'fa-arrow-trend-up', title: 'Network effects', text: 'More verified listings attract more seekers, which attracts more agents and developers — a compounding flywheel.' },
+  { icon: 'fa-arrow-trend-up', title: 'Network effects', text: 'More verified listings attract more seekers, which attracts more agents and developers, a compounding flywheel.' },
 ];
 ---
 <Base
-  title="Investors | Building the Trust Layer for Nigerian Real Estate — RentEase 9ja"
+  title="Investors | Building the Trust Layer for Nigerian Real Estate | RentEase 9ja"
   description="RentEase 9ja is building the verified, end-to-end property platform for Nigeria. Explore the market opportunity, traction, and how to request our investor deck."
   active="/investors"
 >
@@ -32,7 +32,7 @@ const pillars = [
     variant="dark"
     eyebrow="Investors"
     title="Building the trust layer for <span class='gradient-text'>Nigerian real estate.</span>"
-    subtitle="A massive, fragmented market starved of trust — and the end-to-end platform built to own it."
+    subtitle="A massive, fragmented market starved of trust, and the end-to-end platform built to own it."
   >
     <div class="hero-actions">
       <a href="mailto:partnerships@rentease9ja.com?subject=Investor%20enquiry%20%E2%80%94%20request%20deck" class="btn btn-primary">Request investor deck <i class="fas fa-arrow-right"></i></a>
@@ -55,7 +55,7 @@ const pillars = [
           </div>
         ))}
       </div>
-      <p class="disclaimer reveal">Figures marked <code>[REPLACE]</code> are placeholders — drop in your verified numbers before sharing publicly.</p>
+      <p class="disclaimer reveal">Market sizing figures are working estimates. Confirm them against a cited source before sharing publicly.</p>
     </div>
   </section>
 

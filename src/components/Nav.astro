@@ -5,7 +5,8 @@ const links = [
   { href: '/buy', label: 'Buy' },
   { href: '/land', label: 'Land' },
   { href: '/how-it-works', label: 'How it works' },
-  { href: '/for-developers', label: 'For Developers' },
+  { href: '/for-developers', label: 'Developers' },
+  { href: '/team', label: 'Team' },
   { href: '/aboutus', label: 'About' },
 ];
 const { active = '' } = Astro.props;
@@ -13,7 +14,7 @@ const { active = '' } = Astro.props;
 <header class="site-header" id="site-header">
   <nav class="navbar container" aria-label="Primary">
     <a href="/" class="brand" aria-label="RentEase 9ja home">
-      <img src="/logo.webp" alt="RentEase 9ja" width="150" height="42" />
+      <img src="/logo.webp" alt="RentEase 9ja" width="170" height="92" />
     </a>
 
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
@@ -40,8 +41,9 @@ const { active = '' } = Astro.props;
     transition: box-shadow .3s ease;
   }
   .site-header.scrolled { box-shadow: 0 6px 24px rgba(15,23,42,.07); }
-  .navbar { display: flex; align-items: center; justify-content: space-between; height: 80px; }
-  .brand img { height: 52px; width: auto; }
+  .navbar { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+  .brand { display: inline-flex; align-items: center; }
+  .brand img { height: 54px; width: auto; display: block; }
   .nav-menu { display: flex; align-items: center; gap: 30px; }
   .nav-menu ul { display: flex; align-items: center; gap: 26px; }
   .nav-menu a { font-weight: 600; font-size: .95rem; color: var(--text-2); transition: var(--transition); }
@@ -56,8 +58,9 @@ const { active = '' } = Astro.props;
 
   @media (max-width: 920px) {
     .hamburger { display: flex; }
+    .brand img { height: 44px; }
     .nav-menu {
-      position: absolute; top: 80px; left: 0; right: 0;
+      position: absolute; top: 84px; left: 0; right: 0;
       flex-direction: column; gap: 6px; align-items: stretch;
       background: var(--surface); border-bottom: 1px solid var(--border);
       padding: 14px var(--gutter) 24px;
