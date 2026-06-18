@@ -5,10 +5,9 @@ import CtaBand from '../components/CtaBand.astro';
 
 // NOTE: Replace names, roles, bios, photos and links with real data.
 // For photos, drop images in public/team/ and set `photo: '/team/name.webp'`.
-// Names & photos are placeholders — swap in the real founders.
 const founders = [
-  { initials: 'RE', name: 'Founder Name', role: 'Founder & CEO', bio: 'Leads RentEase 9ja’s vision and product. Building the trust layer Nigerian real estate has always lacked, where every listing is verified, every agent is real, and no tenant loses money to fraud again.', photo: '', x: '#', linkedin: '#' },
-  { initials: 'RE', name: 'Co-founder Name', role: 'Co-founder & CTO', bio: 'Leads engineering and the platform. Architecting the end-to-end system, verified listings, in-app chat, escrow-style payments and digital agreements, that powers safe property deals across Nigeria.', photo: '', x: '#', linkedin: '#' },
+  { initials: 'DA', name: 'Damilare V Adebayo', role: 'Founder & CEO', bio: 'Leads RentEase 9ja’s vision and product. Building the trust layer Nigerian real estate has always lacked, where every listing is verified, every agent is real, and no tenant loses money to fraud again.', photo: '/team/damilare.webp', x: 'https://x.com/damilareomoadebayo', instagram: 'https://instagram.com/damilareomoadebayo' },
+  { initials: 'OB', name: 'Ola Benjamen', role: 'Co-founder & CTO', bio: 'Leads engineering and the platform. Architecting the end-to-end system, verified listings, in-app chat, escrow-style payments and digital agreements, that powers safe property deals across Nigeria.', photo: '', x: '', instagram: '' },
 ];
 
 const team = [
@@ -51,10 +50,12 @@ const posts = [
               <h3>{f.name}</h3>
               <p class="role">{f.role}</p>
               <p class="bio">{f.bio}</p>
-              <div class="f-socials">
-                <a href={f.x} target="_blank" rel="noopener" aria-label={`${f.name} on X`}><i class="fab fa-x-twitter"></i></a>
-                <a href={f.linkedin} target="_blank" rel="noopener" aria-label={`${f.name} on LinkedIn`}><i class="fab fa-linkedin-in"></i></a>
-              </div>
+              {(f.x || f.instagram) && (
+                <div class="f-socials">
+                  {f.x && <a href={f.x} target="_blank" rel="noopener" aria-label={`${f.name} on X`}><i class="fab fa-x-twitter"></i></a>}
+                  {f.instagram && <a href={f.instagram} target="_blank" rel="noopener" aria-label={`${f.name} on Instagram`}><i class="fab fa-instagram"></i></a>}
+                </div>
+              )}
             </div>
           </div>
         ))}
