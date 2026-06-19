@@ -14,6 +14,9 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://www.rentease9ja.com').href;
 
+// Single source of truth for the API base. Override at build with PUBLIC_API_BASE.
+const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com';
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -35,14 +38,15 @@ const jsonLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline define:vars={{ API_BASE }}>window.__API_BASE__ = API_BASE;</script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#1E4E8C" />
 
-    <!-- Favicons (multi-size .ico is authoritative for the browser tab) -->
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Favicons (multi-size .ico is authoritative for the browser tab; ?v bust forces past aggressive favicon caching) -->
+    <link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48 64x64" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website" />
