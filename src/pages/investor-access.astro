@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import LeadForm from '../components/LeadForm.astro';
+
+const fields = [
+  { name: 'name', label: 'Full name', placeholder: 'Your name', required: true, autocomplete: 'name' },
+  { name: 'email', label: 'Email', type: 'email', placeholder: 'you@fund.com', required: true, autocomplete: 'email' },
+  { name: 'firm', label: 'Firm / fund', placeholder: 'e.g. Acme Ventures', full: true },
+  { name: 'type', label: 'You are a...', type: 'select', placeholder: 'Select type', options: ['Angel investor', 'VC / Institutional', 'Strategic / Corporate', 'Other'] },
+  { name: 'ticket', label: 'Indicative ticket size', type: 'select', placeholder: 'Optional', options: ['< $25k', '$25k – $100k', '$100k – $500k', '$500k+', 'Not sure yet'] },
+  { name: 'message', label: 'Anything we should know?', type: 'textarea', placeholder: 'Optional', full: true },
+];
+---
+<Base
+  title="Request the Investor Deck | RentEase 9ja"
+  description="Request the RentEase 9ja investor deck. We're building the verified, end-to-end property platform for Nigeria. Tell us a little about you and we'll share access."
+  active="/investors"
+>
+  <PageHero
+    variant="dark"
+    eyebrow="Investors"
+    title="Request the <span class='gradient-text'>investor deck.</span>"
+    subtitle="We're building the trust layer for Nigerian real estate. Share a few details and we'll send the deck and set up a call."
+  />
+
+  <section class="section section--surface">
+    <div class="container narrow">
+      <div class="reveal">
+        <LeadForm
+          endpoint="https://api.rentease9ja.com/v1/investors"
+          submitLabel="Request the deck"
+          successTitle="Thanks — request received!"
+          successText="We'll review and send the deck to your email within 2 business days."
+          note="Your details are kept confidential and used only to share the deck."
+          fields={fields}
+        />
+      </div>
+      <p class="inv-alt reveal">Prefer email? <a href="mailto:partnerships@rentease9ja.com?subject=Investor%20enquiry">partnerships@rentease9ja.com</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow { max-width: 640px; }
+  .inv-alt { text-align: center; color: var(--text-muted); margin-top: 22px; font-size: .95rem; }
+  .inv-alt a { color: var(--brand-blue); font-weight: 600; }
+</style>

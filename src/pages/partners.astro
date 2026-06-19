@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import LeadForm from '../components/LeadForm.astro';
+
+const points = [
+  { icon: 'fa-city', text: 'List entire estates in a branded, verified storefront' },
+  { icon: 'fa-file-contract', text: 'Show C of O, governor’s consent & surveys to build trust' },
+  { icon: 'fa-bullhorn', text: 'Reach thousands of verified, ready buyers' },
+  { icon: 'fa-chart-line', text: 'Track demand with buyer analytics' },
+  { icon: 'fa-headset', text: 'Get a dedicated account & sales support team' },
+];
+
+const fields = [
+  { name: 'company', label: 'Company / brand', placeholder: 'e.g. Acme Homes Ltd', required: true, full: true },
+  { name: 'name', label: 'Contact name', placeholder: 'Your full name', required: true, autocomplete: 'name' },
+  { name: 'email', label: 'Work email', type: 'email', placeholder: 'you@company.com', required: true, autocomplete: 'email' },
+  { name: 'phone', label: 'Phone', type: 'tel', placeholder: '0800 000 0000', autocomplete: 'tel' },
+  { name: 'type', label: 'You are a...', type: 'select', placeholder: 'Select type', options: ['Property Developer', 'Estate Agency', 'Landlord / Portfolio owner', 'Other'] },
+  { name: 'details', label: 'Tell us about your projects', type: 'textarea', placeholder: 'Number of units, locations, what you’d like to list...', required: true, full: true },
+];
+---
+<Base
+  title="Partner with RentEase 9ja | For Developers & Agencies"
+  description="Become a RentEase 9ja partner. List your estates to thousands of verified buyers with document checks, analytics, and dedicated support. Apply in minutes."
+  active="/for-developers"
+>
+  <PageHero
+    eyebrow="Become a partner"
+    title="Sell your developments with <span class='gradient-text'>trust built in.</span>"
+    subtitle="Tell us about your projects and our partnerships team will set up your verified developer account."
+  />
+
+  <section class="section section--mist">
+    <div class="container partner-grid">
+      <div class="partner-copy reveal">
+        <h2>Why partner with us</h2>
+        <ul class="partner-points">
+          {points.map((p) => (<li><i class={`fas ${p.icon}`}></i> {p.text}</li>))}
+        </ul>
+        <p class="partner-alt">Prefer email? <a href="mailto:partnerships@rentease9ja.com">partnerships@rentease9ja.com</a></p>
+      </div>
+      <div class="reveal" data-delay="1">
+        <LeadForm
+          endpoint="https://api.rentease9ja.com/v1/partners"
+          submitLabel="Submit partnership request"
+          successTitle="Request received!"
+          successText="Thanks — our partnerships team will reach out within 2 business days."
+          note="No spam. We only use your details to set up your partnership."
+          fields={fields}
+        />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .partner-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 60px); align-items: start; }
+  .partner-copy h2 { margin-bottom: 20px; }
+  .partner-points { display: flex; flex-direction: column; gap: 14px; }
+  .partner-points li { display: flex; gap: 12px; align-items: flex-start; color: var(--text-2); font-weight: 500; }
+  .partner-points i { color: var(--brand-green); margin-top: 4px; }
+  .partner-alt { margin-top: 26px; color: var(--text-muted); font-size: .95rem; }
+  .partner-alt a { color: var(--brand-blue); font-weight: 600; }
+  @media (max-width: 860px) { .partner-grid { grid-template-columns: 1fr; } }
+</style>
