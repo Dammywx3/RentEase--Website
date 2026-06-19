@@ -120,10 +120,13 @@ p  { font-size: 1.02rem; }
 
 .gradient-text {
   background: var(--brand-gradient);
+  background-size: 220% auto;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
+  animation: gradientPan 9s ease-in-out infinite;
 }
-.section--dark .gradient-text { background: linear-gradient(100deg, #5CC994, #6FA3DC); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.section--dark .gradient-text { background: linear-gradient(100deg, #5CC994, #6FA3DC); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+@keyframes gradientPan { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
 
 /* --- Buttons --- */
 .btn {
@@ -179,8 +182,24 @@ p  { font-size: 1.02rem; }
 .js .count-up { opacity: 0; transition: opacity .4s ease; }
 .js .count-up.counted { opacity: 1; }
 
+/* --- Subtle grid backdrop on heroes (premium, static) --- */
+.hero, .page-hero, .wl-hero { position: relative; }
+.hero::before, .page-hero::before, .wl-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line, rgba(30,78,140,.05)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line, rgba(30,78,140,.05)) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 28%, #000, transparent 80%);
+  mask-image: radial-gradient(ellipse 78% 68% at 50% 28%, #000, transparent 80%);
+}
+.page-hero.dark, .wl-hero { --grid-line: rgba(255,255,255,.06); }
+/* Keep hero content above the grid + glow */
+.hero-inner, .ph-inner, .wl-grid { position: relative; z-index: 1; }
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-glow, .ph-glow, .wl-glow, .hero-media img, .app-media img { animation: none; }
+  .hero-glow, .ph-glow, .wl-glow, .hero-media img, .app-media img,
+  .gradient-text, .section--dark .gradient-text { animation: none; }
   .js .count-up { opacity: 1; }
 }
 
