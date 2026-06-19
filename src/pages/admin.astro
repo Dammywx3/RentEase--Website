@@ -43,13 +43,42 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
 
       <nav class="a-tabs" id="tabs"></nav>
 
+      <div class="a-stats" id="stats" hidden></div>
+
       <div class="a-toolbar">
         <div class="a-search"><i class="fas fa-magnifying-glass"></i><input id="search" placeholder="Search…" /></div>
-        <button class="a-btn ghost" id="export"><i class="fas fa-file-csv"></i> Export CSV</button>
+        <div class="a-toolbar-actions">
+          <button class="a-btn" id="launch-btn" hidden><i class="fas fa-paper-plane"></i> Send launch email</button>
+          <button class="a-btn ghost" id="export"><i class="fas fa-file-csv"></i> Export CSV</button>
+        </div>
       </div>
 
       <div class="a-state" id="state"></div>
       <div class="a-table-wrap"><table class="a-table" id="table"></table></div>
+    </div>
+
+    <!-- LAUNCH-EMAIL MODAL (waitlist broadcast) -->
+    <div class="lm-overlay" id="launch-modal" hidden>
+      <div class="lm-card">
+        <button class="lm-close" id="launch-close" aria-label="Close">&times;</button>
+        <div id="launch-form">
+          <span class="eyebrow">Waitlist broadcast</span>
+          <h3>Send launch email</h3>
+          <p class="lm-sub">Emails everyone on the waitlist who hasn't been notified yet. <span id="launch-pending"></span></p>
+          <div class="a-error" id="launch-error"></div>
+          <label>Subject (optional)</label>
+          <input id="launch-subject" type="text" placeholder="RentEase 9ja is live!" />
+          <label>Custom message (optional)</label>
+          <textarea id="launch-message" rows="4" placeholder="Add a personal note to include in the email…"></textarea>
+          <button class="btn btn-primary" id="launch-send" style="width:100%;justify-content:center;margin-top:8px;">Send to all pending <i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div id="launch-result" hidden>
+          <span class="lm-ok">✅</span>
+          <h3 id="launch-result-title">Sent!</h3>
+          <p class="lm-sub" id="launch-result-text"></p>
+          <button class="btn btn-ghost" id="launch-done" style="width:100%;justify-content:center;">Done</button>
+        </div>
+      </div>
     </div>
 
     <style>
@@ -96,6 +125,23 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
       .a-del { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: .9rem; }
       .a-del:hover { color: var(--danger); }
       .a-empty { text-align: center; padding: 50px; color: var(--text-muted); }
+
+      .a-stats { display: flex; gap: 10px; flex-wrap: wrap; padding: 14px clamp(16px, 4vw, 40px) 0; }
+      .a-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 16px; box-shadow: var(--shadow-sm); }
+      .a-stat b { font-family: var(--font-display); font-size: 1.2rem; color: var(--brand-blue); display: block; }
+      .a-stat span { font-size: .74rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
+      .a-toolbar-actions { display: flex; gap: 10px; }
+
+      .lm-overlay { position: fixed; inset: 0; z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(11,16,32,.55); backdrop-filter: blur(4px); }
+      .lm-overlay.open { display: flex; }
+      .lm-card { position: relative; width: 100%; max-width: 460px; background: var(--surface); border-radius: var(--r-xl); padding: 32px; box-shadow: 0 30px 70px rgba(0,0,0,.35); text-align: left; }
+      .lm-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.7rem; color: var(--text-muted); cursor: pointer; }
+      .lm-card h3 { margin: 8px 0 6px; }
+      .lm-sub { color: var(--text-muted); font-size: .9rem; margin-bottom: 16px; }
+      .lm-card label { display: block; font-size: .8rem; font-weight: 600; color: var(--text-2); margin: 10px 0 5px; }
+      .lm-card input, .lm-card textarea { width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--r-md); font: inherit; background: var(--surface-2); outline: none; resize: vertical; }
+      .lm-card input:focus, .lm-card textarea:focus { border-color: var(--brand-blue); box-shadow: 0 0 0 4px rgba(30,78,140,.12); }
+      #launch-result { text-align: center; } .lm-ok { font-size: 2.4rem; }
     </style>
 
     <script is:inline>
@@ -131,6 +177,7 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
         let secret = sessionStorage.getItem(KEY) || '';
         let current = 'waitlist';
         const cache = {}; // tab -> entries[]
+        let waitlistStats = null;
 
         function headers() { return { 'x-admin-secret': secret, 'ngrok-skip-browser-warning': 'true' }; }
         function loginErr(m) { $('login-error').textContent = m; $('login-error').classList.add('show'); }
@@ -162,7 +209,7 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
           try {
             const data = await api(TABS.waitlist.path + '/admin/list');
             sessionStorage.setItem(KEY, secret);
-            cache.waitlist = data.entries || [];
+            cache.waitlist = data.entries || []; waitlistStats = data.stats || null;
             showDash();
           } catch (err) {
             secret = '';
@@ -200,7 +247,7 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
         async function load(tab, force) {
           if (cache[tab] && !force) return;
           $('state').textContent = 'Loading…'; $('table').innerHTML = '';
-          try { const data = await api(TABS[tab].path + '/admin/list'); cache[tab] = data.entries || []; }
+          try { const data = await api(TABS[tab].path + '/admin/list'); cache[tab] = data.entries || []; if (tab === 'waitlist') waitlistStats = data.stats || null; }
           catch (e) { if (e.kind === 'auth') { logout('Session expired. Please sign in again.'); } else { $('state').textContent = e.kind === 'network' ? 'Could not reach the API (check server / CORS).' : 'Could not load.'; } }
         }
         function rows() {
@@ -209,7 +256,19 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
           if (q) list = list.filter((r) => JSON.stringify(r).toLowerCase().includes(q));
           return list;
         }
+        function renderTabExtras() {
+          const isWl = current === 'waitlist';
+          $('launch-btn').hidden = !isWl;
+          const el = $('stats');
+          if (isWl && waitlistStats) {
+            const s = waitlistStats;
+            el.hidden = false;
+            el.innerHTML = [['Total', s.total], ['Notified', s.notified], ['Pending', s.pending]]
+              .map(([l, v]) => `<div class="a-stat"><b>${v ?? 0}</b><span>${l}</span></div>`).join('');
+          } else { el.hidden = true; el.innerHTML = ''; }
+        }
         function render() {
+          renderTabExtras();
           const cfg = TABS[current], list = rows();
           $('cnt-' + current) && ($('cnt-' + current).textContent = (cache[current] || []).length);
           $('state').textContent = list.length + ' record' + (list.length === 1 ? '' : 's');
@@ -240,9 +299,40 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
           a.download = 'rentease-' + current + '.csv'; a.click();
         });
 
+        // ---- launch-email broadcast (waitlist) ----
+        function openLaunch() {
+          $('launch-form').hidden = false; $('launch-result').hidden = true; $('launch-error').classList.remove('show');
+          $('launch-pending').textContent = waitlistStats ? waitlistStats.pending + ' people pending.' : '';
+          $('launch-modal').hidden = false; requestAnimationFrame(() => $('launch-modal').classList.add('open'));
+        }
+        function closeLaunch() { $('launch-modal').classList.remove('open'); setTimeout(() => { $('launch-modal').hidden = true; }, 200); }
+        $('launch-btn').addEventListener('click', openLaunch);
+        $('launch-close').addEventListener('click', closeLaunch);
+        $('launch-modal').addEventListener('click', (e) => { if (e.target === $('launch-modal')) closeLaunch(); });
+        $('launch-done').addEventListener('click', async () => { closeLaunch(); await load('waitlist', true); render(); });
+        $('launch-send').addEventListener('click', async () => {
+          const subject = $('launch-subject').value.trim();
+          const customMessage = $('launch-message').value.trim();
+          const btn = $('launch-send'); const orig = btn.innerHTML; btn.disabled = true; btn.textContent = 'Sending…';
+          $('launch-error').classList.remove('show');
+          try {
+            const data = await api(TABS.waitlist.path + '/admin/launch', {
+              method: 'POST',
+              headers: Object.assign({ 'Content-Type': 'application/json' }, headers()),
+              body: JSON.stringify({ subject: subject || undefined, customMessage: customMessage || undefined }),
+            });
+            $('launch-form').hidden = true; $('launch-result').hidden = false;
+            $('launch-result-title').textContent = (data.sent > 0) ? ('Sent to ' + data.sent + '!') : 'All caught up';
+            $('launch-result-text').textContent = data.message || ((data.sent || 0) + ' sent, ' + (data.failed || 0) + ' failed.');
+          } catch (e) {
+            $('launch-error').textContent = e.kind === 'auth' ? 'Session expired. Sign in again.' : 'Could not send. Please try again.';
+            $('launch-error').classList.add('show');
+          } finally { btn.disabled = false; btn.innerHTML = orig; }
+        });
+
         // auto-resume session
         if (secret) {
-          api(TABS.waitlist.path + '/admin/list').then((d) => { cache.waitlist = d.entries || []; showDash(); }).catch(() => logout());
+          api(TABS.waitlist.path + '/admin/list').then((d) => { cache.waitlist = d.entries || []; waitlistStats = d.stats || null; showDash(); }).catch(() => logout());
         }
       })();
     </script>
