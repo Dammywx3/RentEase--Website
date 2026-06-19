@@ -80,6 +80,41 @@ const jsonLd = {
         }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
         els.forEach((el) => io.observe(el));
       }
+
+      // Count-up for stat numbers (parses a leading number, keeps prefix/suffix)
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const counters = document.querySelectorAll('.count-up');
+      const runCount = (el) => {
+        const raw = (el.textContent || '').trim();
+        const m = raw.match(/^(\D*)([\d.,]+)(.*)$/);
+        if (!m) { el.classList.add('counted'); return; }
+        const prefix = m[1], suffix = m[3];
+        const clean = m[2].replace(/,/g, '');
+        const target = parseFloat(clean);
+        const decimals = clean.includes('.') ? (clean.split('.')[1] || '').length : 0;
+        const hasComma = m[2].includes(',');
+        const fmt = (n) => {
+          let s = decimals ? n.toFixed(decimals) : Math.round(n).toString();
+          if (hasComma) s = Number(s).toLocaleString('en-US');
+          return prefix + s + suffix;
+        };
+        el.classList.add('counted');
+        if (prefersReduced || !isFinite(target)) { el.textContent = raw; return; }
+        const dur = 1200, start = performance.now();
+        const tick = (t) => {
+          const p = Math.min(1, (t - start) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(target * eased);
+          if (p < 1) requestAnimationFrame(tick); else el.textContent = raw;
+        };
+        requestAnimationFrame(tick);
+      };
+      if (counters.length) {
+        const cio = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); } });
+        }, { threshold: 0.5 });
+        counters.forEach((el) => cio.observe(el));
+      }
     </script>
 
     <!-- Adigun: RentEase 9ja AI assistant (Tawk.to), available site-wide -->

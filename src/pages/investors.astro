@@ -50,7 +50,7 @@ const pillars = [
       <div class="grid grid-4">
         {market.map((m, i) => (
           <div class="m-stat reveal" data-delay={i % 4}>
-            <div class="m-val gradient-text">{m.value}</div>
+            <div class="m-val gradient-text count-up">{m.value}</div>
             <div class="m-label">{m.label}</div>
           </div>
         ))}
@@ -85,7 +85,7 @@ const pillars = [
       <div class="grid grid-4">
         {traction.map((t, i) => (
           <div class="m-stat reveal" data-delay={i % 4}>
-            <div class="m-val gradient-text">{t.value}</div>
+            <div class="m-val gradient-text count-up">{t.value}</div>
             <div class="m-label">{t.label}</div>
           </div>
         ))}

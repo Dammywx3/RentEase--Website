@@ -162,6 +162,28 @@ p  { font-size: 1.02rem; }
   html { scroll-behavior: auto; }
 }
 
+/* --- Ambient motion (subtle, premium) --- */
+@keyframes auroraDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: .9; }
+  50% { transform: translate(3%, -4%) scale(1.12); opacity: 1; }
+}
+.hero-glow, .ph-glow, .wl-glow { animation: auroraDrift 22s ease-in-out infinite; will-change: transform; }
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.hero-media img, .app-media img { animation: floatY 6.5s ease-in-out infinite; will-change: transform; }
+
+/* Count-up numbers start hidden, fade in once animated (avoids flash) */
+.js .count-up { opacity: 0; transition: opacity .4s ease; }
+.js .count-up.counted { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow, .ph-glow, .wl-glow, .hero-media img, .app-media img { animation: none; }
+  .js .count-up { opacity: 1; }
+}
+
 /* --- Grids --- */
 .grid { display: grid; gap: clamp(18px, 2.4vw, 30px); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }

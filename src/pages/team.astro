@@ -14,6 +14,7 @@ const founders = [
 const team = [
   { initials: 'AA', name: 'Ayomide T Ademilua', role: 'Operations & Support', photo: '/team/ayomide.webp' },
   { initials: 'OA', name: 'Oluwakayode O Afolabi', role: 'Growth & Partnerships', photo: '/team/afolabi.webp' },
+  { initials: 'AO', name: 'Abdulafeez O Abdulhakeem', role: 'Product & Design', photo: '/team/abdulafeez.webp' },
 ];
 
 const posts = [
@@ -68,7 +69,7 @@ const posts = [
         <span class="eyebrow">The team</span>
         <h2>Builders, designers & operators</h2>
       </div>
-      <div class="grid grid-2 team-grid">
+      <div class="grid grid-3 team-grid">
         {team.map((t, i) => (
           <div class="member reveal" data-delay={i % 4}>
             {t.photo
@@ -125,7 +126,8 @@ const posts = [
   .f-socials a { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--border); color: var(--brand-blue); transition: var(--transition); }
   .f-socials a:hover { background: var(--brand-gradient); color: #fff; border-color: transparent; transform: translateY(-2px); }
 
-  .team-grid { max-width: 640px; margin-inline: auto; }
+  .team-grid { max-width: 860px; margin-inline: auto; grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 720px) { .team-grid { grid-template-columns: 1fr; max-width: 340px; } }
   .member { text-align: center; }
   /* Circular avatar, same size as the initials avatars, centered — consistent across cards */
   .member .avatar { width: 88px; height: 88px; margin: 0 auto 16px; display: block; }
