@@ -1,0 +1,235 @@
+---
+// Auto-playing in-app walkthrough for the How it works page.
+// Recreates four real RentEase 9ja screens (sign-in, tenant explore,
+// agent tenancies, landlord dashboard) inside a phone frame and cycles
+// through them like a looping demo reel.
+const captions = [
+  { eyebrow: 'Secure sign-in', text: 'One account for tenants, agents and landlords.' },
+  { eyebrow: 'For tenants', text: 'Explore verified homes and book viewings in-app.' },
+  { eyebrow: 'For agents', text: 'Manage tenancies, requests and renewals end-to-end.' },
+  { eyebrow: 'For landlords', text: 'Track your whole portfolio at a glance.' },
+];
+---
+<section class="section section--mist demo-sec">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">See it in action</span>
+      <h2>The whole journey, in one app</h2>
+      <p>A quick look at what tenants, agents and landlords actually use, every screen verified and secure.</p>
+    </div>
+
+    <div class="demo-wrap reveal" data-delay="1">
+      <div class="demo-phone">
+        <div class="demo-notch"></div>
+        <div class="demo-viewport" id="demo-viewport">
+          <!-- 1. LOGIN -->
+          <div class="dscreen active" data-screen>
+            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+            <div class="dlogin">
+              <div class="dlogo"><img src="/logo.webp" alt="RentEase 9ja" /></div>
+              <h4>Welcome back</h4>
+              <p class="dmuted">Sign in to access your dashboard</p>
+              <label>Email Address</label>
+              <div class="dinput"><i class="fas fa-envelope"></i> you@example.com</div>
+              <label>Password</label>
+              <div class="dinput"><i class="fas fa-lock"></i> ••••••••</div>
+              <div class="dbtn-grad">Sign in</div>
+              <div class="ddivider"><span>or</span></div>
+              <div class="dbtn-out"><i class="fab fa-google"></i> Continue with Google</div>
+            </div>
+          </div>
+
+          <!-- 2. TENANT EXPLORE -->
+          <div class="dscreen" data-screen>
+            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+            <div class="dpad">
+              <div class="dhead-row"><div><div class="dmuted dxs">Find your perfect place</div><div class="dh">Explore</div></div><div class="davatar">A</div></div>
+              <div class="dsearch"><i class="fas fa-magnifying-glass"></i> Location, price, or city…</div>
+              <div class="dchips"><span class="dchip active">Rent</span><span class="dchip">Buy</span><span class="dchip">Land</span></div>
+              <div class="dsubh">Featured</div>
+              <div class="dcard">
+                <div class="dcard-img" style="--g1:#9fb3d1;--g2:#6d86ad;"><span class="dbadge"><i class="fas fa-circle-check"></i> Verified</span></div>
+                <div class="dcard-b"><div class="dprice">₦1.2M<span>/yr</span></div><div class="dtitle">Modern 2-Bed Flat</div><div class="dloc"><i class="fas fa-location-dot"></i> Lekki, Lagos</div></div>
+              </div>
+              <div class="dcard">
+                <div class="dcard-img" style="--g1:#a9c2b4;--g2:#6f9a83;"><span class="dbadge"><i class="fas fa-circle-check"></i> Verified</span></div>
+                <div class="dcard-b"><div class="dprice">₦2.5M<span>/yr</span></div><div class="dtitle">3-Bed Flat, Wuse II</div><div class="dloc"><i class="fas fa-location-dot"></i> Abuja</div></div>
+              </div>
+            </div>
+            <div class="dnav"><i class="fas fa-compass active"></i><i class="fas fa-heart"></i><i class="fas fa-comment-dots"></i><i class="fas fa-user"></i></div>
+          </div>
+
+          <!-- 3. AGENT TENANCIES -->
+          <div class="dscreen" data-screen>
+            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+            <div class="dpad">
+              <div class="dh dh-top">Tenancies</div>
+              <div class="dtabs"><span class="dtab active">Active</span><span class="dtab">Expiring</span><span class="dtab">Past</span><span class="dtab">Requests</span></div>
+              <div class="drow"><div class="dinitial">CO</div><div class="drow-b"><div class="dtitle">Chuka Obi</div><div class="dmuted dxs">2-Bed · Lekki, Lagos</div><div class="dmuted dxs">Expires 12 Aug 2026</div></div><span class="dpill green">Active</span></div>
+              <div class="drow"><div class="dinitial">AE</div><div class="drow-b"><div class="dtitle">Adaeze Eze</div><div class="dmuted dxs">Studio · Yaba</div><div class="dmuted dxs">Expires 30 Sep 2026</div></div><span class="dpill amber">Expiring</span></div>
+              <div class="drow"><div class="dinitial">TB</div><div class="drow-b"><div class="dtitle">Tunde Bello</div><div class="dmuted dxs">3-Bed · Gwarinpa</div><div class="dmuted dxs">Expires 04 Nov 2026</div></div><span class="dpill green">Active</span></div>
+            </div>
+            <div class="dnav"><i class="fas fa-house"></i><i class="fas fa-file-signature active"></i><i class="fas fa-comment-dots"></i><i class="fas fa-user"></i></div>
+          </div>
+
+          <!-- 4. LANDLORD DASHBOARD -->
+          <div class="dscreen" data-screen>
+            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+            <div class="dpad">
+              <div class="dmuted dxs">Good morning</div>
+              <div class="dh">Tunde A. <span class="dwave">👋</span></div>
+              <div class="dstat-row">
+                <div class="dstat"><div class="dstat-n">8</div><div class="dstat-l">Active listings</div></div>
+                <div class="dstat"><div class="dstat-n">12</div><div class="dstat-l">Active tenants</div></div>
+                <div class="dstat"><div class="dstat-n">2</div><div class="dstat-l">Open repairs</div></div>
+              </div>
+              <div class="dsubh">My portfolio</div>
+              <div class="drow"><div class="dthumb" style="--g1:#9fb3d1;--g2:#6d86ad;"></div><div class="drow-b"><div class="dtitle">Lekki Duplex</div><div class="dmuted dxs">Occupied · ₦4.5M/yr</div></div><span class="dpill green">Paid</span></div>
+              <div class="drow"><div class="dthumb" style="--g1:#a9c2b4;--g2:#6f9a83;"></div><div class="drow-b"><div class="dtitle">Ikeja Flats (x4)</div><div class="dmuted dxs">3 occupied · 1 vacant</div></div><span class="dpill amber">1 due</span></div>
+            </div>
+            <div class="dnav"><i class="fas fa-chart-pie active"></i><i class="fas fa-building"></i><i class="fas fa-wrench"></i><i class="fas fa-user"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-caption">
+        <div class="demo-cap-text" id="demo-cap">
+          {captions.map((c, i) => (
+            <div class:list={['dcap', { active: i === 0 }]} data-cap>
+              <span class="eyebrow">{c.eyebrow}</span>
+              <p>{c.text}</p>
+            </div>
+          ))}
+        </div>
+        <div class="demo-dots" id="demo-dots">
+          {captions.map((_, i) => (<button class:list={['ddot', { active: i === 0 }]} data-dot={i} aria-label={`Screen ${i + 1}`}></button>))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo-wrap { display: flex; align-items: center; justify-content: center; gap: clamp(28px, 6vw, 80px); flex-wrap: wrap; }
+  .demo-phone { position: relative; width: 300px; height: 610px; flex-shrink: 0; background: #0B1020; border-radius: 42px; padding: 12px; box-shadow: 0 40px 80px rgba(15,23,42,.28), inset 0 0 0 2px rgba(255,255,255,.06); }
+  .demo-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 120px; height: 22px; background: #0B1020; border-radius: 0 0 16px 16px; z-index: 5; }
+  .demo-viewport { position: relative; width: 100%; height: 100%; border-radius: 32px; overflow: hidden; background: var(--bg); }
+
+  .dscreen { position: absolute; inset: 0; display: flex; flex-direction: column; opacity: 0; transform: translateX(24px) scale(.99); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+  .dscreen.active { opacity: 1; transform: none; pointer-events: auto; }
+
+  .dstatus { display: flex; justify-content: space-between; align-items: center; padding: 9px 20px 4px; font-size: 11px; font-weight: 700; color: var(--text); }
+  .dstatus-r { display: flex; gap: 5px; font-size: 9px; }
+  .dpad { flex: 1; padding: 6px 16px 0; overflow: hidden; }
+
+  .dmuted { color: var(--text-muted); } .dxs { font-size: 10.5px; }
+  .dh { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--text); letter-spacing: -.02em; }
+  .dh-top { margin: 4px 0 12px; } .dwave { font-size: 18px; }
+  .dhead-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+  .davatar { width: 36px; height: 36px; border-radius: 50%; background: var(--brand-gradient); color: #fff; font-weight: 800; display: grid; place-items: center; font-size: 14px; }
+
+  .dsearch { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 11px 13px; font-size: 12px; color: var(--text-muted); display: flex; gap: 8px; align-items: center; box-shadow: var(--shadow-sm); }
+  .dchips { display: flex; gap: 7px; margin: 12px 0; }
+  .dchip { font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text-2); }
+  .dchip.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+  .dsubh { font-weight: 800; font-size: 13px; color: var(--text); margin: 6px 0 9px; }
+
+  .dcard { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 11px; box-shadow: var(--shadow-card); }
+  .dcard-img { height: 78px; background: linear-gradient(135deg, var(--g1), var(--g2)); position: relative; }
+  .dbadge { position: absolute; top: 7px; left: 7px; background: var(--brand-gradient); color: #fff; font-size: 8.5px; font-weight: 700; padding: 3px 7px; border-radius: 999px; }
+  .dcard-b { padding: 9px 11px; }
+  .dprice { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--text); }
+  .dprice span { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+  .dtitle { font-size: 12px; font-weight: 700; color: var(--text); margin-top: 1px; }
+  .dloc { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
+
+  .dtabs { display: flex; gap: 14px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .dtab { font-size: 11.5px; font-weight: 700; color: var(--text-muted); padding-bottom: 8px; }
+  .dtab.active { color: var(--brand-blue); box-shadow: inset 0 -2px 0 var(--brand-blue); }
+  .drow { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px; margin-bottom: 9px; box-shadow: var(--shadow-sm); }
+  .dinitial { width: 34px; height: 34px; border-radius: 50%; background: var(--brand-gradient-soft); color: var(--brand-blue); font-weight: 800; font-size: 12px; display: grid; place-items: center; flex-shrink: 0; }
+  .dthumb { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, var(--g1), var(--g2)); flex-shrink: 0; }
+  .drow-b { flex: 1; } .drow-b .dtitle { font-size: 12.5px; }
+  .dpill { font-size: 9.5px; font-weight: 700; padding: 4px 9px; border-radius: 999px; }
+  .dpill.green { background: rgba(43,182,115,.15); color: #1f8f5a; }
+  .dpill.amber { background: rgba(245,158,11,.16); color: #b9770a; }
+
+  .dstat-row { display: flex; gap: 8px; margin: 12px 0; }
+  .dstat { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 11px 8px; text-align: center; box-shadow: var(--shadow-sm); }
+  .dstat-n { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--brand-blue); }
+  .dstat-l { font-size: 9px; color: var(--text-muted); margin-top: 2px; line-height: 1.2; }
+
+  .dnav { display: flex; justify-content: space-around; align-items: center; padding: 12px 0 16px; border-top: 1px solid var(--border); background: var(--surface); font-size: 16px; color: var(--text-muted); }
+  .dnav .active { color: var(--brand-blue); }
+
+  /* Login screen */
+  .dlogin { padding: 18px 22px; display: flex; flex-direction: column; }
+  .dlogo { display: flex; justify-content: center; margin: 6px 0 16px; }
+  .dlogo img { height: 30px; width: auto; }
+  .dlogin h4 { font-family: var(--font-display); font-weight: 800; font-size: 19px; color: var(--text); text-align: center; }
+  .dlogin .dmuted { text-align: center; font-size: 11.5px; margin-bottom: 16px; }
+  .dlogin label { font-size: 10.5px; font-weight: 700; color: var(--text-2); margin: 9px 0 5px; }
+  .dinput { background: var(--surface-2); border: 1px solid var(--border); border-radius: 11px; padding: 11px 12px; font-size: 12px; color: var(--text-2); display: flex; gap: 8px; align-items: center; }
+  .dinput i { color: var(--text-muted); }
+  .dbtn-grad { background: var(--brand-gradient); color: #fff; text-align: center; font-weight: 700; font-size: 13px; padding: 12px; border-radius: 11px; margin-top: 16px; box-shadow: var(--shadow-glow); }
+  .ddivider { text-align: center; position: relative; margin: 14px 0; }
+  .ddivider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border); }
+  .ddivider span { position: relative; background: var(--bg); padding: 0 10px; font-size: 10px; color: var(--text-muted); }
+  .dbtn-out { border: 1px solid var(--border); background: var(--surface); color: var(--text); text-align: center; font-weight: 700; font-size: 12px; padding: 11px; border-radius: 11px; display: flex; gap: 8px; align-items: center; justify-content: center; }
+  .dbtn-out i { color: #EA4335; }
+
+  /* Caption + dots */
+  .demo-caption { max-width: 320px; }
+  .demo-cap-text { position: relative; min-height: 96px; }
+  .dcap { position: absolute; inset: 0; opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+  .dcap.active { opacity: 1; transform: none; }
+  .dcap p { font-size: 1.25rem; font-weight: 600; color: var(--text); line-height: 1.45; margin-top: 8px; }
+  .demo-dots { display: flex; gap: 9px; margin-top: 18px; }
+  .ddot { width: 28px; height: 5px; border-radius: 999px; background: var(--border); border: none; cursor: pointer; transition: background .3s ease; padding: 0; }
+  .ddot.active { background: var(--brand-gradient); }
+
+  @media (max-width: 760px) {
+    .demo-caption { max-width: 320px; text-align: center; }
+    .demo-cap-text { min-height: 80px; }
+    .demo-dots { justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dscreen, .dcap { transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const vp = document.getElementById('demo-viewport');
+    if (!vp) return;
+    const screens = [...vp.querySelectorAll('[data-screen]')];
+    const caps = [...document.querySelectorAll('[data-cap]')];
+    const dots = [...document.querySelectorAll('[data-dot]')];
+    let i = 0, timer = null;
+    const HOLD = 3800;
+
+    function show(n) {
+      i = (n + screens.length) % screens.length;
+      screens.forEach((s, k) => s.classList.toggle('active', k === i));
+      caps.forEach((s, k) => s.classList.toggle('active', k === i));
+      dots.forEach((s, k) => s.classList.toggle('active', k === i));
+    }
+    function next() { show(i + 1); }
+    function start() { stop(); timer = setInterval(next, HOLD); }
+    function stop() { if (timer) clearInterval(timer); timer = null; }
+
+    dots.forEach((d) => d.addEventListener('click', () => { show(Number(d.dataset.dot)); start(); }));
+    const wrap = document.querySelector('.demo-wrap');
+    wrap.addEventListener('mouseenter', stop);
+    wrap.addEventListener('mouseleave', start);
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Only autoplay when the demo scrolls into view
+    if ('IntersectionObserver' in window && !reduce) {
+      const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting ? start() : stop()), { threshold: 0.3 });
+      io.observe(vp);
+    } else if (!reduce) {
+      start();
+    }
+  })();
+</script>
