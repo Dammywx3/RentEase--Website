@@ -1,0 +1,143 @@
+---
+// Site-wide contact modal. Any link/button with [data-contact] or href="#contact"
+// opens it. On send it composes an email to support@rentease9ja.com.
+---
+<div class="cm-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="cm-title" hidden>
+  <div class="cm-card" role="document">
+    <button class="cm-close" type="button" aria-label="Close" data-cm-close>&times;</button>
+
+    <div class="cm-body" id="cm-body">
+      <span class="eyebrow">Contact us</span>
+      <h3 id="cm-title">Get in touch</h3>
+      <p class="cm-sub">Tell us what you need and we'll get back to you. Sends to <strong>support@rentease9ja.com</strong>.</p>
+
+      <div class="cm-error" id="cm-error"></div>
+
+      <div class="cm-row">
+        <div class="cm-field">
+          <label for="cm-name">Name</label>
+          <input type="text" id="cm-name" placeholder="Your name" autocomplete="name" />
+        </div>
+        <div class="cm-field">
+          <label for="cm-email">Email</label>
+          <input type="email" id="cm-email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+      </div>
+      <div class="cm-field">
+        <label for="cm-subject">Subject</label>
+        <input type="text" id="cm-subject" placeholder="What is this about?" />
+      </div>
+      <div class="cm-field">
+        <label for="cm-message">Message</label>
+        <textarea id="cm-message" rows="4" placeholder="How can we help?"></textarea>
+      </div>
+
+      <button class="btn btn-primary cm-send" type="button" id="cm-send">Send message <i class="fas fa-paper-plane"></i></button>
+    </div>
+
+    <div class="cm-success" id="cm-success">
+      <span class="cm-success-ico">✅</span>
+      <h3>Message sent!</h3>
+      <p>Thanks for reaching out. We've received your message and will reply by email shortly.</p>
+      <button class="btn btn-ghost" type="button" data-cm-close>Close</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cm-overlay { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(11,16,32,.55); backdrop-filter: blur(4px); }
+  .cm-overlay.open { display: flex; }
+  .cm-card { position: relative; width: 100%; max-width: 480px; background: var(--surface); border-radius: var(--r-xl); padding: clamp(26px, 4vw, 40px); box-shadow: 0 30px 70px rgba(0,0,0,.35); max-height: 92vh; overflow-y: auto; animation: cmIn .25s cubic-bezier(.2,.7,.2,1); }
+  @keyframes cmIn { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+  .cm-close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.8rem; line-height: 1; color: var(--text-muted); cursor: pointer; }
+  .cm-close:hover { color: var(--text); }
+  .cm-body h3, .cm-success h3 { margin: 10px 0 6px; }
+  .cm-sub { color: var(--text-muted); font-size: .95rem; margin-bottom: 18px; }
+  .cm-row { display: flex; gap: 14px; }
+  .cm-row .cm-field { flex: 1; }
+  .cm-field { margin-bottom: 14px; text-align: left; }
+  .cm-field label { display: block; font-size: .82rem; font-weight: 600; color: var(--text-2); margin-bottom: 6px; }
+  .cm-field input, .cm-field textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-md); font: inherit; font-size: .95rem; background: var(--surface-2); color: var(--text); outline: none; transition: var(--transition); resize: vertical; }
+  .cm-field input:focus, .cm-field textarea:focus { border-color: var(--brand-blue); background: #fff; box-shadow: 0 0 0 4px rgba(30,78,140,.12); }
+  .cm-field input.err, .cm-field textarea.err { border-color: var(--danger); background: #FEF2F2; }
+  .cm-send { width: 100%; margin-top: 6px; justify-content: center; }
+  .cm-error { display: none; background: #FEF2F2; border-left: 4px solid var(--danger); color: #B91C1C; font-size: .88rem; padding: 10px 14px; border-radius: var(--r-sm); margin-bottom: 14px; }
+  .cm-error.show { display: block; }
+  .cm-success { display: none; text-align: center; padding: 6px 0; }
+  .cm-success.show { display: block; }
+  .cm-success-ico { font-size: 2.6rem; }
+  .cm-success p { color: var(--text-muted); margin: 8px 0 20px; }
+  .cm-success a { color: var(--brand-blue); font-weight: 600; }
+  @media (max-width: 460px) { .cm-row { flex-direction: column; gap: 0; } }
+</style>
+
+<script is:inline>
+  (function () {
+    const SUPPORT = 'support@rentease9ja.com';
+    const overlay = document.getElementById('contact-modal');
+    if (!overlay) return;
+    const body = document.getElementById('cm-body');
+    const success = document.getElementById('cm-success');
+    const errorBox = document.getElementById('cm-error');
+    const $ = (id) => document.getElementById(id);
+
+    function open(prefillSubject) {
+      body.style.display = ''; success.classList.remove('show'); errorBox.classList.remove('show');
+      if (prefillSubject && !$('cm-subject').value) $('cm-subject').value = prefillSubject;
+      overlay.hidden = false; requestAnimationFrame(() => overlay.classList.add('open'));
+      setTimeout(() => $('cm-name').focus(), 60);
+    }
+    function close() { overlay.classList.remove('open'); setTimeout(() => { overlay.hidden = true; }, 200); }
+
+    function showErr(msg, field) {
+      errorBox.textContent = msg; errorBox.classList.add('show');
+      ['cm-name','cm-email','cm-subject','cm-message'].forEach((id) => $(id).classList.remove('err'));
+      if (field) { $(field).classList.add('err'); $(field).focus(); }
+    }
+
+    const API_URL = 'https://api.rentease9ja.com/v1/contact';
+    const sendBtn = $('cm-send');
+
+    async function send() {
+      const name = $('cm-name').value.trim();
+      const email = $('cm-email').value.trim();
+      const subject = $('cm-subject').value.trim();
+      const message = $('cm-message').value.trim();
+      if (!name) return showErr('Please enter your name.', 'cm-name');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr('Please enter a valid email.', 'cm-email');
+      if (!message) return showErr('Please enter a message.', 'cm-message');
+
+      errorBox.classList.remove('show');
+      const original = sendBtn.innerHTML;
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending…';
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject: subject || undefined, message }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          showErr(data.message || 'Could not send your message. Please try again.');
+          return;
+        }
+        body.style.display = 'none';
+        success.classList.add('show');
+      } catch (err) {
+        showErr('Network error. Please try again, or email ' + SUPPORT + ' directly.');
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = original;
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-contact], a[href="#contact"]');
+      if (trigger) { e.preventDefault(); open(trigger.getAttribute('data-contact-subject') || ''); return; }
+      if (e.target.closest('[data-cm-close]') || e.target === overlay) { close(); }
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+    $('cm-send').addEventListener('click', send);
+  })();
+</script>

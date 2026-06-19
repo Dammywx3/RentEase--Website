@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ContactModal from '../components/ContactModal.astro';
 
 const {
   title = 'RentEase 9ja: Rent, Buy & Sell Property in Nigeria, Safely',
@@ -39,9 +40,8 @@ const jsonLd = {
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#1E4E8C" />
 
-    <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <!-- Favicons (multi-size .ico is authoritative for the browser tab) -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Open Graph / Twitter -->
@@ -68,6 +68,7 @@ const jsonLd = {
       <slot />
     </main>
     {!noFooter && <Footer />}
+    <ContactModal />
 
     <script>
       // Scroll reveal
