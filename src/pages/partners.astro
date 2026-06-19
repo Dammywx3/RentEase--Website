@@ -42,7 +42,7 @@ const fields = [
       </div>
       <div class="reveal" data-delay="1">
         <LeadForm
-          endpoint="https://api.rentease9ja.com/v1/partners"
+          endpoint={(import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com') + '/v1/partners'}
           submitLabel="Submit partnership request"
           successTitle="Request received!"
           successText="Thanks — our partnerships team will reach out within 2 business days."

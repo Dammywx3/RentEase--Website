@@ -282,7 +282,7 @@ const roles = [
     const btn = document.getElementById('submit-btn');
     btn.disabled = true; btn.classList.add('loading');
     try {
-      const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' }, body: JSON.stringify(payload) });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         if (res.status === 409) showError('You are already on the waitlist! Check your inbox for details.');

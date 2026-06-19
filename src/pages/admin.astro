@@ -132,7 +132,7 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
         let current = 'waitlist';
         const cache = {}; // tab -> entries[]
 
-        function headers() { return { 'x-admin-secret': secret }; }
+        function headers() { return { 'x-admin-secret': secret, 'ngrok-skip-browser-warning': 'true' }; }
         async function api(path, opts) {
           const res = await fetch(API + path, Object.assign({ headers: headers() }, opts || {}));
           if (res.status === 401) { logout('Invalid or expired secret. Please sign in again.'); throw new Error('unauthorized'); }
