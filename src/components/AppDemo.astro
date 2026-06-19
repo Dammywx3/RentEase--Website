@@ -1,109 +1,235 @@
 ---
-// Auto-playing in-app walkthrough for the How it works page.
-// Recreates four real RentEase 9ja screens (sign-in, tenant explore,
-// agent tenancies, landlord dashboard) inside a phone frame and cycles
-// through them like a looping demo reel.
-const captions = [
-  { eyebrow: 'Secure sign-in', text: 'One account for tenants, agents and landlords.' },
-  { eyebrow: 'For tenants', text: 'Explore verified homes and book viewings in-app.' },
-  { eyebrow: 'For agents', text: 'Manage tenancies, requests and renewals end-to-end.' },
-  { eyebrow: 'For landlords', text: 'Track your whole portfolio at a glance.' },
-];
+// Hand-driven, scripted in-app walkthrough for the How it works page.
+// A finger types the login, enters the code, lands on the welcome screen,
+// then taps through the real tenant flow (Explore → search → Wallet →
+// Tenancy → Referral) and the agent flow (login → Listings → Wallet →
+// Registry). Screens are faithfully recreated from the RentEase 9ja app.
+const sb = `<div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>`;
 ---
 <section class="section section--mist demo-sec">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">See it in action</span>
-      <h2>The whole journey, in one app</h2>
-      <p>A quick look at what tenants, agents and landlords actually use, every screen verified and secure.</p>
+      <h2>A real walkthrough of the app</h2>
+      <p>Watch the actual journey, tenants sign in, explore, pay and track tenancies; agents list, get paid and manage the registry.</p>
     </div>
 
     <div class="demo-wrap reveal" data-delay="1">
       <div class="demo-phone">
         <div class="demo-notch"></div>
         <div class="demo-viewport" id="demo-viewport">
-          <!-- 1. LOGIN -->
-          <div class="dscreen active" data-screen>
-            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+          <span class="demo-role" id="demo-role">Tenant</span>
+
+          <!-- LOGIN (tenant) -->
+          <div class="dscreen active" data-screen="login">
+            <Fragment set:html={sb} />
             <div class="dlogin">
               <div class="dlogo"><img src="/logo.webp" alt="RentEase 9ja" /></div>
               <h4>Welcome back</h4>
-              <p class="dmuted">Sign in to access your dashboard</p>
+              <p class="dmuted dctr">Sign in to access your dashboard</p>
               <label>Email Address</label>
-              <div class="dinput"><i class="fas fa-envelope"></i> you@example.com</div>
+              <div class="dinput" id="tap-email"><i class="fas fa-envelope"></i> <span class="dtype" id="val-email"></span><span class="dcaret">|</span></div>
               <label>Password</label>
-              <div class="dinput"><i class="fas fa-lock"></i> ••••••••</div>
-              <div class="dbtn-grad">Sign in</div>
+              <div class="dinput" id="tap-pass"><i class="fas fa-lock"></i> <span class="dtype" id="val-pass"></span></div>
+              <div class="dbtn-grad" id="tap-signin">Sign in</div>
               <div class="ddivider"><span>or</span></div>
               <div class="dbtn-out"><i class="fab fa-google"></i> Continue with Google</div>
             </div>
           </div>
 
-          <!-- 2. TENANT EXPLORE -->
-          <div class="dscreen" data-screen>
-            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+          <!-- VERIFY CODE -->
+          <div class="dscreen" data-screen="verify">
+            <Fragment set:html={sb} />
+            <div class="dlogin">
+              <div class="dverify-ico"><i class="fas fa-shield-halved"></i></div>
+              <h4>Verify it's you</h4>
+              <p class="dmuted dctr">Enter the code sent to your email</p>
+              <div class="dotp" id="tap-otp">
+                <span class="dotp-box" id="otp1"></span><span class="dotp-box" id="otp2"></span>
+                <span class="dotp-box" id="otp3"></span><span class="dotp-box" id="otp4"></span>
+              </div>
+              <div class="dbtn-grad" id="tap-confirm">Confirm code</div>
+              <p class="dmuted dctr dxs" style="margin-top:14px;">Resend code in 0:42</p>
+            </div>
+          </div>
+
+          <!-- WELCOME -->
+          <div class="dscreen" data-screen="welcome">
+            <Fragment set:html={sb} />
+            <div class="dwelcome">
+              <div class="davatar lg">A</div>
+              <p class="dmuted">Good morning</p>
+              <h3 class="dwelcome-h">Welcome, Adigun <span class="dwave">👋</span></h3>
+              <p class="dmuted dctr">Ready to find your next home?</p>
+              <div class="dwelcome-btns">
+                <div class="dbtn-grad" id="tap-explore"><i class="fas fa-compass"></i> Explore homes</div>
+                <div class="dbtn-out">My properties</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXPLORE (tenant) -->
+          <div class="dscreen" data-screen="explore">
+            <Fragment set:html={sb} />
             <div class="dpad">
               <div class="dhead-row"><div><div class="dmuted dxs">Find your perfect place</div><div class="dh">Explore</div></div><div class="davatar">A</div></div>
-              <div class="dsearch"><i class="fas fa-magnifying-glass"></i> Location, price, or city…</div>
+              <div class="dsearch" id="tap-search"><i class="fas fa-magnifying-glass"></i> <span id="search-txt">Location, price, or city…</span></div>
               <div class="dchips"><span class="dchip active">Rent</span><span class="dchip">Buy</span><span class="dchip">Land</span></div>
               <div class="dsubh">Featured</div>
-              <div class="dcard">
-                <div class="dcard-img" style="--g1:#9fb3d1;--g2:#6d86ad;"><span class="dbadge"><i class="fas fa-circle-check"></i> Verified</span></div>
-                <div class="dcard-b"><div class="dprice">₦1.2M<span>/yr</span></div><div class="dtitle">Modern 2-Bed Flat</div><div class="dloc"><i class="fas fa-location-dot"></i> Lekki, Lagos</div></div>
-              </div>
-              <div class="dcard">
-                <div class="dcard-img" style="--g1:#a9c2b4;--g2:#6f9a83;"><span class="dbadge"><i class="fas fa-circle-check"></i> Verified</span></div>
-                <div class="dcard-b"><div class="dprice">₦2.5M<span>/yr</span></div><div class="dtitle">3-Bed Flat, Wuse II</div><div class="dloc"><i class="fas fa-location-dot"></i> Abuja</div></div>
-              </div>
+              <div class="dcard"><div class="dcard-img" style="--g1:#9fb3d1;--g2:#6d86ad;"><span class="dbadge"><i class="fas fa-circle-check"></i> Verified</span></div><div class="dcard-b"><div class="dprice">₦1.2M<span>/yr</span></div><div class="dtitle">Modern 2-Bed Flat</div><div class="dloc"><i class="fas fa-location-dot"></i> Lekki, Lagos</div></div></div>
+              <div class="dcard"><div class="dcard-img" style="--g1:#a9c2b4;--g2:#6f9a83;"><span class="dbadge"><i class="fas fa-circle-check"></i> Verified</span></div><div class="dcard-b"><div class="dprice">₦2.5M<span>/yr</span></div><div class="dtitle">3-Bed Flat, Wuse II</div><div class="dloc"><i class="fas fa-location-dot"></i> Abuja</div></div></div>
             </div>
-            <div class="dnav"><i class="fas fa-compass active"></i><i class="fas fa-heart"></i><i class="fas fa-comment-dots"></i><i class="fas fa-user"></i></div>
+            <nav class="dnav"><i class="fas fa-compass active"></i><i class="fas fa-heart"></i><i class="fas fa-wallet" id="tap-nav-wallet"></i><i class="fas fa-comment-dots"></i><i class="fas fa-ellipsis"></i></nav>
           </div>
 
-          <!-- 3. AGENT TENANCIES -->
-          <div class="dscreen" data-screen>
-            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+          <!-- WALLET (tenant) -->
+          <div class="dscreen" data-screen="wallet">
+            <Fragment set:html={sb} />
             <div class="dpad">
-              <div class="dh dh-top">Tenancies</div>
-              <div class="dtabs"><span class="dtab active">Active</span><span class="dtab">Expiring</span><span class="dtab">Past</span><span class="dtab">Requests</span></div>
-              <div class="drow"><div class="dinitial">CO</div><div class="drow-b"><div class="dtitle">Chuka Obi</div><div class="dmuted dxs">2-Bed · Lekki, Lagos</div><div class="dmuted dxs">Expires 12 Aug 2026</div></div><span class="dpill green">Active</span></div>
-              <div class="drow"><div class="dinitial">AE</div><div class="drow-b"><div class="dtitle">Adaeze Eze</div><div class="dmuted dxs">Studio · Yaba</div><div class="dmuted dxs">Expires 30 Sep 2026</div></div><span class="dpill amber">Expiring</span></div>
-              <div class="drow"><div class="dinitial">TB</div><div class="drow-b"><div class="dtitle">Tunde Bello</div><div class="dmuted dxs">3-Bed · Gwarinpa</div><div class="dmuted dxs">Expires 04 Nov 2026</div></div><span class="dpill green">Active</span></div>
+              <div class="dmuted dxs">Manage funds & payments</div>
+              <div class="dh dh-top">Wallet</div>
+              <div class="dbalance"><div class="dbal-l">Wallet balance</div><div class="dbal-n">₦185,000<span>.00</span></div><div class="dbal-tag"><i class="fas fa-shield-halved"></i> Secure & escrow-protected</div></div>
+              <div class="dsubh">Quick actions</div>
+              <div class="dqa"><div class="dqa-i"><i class="fas fa-plus"></i><span>Fund</span></div><div class="dqa-i"><i class="fas fa-house"></i><span>Pay rent</span></div><div class="dqa-i"><i class="fas fa-arrow-up"></i><span>Send</span></div><div class="dqa-i"><i class="fas fa-receipt"></i><span>Bills</span></div></div>
+              <div class="dsubh">Recent transactions</div>
+              <div class="drow sm"><div class="dinitial green"><i class="fas fa-arrow-down"></i></div><div class="drow-b"><div class="dtitle">Wallet funding</div><div class="dmuted dxs">Today · 9:32 AM</div></div><span class="damt green">+₦150,000</span></div>
+              <div class="drow sm"><div class="dinitial blue"><i class="fas fa-house"></i></div><div class="drow-b"><div class="dtitle">Rent payment</div><div class="dmuted dxs">12 Jun · Lekki</div></div><span class="damt">-₦100,000</span></div>
             </div>
-            <div class="dnav"><i class="fas fa-house"></i><i class="fas fa-file-signature active"></i><i class="fas fa-comment-dots"></i><i class="fas fa-user"></i></div>
+            <nav class="dnav"><i class="fas fa-compass"></i><i class="fas fa-heart"></i><i class="fas fa-wallet active"></i><i class="fas fa-comment-dots"></i><i class="fas fa-ellipsis" id="tap-nav-more"></i></nav>
           </div>
 
-          <!-- 4. LANDLORD DASHBOARD -->
-          <div class="dscreen" data-screen>
-            <div class="dstatus"><span>9:41</span><span class="dstatus-r"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters"></i></span></div>
+          <!-- MORE MENU (tenant) -->
+          <div class="dscreen" data-screen="more">
+            <Fragment set:html={sb} />
             <div class="dpad">
-              <div class="dmuted dxs">Good morning</div>
-              <div class="dh">Tunde A. <span class="dwave">👋</span></div>
+              <div class="dh dh-top">More</div>
+              <div class="dgrid">
+                <div class="dgi" id="tap-tenancy"><i class="fas fa-file-signature"></i><span>Tenancy</span></div>
+                <div class="dgi" id="tap-referral"><i class="fas fa-gift"></i><span>Refer & Earn</span></div>
+                <div class="dgi"><i class="fas fa-screwdriver-wrench"></i><span>Maintenance</span></div>
+                <div class="dgi"><i class="fas fa-bookmark"></i><span>Saved</span></div>
+                <div class="dgi"><i class="fas fa-file-lines"></i><span>Documents</span></div>
+                <div class="dgi"><i class="fas fa-user"></i><span>Profile</span></div>
+              </div>
+            </div>
+            <nav class="dnav"><i class="fas fa-compass"></i><i class="fas fa-heart"></i><i class="fas fa-wallet"></i><i class="fas fa-comment-dots"></i><i class="fas fa-ellipsis active"></i></nav>
+          </div>
+
+          <!-- TENANCY (tenant) -->
+          <div class="dscreen" data-screen="tenancy">
+            <Fragment set:html={sb} />
+            <div class="dpad">
+              <div class="dh dh-top">Tenancy</div>
+              <div class="dtenancy">
+                <span class="dpill green">Active Tenancy</span>
+                <div class="dtitle big">Modern 2-Bed Flat</div>
+                <div class="dmuted dxs"><i class="fas fa-location-dot"></i> Lekki, Lagos</div>
+                <div class="dten-row"><span>Annual rent</span><b>₦1,200,000</b></div>
+                <div class="dten-row"><span>Next rent due</span><b>12 Aug 2026</b></div>
+                <div class="dten-row"><span>Agreement</span><b class="green">Signed ✓</b></div>
+                <div class="dbtn-grad">Pay rent</div>
+                <div class="dbtn-out">View tenancy details</div>
+              </div>
+            </div>
+            <nav class="dnav"><i class="fas fa-compass"></i><i class="fas fa-heart"></i><i class="fas fa-wallet"></i><i class="fas fa-comment-dots"></i><i class="fas fa-ellipsis" id="tap-nav-more-b"></i></nav>
+          </div>
+
+          <!-- REFERRAL (tenant) -->
+          <div class="dscreen" data-screen="referral">
+            <Fragment set:html={sb} />
+            <div class="dpad">
+              <div class="dh dh-top">Refer &amp; Earn</div>
+              <div class="dref"><i class="fas fa-gift"></i><div><div class="dtitle">Invite friends, earn rewards</div><div class="dmuted dxs">Get rewarded for every friend who joins.</div></div></div>
               <div class="dstat-row">
-                <div class="dstat"><div class="dstat-n">8</div><div class="dstat-l">Active listings</div></div>
-                <div class="dstat"><div class="dstat-n">12</div><div class="dstat-l">Active tenants</div></div>
-                <div class="dstat"><div class="dstat-n">2</div><div class="dstat-l">Open repairs</div></div>
+                <div class="dstat"><div class="dstat-n">₦15k</div><div class="dstat-l">Earned</div></div>
+                <div class="dstat"><div class="dstat-n">3</div><div class="dstat-l">Pending</div></div>
+                <div class="dstat"><div class="dstat-n">6</div><div class="dstat-l">Success</div></div>
               </div>
-              <div class="dsubh">My portfolio</div>
-              <div class="drow"><div class="dthumb" style="--g1:#9fb3d1;--g2:#6d86ad;"></div><div class="drow-b"><div class="dtitle">Lekki Duplex</div><div class="dmuted dxs">Occupied · ₦4.5M/yr</div></div><span class="dpill green">Paid</span></div>
-              <div class="drow"><div class="dthumb" style="--g1:#a9c2b4;--g2:#6f9a83;"></div><div class="drow-b"><div class="dtitle">Ikeja Flats (x4)</div><div class="dmuted dxs">3 occupied · 1 vacant</div></div><span class="dpill amber">1 due</span></div>
+              <div class="dsubh">Your code</div>
+              <div class="dcode">ADIGUN-9JA <i class="fas fa-copy"></i></div>
+              <div class="dbtn-grad"><i class="fab fa-whatsapp"></i> Invite friends</div>
             </div>
-            <div class="dnav"><i class="fas fa-chart-pie active"></i><i class="fas fa-building"></i><i class="fas fa-wrench"></i><i class="fas fa-user"></i></div>
+            <nav class="dnav"><i class="fas fa-compass"></i><i class="fas fa-heart"></i><i class="fas fa-wallet"></i><i class="fas fa-comment-dots"></i><i class="fas fa-ellipsis"></i></nav>
           </div>
+
+          <!-- AGENT LOGIN -->
+          <div class="dscreen" data-screen="alogin">
+            <Fragment set:html={sb} />
+            <div class="dlogin">
+              <div class="dlogo"><img src="/logo.webp" alt="RentEase 9ja" /></div>
+              <h4>Welcome back</h4>
+              <p class="dmuted dctr">Sign in to your agent dashboard</p>
+              <label>Email Address</label>
+              <div class="dinput"><i class="fas fa-envelope"></i> tunde@rentease9ja.com</div>
+              <label>Password</label>
+              <div class="dinput"><i class="fas fa-lock"></i> ••••••••</div>
+              <div class="dbtn-grad" id="tap-asignin">Sign in</div>
+              <div class="ddivider"><span>or</span></div>
+              <div class="dbtn-out"><i class="fab fa-google"></i> Continue with Google</div>
+            </div>
+          </div>
+
+          <!-- AGENT LISTINGS -->
+          <div class="dscreen" data-screen="listings">
+            <Fragment set:html={sb} />
+            <div class="dpad">
+              <div class="dhead-row"><div><div class="dmuted dxs">Manage your portfolio</div><div class="dh">My Listings</div></div><div class="davatar">T</div></div>
+              <div class="dtabs"><span class="dtab active">Active</span><span class="dtab">Drafts</span><span class="dtab">Rented</span><span class="dtab">Sold</span></div>
+              <div class="dcard"><div class="dcard-img" style="--g1:#9fb3d1;--g2:#6d86ad;"><span class="dbadge blue">AGENT DIRECT</span></div><div class="dcard-b"><div class="dprice">₦45M</div><div class="dtitle">4-Bed Duplex, Lekki</div><div class="dloc"><i class="fas fa-eye"></i> 1,240 views · 18 leads</div></div></div>
+              <div class="dcard"><div class="dcard-img" style="--g1:#c9b89a;--g2:#a3895f;"><span class="dbadge amber">OWNER DIRECT</span></div><div class="dcard-b"><div class="dprice">₦2.5M<span>/yr</span></div><div class="dtitle">3-Bed Flat, Wuse II</div><div class="dloc"><i class="fas fa-eye"></i> 860 views · 9 leads</div></div></div>
+            </div>
+            <div class="dfab"><i class="fas fa-plus"></i></div>
+            <nav class="dnav"><i class="fas fa-house"></i><i class="fas fa-bars-staggered active"></i><i class="fas fa-wallet" id="tap-anav-wallet"></i><i class="fas fa-file-signature"></i><i class="fas fa-user"></i></nav>
+          </div>
+
+          <!-- AGENT WALLET -->
+          <div class="dscreen" data-screen="awallet">
+            <Fragment set:html={sb} />
+            <div class="dpad">
+              <div class="dmuted dxs">Financial overview</div>
+              <div class="dh dh-top">My Wallet</div>
+              <div class="dbalance"><div class="dbal-l">Available for payout</div><div class="dbal-n">₦642,500<span>.00</span></div><div class="dbtn-light">Withdraw</div></div>
+              <div class="dwlt-row"><div class="dwlt-c"><div class="dmuted dxs">In escrow</div><div class="dtitle">₦1.8M</div></div><div class="dwlt-c"><div class="dmuted dxs">Pending</div><div class="dtitle">₦120k</div></div></div>
+              <div class="dsubh">Recent activity</div>
+              <div class="drow sm"><div class="dinitial green"><i class="fas fa-arrow-down"></i></div><div class="drow-b"><div class="dtitle">Commission released</div><div class="dmuted dxs">Lekki Duplex · 14 Jun</div></div><span class="damt green">+₦450,000</span></div>
+              <div class="drow sm"><div class="dinitial blue"><i class="fas fa-lock"></i></div><div class="drow-b"><div class="dtitle">Held in escrow</div><div class="dmuted dxs">Wuse Flat · 10 Jun</div></div><span class="damt">₦1,800,000</span></div>
+            </div>
+            <nav class="dnav"><i class="fas fa-house"></i><i class="fas fa-bars-staggered"></i><i class="fas fa-wallet active"></i><i class="fas fa-file-signature" id="tap-anav-registry"></i><i class="fas fa-user"></i></nav>
+          </div>
+
+          <!-- AGENT REGISTRY -->
+          <div class="dscreen" data-screen="registry">
+            <Fragment set:html={sb} />
+            <div class="dpad">
+              <div class="dmuted dxs">Registry transactions</div>
+              <div class="dh dh-top">Registry</div>
+              <div class="dtabs"><span class="dtab active">Rentals</span><span class="dtab">Sales</span></div>
+              <div class="dreg">
+                <div class="dreg-top"><span class="dpill green">IN PROGRESS</span><span class="dmuted dxs">Rental Agreement</span></div>
+                <div class="dtitle">Chuka Obi · 2-Bed Lekki</div>
+                <div class="dreg-row"><div><div class="dmuted dxs">Contract value</div><b>₦1,200,000</b></div><div><div class="dmuted dxs">Current stage</div><b>Key handover</b></div></div>
+                <div class="dprogress"><span style="width:72%"></span></div>
+              </div>
+              <div class="dreg">
+                <div class="dreg-top"><span class="dpill amber">AWAITING</span><span class="dmuted dxs">Sale Deed</span></div>
+                <div class="dtitle">Grace E. · 4-Bed Maitama</div>
+                <div class="dreg-row"><div><div class="dmuted dxs">Contract value</div><b>₦45,000,000</b></div><div><div class="dmuted dxs">Current stage</div><b>Docs review</b></div></div>
+                <div class="dprogress"><span style="width:30%"></span></div>
+              </div>
+            </div>
+            <nav class="dnav"><i class="fas fa-house"></i><i class="fas fa-bars-staggered"></i><i class="fas fa-wallet"></i><i class="fas fa-file-signature active"></i><i class="fas fa-user"></i></nav>
+          </div>
+
+          <!-- HAND CURSOR + tap ripple -->
+          <i class="fas fa-hand-pointer demo-hand" id="demo-hand" aria-hidden="true"></i>
+          <span class="demo-ripple" id="demo-ripple" aria-hidden="true"></span>
         </div>
       </div>
 
       <div class="demo-caption">
-        <div class="demo-cap-text" id="demo-cap">
-          {captions.map((c, i) => (
-            <div class:list={['dcap', { active: i === 0 }]} data-cap>
-              <span class="eyebrow">{c.eyebrow}</span>
-              <p>{c.text}</p>
-            </div>
-          ))}
-        </div>
-        <div class="demo-dots" id="demo-dots">
-          {captions.map((_, i) => (<button class:list={['ddot', { active: i === 0 }]} data-dot={i} aria-label={`Screen ${i + 1}`}></button>))}
-        </div>
+        <span class="eyebrow" id="demo-eyebrow">Secure sign-in</span>
+        <p id="demo-cap">A hand walks through exactly what tenants and agents do in the app.</p>
+        <button class="demo-replay" id="demo-replay"><i class="fas fa-rotate-right"></i> Replay</button>
       </div>
     </div>
   </div>
@@ -112,124 +238,259 @@ const captions = [
 <style>
   .demo-wrap { display: flex; align-items: center; justify-content: center; gap: clamp(28px, 6vw, 80px); flex-wrap: wrap; }
   .demo-phone { position: relative; width: 300px; height: 610px; flex-shrink: 0; background: #0B1020; border-radius: 42px; padding: 12px; box-shadow: 0 40px 80px rgba(15,23,42,.28), inset 0 0 0 2px rgba(255,255,255,.06); }
-  .demo-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 120px; height: 22px; background: #0B1020; border-radius: 0 0 16px 16px; z-index: 5; }
+  .demo-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 120px; height: 22px; background: #0B1020; border-radius: 0 0 16px 16px; z-index: 9; }
   .demo-viewport { position: relative; width: 100%; height: 100%; border-radius: 32px; overflow: hidden; background: var(--bg); }
+  .demo-role { position: absolute; top: 10px; left: 14px; z-index: 8; background: var(--brand-gradient); color: #fff; font-size: 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; }
 
-  .dscreen { position: absolute; inset: 0; display: flex; flex-direction: column; opacity: 0; transform: translateX(24px) scale(.99); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
-  .dscreen.active { opacity: 1; transform: none; pointer-events: auto; }
+  .dscreen { position: absolute; inset: 0; display: flex; flex-direction: column; opacity: 0; transform: translateX(20px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+  .dscreen.active { opacity: 1; transform: none; }
 
-  .dstatus { display: flex; justify-content: space-between; align-items: center; padding: 9px 20px 4px; font-size: 11px; font-weight: 700; color: var(--text); }
+  .dstatus { display: flex; justify-content: space-between; align-items: center; padding: 9px 18px 4px; font-size: 11px; font-weight: 700; color: var(--text); }
   .dstatus-r { display: flex; gap: 5px; font-size: 9px; }
-  .dpad { flex: 1; padding: 6px 16px 0; overflow: hidden; }
+  .dpad { flex: 1; padding: 30px 16px 0; overflow: hidden; }
 
-  .dmuted { color: var(--text-muted); } .dxs { font-size: 10.5px; }
+  .dmuted { color: var(--text-muted); } .dxs { font-size: 10.5px; } .dctr { text-align: center; }
   .dh { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--text); letter-spacing: -.02em; }
-  .dh-top { margin: 4px 0 12px; } .dwave { font-size: 18px; }
+  .dh-top { margin: 2px 0 12px; }
   .dhead-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
   .davatar { width: 36px; height: 36px; border-radius: 50%; background: var(--brand-gradient); color: #fff; font-weight: 800; display: grid; place-items: center; font-size: 14px; }
+  .davatar.lg { width: 64px; height: 64px; font-size: 26px; margin: 0 auto 14px; }
 
   .dsearch { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 11px 13px; font-size: 12px; color: var(--text-muted); display: flex; gap: 8px; align-items: center; box-shadow: var(--shadow-sm); }
+  .dsearch.focus { border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(30,78,140,.14); }
   .dchips { display: flex; gap: 7px; margin: 12px 0; }
   .dchip { font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text-2); }
   .dchip.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
-  .dsubh { font-weight: 800; font-size: 13px; color: var(--text); margin: 6px 0 9px; }
+  .dsubh { font-weight: 800; font-size: 13px; color: var(--text); margin: 8px 0 9px; }
 
   .dcard { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 11px; box-shadow: var(--shadow-card); }
-  .dcard-img { height: 78px; background: linear-gradient(135deg, var(--g1), var(--g2)); position: relative; }
-  .dbadge { position: absolute; top: 7px; left: 7px; background: var(--brand-gradient); color: #fff; font-size: 8.5px; font-weight: 700; padding: 3px 7px; border-radius: 999px; }
+  .dcard-img { height: 72px; background: linear-gradient(135deg, var(--g1), var(--g2)); position: relative; }
+  .dbadge { position: absolute; top: 7px; left: 7px; background: var(--brand-gradient); color: #fff; font-size: 8px; font-weight: 800; padding: 3px 7px; border-radius: 999px; letter-spacing: .03em; }
+  .dbadge.blue { background: var(--brand-blue); } .dbadge.amber { background: #C77B16; }
   .dcard-b { padding: 9px 11px; }
-  .dprice { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--text); }
-  .dprice span { font-size: 10px; color: var(--text-muted); font-weight: 600; }
-  .dtitle { font-size: 12px; font-weight: 700; color: var(--text); margin-top: 1px; }
+  .dprice { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--text); } .dprice span { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+  .dtitle { font-size: 12px; font-weight: 700; color: var(--text); margin-top: 1px; } .dtitle.big { font-size: 15px; margin: 8px 0 2px; }
   .dloc { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
 
   .dtabs { display: flex; gap: 14px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
   .dtab { font-size: 11.5px; font-weight: 700; color: var(--text-muted); padding-bottom: 8px; }
   .dtab.active { color: var(--brand-blue); box-shadow: inset 0 -2px 0 var(--brand-blue); }
   .drow { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px; margin-bottom: 9px; box-shadow: var(--shadow-sm); }
-  .dinitial { width: 34px; height: 34px; border-radius: 50%; background: var(--brand-gradient-soft); color: var(--brand-blue); font-weight: 800; font-size: 12px; display: grid; place-items: center; flex-shrink: 0; }
-  .dthumb { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, var(--g1), var(--g2)); flex-shrink: 0; }
-  .drow-b { flex: 1; } .drow-b .dtitle { font-size: 12.5px; }
-  .dpill { font-size: 9.5px; font-weight: 700; padding: 4px 9px; border-radius: 999px; }
-  .dpill.green { background: rgba(43,182,115,.15); color: #1f8f5a; }
-  .dpill.amber { background: rgba(245,158,11,.16); color: #b9770a; }
+  .drow.sm { padding: 9px 10px; }
+  .dinitial { width: 32px; height: 32px; border-radius: 50%; background: var(--brand-gradient-soft); color: var(--brand-blue); font-weight: 800; font-size: 12px; display: grid; place-items: center; flex-shrink: 0; }
+  .dinitial.green { background: rgba(43,182,115,.15); color: #1f8f5a; } .dinitial.blue { background: rgba(30,78,140,.12); color: var(--brand-blue); }
+  .drow-b { flex: 1; } .drow-b .dtitle { font-size: 12px; }
+  .damt { font-weight: 800; font-size: 12px; color: var(--text); } .damt.green { color: #1f8f5a; }
+  .dpill { font-size: 9px; font-weight: 800; padding: 4px 9px; border-radius: 999px; letter-spacing: .03em; }
+  .dpill.green { background: rgba(43,182,115,.15); color: #1f8f5a; } .dpill.amber { background: rgba(245,158,11,.16); color: #b9770a; }
 
   .dstat-row { display: flex; gap: 8px; margin: 12px 0; }
-  .dstat { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 11px 8px; text-align: center; box-shadow: var(--shadow-sm); }
-  .dstat-n { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--brand-blue); }
-  .dstat-l { font-size: 9px; color: var(--text-muted); margin-top: 2px; line-height: 1.2; }
+  .dstat { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 11px 6px; text-align: center; box-shadow: var(--shadow-sm); }
+  .dstat-n { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--brand-blue); }
+  .dstat-l { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
 
   .dnav { display: flex; justify-content: space-around; align-items: center; padding: 12px 0 16px; border-top: 1px solid var(--border); background: var(--surface); font-size: 16px; color: var(--text-muted); }
   .dnav .active { color: var(--brand-blue); }
 
-  /* Login screen */
-  .dlogin { padding: 18px 22px; display: flex; flex-direction: column; }
-  .dlogo { display: flex; justify-content: center; margin: 6px 0 16px; }
-  .dlogo img { height: 30px; width: auto; }
+  /* login / verify */
+  .dlogin { padding: 24px 22px 0; display: flex; flex-direction: column; }
+  .dlogo { display: flex; justify-content: center; margin: 4px 0 14px; } .dlogo img { height: 30px; width: auto; }
   .dlogin h4 { font-family: var(--font-display); font-weight: 800; font-size: 19px; color: var(--text); text-align: center; }
-  .dlogin .dmuted { text-align: center; font-size: 11.5px; margin-bottom: 16px; }
+  .dlogin .dmuted { font-size: 11.5px; margin-bottom: 14px; }
   .dlogin label { font-size: 10.5px; font-weight: 700; color: var(--text-2); margin: 9px 0 5px; }
-  .dinput { background: var(--surface-2); border: 1px solid var(--border); border-radius: 11px; padding: 11px 12px; font-size: 12px; color: var(--text-2); display: flex; gap: 8px; align-items: center; }
+  .dinput { background: var(--surface-2); border: 1px solid var(--border); border-radius: 11px; padding: 11px 12px; font-size: 12px; color: var(--text-2); display: flex; gap: 8px; align-items: center; min-height: 40px; }
   .dinput i { color: var(--text-muted); }
-  .dbtn-grad { background: var(--brand-gradient); color: #fff; text-align: center; font-weight: 700; font-size: 13px; padding: 12px; border-radius: 11px; margin-top: 16px; box-shadow: var(--shadow-glow); }
-  .ddivider { text-align: center; position: relative; margin: 14px 0; }
+  .dtype { white-space: nowrap; } .dcaret { color: var(--brand-blue); font-weight: 700; opacity: 0; }
+  .dinput.typing .dcaret { opacity: 1; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .dbtn-grad { background: var(--brand-gradient); color: #fff; text-align: center; font-weight: 700; font-size: 13px; padding: 12px; border-radius: 11px; margin-top: 16px; box-shadow: var(--shadow-glow); display:flex; gap:8px; align-items:center; justify-content:center; }
+  .ddivider { text-align: center; position: relative; margin: 13px 0; }
   .ddivider::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border); }
   .ddivider span { position: relative; background: var(--bg); padding: 0 10px; font-size: 10px; color: var(--text-muted); }
-  .dbtn-out { border: 1px solid var(--border); background: var(--surface); color: var(--text); text-align: center; font-weight: 700; font-size: 12px; padding: 11px; border-radius: 11px; display: flex; gap: 8px; align-items: center; justify-content: center; }
+  .dbtn-out { border: 1px solid var(--border); background: var(--surface); color: var(--text); text-align: center; font-weight: 700; font-size: 12px; padding: 11px; border-radius: 11px; display: flex; gap: 8px; align-items: center; justify-content: center; margin-top: 10px; }
   .dbtn-out i { color: #EA4335; }
+  .dverify-ico { width: 56px; height: 56px; border-radius: 50%; background: var(--brand-gradient-soft); color: var(--brand-blue); display: grid; place-items: center; font-size: 22px; margin: 8px auto 14px; }
+  .dotp { display: flex; gap: 10px; justify-content: center; margin: 18px 0 4px; }
+  .dotp-box { width: 46px; height: 54px; border-radius: 12px; border: 1.5px solid var(--border); background: var(--surface-2); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--text); }
+  .dotp-box.filled { border-color: var(--brand-blue); background: #fff; }
 
-  /* Caption + dots */
+  /* welcome */
+  .dwelcome { padding: 40px 24px 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .dwelcome-h { font-family: var(--font-display); font-weight: 800; font-size: 23px; color: var(--text); margin: 4px 0; } .dwave { display: inline-block; }
+  .dwelcome-btns { width: 100%; margin-top: 26px; }
+
+  /* wallet */
+  .dbalance { background: var(--brand-gradient); color: #fff; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-glow); }
+  .dbal-l { font-size: 11px; opacity: .9; } .dbal-n { font-family: var(--font-display); font-weight: 800; font-size: 26px; margin: 4px 0 8px; } .dbal-n span { font-size: 15px; opacity: .8; }
+  .dbal-tag { font-size: 10px; background: rgba(255,255,255,.18); display: inline-flex; gap: 5px; align-items: center; padding: 4px 9px; border-radius: 999px; }
+  .dbtn-light { background: #fff; color: var(--brand-blue); font-weight: 800; font-size: 12px; padding: 8px 16px; border-radius: 999px; display: inline-block; margin-top: 10px; }
+  .dqa { display: flex; gap: 8px; }
+  .dqa-i { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 4px; text-align: center; font-size: 9.5px; color: var(--text-2); font-weight: 600; box-shadow: var(--shadow-sm); }
+  .dqa-i i { display: block; font-size: 15px; color: var(--brand-blue); margin-bottom: 5px; }
+  .dwlt-row { display: flex; gap: 8px; margin: 10px 0; } .dwlt-c { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 11px; box-shadow: var(--shadow-sm); }
+
+  /* more grid */
+  .dgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .dgi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 6px; text-align: center; font-size: 10px; font-weight: 700; color: var(--text-2); box-shadow: var(--shadow-sm); }
+  .dgi i { display: block; font-size: 19px; color: var(--brand-blue); margin-bottom: 8px; }
+
+  /* tenancy */
+  .dtenancy { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: var(--shadow-card); }
+  .dten-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-2); padding: 9px 0; border-bottom: 1px solid var(--border); } .dten-row b.green { color: #1f8f5a; }
+  .dtenancy .dbtn-grad { margin-top: 16px; } .dtenancy .dbtn-out { margin-top: 8px; }
+
+  /* referral */
+  .dref { display: flex; gap: 12px; align-items: center; background: var(--brand-gradient-soft); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+  .dref > i { font-size: 22px; color: var(--brand-blue); }
+  .dcode { background: var(--surface); border: 1.5px dashed var(--brand-blue); border-radius: 12px; padding: 13px; text-align: center; font-family: var(--font-display); font-weight: 800; letter-spacing: .06em; color: var(--brand-blue); display: flex; justify-content: center; gap: 10px; align-items: center; }
+
+  /* registry */
+  .dreg { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 11px; box-shadow: var(--shadow-sm); }
+  .dreg-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .dreg-row { display: flex; justify-content: space-between; margin: 10px 0; font-size: 12px; color: var(--text); }
+  .dprogress { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; } .dprogress span { display: block; height: 100%; background: var(--brand-gradient); }
+
+  /* FAB */
+  .dfab { position: absolute; right: 16px; bottom: 70px; width: 46px; height: 46px; border-radius: 50%; background: var(--brand-gradient); color: #fff; display: grid; place-items: center; font-size: 17px; box-shadow: var(--shadow-glow); z-index: 6; }
+
+  /* hand + ripple */
+  .demo-hand { position: absolute; left: 0; top: 0; z-index: 12; font-size: 30px; color: #0B1020; filter: drop-shadow(0 4px 6px rgba(0,0,0,.3)); transform: translate(140px, 360px) rotate(-12deg); transition: transform .65s cubic-bezier(.4,.1,.2,1); pointer-events: none; opacity: .92; }
+  .demo-hand.tap { transform: translate(var(--hx), var(--hy)) rotate(-12deg) scale(.82); transition: transform .12s ease; }
+  .demo-ripple { position: absolute; z-index: 11; width: 30px; height: 30px; border-radius: 50%; background: rgba(30,78,140,.35); transform: translate(-50%, -50%) scale(0); opacity: 0; pointer-events: none; }
+  .demo-ripple.go { animation: ripple .5s ease-out; }
+  @keyframes ripple { 0% { transform: translate(-50%,-50%) scale(0); opacity: .7; } 100% { transform: translate(-50%,-50%) scale(3.2); opacity: 0; } }
+
+  /* caption */
   .demo-caption { max-width: 320px; }
-  .demo-cap-text { position: relative; min-height: 96px; }
-  .dcap { position: absolute; inset: 0; opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
-  .dcap.active { opacity: 1; transform: none; }
-  .dcap p { font-size: 1.25rem; font-weight: 600; color: var(--text); line-height: 1.45; margin-top: 8px; }
-  .demo-dots { display: flex; gap: 9px; margin-top: 18px; }
-  .ddot { width: 28px; height: 5px; border-radius: 999px; background: var(--border); border: none; cursor: pointer; transition: background .3s ease; padding: 0; }
-  .ddot.active { background: var(--brand-gradient); }
-
-  @media (max-width: 760px) {
-    .demo-caption { max-width: 320px; text-align: center; }
-    .demo-cap-text { min-height: 80px; }
-    .demo-dots { justify-content: center; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .dscreen, .dcap { transition: none; }
-  }
+  .demo-caption .eyebrow { display: inline-block; }
+  .demo-caption p { font-size: 1.25rem; font-weight: 600; color: var(--text); line-height: 1.45; margin-top: 10px; min-height: 84px; transition: opacity .3s ease; }
+  .demo-replay { margin-top: 6px; background: var(--surface); border: 1px solid var(--border); color: var(--brand-blue); font-weight: 700; font-size: .9rem; padding: 9px 18px; border-radius: var(--r-pill); cursor: pointer; display: inline-flex; gap: 8px; align-items: center; }
+  .demo-replay:hover { background: var(--brand-gradient-soft); }
+  @media (max-width: 760px) { .demo-caption { max-width: 320px; text-align: center; } .demo-caption .demo-replay { } }
+  @media (prefers-reduced-motion: reduce) { .dscreen, .demo-hand { transition: none; } }
 </style>
 
 <script is:inline>
   (function () {
     const vp = document.getElementById('demo-viewport');
     if (!vp) return;
-    const screens = [...vp.querySelectorAll('[data-screen]')];
-    const caps = [...document.querySelectorAll('[data-cap]')];
-    const dots = [...document.querySelectorAll('[data-dot]')];
-    let i = 0, timer = null;
-    const HOLD = 3800;
-
-    function show(n) {
-      i = (n + screens.length) % screens.length;
-      screens.forEach((s, k) => s.classList.toggle('active', k === i));
-      caps.forEach((s, k) => s.classList.toggle('active', k === i));
-      dots.forEach((s, k) => s.classList.toggle('active', k === i));
-    }
-    function next() { show(i + 1); }
-    function start() { stop(); timer = setInterval(next, HOLD); }
-    function stop() { if (timer) clearInterval(timer); timer = null; }
-
-    dots.forEach((d) => d.addEventListener('click', () => { show(Number(d.dataset.dot)); start(); }));
-    const wrap = document.querySelector('.demo-wrap');
-    wrap.addEventListener('mouseenter', stop);
-    wrap.addEventListener('mouseleave', start);
-
+    const hand = document.getElementById('demo-hand');
+    const ripple = document.getElementById('demo-ripple');
+    const roleEl = document.getElementById('demo-role');
+    const capEl = document.getElementById('demo-cap');
+    const eyeEl = document.getElementById('demo-eyebrow');
+    const screens = {};
+    vp.querySelectorAll('[data-screen]').forEach((s) => (screens[s.dataset.screen] = s));
+    let cancelled = true, running = false;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Only autoplay when the demo scrolls into view
-    if ('IntersectionObserver' in window && !reduce) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting ? start() : stop()), { threshold: 0.3 });
-      io.observe(vp);
-    } else if (!reduce) {
+
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    function showScreen(name) {
+      Object.values(screens).forEach((s) => s.classList.remove('active'));
+      screens[name].classList.add('active');
+    }
+    function setRole(r) { roleEl.textContent = r; }
+    function setCap(eye, text) { eyeEl.textContent = eye; capEl.style.opacity = 0; setTimeout(() => { capEl.textContent = text; capEl.style.opacity = 1; }, 200); }
+
+    function handTo(sel) {
+      const el = document.querySelector(sel);
+      if (!el) return;
+      const er = el.getBoundingClientRect(), vr = vp.getBoundingClientRect();
+      const x = er.left - vr.left + er.width / 2 - 4;
+      const y = er.top - vr.top + er.height / 2 + 2;
+      hand.style.setProperty('--hx', x + 'px');
+      hand.style.setProperty('--hy', y + 'px');
+      hand.style.transform = `translate(${x}px, ${y}px) rotate(-12deg)`;
+    }
+    async function tap(sel) {
+      handTo(sel); await wait(reduce ? 0 : 680);
+      const el = document.querySelector(sel);
+      if (el) {
+        const er = el.getBoundingClientRect(), vr = vp.getBoundingClientRect();
+        ripple.style.left = er.left - vr.left + er.width / 2 + 'px';
+        ripple.style.top = er.top - vr.top + er.height / 2 + 'px';
+        ripple.classList.remove('go'); void ripple.offsetWidth; ripple.classList.add('go');
+      }
+      hand.classList.add('tap'); await wait(150); hand.classList.remove('tap');
+    }
+    async function type(sel, text, opts) {
+      handTo(sel); await wait(reduce ? 0 : 600);
+      const el = document.querySelector(sel);
+      if (!el) return;
+      if (opts && opts.otp) {
+        const boxes = ['#otp1', '#otp2', '#otp3', '#otp4'];
+        for (let i = 0; i < text.length && i < 4; i++) { const b = document.querySelector(boxes[i]); b.textContent = text[i]; b.classList.add('filled'); await wait(reduce ? 0 : 260); }
+        return;
+      }
+      const field = el.classList.contains('dinput') ? el : el.closest('.dinput');
+      if (field) field.classList.add('typing');
+      el.textContent = '';
+      for (let i = 0; i < text.length; i++) { if (cancelled) return; el.textContent += text[i]; await wait(reduce ? 0 : 55); }
+      if (field) setTimeout(() => field.classList.remove('typing'), 600);
+    }
+
+    const script = [
+      { do: () => { showScreen('login'); setRole('Tenant'); setCap('Secure sign-in', 'Tenants sign in to one secure account.'); } },
+      { fn: () => type('#val-email', 'adigun@rentease9ja.com') },
+      { fn: () => type('#val-pass', '••••••••') },
+      { fn: () => tap('#tap-signin'), after: () => { showScreen('verify'); setCap('Verify it’s you', 'A one-time code keeps every account safe.'); }, gap: 500 },
+      { fn: () => type('#tap-otp', '1248', { otp: true }) },
+      { fn: () => tap('#tap-confirm'), after: () => { showScreen('welcome'); setCap('Welcome 👋', 'Welcome, Adigun! Straight to your dashboard.'); }, gap: 1500 },
+      { fn: () => tap('#tap-explore'), after: () => { showScreen('explore'); setCap('Explore', 'Browse verified homes, filter by rent, buy or land.'); }, gap: 1700 },
+      { fn: () => tap('#tap-search'), before: () => { document.getElementById('tap-search').classList.add('focus'); document.getElementById('search-txt').textContent = 'Lekki, 2 bed, under ₦1.5M'; }, gap: 1700 },
+      { fn: () => tap('#tap-nav-wallet'), after: () => { showScreen('wallet'); setCap('Wallet', 'Fund the wallet and pay rent securely in-app.'); }, gap: 1700 },
+      { fn: () => tap('#tap-nav-more'), after: () => { showScreen('more'); setCap('More', 'Everything else lives under More.'); }, gap: 1400 },
+      { fn: () => tap('#tap-tenancy'), after: () => { showScreen('tenancy'); setCap('Tenancy', 'Track the active tenancy, rent and agreement.'); }, gap: 1700 },
+      { fn: () => tap('#tap-nav-more-b'), after: () => { showScreen('more'); setCap('More', 'Back to More for rewards.'); }, gap: 1300 },
+      { fn: () => tap('#tap-referral'), after: () => { showScreen('referral'); setCap('Refer & earn', 'Invite friends and earn rewards.'); }, gap: 1800 },
+      { do: () => { showScreen('alogin'); setRole('Agent'); setCap('Now, as an agent', 'Agents get their own dashboard.'); }, gap: 1500 },
+      { fn: () => tap('#tap-asignin'), after: () => { showScreen('listings'); setCap('Listings', 'Agents list and manage their whole portfolio.'); }, gap: 1700 },
+      { fn: () => tap('#tap-anav-wallet'), after: () => { showScreen('awallet'); setCap('Earnings', 'Commissions, escrow and payouts, all tracked.'); }, gap: 1800 },
+      { fn: () => tap('#tap-anav-registry'), after: () => { showScreen('registry'); setCap('Registry', 'Every rental and sale, tracked to handover.'); }, gap: 2000 },
+    ];
+
+    function resetTransients() {
+      document.getElementById('search-txt').textContent = 'Location, price, or city…';
+      document.getElementById('tap-search').classList.remove('focus');
+      document.getElementById('val-email').textContent = '';
+      document.getElementById('val-pass').textContent = '';
+      ['#otp1', '#otp2', '#otp3', '#otp4'].forEach((s) => { const b = document.querySelector(s); b.textContent = ''; b.classList.remove('filled'); });
+    }
+
+    async function loop() {
+      running = true;
+      while (!cancelled) {
+        for (const step of script) {
+          if (cancelled) break;
+          if (step.before) step.before();
+          if (step.do) step.do();
+          if (step.fn) await step.fn();
+          if (cancelled) break;
+          if (step.after) step.after();
+          await wait(reduce ? 700 : (step.gap || 700));
+        }
+        resetTransients();
+      }
+      running = false;
+    }
+
+    function start() { if (running) return; cancelled = false; loop(); }
+    async function restart() {
+      cancelled = true;
+      let guard = 0;
+      while (running && guard++ < 80) await wait(80); // let the current loop unwind
+      resetTransients();
+      showScreen('login'); setRole('Tenant');
       start();
     }
+
+    document.getElementById('demo-replay').addEventListener('click', restart);
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) start(); }), { threshold: 0.25 });
+      io.observe(vp);
+    }
+    // Fallback: start even if the observer never reports an intersection.
+    setTimeout(start, 2500);
   })();
 </script>
