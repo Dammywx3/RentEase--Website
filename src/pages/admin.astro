@@ -1,147 +1,228 @@
 ---
-import '../styles/global.css';
-// Unified leads admin: one login (admin secret) → Waitlist, Contact,
-// Partners and Investors in one dashboard. Standalone (no marketing chrome).
+// Unified leads admin — one login (admin secret) → Waitlist, Contact,
+// Partners, Investors. Standalone, data-dense, enterprise styling.
 const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com';
 ---
 <!doctype html>
-<html lang="en" class="js">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Admin · RentEase 9ja</title>
-    <link rel="icon" href="/favicon.ico?v=3" sizes="16x16 32x32 48x48 64x64" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="icon" href="/favicon.ico?v=4" sizes="16x16 32x32 48x48 64x64" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script is:inline define:vars={{ API_BASE }}>window.__API_BASE__ = API_BASE;</script>
   </head>
   <body>
     <!-- LOGIN -->
-    <div id="login" class="login-wrap">
-      <form class="login-card" id="login-form">
-        <div class="login-ico"><i class="fas fa-lock"></i></div>
+    <div id="login" class="lg-wrap">
+      <form class="lg-card" id="login-form">
+        <div class="lg-ico"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h1>Admin access</h1>
-        <p>Enter your admin secret to view captured leads.</p>
-        <div class="a-error" id="login-error"></div>
+        <p>Enter your admin secret to continue.</p>
+        <div class="err" id="login-error"></div>
         <input type="password" id="secret" placeholder="Admin secret" autocomplete="off" />
-        <button type="submit" class="btn btn-primary" id="login-btn">Sign in <i class="fas fa-arrow-right"></i></button>
+        <button type="submit" class="btn-pri" id="login-btn">Sign in</button>
       </form>
     </div>
 
-    <!-- DASHBOARD -->
-    <div id="dash" hidden>
-      <header class="a-top">
-        <div class="a-brand"><img src="/logo.webp" alt="RentEase 9ja" /><span>Admin</span></div>
-        <div class="a-top-actions">
-          <button class="a-btn" id="refresh"><i class="fas fa-rotate-right"></i> Refresh</button>
-          <button class="a-btn ghost" id="logout"><i class="fas fa-arrow-right-from-bracket"></i> Log out</button>
+    <!-- APP -->
+    <div id="app" class="app" hidden>
+      <aside class="sb">
+        <div class="sb-logo"><img src="/logo.webp" alt="RentEase 9ja" /></div>
+        <div class="sb-label">Leads</div>
+        <nav class="sb-nav" id="nav"></nav>
+        <div class="sb-foot">
+          <div class="sb-user">
+            <div class="sb-av">RE</div>
+            <div><div class="sb-uname">Admin</div><div class="sb-usub">RentEase 9ja</div></div>
+          </div>
+          <button class="sb-logout" id="logout">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+            Log out
+          </button>
         </div>
-      </header>
+      </aside>
 
-      <nav class="a-tabs" id="tabs"></nav>
+      <main class="mn">
+        <header class="hd">
+          <div class="hd-l">
+            <button class="hd-menu" id="menu-toggle" aria-label="Sections"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+            <div><h1 id="page-title">Waitlist</h1><p id="page-sub">People waiting for launch</p></div>
+          </div>
+          <div class="hd-r">
+            <div class="srch">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input id="search" placeholder="Search…" />
+            </div>
+            <button class="ico-btn" id="refresh" title="Refresh"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></button>
+          </div>
+        </header>
 
-      <div class="a-stats" id="stats" hidden></div>
-
-      <div class="a-toolbar">
-        <div class="a-search"><i class="fas fa-magnifying-glass"></i><input id="search" placeholder="Search…" /></div>
-        <div class="a-toolbar-actions">
-          <button class="a-btn" id="launch-btn" hidden><i class="fas fa-paper-plane"></i> Send launch email</button>
-          <button class="a-btn ghost" id="export"><i class="fas fa-file-csv"></i> Export CSV</button>
+        <div class="bd">
+          <div class="stats" id="stats" style="display:none"></div>
+          <div class="tb-bar">
+            <span class="tb-count" id="state"></span>
+            <div class="tb-actions">
+              <button class="btn-pri sm" id="launch-btn" style="display:none">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                Send launch email
+              </button>
+              <button class="btn-sec sm" id="export">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Export CSV
+              </button>
+            </div>
+          </div>
+          <div class="card"><div class="tb-wrap"><table class="tb" id="table"></table></div></div>
         </div>
-      </div>
-
-      <div class="a-state" id="state"></div>
-      <div class="a-table-wrap"><table class="a-table" id="table"></table></div>
+      </main>
     </div>
 
-    <!-- LAUNCH-EMAIL MODAL (waitlist broadcast) -->
-    <div class="lm-overlay" id="launch-modal" hidden>
-      <div class="lm-card">
-        <button class="lm-close" id="launch-close" aria-label="Close">&times;</button>
+    <!-- LAUNCH MODAL -->
+    <div class="ov" id="launch-modal" hidden>
+      <div class="ov-card">
+        <button class="ov-x" id="launch-close" aria-label="Close">&times;</button>
         <div id="launch-form">
-          <span class="eyebrow">Waitlist broadcast</span>
+          <span class="ov-eyebrow">Waitlist broadcast</span>
           <h3>Send launch email</h3>
-          <p class="lm-sub">Emails everyone on the waitlist who hasn't been notified yet. <span id="launch-pending"></span></p>
-          <div class="a-error" id="launch-error"></div>
-          <label>Subject (optional)</label>
+          <p class="ov-sub">Emails everyone on the waitlist who hasn't been notified yet. <span id="launch-pending"></span></p>
+          <div class="err" id="launch-error"></div>
+          <label>Subject <span class="opt">(optional)</span></label>
           <input id="launch-subject" type="text" placeholder="RentEase 9ja is live!" />
-          <label>Custom message (optional)</label>
+          <label>Custom message <span class="opt">(optional)</span></label>
           <textarea id="launch-message" rows="4" placeholder="Add a personal note to include in the email…"></textarea>
-          <button class="btn btn-primary" id="launch-send" style="width:100%;justify-content:center;margin-top:8px;">Send to all pending <i class="fas fa-paper-plane"></i></button>
+          <button class="btn-pri" id="launch-send" style="width:100%;margin-top:16px;">Send to all pending</button>
         </div>
-        <div id="launch-result" hidden>
-          <span class="lm-ok">✅</span>
-          <h3 id="launch-result-title">Sent!</h3>
-          <p class="lm-sub" id="launch-result-text"></p>
-          <button class="btn btn-ghost" id="launch-done" style="width:100%;justify-content:center;">Done</button>
+        <div id="launch-result" hidden style="text-align:center;">
+          <div class="ov-ok"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.3"/><path d="m9 11 3 3L22 4"/></svg></div>
+          <h3 id="launch-result-title">Sent</h3>
+          <p class="ov-sub" id="launch-result-text"></p>
+          <button class="btn-sec" id="launch-done" style="width:100%;">Done</button>
         </div>
       </div>
     </div>
 
-    <style>
-      :root { color-scheme: light; }
-      body { background: var(--bg); color: var(--text); font-family: var(--font-body); margin: 0; }
+    <style is:global>
+      :root {
+        --bg:#F5F6F8; --surface:#FFFFFF; --border:#E7E9EF; --line:#EEF0F4;
+        --ink:#0F172A; --ink2:#475569; --muted:#8A93A3;
+        --brand:#1E4E8C; --brand-d:#173E70; --tint:#EDF2F9;
+        --green:#1F8F5A; --green-bg:#E7F5EE; --amber:#B9770A; --amber-bg:#FBF1DF; --danger:#DC2626; --danger-bg:#FEF2F2;
+        --r:8px; --r-lg:12px; --sb:248px;
+        --sh-sm:0 1px 2px rgba(16,24,40,.05); --sh:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04);
+      }
+      * { box-sizing:border-box; }
+      body { margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',system-ui,sans-serif; font-size:14px; -webkit-font-smoothing:antialiased; }
+      h1,h3 { margin:0; font-weight:700; letter-spacing:-.01em; }
+      input,textarea,button { font-family:inherit; }
+      svg { display:block; flex-shrink:0; }
+      .tnum { font-variant-numeric:tabular-nums; }
 
-      .login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(120% 120% at 80% 0%, var(--mist), var(--bg)); }
-      .login-card { width: 100%; max-width: 380px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 36px 30px; box-shadow: var(--shadow-card); text-align: center; }
-      .login-ico { width: 60px; height: 60px; border-radius: 50%; background: var(--brand-gradient); color: #fff; display: grid; place-items: center; font-size: 24px; margin: 0 auto 18px; }
-      .login-card h1 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 6px; }
-      .login-card p { color: var(--text-muted); font-size: .95rem; margin: 0 0 20px; }
-      .login-card input { width: 100%; padding: 13px 15px; border: 1px solid var(--border); border-radius: var(--r-md); font: inherit; background: var(--surface-2); margin-bottom: 14px; outline: none; }
-      .login-card input:focus { border-color: var(--brand-blue); box-shadow: 0 0 0 4px rgba(30,78,140,.12); }
-      .login-card .btn { width: 100%; justify-content: center; }
-      .a-error { display: none; background: #FEF2F2; border-left: 4px solid var(--danger); color: #B91C1C; font-size: .88rem; padding: 10px 12px; border-radius: var(--r-sm); margin-bottom: 14px; text-align: left; }
-      .a-error.show { display: block; }
+      .btn-pri { background:var(--brand); color:#fff; border:none; font-weight:600; font-size:14px; height:40px; padding:0 18px; border-radius:var(--r); cursor:pointer; display:inline-flex; gap:8px; align-items:center; justify-content:center; transition:background .15s ease; }
+      .btn-pri:hover { background:var(--brand-d); } .btn-pri:disabled { opacity:.55; cursor:not-allowed; }
+      .btn-pri.sm,.btn-sec.sm { height:34px; padding:0 13px; font-size:13px; }
+      .btn-sec { background:var(--surface); color:var(--ink2); border:1px solid var(--border); font-weight:600; font-size:14px; height:40px; padding:0 16px; border-radius:var(--r); cursor:pointer; display:inline-flex; gap:8px; align-items:center; justify-content:center; transition:.15s ease; }
+      .btn-sec:hover { background:#F8F9FB; color:var(--ink); border-color:#D7DAE2; }
+      .err { display:none; background:var(--danger-bg); border:1px solid #FAC5C5; color:#B42318; font-size:13px; padding:9px 12px; border-radius:var(--r); margin-bottom:14px; }
+      .err.show { display:block; }
 
-      .a-top { display: flex; justify-content: space-between; align-items: center; padding: 14px clamp(16px, 4vw, 40px); background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
-      .a-brand { display: flex; align-items: center; gap: 10px; }
-      .a-brand img { height: 34px; }
-      .a-brand span { font-family: var(--font-display); font-weight: 800; color: var(--brand-blue); background: var(--brand-gradient-soft); padding: 3px 10px; border-radius: 999px; font-size: .8rem; }
-      .a-top-actions { display: flex; gap: 10px; }
-      .a-btn { background: var(--brand-gradient); color: #fff; border: none; font-weight: 700; font-size: .85rem; padding: 9px 16px; border-radius: var(--r-pill); cursor: pointer; display: inline-flex; gap: 7px; align-items: center; }
-      .a-btn.ghost { background: var(--surface); color: var(--text-2); border: 1px solid var(--border); }
+      /* login */
+      .lg-wrap { min-height:100vh; display:grid; place-items:center; padding:24px; }
+      .lg-card { width:100%; max-width:360px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:36px 30px; box-shadow:var(--sh); text-align:center; }
+      .lg-ico { width:48px; height:48px; border-radius:12px; background:var(--brand); color:#fff; display:grid; place-items:center; margin:0 auto 18px; }
+      .lg-card h1 { font-size:19px; margin-bottom:6px; }
+      .lg-card p { color:var(--muted); font-size:13px; margin:0 0 20px; }
+      .lg-card input { width:100%; height:42px; padding:0 14px; border:1px solid var(--border); border-radius:var(--r); background:#FBFCFD; outline:none; font-size:14px; margin-bottom:12px; }
+      .lg-card input:focus { border-color:var(--brand); box-shadow:0 0 0 3px rgba(30,78,140,.12); }
+      .lg-card .btn-pri { width:100%; }
+      .lg-card .err { text-align:left; }
 
-      .a-tabs { display: flex; gap: 8px; flex-wrap: wrap; padding: 16px clamp(16px, 4vw, 40px) 0; }
-      .a-tab { background: var(--surface); border: 1px solid var(--border); color: var(--text-2); font-weight: 700; font-size: .9rem; padding: 9px 16px; border-radius: var(--r-pill); cursor: pointer; }
-      .a-tab.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
-      .a-tab .count { background: rgba(255,255,255,.25); border-radius: 999px; padding: 1px 8px; margin-left: 6px; font-size: .78rem; }
-      .a-tab:not(.active) .count { background: var(--brand-gradient-soft); color: var(--brand-blue); }
+      /* shell */
+      .app { display:grid; grid-template-columns:var(--sb) 1fr; min-height:100vh; }
+      .sb { background:var(--surface); border-right:1px solid var(--border); display:flex; flex-direction:column; padding:18px 14px; position:sticky; top:0; height:100vh; }
+      .sb-logo { padding:4px 8px 16px; } .sb-logo img { height:34px; width:auto; }
+      .sb-label { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); padding:0 10px 8px; }
+      .sb-nav { display:flex; flex-direction:column; gap:2px; flex:1; }
+      .nav-i { display:flex; align-items:center; gap:11px; height:38px; padding:0 11px; border-radius:var(--r); border:none; background:none; cursor:pointer; font-size:14px; font-weight:500; color:var(--ink2); text-align:left; width:100%; transition:background .12s ease, color .12s ease; }
+      .nav-i svg { color:var(--muted); transition:color .12s ease; }
+      .nav-i:hover { background:#F6F7F9; color:var(--ink); }
+      .nav-i.on { background:var(--tint); color:var(--brand); font-weight:600; }
+      .nav-i.on svg { color:var(--brand); }
+      .nav-i .ct { margin-left:auto; font-size:12px; font-weight:600; color:var(--muted); background:#F1F2F5; border-radius:20px; padding:1px 8px; min-width:22px; text-align:center; }
+      .nav-i.on .ct { background:var(--brand); color:#fff; }
+      .sb-foot { border-top:1px solid var(--line); padding-top:12px; margin-top:8px; }
+      .sb-user { display:flex; align-items:center; gap:10px; padding:2px 8px 12px; }
+      .sb-av { width:34px; height:34px; border-radius:50%; background:var(--brand); color:#fff; font-weight:700; font-size:12px; display:grid; place-items:center; }
+      .sb-uname { font-size:13px; font-weight:600; } .sb-usub { font-size:12px; color:var(--muted); }
+      .sb-logout { width:100%; display:flex; align-items:center; justify-content:center; gap:8px; height:38px; border-radius:var(--r); border:1px solid var(--border); background:var(--surface); color:var(--ink2); font-size:13px; font-weight:600; cursor:pointer; transition:.15s ease; }
+      .sb-logout:hover { border-color:#F3B9B9; color:var(--danger); background:var(--danger-bg); }
 
-      .a-toolbar { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 16px clamp(16px, 4vw, 40px) 10px; flex-wrap: wrap; }
-      .a-search { flex: 1; min-width: 200px; display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 9px 13px; color: var(--text-muted); }
-      .a-search input { border: none; background: none; outline: none; font: inherit; flex: 1; color: var(--text); }
+      /* main */
+      .mn { min-width:0; display:flex; flex-direction:column; }
+      .hd { display:flex; justify-content:space-between; align-items:center; gap:16px; height:64px; padding:0 28px; background:var(--surface); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:20; }
+      .hd-l { display:flex; align-items:center; gap:12px; }
+      .hd h1 { font-size:18px; } .hd p { color:var(--muted); font-size:13px; margin:1px 0 0; }
+      .hd-menu { display:none; background:none; border:none; color:var(--ink2); cursor:pointer; padding:6px; }
+      .hd-r { display:flex; align-items:center; gap:10px; }
+      .srch { display:flex; align-items:center; gap:8px; height:38px; padding:0 12px; background:#F6F7F9; border:1px solid var(--border); border-radius:var(--r); color:var(--muted); width:230px; max-width:40vw; transition:.15s ease; }
+      .srch:focus-within { border-color:var(--brand); box-shadow:0 0 0 3px rgba(30,78,140,.1); background:var(--surface); }
+      .srch input { border:none; background:none; outline:none; flex:1; min-width:0; font-size:13.5px; color:var(--ink); }
+      .ico-btn { width:38px; height:38px; border-radius:var(--r); border:1px solid var(--border); background:var(--surface); color:var(--ink2); cursor:pointer; display:grid; place-items:center; transition:.15s ease; }
+      .ico-btn:hover { color:var(--brand); border-color:#CFD8E6; }
 
-      .a-state { padding: 10px clamp(16px, 4vw, 40px); color: var(--text-muted); font-size: .9rem; }
-      .a-table-wrap { overflow-x: auto; padding: 0 clamp(16px, 4vw, 40px) 60px; }
-      .a-table { width: 100%; border-collapse: collapse; font-size: .88rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
-      .a-table th { text-align: left; background: var(--surface-2); color: var(--text-2); font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; padding: 11px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
-      .a-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text-2); vertical-align: top; }
-      .a-table tr:last-child td { border-bottom: none; }
-      .a-table td.msg { max-width: 320px; white-space: pre-wrap; }
-      .a-pill { font-size: .72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--brand-gradient-soft); color: var(--brand-blue); white-space: nowrap; }
-      .a-del { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: .9rem; }
-      .a-del:hover { color: var(--danger); }
-      .a-empty { text-align: center; padding: 50px; color: var(--text-muted); }
+      .bd { padding:24px 28px; }
+      .stats { display:grid; grid-template-columns:repeat(3,minmax(0,200px)); gap:12px; margin-bottom:22px; }
+      .stat { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:15px 18px; box-shadow:var(--sh-sm); }
+      .stat b { font-size:24px; font-weight:700; line-height:1.1; display:block; letter-spacing:-.02em; }
+      .stat span { font-size:12px; color:var(--muted); margin-top:3px; display:block; }
+      .stat.g b { color:var(--green); } .stat.a b { color:var(--amber); }
+      .tb-bar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+      .tb-count { color:var(--muted); font-size:13px; font-weight:500; }
+      .tb-actions { display:flex; gap:8px; }
 
-      .a-stats { display: flex; gap: 10px; flex-wrap: wrap; padding: 14px clamp(16px, 4vw, 40px) 0; }
-      .a-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 16px; box-shadow: var(--shadow-sm); }
-      .a-stat b { font-family: var(--font-display); font-size: 1.2rem; color: var(--brand-blue); display: block; }
-      .a-stat span { font-size: .74rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
-      .a-toolbar-actions { display: flex; gap: 10px; }
+      .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); box-shadow:var(--sh-sm); overflow:hidden; }
+      .tb-wrap { overflow-x:auto; }
+      .tb { width:100%; border-collapse:collapse; }
+      .tb th { text-align:left; background:#FAFBFC; color:var(--muted); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; padding:11px 16px; border-bottom:1px solid var(--border); white-space:nowrap; position:sticky; top:0; }
+      .tb td { padding:13px 16px; border-bottom:1px solid var(--line); color:var(--ink2); font-size:13.5px; vertical-align:middle; }
+      .tb tbody tr:last-child td { border-bottom:none; }
+      .tb tbody tr { transition:background .1s ease; }
+      .tb tbody tr:hover { background:#FAFBFD; }
+      .tb td.nm { color:var(--ink); font-weight:600; white-space:nowrap; }
+      .tb td.msg { max-width:320px; color:var(--ink2); line-height:1.5; }
+      .tb td.dt { color:var(--muted); white-space:nowrap; font-variant-numeric:tabular-nums; }
+      .tb td.act { width:44px; text-align:right; }
+      .pill { display:inline-flex; align-items:center; font-size:12px; font-weight:600; padding:2px 9px; border-radius:20px; background:var(--tint); color:var(--brand); white-space:nowrap; }
+      .del { background:none; border:none; color:var(--muted); cursor:pointer; padding:6px; border-radius:6px; display:inline-grid; place-items:center; transition:.12s ease; }
+      .del:hover { color:var(--danger); background:var(--danger-bg); }
+      .empty { text-align:center; padding:56px 20px; color:var(--muted); }
+      .empty svg { margin:0 auto 12px; opacity:.45; } .empty p { margin:0; font-size:13.5px; }
 
-      .lm-overlay { position: fixed; inset: 0; z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(11,16,32,.55); backdrop-filter: blur(4px); }
-      .lm-overlay.open { display: flex; }
-      .lm-card { position: relative; width: 100%; max-width: 460px; background: var(--surface); border-radius: var(--r-xl); padding: 32px; box-shadow: 0 30px 70px rgba(0,0,0,.35); text-align: left; }
-      .lm-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.7rem; color: var(--text-muted); cursor: pointer; }
-      .lm-card h3 { margin: 8px 0 6px; }
-      .lm-sub { color: var(--text-muted); font-size: .9rem; margin-bottom: 16px; }
-      .lm-card label { display: block; font-size: .8rem; font-weight: 600; color: var(--text-2); margin: 10px 0 5px; }
-      .lm-card input, .lm-card textarea { width: 100%; padding: 11px 13px; border: 1px solid var(--border); border-radius: var(--r-md); font: inherit; background: var(--surface-2); outline: none; resize: vertical; }
-      .lm-card input:focus, .lm-card textarea:focus { border-color: var(--brand-blue); box-shadow: 0 0 0 4px rgba(30,78,140,.12); }
-      #launch-result { text-align: center; } .lm-ok { font-size: 2.4rem; }
+      /* modal */
+      .ov { position:fixed; inset:0; z-index:3000; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(15,23,42,.5); }
+      .ov.open { display:flex; }
+      .ov-card { position:relative; width:100%; max-width:440px; background:var(--surface); border-radius:var(--r-lg); padding:30px; box-shadow:0 24px 60px rgba(0,0,0,.3); }
+      .ov-x { position:absolute; top:12px; right:16px; background:none; border:none; font-size:24px; line-height:1; color:var(--muted); cursor:pointer; }
+      .ov-eyebrow { font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--brand); }
+      .ov-card h3 { font-size:19px; margin:8px 0 6px; }
+      .ov-sub { color:var(--muted); font-size:13.5px; margin-bottom:16px; line-height:1.55; } .opt { color:var(--muted); font-weight:400; }
+      .ov-card label { display:block; font-size:12.5px; font-weight:600; color:var(--ink2); margin:12px 0 6px; }
+      .ov-card input,.ov-card textarea { width:100%; padding:10px 13px; border:1px solid var(--border); border-radius:var(--r); background:#FBFCFD; outline:none; font-size:14px; resize:vertical; }
+      .ov-card input:focus,.ov-card textarea:focus { border-color:var(--brand); box-shadow:0 0 0 3px rgba(30,78,140,.12); }
+      .ov-ok { color:var(--green); margin-bottom:8px; display:flex; justify-content:center; }
+
+      @media (max-width:880px) {
+        .app { grid-template-columns:1fr; }
+        .sb { position:fixed; left:0; top:0; bottom:0; width:268px; z-index:60; transform:translateX(-100%); transition:transform .22s ease; }
+        .app.open .sb { transform:none; box-shadow:0 0 50px rgba(0,0,0,.3); }
+        .app.open::after { content:''; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:50; }
+        .hd-menu { display:block; } .hd { padding:0 18px; } .bd { padding:18px; }
+        .stats { grid-template-columns:1fr 1fr; }
+      }
     </style>
 
     <script is:inline>
@@ -151,43 +232,49 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
         const $ = (id) => document.getElementById(id);
         const fmtDate = (s) => { if (!s) return '—'; const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); };
         const esc = (v) => (v == null ? '' : String(v)).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const ICON = {
+          waitlist: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',
+          contact: '<rect width="18" height="14" x="3" y="5" rx="2"/><path d="m3 7 9 6 9-6"/>',
+          partners: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+          investors: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+          trash: '<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>',
+          inbox: '<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.4 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.4-6.9A2 2 0 0 0 16.7 4H7.2a2 2 0 0 0-1.8 1.1z"/>',
+        };
+        const svg = (n, s) => `<svg viewBox="0 0 24 24" width="${s || 18}" height="${s || 18}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ICON[n]}</svg>`;
 
         const TABS = {
-          waitlist:  { label: 'Waitlist',  path: '/v1/waitlist',  cols: [
-            { h: 'Name',  g: (r) => [r.first_name, r.last_name].filter(Boolean).join(' ') },
-            { h: 'Email', g: (r) => r.email }, { h: 'Phone', g: (r) => r.phone },
-            { h: 'Role',  g: (r) => r.role, pill: true }, { h: 'State', g: (r) => r.state },
-            { h: 'Joined', g: (r) => fmtDate(r.created_at) } ] },
-          contact:   { label: 'Contact',   path: '/v1/contact',   cols: [
-            { h: 'Name', g: (r) => r.name }, { h: 'Email', g: (r) => r.email },
-            { h: 'Subject', g: (r) => r.subject }, { h: 'Message', g: (r) => r.message, msg: true },
-            { h: 'Received', g: (r) => fmtDate(r.created_at) } ] },
-          partners:  { label: 'Partners',  path: '/v1/partners',  cols: [
-            { h: 'Company', g: (r) => r.company }, { h: 'Name', g: (r) => r.name },
-            { h: 'Email', g: (r) => r.email }, { h: 'Phone', g: (r) => r.phone },
-            { h: 'Type', g: (r) => r.type, pill: true }, { h: 'Details', g: (r) => r.details, msg: true },
-            { h: 'Received', g: (r) => fmtDate(r.created_at) } ] },
-          investors: { label: 'Investors', path: '/v1/investors', cols: [
-            { h: 'Name', g: (r) => r.name }, { h: 'Email', g: (r) => r.email },
-            { h: 'Firm', g: (r) => r.firm }, { h: 'Type', g: (r) => r.type, pill: true },
-            { h: 'Ticket', g: (r) => r.ticket }, { h: 'Message', g: (r) => r.message, msg: true },
-            { h: 'Received', g: (r) => fmtDate(r.created_at) } ] },
+          waitlist:  { label:'Waitlist', sub:'People waiting for launch', icon:'waitlist', path:'/v1/waitlist', cols:[
+            { h:'Name', cls:'nm', g:(r)=>[r.first_name,r.last_name].filter(Boolean).join(' ') },
+            { h:'Email', g:(r)=>r.email }, { h:'Phone', cls:'dt', g:(r)=>r.phone },
+            { h:'Role', pill:true, g:(r)=>r.role }, { h:'State', g:(r)=>r.state },
+            { h:'Joined', cls:'dt', g:(r)=>fmtDate(r.created_at) } ] },
+          contact:   { label:'Contact', sub:'Messages from the contact form', icon:'contact', path:'/v1/contact', cols:[
+            { h:'Name', cls:'nm', g:(r)=>r.name }, { h:'Email', g:(r)=>r.email },
+            { h:'Subject', g:(r)=>r.subject }, { h:'Message', cls:'msg', g:(r)=>r.message },
+            { h:'Received', cls:'dt', g:(r)=>fmtDate(r.created_at) } ] },
+          partners:  { label:'Partners', sub:'Partnership requests', icon:'partners', path:'/v1/partners', cols:[
+            { h:'Company', cls:'nm', g:(r)=>r.company }, { h:'Name', g:(r)=>r.name },
+            { h:'Email', g:(r)=>r.email }, { h:'Phone', cls:'dt', g:(r)=>r.phone },
+            { h:'Type', pill:true, g:(r)=>r.type }, { h:'Details', cls:'msg', g:(r)=>r.details },
+            { h:'Received', cls:'dt', g:(r)=>fmtDate(r.created_at) } ] },
+          investors: { label:'Investors', sub:'Investor enquiries', icon:'investors', path:'/v1/investors', cols:[
+            { h:'Name', cls:'nm', g:(r)=>r.name }, { h:'Email', g:(r)=>r.email },
+            { h:'Firm', g:(r)=>r.firm }, { h:'Type', pill:true, g:(r)=>r.type },
+            { h:'Ticket', cls:'dt', g:(r)=>r.ticket }, { h:'Message', cls:'msg', g:(r)=>r.message },
+            { h:'Received', cls:'dt', g:(r)=>fmtDate(r.created_at) } ] },
         };
 
         let secret = sessionStorage.getItem(KEY) || '';
         let current = 'waitlist';
-        const cache = {}; // tab -> entries[]
+        const cache = {};
         let waitlistStats = null;
 
         function headers() { return { 'x-admin-secret': secret, 'ngrok-skip-browser-warning': 'true' }; }
         function loginErr(m) { $('login-error').textContent = m; $('login-error').classList.add('show'); }
         async function api(path, opts) {
           let res;
-          try {
-            res = await fetch(API + path, Object.assign({ headers: headers() }, opts || {}));
-          } catch (e) {
-            const err = new Error('network'); err.kind = 'network'; throw err;
-          }
+          try { res = await fetch(API + path, Object.assign({ headers: headers() }, opts || {})); }
+          catch (e) { const err = new Error('network'); err.kind = 'network'; throw err; }
           if (res.status === 401) { const err = new Error('auth'); err.kind = 'auth'; throw err; }
           if (!res.ok) { const err = new Error('server'); err.kind = 'server'; err.status = res.status; throw err; }
           return res.json();
@@ -198,90 +285,59 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
           return 'Server error' + (err.status ? ' (' + err.status + ')' : '') + '. Please try again.';
         }
 
-        // ---- auth ----
         $('login-form').addEventListener('submit', async (e) => {
           e.preventDefault();
-          const val = $('secret').value.trim();
-          if (!val) return;
-          $('login-error').classList.remove('show');
-          $('login-btn').disabled = true; $('login-btn').textContent = 'Checking…';
+          const val = $('secret').value.trim(); if (!val) return;
+          $('login-error').classList.remove('show'); $('login-btn').disabled = true; $('login-btn').textContent = 'Checking…';
           secret = val;
-          try {
-            const data = await api(TABS.waitlist.path + '/admin/list');
-            sessionStorage.setItem(KEY, secret);
-            cache.waitlist = data.entries || []; waitlistStats = data.stats || null;
-            showDash();
-          } catch (err) {
-            secret = '';
-            loginErr(describe(err));
-          } finally {
-            $('login-btn').disabled = false; $('login-btn').innerHTML = 'Sign in <i class="fas fa-arrow-right"></i>';
-          }
+          try { const data = await api(TABS.waitlist.path + '/admin/list'); sessionStorage.setItem(KEY, secret); cache.waitlist = data.entries || []; waitlistStats = data.stats || null; showApp(); }
+          catch (err) { secret = ''; loginErr(describe(err)); }
+          finally { $('login-btn').disabled = false; $('login-btn').textContent = 'Sign in'; }
         });
-
-        function logout(msg) {
-          secret = ''; sessionStorage.removeItem(KEY);
-          $('dash').hidden = true; $('login').style.display = 'grid';
-          $('secret').value = '';
-          if (msg) { $('login-error').textContent = msg; $('login-error').classList.add('show'); }
-        }
+        function logout(msg) { secret = ''; sessionStorage.removeItem(KEY); $('app').hidden = true; $('login').style.display = 'grid'; $('secret').value = ''; if (msg) loginErr(msg); }
         $('logout').addEventListener('click', () => logout());
 
-        // ---- dashboard ----
-        function showDash() {
-          $('login').style.display = 'none'; $('dash').hidden = false;
-          renderTabs(); selectTab('waitlist');
-        }
-        function renderTabs() {
-          $('tabs').innerHTML = Object.keys(TABS).map((k) =>
-            `<button class="a-tab" data-tab="${k}">${TABS[k].label}<span class="count" id="cnt-${k}">·</span></button>`).join('');
-          $('tabs').querySelectorAll('[data-tab]').forEach((b) => b.addEventListener('click', () => selectTab(b.dataset.tab)));
+        function showApp() { $('login').style.display = 'none'; $('app').hidden = false; renderNav(); selectTab('waitlist'); }
+        function renderNav() {
+          $('nav').innerHTML = Object.keys(TABS).map((k) => `<button class="nav-i" data-tab="${k}">${svg(TABS[k].icon)}<span>${TABS[k].label}</span><span class="ct" id="cnt-${k}">·</span></button>`).join('');
+          $('nav').querySelectorAll('[data-tab]').forEach((b) => b.addEventListener('click', () => { selectTab(b.dataset.tab); $('app').classList.remove('open'); }));
         }
         async function selectTab(tab) {
           current = tab;
-          $('tabs').querySelectorAll('.a-tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
+          $('nav').querySelectorAll('.nav-i').forEach((b) => b.classList.toggle('on', b.dataset.tab === tab));
+          $('page-title').textContent = TABS[tab].label; $('page-sub').textContent = TABS[tab].sub;
           $('search').value = '';
-          await load(tab);
-          render();
+          await load(tab); render();
         }
         async function load(tab, force) {
           if (cache[tab] && !force) return;
           $('state').textContent = 'Loading…'; $('table').innerHTML = '';
           try { const data = await api(TABS[tab].path + '/admin/list'); cache[tab] = data.entries || []; if (tab === 'waitlist') waitlistStats = data.stats || null; }
-          catch (e) { if (e.kind === 'auth') { logout('Session expired. Please sign in again.'); } else { $('state').textContent = e.kind === 'network' ? 'Could not reach the API (check server / CORS).' : 'Could not load.'; } }
+          catch (e) { if (e.kind === 'auth') logout('Session expired. Please sign in again.'); else $('state').textContent = e.kind === 'network' ? 'Could not reach the API (check server / CORS).' : 'Could not load.'; }
         }
-        function rows() {
-          const q = $('search').value.trim().toLowerCase();
-          let list = cache[current] || [];
-          if (q) list = list.filter((r) => JSON.stringify(r).toLowerCase().includes(q));
-          return list;
-        }
-        function renderTabExtras() {
+        function rows() { const q = $('search').value.trim().toLowerCase(); let list = cache[current] || []; if (q) list = list.filter((r) => JSON.stringify(r).toLowerCase().includes(q)); return list; }
+        function renderExtras() {
           const isWl = current === 'waitlist';
-          $('launch-btn').hidden = !isWl;
+          $('launch-btn').style.display = isWl ? '' : 'none';
           const el = $('stats');
-          if (isWl && waitlistStats) {
-            const s = waitlistStats;
-            el.hidden = false;
-            el.innerHTML = [['Total', s.total], ['Notified', s.notified], ['Pending', s.pending]]
-              .map(([l, v]) => `<div class="a-stat"><b>${v ?? 0}</b><span>${l}</span></div>`).join('');
-          } else { el.hidden = true; el.innerHTML = ''; }
+          if (isWl && waitlistStats) { const s = waitlistStats; el.style.display = ''; el.innerHTML = `<div class="stat"><b class="tnum">${s.total ?? 0}</b><span>Total signups</span></div><div class="stat g"><b class="tnum">${s.notified ?? 0}</b><span>Notified</span></div><div class="stat a"><b class="tnum">${s.pending ?? 0}</b><span>Pending</span></div>`; }
+          else { el.style.display = 'none'; el.innerHTML = ''; }
         }
         function render() {
-          renderTabExtras();
+          renderExtras();
           const cfg = TABS[current], list = rows();
-          $('cnt-' + current) && ($('cnt-' + current).textContent = (cache[current] || []).length);
+          const cntEl = $('cnt-' + current); if (cntEl) cntEl.textContent = (cache[current] || []).length;
           $('state').textContent = list.length + ' record' + (list.length === 1 ? '' : 's');
-          if (!list.length) { $('table').innerHTML = '<tr><td><div class="a-empty"><i class="fas fa-inbox"></i><br>No records yet.</div></td></tr>'; return; }
-          const head = '<tr>' + cfg.cols.map((c) => `<th>${c.h}</th>`).join('') + '<th></th></tr>';
-          const body = list.map((r) => '<tr>' + cfg.cols.map((c) => {
+          if (!list.length) { $('table').innerHTML = `<tbody><tr><td colspan="9"><div class="empty">${svg('inbox', 28)}<p>No records yet.</p></div></td></tr></tbody>`; return; }
+          const head = '<thead><tr>' + cfg.cols.map((c) => `<th>${c.h}</th>`).join('') + '<th></th></tr></thead>';
+          const body = '<tbody>' + list.map((r) => '<tr>' + cfg.cols.map((c) => {
             const v = c.g(r);
-            if (!v) return '<td>—</td>';
-            if (c.pill) return `<td><span class="a-pill">${esc(v)}</span></td>`;
-            return `<td class="${c.msg ? 'msg' : ''}">${esc(v)}</td>`;
-          }).join('') + `<td><button class="a-del" data-id="${esc(r.id)}" title="Delete"><i class="fas fa-trash"></i></button></td></tr>`).join('');
+            if (!v) return '<td class="dt">—</td>';
+            if (c.pill) return `<td><span class="pill">${esc(v)}</span></td>`;
+            return `<td class="${c.cls || ''}">${esc(v)}</td>`;
+          }).join('') + `<td class="act"><button class="del" data-id="${esc(r.id)}" title="Delete">${svg('trash', 16)}</button></td></tr>`).join('') + '</tbody>';
           $('table').innerHTML = head + body;
-          $('table').querySelectorAll('.a-del').forEach((b) => b.addEventListener('click', () => del(b.dataset.id)));
+          $('table').querySelectorAll('.del').forEach((b) => b.addEventListener('click', () => del(b.dataset.id)));
         }
         async function del(id) {
           if (!id || !confirm('Delete this record permanently?')) return;
@@ -290,50 +346,33 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
         }
         $('refresh').addEventListener('click', async () => { await load(current, true); render(); });
         $('search').addEventListener('input', render);
+        $('menu-toggle').addEventListener('click', () => $('app').classList.toggle('open'));
         $('export').addEventListener('click', () => {
           const cfg = TABS[current], list = rows();
-          const head = cfg.cols.map((c) => c.h);
-          const csv = [head.join(',')].concat(list.map((r) => cfg.cols.map((c) => '"' + String(c.g(r) ?? '').replace(/"/g, '""') + '"').join(','))).join('\n');
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-          a.download = 'rentease-' + current + '.csv'; a.click();
+          const csv = [cfg.cols.map((c) => c.h).join(',')].concat(list.map((r) => cfg.cols.map((c) => '"' + String(c.g(r) ?? '').replace(/"/g, '""') + '"').join(','))).join('\n');
+          const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'rentease-' + current + '.csv'; a.click();
         });
 
-        // ---- launch-email broadcast (waitlist) ----
-        function openLaunch() {
-          $('launch-form').hidden = false; $('launch-result').hidden = true; $('launch-error').classList.remove('show');
-          $('launch-pending').textContent = waitlistStats ? waitlistStats.pending + ' people pending.' : '';
-          $('launch-modal').hidden = false; requestAnimationFrame(() => $('launch-modal').classList.add('open'));
-        }
-        function closeLaunch() { $('launch-modal').classList.remove('open'); setTimeout(() => { $('launch-modal').hidden = true; }, 200); }
+        // launch broadcast
+        function openLaunch() { $('launch-form').hidden = false; $('launch-result').hidden = true; $('launch-error').classList.remove('show'); $('launch-pending').textContent = waitlistStats ? waitlistStats.pending + ' people pending.' : ''; $('launch-modal').hidden = false; requestAnimationFrame(() => $('launch-modal').classList.add('open')); }
+        function closeLaunch() { $('launch-modal').classList.remove('open'); setTimeout(() => { $('launch-modal').hidden = true; }, 180); }
         $('launch-btn').addEventListener('click', openLaunch);
         $('launch-close').addEventListener('click', closeLaunch);
         $('launch-modal').addEventListener('click', (e) => { if (e.target === $('launch-modal')) closeLaunch(); });
         $('launch-done').addEventListener('click', async () => { closeLaunch(); await load('waitlist', true); render(); });
         $('launch-send').addEventListener('click', async () => {
-          const subject = $('launch-subject').value.trim();
-          const customMessage = $('launch-message').value.trim();
-          const btn = $('launch-send'); const orig = btn.innerHTML; btn.disabled = true; btn.textContent = 'Sending…';
-          $('launch-error').classList.remove('show');
+          const subject = $('launch-subject').value.trim(), customMessage = $('launch-message').value.trim();
+          const btn = $('launch-send'), orig = btn.textContent; btn.disabled = true; btn.textContent = 'Sending…'; $('launch-error').classList.remove('show');
           try {
-            const data = await api(TABS.waitlist.path + '/admin/launch', {
-              method: 'POST',
-              headers: Object.assign({ 'Content-Type': 'application/json' }, headers()),
-              body: JSON.stringify({ subject: subject || undefined, customMessage: customMessage || undefined }),
-            });
+            const data = await api(TABS.waitlist.path + '/admin/launch', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, headers()), body: JSON.stringify({ subject: subject || undefined, customMessage: customMessage || undefined }) });
             $('launch-form').hidden = true; $('launch-result').hidden = false;
             $('launch-result-title').textContent = (data.sent > 0) ? ('Sent to ' + data.sent + '!') : 'All caught up';
             $('launch-result-text').textContent = data.message || ((data.sent || 0) + ' sent, ' + (data.failed || 0) + ' failed.');
-          } catch (e) {
-            $('launch-error').textContent = e.kind === 'auth' ? 'Session expired. Sign in again.' : 'Could not send. Please try again.';
-            $('launch-error').classList.add('show');
-          } finally { btn.disabled = false; btn.innerHTML = orig; }
+          } catch (e) { $('launch-error').textContent = e.kind === 'auth' ? 'Session expired. Sign in again.' : 'Could not send. Please try again.'; $('launch-error').classList.add('show'); }
+          finally { btn.disabled = false; btn.textContent = orig; }
         });
 
-        // auto-resume session
-        if (secret) {
-          api(TABS.waitlist.path + '/admin/list').then((d) => { cache.waitlist = d.entries || []; waitlistStats = d.stats || null; showDash(); }).catch(() => logout());
-        }
+        if (secret) { api(TABS.waitlist.path + '/admin/list').then((d) => { cache.waitlist = d.entries || []; waitlistStats = d.stats || null; showApp(); }).catch(() => logout()); }
       })();
     </script>
   </body>
