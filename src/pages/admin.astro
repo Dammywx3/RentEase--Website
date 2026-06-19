@@ -133,10 +133,22 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
         const cache = {}; // tab -> entries[]
 
         function headers() { return { 'x-admin-secret': secret, 'ngrok-skip-browser-warning': 'true' }; }
+        function loginErr(m) { $('login-error').textContent = m; $('login-error').classList.add('show'); }
         async function api(path, opts) {
-          const res = await fetch(API + path, Object.assign({ headers: headers() }, opts || {}));
-          if (res.status === 401) { logout('Invalid or expired secret. Please sign in again.'); throw new Error('unauthorized'); }
+          let res;
+          try {
+            res = await fetch(API + path, Object.assign({ headers: headers() }, opts || {}));
+          } catch (e) {
+            const err = new Error('network'); err.kind = 'network'; throw err;
+          }
+          if (res.status === 401) { const err = new Error('auth'); err.kind = 'auth'; throw err; }
+          if (!res.ok) { const err = new Error('server'); err.kind = 'server'; err.status = res.status; throw err; }
           return res.json();
+        }
+        function describe(err) {
+          if (err.kind === 'auth') return 'Invalid admin secret. Please try again.';
+          if (err.kind === 'network') return 'Could not reach the API. Check the server is running and this site’s origin is allowed (CORS).';
+          return 'Server error' + (err.status ? ' (' + err.status + ')' : '') + '. Please try again.';
         }
 
         // ---- auth ----
@@ -154,8 +166,7 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
             showDash();
           } catch (err) {
             secret = '';
-            $('login-error').textContent = 'Invalid admin secret. Please try again.';
-            $('login-error').classList.add('show');
+            loginErr(describe(err));
           } finally {
             $('login-btn').disabled = false; $('login-btn').innerHTML = 'Sign in <i class="fas fa-arrow-right"></i>';
           }
@@ -190,7 +201,7 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
           if (cache[tab] && !force) return;
           $('state').textContent = 'Loading…'; $('table').innerHTML = '';
           try { const data = await api(TABS[tab].path + '/admin/list'); cache[tab] = data.entries || []; }
-          catch (e) { if (e.message !== 'unauthorized') $('state').textContent = 'Could not load. Check your connection.'; }
+          catch (e) { if (e.kind === 'auth') { logout('Session expired. Please sign in again.'); } else { $('state').textContent = e.kind === 'network' ? 'Could not reach the API (check server / CORS).' : 'Could not load.'; } }
         }
         function rows() {
           const q = $('search').value.trim().toLowerCase();
@@ -216,7 +227,7 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
         async function del(id) {
           if (!id || !confirm('Delete this record permanently?')) return;
           try { await api(TABS[current].path + '/admin/' + encodeURIComponent(id), { method: 'DELETE' }); cache[current] = (cache[current] || []).filter((r) => String(r.id) !== String(id)); render(); }
-          catch (e) {}
+          catch (e) { if (e.kind === 'auth') logout('Session expired. Please sign in again.'); else alert('Could not delete. Please try again.'); }
         }
         $('refresh').addEventListener('click', async () => { await load(current, true); render(); });
         $('search').addEventListener('input', render);
