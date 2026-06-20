@@ -5,5 +5,5 @@ import { defineConfig } from 'astro/config';
 // static host: Netlify, Vercel, Cloudflare Pages, GitHub Pages, etc.).
 // Build with `npm run build`; deploy the generated `dist/` folder.
 export default defineConfig({
-  site: 'https://www.rentease9ja.com',
+  site: 'https://rentease9ja.com',
 });
