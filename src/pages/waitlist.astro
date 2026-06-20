@@ -17,6 +17,7 @@ const roles = [
   title="Join the RentEase 9ja Waitlist | Early Access"
   description="Join 1,200+ Nigerians on the RentEase 9ja waitlist. Be first to access Nigeria's safest, fully digital property platform, verified listings, escrow payments, digital leases."
   active="/waitlist"
+  hideCta={true}
 >
   <section class="wl-hero">
     <div class="wl-glow" aria-hidden="true"></div>
@@ -25,6 +26,12 @@ const roles = [
         <span class="eyebrow"><span class="dot"></span> Beta launching soon</span>
         <h1>Rent with <span class="gradient-text">transparency</span> & peace of mind</h1>
         <p>Nigeria's first fully digital, fraud-proof property platform. Tenants rent safely, agents earn securely, and landlords stay in control.</p>
+        <div class="wl-countdown" id="countdown" aria-label="Time until launch">
+          <div class="cd-u"><span class="cd-n" id="cd-d">00</span><span class="cd-l">Days</span></div>
+          <div class="cd-u"><span class="cd-n" id="cd-h">00</span><span class="cd-l">Hrs</span></div>
+          <div class="cd-u"><span class="cd-n" id="cd-m">00</span><span class="cd-l">Min</span></div>
+          <div class="cd-u"><span class="cd-n" id="cd-s">00</span><span class="cd-l">Sec</span></div>
+        </div>
         <ul class="wl-badges">
           <li><i class="fas fa-circle-check"></i> Verified listings</li>
           <li><i class="fas fa-lock"></i> Escrow payments</li>
@@ -77,7 +84,7 @@ const roles = [
         </div>
 
         <div class="success-state" id="success-state">
-          <span class="success-icon">🎉</span>
+          <span class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.3"/><path d="m9 11 3 3L22 4"/></svg></span>
           <div class="success-title">You're in, <span class="success-name" id="success-name"></span>!</div>
           <p class="success-sub">Welcome to the future of real estate in Nigeria.<br /><strong>Check your inbox for your confirmation.</strong></p>
           <div class="success-email-box">
@@ -162,6 +169,11 @@ const roles = [
   .wl-copy h1 { color: #fff; margin: 18px 0 16px; }
   .wl-copy > p { color: var(--on-dark-2); font-size: 1.12rem; max-width: 480px; }
   .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-green); box-shadow: 0 0 0 4px rgba(43,182,115,.2); animation: blink 1.6s ease-in-out infinite; }
+  .wl-countdown { display: flex; gap: 10px; margin: 22px 0 4px; }
+  .cd-u { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); border-radius: 12px; padding: 11px 0; width: 66px; text-align: center; }
+  .cd-n { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: #fff; line-height: 1; font-variant-numeric: tabular-nums; }
+  .cd-l { display: block; font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: var(--on-dark-2); margin-top: 6px; }
+  @media (max-width: 900px) { .wl-countdown { justify-content: center; } }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
   .wl-badges { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 26px; }
   .wl-badges li { color: var(--on-dark); font-weight: 600; font-size: .92rem; }
@@ -193,7 +205,8 @@ const roles = [
   .form-note span { color: var(--brand-green); font-weight: 700; }
 
   .success-state { display: none; text-align: center; padding: 10px 0; }
-  .success-icon { font-size: 3rem; }
+  .success-icon { display: inline-flex; color: var(--brand-green); }
+  .success-icon svg { width: 54px; height: 54px; }
   .success-title { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--text); margin: 12px 0 8px; }
   .success-name { color: var(--brand-green); }
   .success-sub { color: var(--text-muted); margin-bottom: 18px; }
@@ -235,6 +248,22 @@ const roles = [
 </style>
 
 <script is:inline>
+  // Launch countdown — set your real launch date/time here:
+  var LAUNCH_DATE = new Date('2026-08-15T09:00:00+01:00');
+  (function () {
+    var d = document.getElementById('cd-d'), h = document.getElementById('cd-h'), m = document.getElementById('cd-m'), s = document.getElementById('cd-s');
+    if (!d) return;
+    var pad = (n) => String(n).padStart(2, '0');
+    function tick() {
+      var sec = Math.max(0, Math.floor((LAUNCH_DATE - new Date()) / 1000));
+      d.textContent = pad(Math.floor(sec / 86400));
+      h.textContent = pad(Math.floor((sec % 86400) / 3600));
+      m.textContent = pad(Math.floor((sec % 3600) / 60));
+      s.textContent = pad(sec % 60);
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+
   document.getElementById('hamburger')?.addEventListener('click', () => {
     document.getElementById('nav-menu')?.classList.toggle('open');
   });

@@ -237,7 +237,13 @@ const faqs = [
       <div class="grid grid-3">
         {testimonials.map((t, i) => (
           <figure class="quote card reveal" data-delay={i}>
-            <div class="stars">★★★★★</div>
+            <div class="stars" aria-label="Rated 5 out of 5">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            </div>
             <blockquote>{t.quote}</blockquote>
             <figcaption>
               <div class="q-av" aria-hidden="true">{t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}</div>
@@ -364,7 +370,8 @@ const faqs = [
 
   /* TESTIMONIALS */
   .quote { padding: 30px 28px; display: flex; flex-direction: column; }
-  .stars { color: #F5A623; letter-spacing: 2px; margin-bottom: 14px; }
+  .stars { display: flex; gap: 3px; color: #F5A623; margin-bottom: 14px; }
+  .stars svg { width: 16px; height: 16px; }
   .quote blockquote { font-size: 1.05rem; color: var(--text); line-height: 1.6; margin-bottom: 20px; }
   .quote figcaption { margin-top: auto; display: flex; align-items: center; gap: 12px; }
   .q-av { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-gradient); color: #fff; font-weight: 800; font-size: .85rem; display: grid; place-items: center; flex-shrink: 0; }

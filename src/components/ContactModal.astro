@@ -36,7 +36,7 @@
     </div>
 
     <div class="cm-success" id="cm-success">
-      <span class="cm-success-ico">✅</span>
+      <span class="cm-success-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.3"/><path d="m9 11 3 3L22 4"/></svg></span>
       <h3>Message sent!</h3>
       <p>Thanks for reaching out. We've received your message and will reply by email shortly.</p>
       <button class="btn btn-ghost" type="button" data-cm-close>Close</button>
@@ -65,7 +65,8 @@
   .cm-error.show { display: block; }
   .cm-success { display: none; text-align: center; padding: 6px 0; }
   .cm-success.show { display: block; }
-  .cm-success-ico { font-size: 2.6rem; }
+  .cm-success-ico { display: inline-flex; color: var(--brand-green); }
+  .cm-success-ico svg { width: 48px; height: 48px; }
   .cm-success p { color: var(--text-muted); margin: 8px 0 20px; }
   .cm-success a { color: var(--brand-blue); font-weight: 600; }
   @media (max-width: 460px) { .cm-row { flex-direction: column; gap: 0; } }
