@@ -35,14 +35,14 @@
       <div class="hp-sb"><span>9:41</span><span class="hp-sb-i"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div>
       <div class="hp-pad">
         <div class="hp-thd"><span class="hp-av ph"></span><strong class="hp-ctr">Agent Workspace</strong><span class="hp-bell ac"><i class="fas fa-bell"></i><i class="hp-dot"></i></span></div>
-        <div class="hp-greet">Hi, Tunde</div>
+        <div class="hp-greet">Hi, Adigun</div>
         <div class="hp-sub">Here's your overview today</div>
         <div class="hp-stats g3">
           <div class="hp-stat"><b>8</b><span>New Leads</span><a>View pipeline</a></div>
           <div class="hp-stat"><b>12</b><span>Active Listings</span><a>View all</a></div>
           <div class="hp-stat"><b>3</b><span>New Apps</span><a>Review now</a></div>
         </div>
-        <div class="hp-qa"><span class="fill"><i class="fas fa-plus"></i>New Listing</span><span><i class="fas fa-calendar"></i>Calendar</span><span><i class="fas fa-wallet"></i>Wallet</span></div>
+        <div class="hp-qa qa4"><span class="fill"><i class="fas fa-plus"></i>New</span><span><i class="fas fa-calendar"></i>Calendar</span><span><i class="fas fa-wallet"></i>Wallet</span><span><i class="fas fa-chart-line"></i>Analytics</span></div>
         <div class="hp-panel">
           <div class="hp-psec"><b>Schedule</b><i class="fas fa-ellipsis"></i></div>
           <div class="hp-days"><span class="on">Today</span><span>Tomorrow</span><span>Mon</span><span>Tue</span></div>
@@ -50,6 +50,7 @@
         </div>
         <div class="hp-sec"><span>Needs Your Attention</span></div>
         <div class="hp-att"><span class="hp-aic"><i class="fas fa-file-signature"></i></span><div><b>Sales Registry</b><span>Action required</span></div><em class="hp-badge">TXN HUB</em></div>
+        <div class="hp-att"><span class="hp-aic"><i class="fas fa-id-card"></i></span><div><b>New application</b><span>Review income</span></div><em class="hp-badge">APPLICATION</em></div>
       </div>
       <nav class="hp-nav"><span class="on"><i class="fas fa-table-cells-large"></i>Home</span><span><i class="fas fa-list"></i>Listings</span><span><i class="fas fa-handshake"></i>Tenancies</span><span><i class="fas fa-comment"></i>Chat</span><span><i class="fas fa-user"></i>Profile</span></nav>
     </div>
@@ -62,7 +63,7 @@
       <div class="hp-sb"><span>9:41</span><span class="hp-sb-i"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div>
       <div class="hp-pad">
         <div class="hp-thd"><span class="hp-av ph"></span><strong>My Portfolio</strong><span class="hp-licons"><i class="fas fa-chart-line"></i><i class="fas fa-rotate"></i><span class="hp-bell ac"><i class="fas fa-bell"></i><i class="hp-dot"></i></span></span></div>
-        <div class="hp-greet">Good morning, Grace 👋</div>
+        <div class="hp-greet">Good morning, Okoro 👋</div>
         <div class="hp-sub">Here's your property overview</div>
         <div class="hp-income">
           <span class="hp-il"><i class="fas fa-wallet"></i> EST. MONTHLY INCOME</span>
@@ -70,11 +71,11 @@
           <span class="hp-pill"><i class="fas fa-users"></i> 9 Active Tenants</span>
         </div>
         <div class="hp-stats g3">
-          <div class="hp-stat"><i class="fas fa-building hp-g"></i><b>6</b><span>Active Listings</span></div>
-          <div class="hp-stat"><i class="fas fa-users hp-b"></i><b>9</b><span>Active Tenants</span></div>
-          <div class="hp-stat"><i class="fas fa-screwdriver-wrench hp-g"></i><b>1</b><span>Open Repairs</span></div>
+          <div class="hp-stat"><i class="fas fa-building hp-g"></i><b>6</b><span>Active Listings</span><em class="hp-ss">of 6 total</em></div>
+          <div class="hp-stat"><i class="fas fa-users hp-b"></i><b>9</b><span>Active Tenants</span><em class="hp-ss">All current</em></div>
+          <div class="hp-stat"><i class="fas fa-screwdriver-wrench hp-g"></i><b>1</b><span>Open Repairs</span><em class="hp-ss">1 pending</em></div>
         </div>
-        <div class="hp-qa"><span class="fill"><i class="fas fa-wallet"></i>Wallet</span><span><i class="fas fa-screwdriver-wrench"></i>Repairs</span><span><i class="fas fa-users"></i>Tenants</span></div>
+        <div class="hp-qa qa4"><span class="fill"><i class="fas fa-wallet"></i>Wallet</span><span><i class="fas fa-screwdriver-wrench"></i>Maint.</span><span><i class="fas fa-users"></i>Tenants</span><span><i class="fas fa-handshake"></i>Agents</span></div>
         <div class="hp-sec"><span>My Properties</span><a>View all →</a></div>
         <div class="hp-list">
           <div class="hp-li"><div class="hp-th t1"></div><div class="hp-lic"><b>3-Bed Duplex · Maitama</b><span>₦3.5M/yr · Occupied</span></div></div>
@@ -176,6 +177,8 @@
   .hp-qa span { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; background: #fff; border-radius: 8px; padding: 6px 2px; font-size: 6px; font-weight: 700; color: #334155; box-shadow: 0 2px 8px rgba(15,23,42,.05); text-align: center; }
   .hp-qa i { color: var(--ac); font-size: 9px; }
   .hp-qa .fill { background: var(--ac); color: #fff; } .hp-qa .fill i { color: #fff; }
+  .hp-qa.qa4 span { font-size: 5.4px; padding: 6px 1px; } .hp-qa.qa4 i { font-size: 8px; }
+  .hp-ss { display: block; font-style: normal; font-size: 5px; color: #9AA1AC; margin-top: 1px; }
 
   /* schedule panel (agent) */
   .hp-panel { background: #fff; border-radius: 10px; padding: 7px; margin-bottom: 7px; box-shadow: 0 2px 8px rgba(15,23,42,.05); }

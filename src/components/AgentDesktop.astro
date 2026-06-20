@@ -1,0 +1,177 @@
+---
+// Agent desktop / web dashboard mock (browser window), recreated 1:1 from the
+// real agent web dashboard (LIGHT theme, blue accent): grouped sidebar,
+// 8 KPI cards, "Needs your attention" + "Today's schedule" panels.
+// Demo data modelled on a realistic active agency.
+---
+<div class="agd" role="img" aria-label="RentEase 9ja agent web dashboard">
+  <div class="agd-bar">
+    <span class="agd-dots"><i></i><i></i><i></i></span>
+    <span class="agd-url"><i class="fas fa-lock"></i> app.rentease9ja.com/agent</span>
+    <span class="agd-bi"><i class="fas fa-rotate-right"></i></span>
+  </div>
+  <div class="agd-app">
+    <aside class="agd-side">
+      <div class="agd-brand"><span class="agd-mark"><i class="fas fa-house-chimney"></i></span><b>RentEase 9ja</b><em>AGENT</em></div>
+      <nav class="agd-nav">
+        <a class="on"><i class="fas fa-table-cells-large"></i> Dashboard</a>
+        <a><i class="fas fa-building"></i> Listings</a>
+        <a><i class="fas fa-users"></i> Tenancies</a>
+        <a><i class="fas fa-comment-dots"></i> Inbox</a>
+        <span class="agd-grp">Deals</span>
+        <a><i class="fas fa-clipboard-check"></i> Applications</a>
+        <a><i class="fas fa-tag"></i> Offers</a>
+        <a><i class="fas fa-eye"></i> Viewings</a>
+        <a><i class="fas fa-calendar"></i> Schedule</a>
+        <span class="agd-grp">Finance</span>
+        <a><i class="fas fa-wallet"></i> Wallet</a>
+        <a><i class="fas fa-credit-card"></i> Payments &amp; Payouts</a>
+        <a><i class="fas fa-file-pen"></i> Sales &amp; Registry</a>
+        <span class="agd-grp">Growth</span>
+        <a><i class="fas fa-store"></i> Marketplace</a>
+        <a><i class="fas fa-address-book"></i> Leads (CRM)</a>
+        <a><i class="fas fa-chart-column"></i> Analytics</a>
+        <span class="agd-grp">Operations</span>
+        <a><i class="fas fa-screwdriver-wrench"></i> Maintenance</a>
+        <a><i class="fas fa-shield-halved"></i> Verification (KYC)</a>
+      </nav>
+    </aside>
+
+    <main class="agd-main">
+      <header class="agd-top">
+        <b>Dashboard</b>
+        <div class="agd-tr">
+          <span class="agd-ti"><i class="fas fa-moon"></i></span>
+          <span class="agd-ti"><i class="fas fa-bell"></i><em>3</em></span>
+          <span class="agd-user"><span class="agd-av">AB</span> Adamu Bello <i class="fas fa-chevron-down"></i></span>
+        </div>
+      </header>
+
+      <div class="agd-body">
+        <div class="agd-welcome">
+          <div><h4>Welcome back, Adamu</h4><span>Here's what's happening across your agency today.</span></div>
+          <div class="agd-acts">
+            <span class="agd-ob"><i class="fas fa-calendar"></i> Calendar</span>
+            <span class="agd-ob"><i class="fas fa-wallet"></i> Wallet</span>
+            <span class="agd-pb"><i class="fas fa-plus"></i> New Listing</span>
+          </div>
+        </div>
+
+        <div class="agd-kpis">
+          <div class="agd-kpi"><span class="agd-kl">NEW LEADS</span><span class="agd-ki bl"><i class="fas fa-address-card"></i></span><b>8</b></div>
+          <div class="agd-kpi"><span class="agd-kl">ACTIVE LISTINGS</span><span class="agd-ki bl"><i class="fas fa-building"></i></span><b>12</b></div>
+          <div class="agd-kpi"><span class="agd-kl">APPLICATIONS</span><span class="agd-ki or"><i class="fas fa-file-circle-check"></i></span><b>3</b></div>
+          <div class="agd-kpi"><span class="agd-kl">OPEN OFFERS</span><span class="agd-ki bl"><i class="fas fa-tag"></i></span><b>2</b></div>
+          <div class="agd-kpi"><span class="agd-kl">MAINTENANCE</span><span class="agd-ki rd"><i class="fas fa-screwdriver-wrench"></i></span><b>1</b></div>
+          <div class="agd-kpi"><span class="agd-kl">UNPAID INVOICES</span><span class="agd-ki or"><i class="fas fa-receipt"></i></span><b>1</b><em>₦0.3m outstanding</em></div>
+          <div class="agd-kpi"><span class="agd-kl">ACTIVE SALES</span><span class="agd-ki gr"><i class="fas fa-file-pen"></i></span><b>4</b></div>
+          <div class="agd-kpi"><span class="agd-kl">VIEWINGS TODAY</span><span class="agd-ki gr"><i class="fas fa-calendar-check"></i></span><b>2</b></div>
+        </div>
+
+        <div class="agd-cols">
+          <section class="agd-panel">
+            <div class="agd-ph"><b>Needs your attention</b><a>View all</a></div>
+            <div class="agd-att"><span class="agd-ai bl"><i class="fas fa-file-signature"></i></span><div><b>Sales Registry</b><span>Action required · Lekki sale</span></div><em class="agd-bd">TXN HUB</em></div>
+            <div class="agd-att"><span class="agd-ai bl"><i class="fas fa-id-card"></i></span><div><b>New application</b><span>2-Bed Flat · Lekki, Lagos</span></div><em class="agd-bd">APPLICATION</em></div>
+            <div class="agd-att"><span class="agd-ai rd"><i class="fas fa-triangle-exclamation"></i></span><div><b>Unpaid invoice</b><span>₦0.3m · 1 tenant overdue</span></div><em class="agd-bd red">RENT</em></div>
+          </section>
+          <section class="agd-panel">
+            <div class="agd-ph"><b>Today's schedule</b></div>
+            <div class="agd-ev"><span class="agd-et">10:00</span><div><b>Viewing · 2-Bed Flat</b><span>Lekki, Lagos</span></div></div>
+            <div class="agd-ev"><span class="agd-et">14:30</span><div><b>Inspection · 4-Bed Duplex</b><span>Maitama, Abuja</span></div></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<style>
+  .agd { --ac: #2563EB; --bg: #F5F6FB; --panel: #FFFFFF; --line: #E8E6F2; --tx: #0F172A; --mut: #6F7785;
+    width: 100%; max-width: 1040px; margin-inline: auto; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 40px 80px -28px rgba(15,23,42,.4), 0 0 0 1px var(--line); font-size: 13px; background: var(--panel); }
+  .agd-bar { display: flex; align-items: center; gap: 14px; background: #EFEEF6; padding: 11px 16px; border-bottom: 1px solid var(--line); }
+  .agd-dots { display: inline-flex; gap: 6px; }
+  .agd-dots i { width: 11px; height: 11px; border-radius: 50%; }
+  .agd-dots i:nth-child(1) { background: #FF5F57; } .agd-dots i:nth-child(2) { background: #FEBC2E; } .agd-dots i:nth-child(3) { background: #28C840; }
+  .agd-url { flex: 1; max-width: 380px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 5px 12px; font-size: .72rem; color: var(--mut); }
+  .agd-url i { color: #16A34A; margin-right: 6px; font-size: .64rem; }
+  .agd-bi { color: var(--mut); font-size: .8rem; }
+
+  .agd-app { display: grid; grid-template-columns: 200px 1fr; background: var(--bg); color: var(--tx); }
+
+  /* sidebar */
+  .agd-side { background: #fff; border-right: 1px solid var(--line); padding: 14px 10px; }
+  .agd-brand { display: flex; align-items: center; gap: 7px; padding: 4px 6px 14px; }
+  .agd-mark { width: 23px; height: 23px; border-radius: 7px; background: linear-gradient(135deg, #1E4E8C, #2BB673); display: grid; place-items: center; color: #fff; font-size: .6rem; }
+  .agd-brand b { font-size: .8rem; font-weight: 800; color: var(--tx); }
+  .agd-brand em { font-style: normal; font-size: .52rem; font-weight: 800; letter-spacing: .08em; color: var(--mut); background: #F1F0F8; padding: 2px 6px; border-radius: 5px; }
+  .agd-nav { display: flex; flex-direction: column; gap: 1px; }
+  .agd-nav a { display: flex; align-items: center; gap: 11px; padding: 7px 10px; border-radius: 8px; font-size: .76rem; font-weight: 600; color: #44506a; }
+  .agd-nav a i { width: 15px; text-align: center; font-size: .76rem; color: #98a1b4; }
+  .agd-nav a.on { background: rgba(37,99,235,.1); color: var(--ac); }
+  .agd-nav a.on i { color: var(--ac); }
+  .agd-grp { font-size: .56rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #a3aabb; padding: 13px 10px 5px; }
+
+  /* main */
+  .agd-main { display: flex; flex-direction: column; }
+  .agd-top { display: flex; justify-content: space-between; align-items: center; padding: 13px 20px; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .agd-top > b { font-size: 1rem; font-weight: 800; color: var(--tx); }
+  .agd-tr { display: flex; align-items: center; gap: 12px; }
+  .agd-ti { position: relative; width: 30px; height: 30px; border-radius: 8px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; color: var(--mut); font-size: .78rem; }
+  .agd-ti em { position: absolute; top: -5px; right: -5px; min-width: 15px; height: 15px; padding: 0 3px; border-radius: 999px; background: #EF4444; color: #fff; font-size: .56rem; font-weight: 800; font-style: normal; display: grid; place-items: center; }
+  .agd-user { display: flex; align-items: center; gap: 8px; font-size: .76rem; font-weight: 700; color: var(--tx); }
+  .agd-user i { color: var(--mut); font-size: .64rem; }
+  .agd-av { width: 27px; height: 27px; border-radius: 50%; background: linear-gradient(135deg, #1E4E8C, #2BB673); color: #fff; font-size: .6rem; font-weight: 800; display: grid; place-items: center; }
+
+  .agd-body { padding: 18px 20px 22px; }
+  .agd-welcome { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+  .agd-welcome h4 { font-size: 1.3rem; font-weight: 800; color: var(--tx); }
+  .agd-welcome > div > span { font-size: .78rem; color: var(--mut); }
+  .agd-acts { display: flex; gap: 9px; flex: none; }
+  .agd-ob, .agd-pb { display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; font-weight: 700; padding: 8px 13px; border-radius: 9px; white-space: nowrap; }
+  .agd-ob { background: #fff; border: 1px solid var(--line); color: var(--tx); }
+  .agd-pb { background: var(--ac); color: #fff; }
+
+  .agd-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .agd-kpi { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 13px; padding: 14px; min-height: 92px; box-shadow: 0 1px 3px rgba(15,23,42,.04); }
+  .agd-kl { font-size: .6rem; font-weight: 800; letter-spacing: .06em; color: var(--mut); }
+  .agd-ki { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; font-size: .78rem; }
+  .agd-ki.gr { background: rgba(22,163,74,.12); color: #16A34A; }
+  .agd-ki.bl { background: rgba(37,99,235,.12); color: #2563EB; }
+  .agd-ki.or { background: rgba(245,158,11,.14); color: #D97706; }
+  .agd-ki.rd { background: rgba(239,68,68,.12); color: #DC2626; }
+  .agd-kpi b { display: block; font-size: 1.7rem; font-weight: 800; color: var(--tx); margin-top: 14px; line-height: 1; }
+  .agd-kpi em { display: block; font-style: normal; font-size: .62rem; color: var(--mut); margin-top: 6px; }
+
+  .agd-cols { display: grid; grid-template-columns: 1.6fr 1fr; gap: 12px; }
+  .agd-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 13px; padding: 15px; box-shadow: 0 1px 3px rgba(15,23,42,.04); }
+  .agd-ph { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .agd-ph b { font-size: .9rem; font-weight: 800; color: var(--tx); }
+  .agd-ph a { font-size: .7rem; font-weight: 700; color: var(--ac); }
+  .agd-att { display: flex; align-items: center; gap: 11px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .agd-att:last-child { border-bottom: 0; }
+  .agd-ai { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-size: .78rem; flex: none; }
+  .agd-ai.bl { background: rgba(37,99,235,.12); color: #2563EB; }
+  .agd-ai.rd { background: rgba(239,68,68,.12); color: #DC2626; }
+  .agd-att > div { flex: 1; min-width: 0; }
+  .agd-att b { display: block; font-size: .78rem; font-weight: 700; color: var(--tx); }
+  .agd-att span { font-size: .66rem; color: var(--mut); }
+  .agd-bd { font-style: normal; font-size: .56rem; font-weight: 800; color: #fff; background: var(--ac); padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
+  .agd-bd.red { background: #DC2626; }
+  .agd-ev { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .agd-ev:last-child { border-bottom: 0; }
+  .agd-et { font-size: .82rem; font-weight: 800; color: var(--ac); }
+  .agd-ev b { display: block; font-size: .76rem; font-weight: 700; color: var(--tx); }
+  .agd-ev span { font-size: .64rem; color: var(--mut); }
+
+  @media (max-width: 820px) {
+    .agd-app { grid-template-columns: 1fr; }
+    .agd-side { display: none; }
+    .agd-welcome { flex-direction: column; }
+    .agd-acts { width: 100%; }
+    .agd-kpis { grid-template-columns: repeat(2, 1fr); }
+    .agd-cols { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 460px) { .agd { font-size: 12px; } }
+</style>

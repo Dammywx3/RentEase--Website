@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ListingCard from '../components/ListingCard.astro';
 import HeroPhones from '../components/HeroPhones.astro';
+import AgentDesktop from '../components/AgentDesktop.astro';
 
 const stats = [
   { value: '800+', label: 'On the waitlist' },
@@ -183,26 +184,22 @@ const faqs = [
     </div>
   </section>
 
-  <!-- APP SHOWCASE -->
+  <!-- WEB WORKSPACE SHOWCASE -->
   <section class="section section--dark app-sec">
-    <div class="container app-inner">
-      <div class="app-copy reveal">
-        <span class="eyebrow">The app</span>
-        <h2>Your whole rental journey, in one app</h2>
-        <p>Search, chat, view, pay, and sign, without leaving RentEase 9ja. Built for Nigerian renters, buyers, landlords, and agents.</p>
-        <ul class="app-features">
-          {appFeatures.map((f) => (<li><i class={`fas ${f.icon}`}></i> {f.text}</li>))}
-        </ul>
-        <div class="app-actions">
-          <a href="/waitlist" class="btn btn-primary">Join the waitlist</a>
-          <div class="qr">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://rentease9ja.com/waitlist" alt="Scan to join the waitlist" width="92" height="92" loading="lazy" />
-            <span>Scan to join</span>
-          </div>
-        </div>
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">For agents &amp; landlords</span>
+        <h2>Run your whole agency from the <span class="gradient-text">web</span></h2>
+        <p>Agents and landlords get a full desktop workspace, listings, leads, applications, viewings, payouts and registry, all in one dashboard.</p>
       </div>
-      <div class="app-media reveal" data-delay="1">
-        <img src="/mockup.webp" alt="RentEase 9ja app screens" width="300" height="610" loading="lazy" />
+      <div class="web-shot reveal" data-delay="1">
+        <AgentDesktop />
+      </div>
+      <ul class="app-chips reveal" data-delay="2">
+        {appFeatures.map((f) => (<li><i class={`fas ${f.icon}`}></i> {f.text}</li>))}
+      </ul>
+      <div class="web-cta reveal" data-delay="2">
+        <a href="/waitlist" class="btn btn-light">Join the waitlist</a>
       </div>
     </div>
   </section>
@@ -298,13 +295,15 @@ const faqs = [
   .hero-copy h1 { margin: 16px 0 14px; font-size: clamp(1.45rem, 2.7vw, 2.3rem); }
   .hero-copy > p { font-size: 1.05rem; color: var(--text-2); max-width: 500px; }
   .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 24px 0 20px; }
-  .hero-trust { display: flex; gap: 22px; flex-wrap: wrap; color: var(--text-2); font-weight: 600; font-size: .92rem; }
+  .hero-trust { display: flex; align-items: center; gap: 18px; flex-wrap: nowrap; color: var(--text-2); font-weight: 600; font-size: .86rem; }
+  .hero-trust li { display: inline-flex; align-items: center; white-space: nowrap; }
   .hero-trust i { color: var(--brand-green); margin-right: 6px; }
   .hero-media { display: flex; justify-content: center; align-items: center; padding-block: 14px; }
   @media (max-width: 920px) {
     .hero-inner { grid-template-columns: 1fr; text-align: center; }
     .hero-copy > p { margin-inline: auto; }
     .hero-cta, .hero-trust { justify-content: center; }
+    .hero-trust { flex-wrap: wrap; row-gap: 8px; }
     .hero-media { order: -1; margin-bottom: 10px; padding-block: 20px 8px; }
   }
 
@@ -346,19 +345,13 @@ const faqs = [
 
   .center-cta { text-align: center; margin-top: 44px; }
 
-  /* APP SHOWCASE */
-  .app-inner { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: clamp(30px, 5vw, 64px); }
-  .app-copy > p { color: var(--on-dark-2); font-size: 1.1rem; margin: 16px 0 26px; max-width: 520px; }
-  .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 30px; }
-  .app-features li { color: var(--on-dark); font-weight: 500; }
-  .app-features i { color: var(--brand-green); margin-right: 10px; }
-  .app-actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-  .qr { display: flex; align-items: center; gap: 12px; color: var(--on-dark-2); font-size: .85rem; }
-  .qr img { border-radius: 10px; border: 3px solid #fff; }
-  .app-media { display: flex; justify-content: center; }
-  .app-media img { width: clamp(220px, 28vw, 300px); height: auto; filter: drop-shadow(0 40px 70px rgba(0,0,0,.4)); }
-  @media (max-width: 920px) { .app-inner { grid-template-columns: 1fr; text-align: center; } .app-copy > p { margin-inline: auto; } .app-features { max-width: 420px; margin-inline: auto; } .app-actions { justify-content: center; } .app-media { order: -1; } .app-media img { width: 220px; } }
-  @media (max-width: 480px) { .app-features { grid-template-columns: 1fr; } }
+  /* WEB WORKSPACE SHOWCASE */
+  .web-shot { position: relative; z-index: 1; }
+  .app-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; max-width: 760px; margin: 30px auto 0; }
+  .app-chips li { display: inline-flex; align-items: center; gap: 8px; color: var(--on-dark); font-weight: 500; font-size: .9rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r-pill); padding: 8px 14px; }
+  .app-chips i { color: #8FE3B9; }
+  .web-cta { display: flex; justify-content: center; margin-top: 28px; }
+  @media (max-width: 600px) { .app-chips li { font-size: .82rem; padding: 7px 12px; } }
 
   /* INVESTORS */
   .invest-stats { margin-bottom: 40px; }

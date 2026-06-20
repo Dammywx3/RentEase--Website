@@ -84,5 +84,13 @@ const cols = [
     border-top: 1px solid var(--navy-border); padding-block: 26px; font-size: .85rem;
   }
   @media (max-width: 920px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
-  @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { justify-content: center; text-align: center; } }
+  /* Mobile: brand full-width on top, then the 3 link groups side by side as columns */
+  @media (max-width: 560px) {
+    .footer-grid { grid-template-columns: repeat(3, 1fr); gap: 24px 14px; }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-col h4 { font-size: .72rem; margin-bottom: 13px; }
+    .footer-col a { font-size: .82rem; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-bottom { justify-content: center; text-align: center; }
+  }
 </style>
