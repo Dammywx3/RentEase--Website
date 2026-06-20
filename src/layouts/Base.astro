@@ -10,7 +10,6 @@ const {
   active = '',
   ogImage = '/og-cover.png',
   noFooter = false,
-  hideCta = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://rentease9ja.com').href;
@@ -80,22 +79,7 @@ const jsonLd = {
     {!noFooter && <Footer />}
     <ContactModal />
 
-    {!hideCta && (
-      <a href="/waitlist" class="sticky-cta" id="sticky-cta" aria-hidden="true">
-        Join the waitlist
-        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    )}
-
     <script>
-      // Sticky mobile CTA: reveal after the hero scrolls past
-      const sticky = document.getElementById('sticky-cta');
-      if (sticky) {
-        const onScroll = () => sticky.classList.toggle('show', window.scrollY > 560);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-      }
-
       // Scroll reveal
       const els = document.querySelectorAll('.reveal');
       if (els.length) {
