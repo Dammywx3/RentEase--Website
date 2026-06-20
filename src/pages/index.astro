@@ -53,6 +53,17 @@ const faqs = [
   { q: 'How much does it cost to list a property?', a: 'Creating a verified listing is free for landlords and agents during launch. Premium tools for high-volume agents and developers are available.' },
   { q: 'When is the app launching?', a: 'We are onboarding early users now. Join the waitlist to get first access and launch updates.' },
 ];
+
+// FAQ rich-result structured data (eligible for Google FAQ rich results).
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <Base active="/">
   <!-- HERO -->
@@ -66,6 +77,16 @@ const faqs = [
         <div class="hero-cta reveal" data-delay="3">
           <a href="/waitlist" class="btn btn-primary">Join the waitlist <i class="fas fa-arrow-right"></i></a>
           <a href="/rent" class="btn btn-ghost">Explore listings</a>
+        </div>
+        <div class="hero-rating reveal" data-delay="3">
+          <span class="hr-stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
+          </span>
+          <span class="hr-text"><strong>800+</strong> Nigerians already on the waitlist</span>
         </div>
         <ul class="hero-trust reveal" data-delay="4">
           <li><i class="fas fa-circle-check"></i> Verified listings</li>
@@ -269,6 +290,23 @@ const faqs = [
         ))}
       </div>
     </div>
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  </section>
+
+  <!-- TRUST & SECURITY -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Safety by design</span>
+        <h2>Built to protect every naira and every deal</h2>
+      </div>
+      <div class="grid grid-4 trust-band">
+        <div class="tb-item reveal"><span class="tb-ic"><i class="fas fa-shield-halved"></i></span><h3>Escrow-secured</h3><p>Rent &amp; fees are held safely and released only on a clean handover.</p></div>
+        <div class="tb-item reveal" data-delay="1"><span class="tb-ic"><i class="fas fa-id-card"></i></span><h3>Identity verified</h3><p>Every agent and landlord passes strict KYC verification.</p></div>
+        <div class="tb-item reveal" data-delay="2"><span class="tb-ic"><i class="fas fa-lock"></i></span><h3>Bank-grade encryption</h3><p>Your data and payments are encrypted end to end.</p></div>
+        <div class="tb-item reveal" data-delay="3"><span class="tb-ic"><i class="fas fa-file-shield"></i></span><h3>NDPR-aligned</h3><p>Personal data is handled to Nigerian data-protection standards.</p></div>
+      </div>
+    </div>
   </section>
 
   <!-- FINAL CTA -->
@@ -294,7 +332,12 @@ const faqs = [
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
   .hero-copy h1 { margin: 16px 0 14px; font-size: clamp(1.45rem, 2.7vw, 2.3rem); }
   .hero-copy > p { font-size: 1.05rem; color: var(--text-2); max-width: 500px; }
-  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 24px 0 20px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 24px 0 16px; }
+  .hero-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+  .hr-stars { display: inline-flex; gap: 2px; color: #F5A623; }
+  .hr-stars svg { width: 15px; height: 15px; }
+  .hr-text { font-size: .9rem; color: var(--text-2); }
+  .hr-text strong { color: var(--text); font-weight: 800; }
   .hero-trust { display: flex; align-items: center; gap: 18px; flex-wrap: nowrap; color: var(--text-2); font-weight: 600; font-size: .86rem; }
   .hero-trust li { display: inline-flex; align-items: center; white-space: nowrap; }
   .hero-trust i { color: var(--brand-green); margin-right: 6px; }
@@ -312,6 +355,13 @@ const faqs = [
   .stat { text-align: center; }
   .stat-val { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -.03em; }
   .stat-label { color: var(--text-muted); font-weight: 600; margin-top: 6px; font-size: .95rem; }
+
+  /* TRUST & SECURITY band */
+  .trust-band { gap: clamp(16px, 2.4vw, 28px); }
+  .tb-item { text-align: center; padding: 8px; }
+  .tb-ic { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; margin: 0 auto 16px; font-size: 1.4rem; color: var(--brand-blue); background: var(--brand-gradient-soft); border: 1px solid var(--border); }
+  .tb-item h3 { margin-bottom: 8px; font-size: 1.05rem; }
+  .tb-item p { color: var(--text-muted); font-size: .92rem; line-height: 1.6; }
 
   /* PROBLEM/SOLUTION */
   .ps-card { padding: 32px; border-radius: var(--r-lg); border: 1px solid var(--border); }

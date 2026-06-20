@@ -1,7 +1,7 @@
 ---
 // Site-wide contact modal. Any link/button with [data-contact] or href="#contact"
 // opens it. On send it composes an email to support@rentease9ja.com.
-import { API_BASE } from '../config';
+import { API_BASE, WHATSAPP_NUMBER } from '../config';
 ---
 <div class="cm-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="cm-title" hidden>
   <div class="cm-card" role="document">
@@ -34,6 +34,15 @@ import { API_BASE } from '../config';
       </div>
 
       <button class="btn btn-primary cm-send" type="button" id="cm-send">Send message <i class="fas fa-paper-plane"></i></button>
+
+      {WHATSAPP_NUMBER && (
+        <>
+          <div class="cm-or"><span>or</span></div>
+          <a class="cm-whatsapp" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i> Chat with us on WhatsApp
+          </a>
+        </>
+      )}
     </div>
 
     <div class="cm-success" id="cm-success">
@@ -62,6 +71,11 @@ import { API_BASE } from '../config';
   .cm-field input:focus, .cm-field textarea:focus { border-color: var(--brand-blue); background: #fff; box-shadow: 0 0 0 4px rgba(30,78,140,.12); }
   .cm-field input.err, .cm-field textarea.err { border-color: var(--danger); background: #FEF2F2; }
   .cm-send { width: 100%; margin-top: 6px; justify-content: center; }
+  .cm-or { display: flex; align-items: center; gap: 12px; margin: 14px 0; color: var(--text-muted); font-size: .82rem; }
+  .cm-or::before, .cm-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .cm-whatsapp { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px; border-radius: var(--r-md); font-weight: 700; color: #fff; background: #25D366; transition: var(--transition); }
+  .cm-whatsapp:hover { background: #1EBE5A; transform: translateY(-1px); }
+  .cm-whatsapp i { font-size: 1.15rem; }
   .cm-error { display: none; background: #FEF2F2; border-left: 4px solid var(--danger); color: #B91C1C; font-size: .88rem; padding: 10px 14px; border-radius: var(--r-sm); margin-bottom: 14px; }
   .cm-error.show { display: block; }
   .cm-success { display: none; text-align: center; padding: 6px 0; }
