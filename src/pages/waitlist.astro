@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { API_BASE } from '../config';
 
 const features = [
   { icon: 'fa-id-card', title: 'Verified identity', text: 'Every agent and landlord passes strict KYC verification. No ghosts, no scams, just real properties and real people.' },
@@ -246,7 +247,7 @@ const roles = [
   @media (max-width: 520px) { .form-row { flex-direction: column; gap: 0; } }
 </style>
 
-<script is:inline>
+<script is:inline define:vars={{ API_BASE }}>
   // Launch countdown — set your real launch date/time here:
   var LAUNCH_DATE = new Date('2026-11-19T09:00:00+01:00');
   (function () {
@@ -267,7 +268,7 @@ const roles = [
     document.getElementById('nav-menu')?.classList.toggle('open');
   });
 
-  const API_URL = (window.__API_BASE__ || 'https://app.rentease9ja.com') + '/v1/waitlist';
+  const API_URL = (window.__API_BASE__ || API_BASE) + '/v1/waitlist';
 
   const showError = (msg) => {
     const banner = document.getElementById('error-banner');

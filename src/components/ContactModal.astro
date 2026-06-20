@@ -1,6 +1,7 @@
 ---
 // Site-wide contact modal. Any link/button with [data-contact] or href="#contact"
 // opens it. On send it composes an email to support@rentease9ja.com.
+import { API_BASE } from '../config';
 ---
 <div class="cm-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="cm-title" hidden>
   <div class="cm-card" role="document">
@@ -72,7 +73,7 @@
   @media (max-width: 460px) { .cm-row { flex-direction: column; gap: 0; } }
 </style>
 
-<script is:inline>
+<script is:inline define:vars={{ API_BASE }}>
   (function () {
     const SUPPORT = 'support@rentease9ja.com';
     const overlay = document.getElementById('contact-modal');
@@ -96,7 +97,7 @@
       if (field) { $(field).classList.add('err'); $(field).focus(); }
     }
 
-    const API_URL = (window.__API_BASE__ || 'https://app.rentease9ja.com') + '/v1/contact';
+    const API_URL = (window.__API_BASE__ || API_BASE) + '/v1/contact';
     const sendBtn = $('cm-send');
 
     async function send() {

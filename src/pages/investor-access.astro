@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import LeadForm from '../components/LeadForm.astro';
+import { API_BASE } from '../config';
 
 const fields = [
   { name: 'name', label: 'Full name', placeholder: 'Your name', required: true, autocomplete: 'name' },
@@ -28,7 +29,7 @@ const fields = [
     <div class="container narrow">
       <div class="reveal">
         <LeadForm
-          endpoint={(import.meta.env.PUBLIC_API_BASE || 'https://app.rentease9ja.com') + '/v1/investors'}
+          endpoint={API_BASE + '/v1/investors'}
           submitLabel="Request the deck"
           successTitle="Thanks — request received!"
           successText="We'll review and send the deck to your email within 2 business days."

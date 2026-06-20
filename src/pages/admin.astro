@@ -1,7 +1,7 @@
 ---
 // Unified leads admin — one login (admin secret) → Waitlist, Contact,
 // Partners, Investors. Standalone, data-dense, enterprise styling.
-const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://app.rentease9ja.com';
+import { API_BASE } from '../config';
 ---
 <!doctype html>
 <html lang="en">
@@ -226,9 +226,9 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://app.rentease9ja.com
       }
     </style>
 
-    <script is:inline>
+    <script is:inline define:vars={{ API_BASE }}>
       (function () {
-        const API = (window.__API_BASE__ || 'https://app.rentease9ja.com');
+        const API = (window.__API_BASE__ || API_BASE);
         const KEY = 're_admin_secret';
         const $ = (id) => document.getElementById(id);
         const fmtDate = (s) => { if (!s) return '—'; const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); };

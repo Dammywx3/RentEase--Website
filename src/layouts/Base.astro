@@ -14,8 +14,8 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://rentease9ja.com').href;
 
-// Single source of truth for the API base. Override at build with PUBLIC_API_BASE.
-const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://app.rentease9ja.com';
+// API base is centralized in src/config.ts (set window.__API_BASE__ for client scripts).
+import { API_BASE } from '../config';
 
 const jsonLd = {
   '@context': 'https://schema.org',

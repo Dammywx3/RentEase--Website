@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import LeadForm from '../components/LeadForm.astro';
+import { API_BASE } from '../config';
 
 const points = [
   { icon: 'fa-city', text: 'List entire estates in a branded, verified storefront' },
@@ -42,7 +43,7 @@ const fields = [
       </div>
       <div class="reveal" data-delay="1">
         <LeadForm
-          endpoint={(import.meta.env.PUBLIC_API_BASE || 'https://app.rentease9ja.com') + '/v1/partners'}
+          endpoint={API_BASE + '/v1/partners'}
           submitLabel="Submit partnership request"
           successTitle="Request received!"
           successText="Thanks — our partnerships team will reach out within 2 business days."

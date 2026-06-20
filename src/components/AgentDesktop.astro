@@ -3,11 +3,12 @@
 // real agent web dashboard (LIGHT theme, blue accent): grouped sidebar,
 // 8 KPI cards, "Needs your attention" + "Today's schedule" panels.
 // Demo data modelled on a realistic active agency.
+import { WEB_APP_HOST } from '../config';
 ---
 <div class="agd" role="img" aria-label="RentEase 9ja agent web dashboard">
   <div class="agd-bar">
     <span class="agd-dots"><i></i><i></i><i></i></span>
-    <span class="agd-url"><i class="fas fa-lock"></i> app.rentease9ja.com/agent</span>
+    <span class="agd-url"><i class="fas fa-lock"></i> {WEB_APP_HOST}/agent</span>
     <span class="agd-bi"><i class="fas fa-rotate-right"></i></span>
   </div>
   <div class="agd-app">
