@@ -88,8 +88,7 @@
 
 <style>
   .agd { --ac: #2563EB; --bg: #F5F6FB; --panel: #FFFFFF; --line: #E8E6F2; --tx: #0F172A; --mut: #6F7785;
-    width: 100%; max-width: 1040px; margin-inline: auto; border-radius: 14px; overflow: hidden;
-    box-shadow: 0 40px 80px -28px rgba(15,23,42,.4), 0 0 0 1px var(--line); font-size: 13px; background: var(--panel); }
+    width: 100%; overflow: hidden; font-size: 13px; background: var(--panel); }
   .agd-bar { display: flex; align-items: center; gap: 14px; background: #EFEEF6; padding: 11px 16px; border-bottom: 1px solid var(--line); }
   .agd-dots { display: inline-flex; gap: 6px; }
   .agd-dots i { width: 11px; height: 11px; border-radius: 50%; }
@@ -165,13 +164,6 @@
   .agd-ev b { display: block; font-size: .76rem; font-weight: 700; color: var(--tx); }
   .agd-ev span { font-size: .64rem; color: var(--mut); }
 
-  @media (max-width: 820px) {
-    .agd-app { grid-template-columns: 1fr; }
-    .agd-side { display: none; }
-    .agd-welcome { flex-direction: column; }
-    .agd-acts { width: 100%; }
-    .agd-kpis { grid-template-columns: repeat(2, 1fr); }
-    .agd-cols { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 460px) { .agd { font-size: 12px; } }
+  /* Always renders the full desktop layout — the MacBook frame (DeviceLaptop)
+     scales the whole thing down to fit on small screens. */
 </style>

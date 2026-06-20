@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ListingCard from '../components/ListingCard.astro';
 import HeroPhones from '../components/HeroPhones.astro';
-import AgentDesktop from '../components/AgentDesktop.astro';
+import DeviceLaptop from '../components/DeviceLaptop.astro';
 
 const stats = [
   { value: '800+', label: 'On the waitlist' },
@@ -193,7 +193,7 @@ const faqs = [
         <p>Agents and landlords get a full desktop workspace, listings, leads, applications, viewings, payouts and registry, all in one dashboard.</p>
       </div>
       <div class="web-shot reveal" data-delay="1">
-        <AgentDesktop />
+        <DeviceLaptop />
       </div>
       <ul class="app-chips reveal" data-delay="2">
         {appFeatures.map((f) => (<li><i class={`fas ${f.icon}`}></i> {f.text}</li>))}
