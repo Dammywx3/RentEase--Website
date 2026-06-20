@@ -1,0 +1,25 @@
+# Dependencies & build output (Vercel installs/builds fresh)
+node_modules
+dist
+.astro
+.vercel
+
+# Git
+.git
+
+# Env (set these in the Vercel dashboard instead)
+.env
+.env.production
+.env.*
+
+# Not needed for the build — source images are pre-optimized into /public
+raw-assets
+legacy
+scripts
+
+# Editor / OS noise
+.vscode
+.DS_Store
+**/.DS_Store
+Thumbs.db
+*.swp
