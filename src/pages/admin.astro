@@ -53,20 +53,20 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
             <button class="hd-menu" id="menu-toggle" aria-label="Sections"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
             <div><h1 id="page-title">Waitlist</h1><p id="page-sub">People waiting for launch</p></div>
           </div>
-          <div class="hd-r">
-            <div class="srch">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <input id="search" placeholder="Search…" />
-            </div>
-            <button class="ico-btn" id="refresh" title="Refresh"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></button>
-          </div>
         </header>
 
         <div class="bd">
           <div class="stats" id="stats" style="display:none"></div>
           <div class="tb-bar">
-            <span class="tb-count" id="state"></span>
+            <div class="tb-left">
+              <div class="srch">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input id="search" placeholder="Search records…" />
+              </div>
+              <span class="tb-count" id="state"></span>
+            </div>
             <div class="tb-actions">
+              <button class="ico-btn" id="refresh" title="Refresh"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></button>
               <button class="btn-pri sm" id="launch-btn" style="display:none">
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
                 Send launch email
@@ -171,10 +171,11 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
       .srch { display:flex; align-items:center; gap:8px; height:38px; padding:0 12px; background:#F6F7F9; border:1px solid var(--border); border-radius:var(--r); color:var(--muted); width:230px; max-width:40vw; transition:.15s ease; }
       .srch:focus-within { border-color:var(--brand); box-shadow:0 0 0 3px rgba(30,78,140,.1); background:var(--surface); }
       .srch input { border:none; background:none; outline:none; flex:1; min-width:0; font-size:13.5px; color:var(--ink); }
-      .ico-btn { width:38px; height:38px; border-radius:var(--r); border:1px solid var(--border); background:var(--surface); color:var(--ink2); cursor:pointer; display:grid; place-items:center; transition:.15s ease; }
+      .ico-btn { width:34px; height:34px; border-radius:var(--r); border:1px solid var(--border); background:var(--surface); color:var(--ink2); cursor:pointer; display:grid; place-items:center; transition:.15s ease; }
       .ico-btn:hover { color:var(--brand); border-color:#CFD8E6; }
 
       .bd { padding:24px 28px; }
+      .tb-left { display:flex; align-items:center; gap:14px; min-width:0; }
       .stats { display:grid; grid-template-columns:repeat(3,minmax(0,200px)); gap:12px; margin-bottom:22px; }
       .stat { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:15px 18px; box-shadow:var(--sh-sm); }
       .stat b { font-size:24px; font-weight:700; line-height:1.1; display:block; letter-spacing:-.02em; }
@@ -328,7 +329,11 @@ const API_BASE = import.meta.env.PUBLIC_API_BASE || 'https://api.rentease9ja.com
           const cfg = TABS[current], list = rows();
           const cntEl = $('cnt-' + current); if (cntEl) cntEl.textContent = (cache[current] || []).length;
           $('state').textContent = list.length + ' record' + (list.length === 1 ? '' : 's');
-          if (!list.length) { $('table').innerHTML = `<tbody><tr><td colspan="9"><div class="empty">${svg('inbox', 28)}<p>No records yet.</p></div></td></tr></tbody>`; return; }
+          if (!list.length) {
+            const total = (cache[current] || []).length, q = $('search').value.trim();
+            const msg = (total && q) ? `No results for &ldquo;${esc(q)}&rdquo;.` : 'No records yet.';
+            $('table').innerHTML = `<tbody><tr><td colspan="9"><div class="empty">${svg('inbox', 28)}<p>${msg}</p></div></td></tr></tbody>`; return;
+          }
           const head = '<thead><tr>' + cfg.cols.map((c) => `<th>${c.h}</th>`).join('') + '<th></th></tr></thead>';
           const body = '<tbody>' + list.map((r) => '<tr>' + cfg.cols.map((c) => {
             const v = c.g(r);
