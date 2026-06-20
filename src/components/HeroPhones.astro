@@ -1,0 +1,229 @@
+---
+// Three faithful app-screen mockups shown side by side in the hero, recreated
+// from the live app screens (which are behind login):
+//   Tenant  → Explore         (lib/features/tenant/explore/explore_screen.dart)
+//   Agent   → Agent Workspace  (lib/features/agent/dashboard/agent_dashboard_screen.dart)
+//   Landlord→ My Portfolio      (lib/features/landlord/dashboard/landlord_dashboard_screen.dart)
+// Content uses realistic demo data modelled on real listings/stats.
+---
+<div class="hp" role="img" aria-label="RentEase 9ja app screens: tenant Explore, agent Workspace, and landlord Portfolio dashboards">
+  <!-- TENANT — Explore -->
+  <article class="hp-phone hp-left" style="--ac:#2BB673;">
+    <span class="hp-tag">Tenant</span>
+    <div class="hp-screen">
+      <div class="hp-sb"><span>9:41</span><span class="hp-sb-i"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div>
+      <div class="hp-pad">
+        <div class="hp-thd"><span class="hp-av ph"></span><div class="hp-ttl"><strong>Explore</strong><span>Find your perfect place</span></div><span class="hp-bell"><i class="fas fa-bell"></i></span></div>
+        <div class="hp-search"><i class="fas fa-magnifying-glass"></i><div><b>Where to?</b><span>Location, price, or city…</span></div><span class="hp-flt"><i class="fas fa-sliders"></i></span></div>
+        <div class="hp-chips"><span class="hp-chip">Buy</span><span class="hp-chip blk">Rent</span><span class="hp-chip">Land</span><span class="hp-chip">Verified</span></div>
+        <div class="hp-sec"><span>Featured</span></div>
+        <div class="hp-cards">
+          <div class="hp-fc"><div class="hp-img t1"><span class="hp-av-badge">AVAILABLE</span><span class="hp-heart"><i class="fas fa-heart"></i></span><div class="hp-ov"><b>₦7.5M</b><span>Modern Duplex</span><em><i class="fas fa-location-dot"></i> Alagbaka, Akure</em></div></div><span class="hp-unit"><i class="fas fa-building"></i> 1 unit available</span></div>
+          <div class="hp-fc"><div class="hp-img t2"><span class="hp-av-badge">AVAILABLE</span><span class="hp-heart"><i class="fas fa-heart"></i></span><div class="hp-ov"><b>₦2.5M</b><span>Residential Land</span><em><i class="fas fa-location-dot"></i> Ado-Ekiti</em></div></div><span class="hp-unit"><i class="fas fa-building"></i> 1 unit available</span></div>
+        </div>
+        <div class="hp-sec"><span>Popular near you</span></div>
+        <div class="hp-list"><div class="hp-li"><div class="hp-th t3"></div><div class="hp-lic"><b>2-Bed Flat · Lekki</b><span>₦1.2M/yr · 2 Beds · 2 Baths</span></div><i class="fas fa-heart"></i></div></div>
+      </div>
+      <nav class="hp-nav"><span class="on"><i class="fas fa-compass"></i>Explore</span><span><i class="fas fa-heart"></i>Saved</span><span><i class="fas fa-comment"></i>Messages</span><span><i class="fas fa-wallet"></i>Wallet</span><span><i class="fas fa-table-cells-large"></i>More</span></nav>
+    </div>
+  </article>
+
+  <!-- AGENT — Agent Workspace (blue accent) -->
+  <article class="hp-phone hp-mid" style="--ac:#2563EB;">
+    <span class="hp-tag">Agent</span>
+    <div class="hp-screen">
+      <div class="hp-sb"><span>9:41</span><span class="hp-sb-i"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div>
+      <div class="hp-pad">
+        <div class="hp-thd"><span class="hp-av ph"></span><strong class="hp-ctr">Agent Workspace</strong><span class="hp-bell ac"><i class="fas fa-bell"></i><i class="hp-dot"></i></span></div>
+        <div class="hp-greet">Hi, Tunde</div>
+        <div class="hp-sub">Here's your overview today</div>
+        <div class="hp-stats g3">
+          <div class="hp-stat"><b>8</b><span>New Leads</span><a>View pipeline</a></div>
+          <div class="hp-stat"><b>12</b><span>Active Listings</span><a>View all</a></div>
+          <div class="hp-stat"><b>3</b><span>New Apps</span><a>Review now</a></div>
+        </div>
+        <div class="hp-qa"><span class="fill"><i class="fas fa-plus"></i>New Listing</span><span><i class="fas fa-calendar"></i>Calendar</span><span><i class="fas fa-wallet"></i>Wallet</span></div>
+        <div class="hp-panel">
+          <div class="hp-psec"><b>Schedule</b><i class="fas fa-ellipsis"></i></div>
+          <div class="hp-days"><span class="on">Today</span><span>Tomorrow</span><span>Mon</span><span>Tue</span></div>
+          <div class="hp-ev"><span class="hp-evt">10:00</span><div><b>Viewing · 2-Bed Flat</b><span>Lekki, Lagos</span></div></div>
+        </div>
+        <div class="hp-sec"><span>Needs Your Attention</span></div>
+        <div class="hp-att"><span class="hp-aic"><i class="fas fa-file-signature"></i></span><div><b>Sales Registry</b><span>Action required</span></div><em class="hp-badge">TXN HUB</em></div>
+      </div>
+      <nav class="hp-nav"><span class="on"><i class="fas fa-table-cells-large"></i>Home</span><span><i class="fas fa-list"></i>Listings</span><span><i class="fas fa-handshake"></i>Tenancies</span><span><i class="fas fa-comment"></i>Chat</span><span><i class="fas fa-user"></i>Profile</span></nav>
+    </div>
+  </article>
+
+  <!-- LANDLORD — My Portfolio (green accent) -->
+  <article class="hp-phone hp-right" style="--ac:#16A34A;">
+    <span class="hp-tag">Landlord</span>
+    <div class="hp-screen">
+      <div class="hp-sb"><span>9:41</span><span class="hp-sb-i"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div>
+      <div class="hp-pad">
+        <div class="hp-thd"><span class="hp-av ph"></span><strong>My Portfolio</strong><span class="hp-licons"><i class="fas fa-chart-line"></i><i class="fas fa-rotate"></i><span class="hp-bell ac"><i class="fas fa-bell"></i><i class="hp-dot"></i></span></span></div>
+        <div class="hp-greet">Good morning, Grace 👋</div>
+        <div class="hp-sub">Here's your property overview</div>
+        <div class="hp-income">
+          <span class="hp-il"><i class="fas fa-wallet"></i> EST. MONTHLY INCOME</span>
+          <b>₦2.4M</b>
+          <span class="hp-pill"><i class="fas fa-users"></i> 9 Active Tenants</span>
+        </div>
+        <div class="hp-stats g3">
+          <div class="hp-stat"><i class="fas fa-building hp-g"></i><b>6</b><span>Active Listings</span></div>
+          <div class="hp-stat"><i class="fas fa-users hp-b"></i><b>9</b><span>Active Tenants</span></div>
+          <div class="hp-stat"><i class="fas fa-screwdriver-wrench hp-g"></i><b>1</b><span>Open Repairs</span></div>
+        </div>
+        <div class="hp-qa"><span class="fill"><i class="fas fa-wallet"></i>Wallet</span><span><i class="fas fa-screwdriver-wrench"></i>Repairs</span><span><i class="fas fa-users"></i>Tenants</span></div>
+        <div class="hp-sec"><span>My Properties</span><a>View all →</a></div>
+        <div class="hp-list">
+          <div class="hp-li"><div class="hp-th t1"></div><div class="hp-lic"><b>3-Bed Duplex · Maitama</b><span>₦3.5M/yr · Occupied</span></div></div>
+          <div class="hp-li"><div class="hp-th t3"></div><div class="hp-lic"><b>2-Bed Flat · Lekki</b><span>₦1.2M/yr · Occupied</span></div></div>
+        </div>
+      </div>
+      <nav class="hp-nav"><span class="on"><i class="fas fa-table-cells-large"></i>Home</span><span><i class="fas fa-building"></i>Properties</span><span><i class="fas fa-users"></i>Tenants</span><span><i class="fas fa-comment"></i>Chat</span><span><i class="fas fa-user"></i>Profile</span></nav>
+    </div>
+  </article>
+</div>
+
+<style>
+  .hp { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 0; perspective: 1600px; width: 100%; }
+  .hp-phone {
+    position: relative; width: clamp(158px, 15vw, 192px); flex: none;
+    background: linear-gradient(160deg, #1a2336, #0b1020);
+    border-radius: 26px; padding: 6px; box-shadow: 0 30px 60px -18px rgba(15,23,42,.5), 0 0 0 1px rgba(255,255,255,.05) inset;
+  }
+  .hp-phone::after { content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 32%; height: 11px; background: #0b1020; border-radius: 0 0 8px 8px; z-index: 3; }
+  .hp-mid  { z-index: 3; transform: translateY(-20px); }
+  .hp-left  { z-index: 2; transform: rotate(-7deg) translateX(22px) scale(.92); transform-origin: bottom right; }
+  .hp-right { z-index: 2; transform: rotate(7deg) translateX(-22px) scale(.92); transform-origin: bottom left; }
+  .hp-tag { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); z-index: 4; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: var(--ac); padding: 3px 11px; border-radius: 999px; white-space: nowrap; box-shadow: 0 6px 14px rgba(15,23,42,.3); }
+
+  .hp-screen { position: relative; border-radius: 20px; overflow: hidden; background: #F4F5FA; aspect-ratio: 9 / 19.3; display: flex; flex-direction: column; font-size: 8px; line-height: 1.25; color: #0F172A; }
+  .hp-sb { display: flex; justify-content: space-between; align-items: center; padding: 6px 11px 1px; font-size: 7px; font-weight: 700; }
+  .hp-sb-i { display: inline-flex; gap: 3px; }
+  .hp-pad { flex: 1; padding: 3px 9px; overflow: hidden; }
+
+  /* header variants */
+  .hp-thd { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+  .hp-av { width: 17px; height: 17px; border-radius: 50%; flex: none; background: var(--ac); color: #fff; font-size: 6.5px; font-weight: 800; display: grid; place-items: center; }
+  .hp-av.ph { background: linear-gradient(135deg, #94a3b8, #475569); }
+  .hp-ttl { flex: 1; text-align: center; line-height: 1.1; }
+  .hp-ttl strong { display: block; font-size: 11px; font-weight: 800; }
+  .hp-ttl span { font-size: 6.4px; color: #6F7785; }
+  .hp-ctr { flex: 1; text-align: center; font-size: 11px; font-weight: 800; }
+  .hp-thd > strong { flex: 1; font-size: 11px; font-weight: 800; }
+  .hp-bell { width: 17px; height: 17px; border-radius: 50%; flex: none; display: grid; place-items: center; background: #fff; color: #475569; font-size: 8px; position: relative; }
+  .hp-bell.ac { background: transparent; color: var(--ac); }
+  .hp-dot { position: absolute; top: 1px; right: 2px; width: 4px; height: 4px; border-radius: 50%; background: #EF4444; }
+  .hp-licons { display: inline-flex; gap: 5px; align-items: center; color: var(--ac); font-size: 8px; }
+
+  .hp-greet { font-size: 11px; font-weight: 800; margin: 5px 0 1px; letter-spacing: -.01em; }
+  .hp-sub { color: #6F7785; font-size: 7.2px; }
+
+  .hp-search { display: flex; align-items: center; gap: 6px; background: #fff; border-radius: 9px; padding: 6px 8px; margin: 7px 0; box-shadow: 0 2px 8px rgba(15,23,42,.05); }
+  .hp-search > i { color: var(--ac); font-size: 8px; }
+  .hp-search div { flex: 1; line-height: 1.15; }
+  .hp-search b { display: block; font-size: 7.8px; font-weight: 800; }
+  .hp-search span { font-size: 6.6px; color: #9AA1AC; }
+  .hp-flt { width: 16px; height: 16px; border-radius: 6px; background: #ECFDF3; color: var(--ac); display: grid; place-items: center; font-size: 7px; }
+
+  .hp-chips { display: flex; gap: 4px; margin-bottom: 7px; }
+  .hp-chip { background: #fff; border: 1px solid #E6E3F2; color: #334155; border-radius: 999px; padding: 4px 8px; font-size: 7px; font-weight: 700; }
+  .hp-chip.blk { background: #0F172A; color: #fff; border-color: #0F172A; }
+
+  .hp-sec { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 5px; font-weight: 800; font-size: 9px; }
+  .hp-sec a { color: var(--ac); font-size: 7px; font-weight: 700; }
+
+  /* featured cards (tenant) */
+  .hp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .hp-fc { background: #fff; border-radius: 9px; overflow: hidden; box-shadow: 0 2px 8px rgba(15,23,42,.05); }
+  .hp-img { position: relative; height: 62px; display: flex; align-items: flex-end; }
+  .hp-img.t1 { background: linear-gradient(150deg, #355c34, #14210f); }
+  .hp-img.t2 { background: linear-gradient(150deg, #b08d3c, #5a3f10); }
+  .hp-av-badge { position: absolute; top: 5px; left: 5px; background: #2BB673; color: #fff; font-size: 5.4px; font-weight: 800; padding: 2px 5px; border-radius: 999px; }
+  .hp-heart { position: absolute; top: 4px; right: 4px; width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.85); color: #C2415C; display: grid; place-items: center; font-size: 6px; }
+  .hp-ov { padding: 5px 6px; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+  .hp-ov b { display: block; font-size: 9.5px; font-weight: 800; }
+  .hp-ov span { display: block; font-size: 6.6px; font-weight: 700; }
+  .hp-ov em { font-style: normal; font-size: 5.8px; opacity: .9; }
+  .hp-unit { display: block; background: #ECFDF3; color: #1F9D61; font-size: 5.8px; font-weight: 700; padding: 3px 6px; }
+
+  /* list rows */
+  .hp-list { display: flex; flex-direction: column; gap: 5px; }
+  .hp-li { display: flex; align-items: center; gap: 6px; background: #fff; border-radius: 9px; padding: 5px 6px; box-shadow: 0 2px 8px rgba(15,23,42,.04); }
+  .hp-th { width: 26px; height: 26px; border-radius: 6px; flex: none; }
+  .hp-th.t1 { background: linear-gradient(135deg, #6FA3DC, #1E4E8C); }
+  .hp-th.t2 { background: linear-gradient(135deg, #F0B6C2, #C2415C); }
+  .hp-th.t3 { background: linear-gradient(135deg, #5CC994, #1F9D61); }
+  .hp-lic { flex: 1; min-width: 0; }
+  .hp-lic b { display: block; font-size: 7.8px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hp-lic span { color: #6F7785; font-size: 6.6px; }
+  .hp-li > i { color: var(--ac); font-size: 8px; }
+
+  /* stat cards */
+  .hp-stats { display: grid; gap: 5px; margin: 8px 0; }
+  .hp-stats.g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .hp-stat { background: #fff; border-radius: 9px; padding: 6px 5px; box-shadow: 0 2px 8px rgba(15,23,42,.05); }
+  .hp-stat i { font-size: 8px; }
+  .hp-stat i.hp-g { color: #16A34A; } .hp-stat i.hp-b { color: #2563EB; }
+  .hp-stat b { display: block; font-size: 13px; font-weight: 800; line-height: 1; margin: 2px 0; }
+  .hp-stat span { color: #6F7785; font-size: 5.6px; display: block; }
+  .hp-stat a { color: var(--ac); font-size: 5.6px; font-weight: 700; }
+
+  /* quick actions */
+  .hp-qa { display: flex; gap: 5px; margin: 8px 0; }
+  .hp-qa span { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; background: #fff; border-radius: 8px; padding: 6px 2px; font-size: 6px; font-weight: 700; color: #334155; box-shadow: 0 2px 8px rgba(15,23,42,.05); text-align: center; }
+  .hp-qa i { color: var(--ac); font-size: 9px; }
+  .hp-qa .fill { background: var(--ac); color: #fff; } .hp-qa .fill i { color: #fff; }
+
+  /* schedule panel (agent) */
+  .hp-panel { background: #fff; border-radius: 10px; padding: 7px; margin-bottom: 7px; box-shadow: 0 2px 8px rgba(15,23,42,.05); }
+  .hp-psec { display: flex; justify-content: space-between; align-items: center; font-size: 9px; font-weight: 800; }
+  .hp-psec i { color: #9AA1AC; }
+  .hp-days { display: flex; gap: 3px; margin: 6px 0; }
+  .hp-days span { font-size: 5.8px; font-weight: 700; border: 1px solid #E6E3F2; border-radius: 999px; padding: 2.5px 5px; color: #6F7785; }
+  .hp-days .on { background: var(--ac); color: #fff; border-color: var(--ac); }
+  .hp-ev { display: flex; align-items: center; gap: 6px; }
+  .hp-evt { font-size: 7.5px; font-weight: 800; color: var(--ac); }
+  .hp-ev b { display: block; font-size: 7.4px; font-weight: 800; }
+  .hp-ev span { font-size: 6.2px; color: #6F7785; }
+
+  /* needs attention (agent) */
+  .hp-att { display: flex; align-items: center; gap: 6px; background: #fff; border-radius: 9px; padding: 6px; box-shadow: 0 2px 8px rgba(15,23,42,.04); }
+  .hp-aic { width: 18px; height: 18px; border-radius: 6px; background: #EFF4FF; color: var(--ac); display: grid; place-items: center; font-size: 7px; flex: none; }
+  .hp-att div { flex: 1; min-width: 0; }
+  .hp-att b { display: block; font-size: 7.4px; font-weight: 800; }
+  .hp-att span { font-size: 6px; color: #6F7785; }
+  .hp-badge { font-style: normal; background: var(--ac); color: #fff; font-size: 5.2px; font-weight: 800; padding: 3px 5px; border-radius: 5px; white-space: nowrap; }
+
+  /* income card (landlord) */
+  .hp-income { background: linear-gradient(140deg, #1F9D61, #157a4a); border-radius: 12px; padding: 8px 9px; margin: 7px 0; color: #fff; }
+  .hp-il { font-size: 5.8px; font-weight: 800; letter-spacing: .06em; opacity: .92; display: flex; align-items: center; gap: 4px; }
+  .hp-income b { display: block; font-size: 17px; font-weight: 800; margin: 4px 0 6px; line-height: 1; }
+  .hp-pill { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,.2); border-radius: 999px; padding: 3px 8px; font-size: 6.2px; font-weight: 700; }
+
+  /* bottom nav */
+  .hp-nav { display: flex; justify-content: space-around; align-items: center; background: #fff; border-top: 1px solid #EEECF7; padding: 6px 3px calc(6px + env(safe-area-inset-bottom)); }
+  .hp-nav span { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 5.4px; font-weight: 700; color: #9AA1AC; }
+  .hp-nav i { font-size: 9px; }
+  .hp-nav .on { color: var(--ac); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hp-phone { transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+    .hp:hover .hp-mid { transform: translateY(-28px); }
+    .hp:hover .hp-left { transform: rotate(-9deg) translateX(16px) scale(.92); }
+    .hp:hover .hp-right { transform: rotate(9deg) translateX(-16px) scale(.92); }
+  }
+  @media (max-width: 920px) {
+    .hp-phone { width: clamp(116px, 30vw, 158px); }
+    .hp-left  { transform: rotate(-6deg) translateX(16px) scale(.9); }
+    .hp-right { transform: rotate(6deg) translateX(-16px) scale(.9); }
+    .hp-mid   { transform: translateY(-12px); }
+  }
+  @media (max-width: 440px) {
+    .hp-phone { width: 32vw; }
+    .hp-left  { transform: rotate(-5deg) translateX(10px) scale(.88); }
+    .hp-right { transform: rotate(5deg) translateX(-10px) scale(.88); }
+  }
+</style>
