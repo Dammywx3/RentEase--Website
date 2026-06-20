@@ -15,4 +15,4 @@ export const SUPPORT_EMAIL = 'support@rentease9ja.com';
 
 // WhatsApp business number in international format, digits only (e.g. '2348012345678').
 // Leave empty to hide the WhatsApp contact button until you have a number.
-export const WHATSAPP_NUMBER = '';
+export const WHATSAPP_NUMBER = '2347042421141';
