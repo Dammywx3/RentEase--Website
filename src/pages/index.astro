@@ -239,7 +239,10 @@ const faqs = [
           <figure class="quote card reveal" data-delay={i}>
             <div class="stars">★★★★★</div>
             <blockquote>{t.quote}</blockquote>
-            <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
+            <figcaption>
+              <div class="q-av" aria-hidden="true">{t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}</div>
+              <div class="q-meta"><strong>{t.name}</strong><span>{t.role}</span></div>
+            </figcaption>
           </figure>
         ))}
       </div>
@@ -363,7 +366,9 @@ const faqs = [
   .quote { padding: 30px 28px; display: flex; flex-direction: column; }
   .stars { color: #F5A623; letter-spacing: 2px; margin-bottom: 14px; }
   .quote blockquote { font-size: 1.05rem; color: var(--text); line-height: 1.6; margin-bottom: 20px; }
-  .quote figcaption { margin-top: auto; display: flex; flex-direction: column; }
+  .quote figcaption { margin-top: auto; display: flex; align-items: center; gap: 12px; }
+  .q-av { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-gradient); color: #fff; font-weight: 800; font-size: .85rem; display: grid; place-items: center; flex-shrink: 0; }
+  .q-meta { display: flex; flex-direction: column; }
   .quote figcaption strong { color: var(--text); }
   .quote figcaption span { color: var(--text-muted); font-size: .88rem; }
 

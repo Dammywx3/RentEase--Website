@@ -212,3 +212,11 @@ p  { font-size: 1.02rem; }
 @media (max-width: 600px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* --- Keyboard focus (a11y) --- */
+:focus-visible { outline: 2.5px solid var(--brand-blue); outline-offset: 2px; border-radius: 6px; }
+.section--dark :focus-visible, .cta-band :focus-visible, .wl-hero :focus-visible { outline-color: #fff; }
+
+/* --- Skip to content --- */
+.skip-link { position: absolute; left: 12px; top: -48px; z-index: 3000; background: var(--brand-blue); color: #fff; font-weight: 700; padding: 10px 16px; border-radius: var(--r-md); transition: top .2s ease; }
+.skip-link:focus { top: 12px; }

@@ -67,8 +67,9 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <Nav active={active} />
-    <main>
+    <main id="main">
       <slot />
     </main>
     {!noFooter && <Footer />}
