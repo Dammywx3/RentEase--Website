@@ -46,7 +46,7 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
             <div class="dlogin">
               <div class="dback"><i class="fas fa-arrow-left"></i></div>
               <h4 class="dvtitle">Verify code</h4>
-              <p class="dmuted dctr">We sent a 6-digit code to<br/>damilareomoadebayo2@gmail.com</p>
+              <p class="dmuted dctr">We sent a 6-digit code to<br/>adigun@example.com</p>
               <div class="dverify-ico sm"><i class="fas fa-envelope-circle-check"></i></div>
               <div class="dotp" id="tap-otp">
                 <span class="dotp-box" id="otp1"></span><span class="dotp-box" id="otp2"></span><span class="dotp-box" id="otp3"></span>
@@ -61,7 +61,7 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
           <div class="dscreen" data-screen="welcome">
             <Fragment set:html={sb} />
             <div class="dwelcome">
-              <h3 class="dwelcome-h">Good evening, Damilare <span class="dwave">👋</span></h3>
+              <h3 class="dwelcome-h">Good evening, Adigun <span class="dwave">👋</span></h3>
               <p class="dmuted dctr">You're logged in as a Tenant.</p>
               <div class="dwel-card">
                 <span class="dpill grey">TENANT</span>
@@ -144,7 +144,7 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
             </div>
             <div class="dpad det">
               <div class="dsubh">Overview</div>
-              <div class="dover"><div class="davatar sm">D</div><div class="drow-b"><div class="dmuted dxs">Landlord / Manager</div><div class="dtitle">Damilare V. Adebayo</div></div><span class="dcirc sm blue"><i class="fas fa-comment"></i></span></div>
+              <div class="dover"><div class="davatar sm">O</div><div class="drow-b"><div class="dmuted dxs">Landlord / Manager</div><div class="dtitle">Mr. Okoro</div></div><span class="dcirc sm blue"><i class="fas fa-comment"></i></span></div>
               <div class="dsubh">Rent &amp; Payments</div>
               <div class="dpay-box">
                 <div class="dpay-row"><span>Monthly rent</span><b>₦250,000</b></div>
@@ -222,7 +222,7 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
                 <div class="dstat"><div class="dstat-n">0</div><div class="dstat-l">Success</div></div>
               </div>
               <div class="dsubh">History</div>
-              <div class="drow sm"><div class="dinitial">F</div><div class="drow-b"><div class="dtitle">Funmi Adebayo</div><div class="dmuted dxs">17/6/2026</div></div><span class="dpill amber xs">Pending</span></div>
+              <div class="drow sm"><div class="dinitial">F</div><div class="drow-b"><div class="dtitle">Funmi Adeyemi</div><div class="dmuted dxs">17/6/2026</div></div><span class="dpill amber xs">Pending</span></div>
               <div class="drow sm"><div class="dinitial">A</div><div class="drow-b"><div class="dtitle">Adigun Dami</div><div class="dmuted dxs">17/6/2026</div></div><span class="dpill amber xs">Pending</span></div>
             </div>
           </div>
@@ -486,11 +486,11 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
 
     const script = [
       { do: () => { showScreen('login'); setCap('Secure sign-in', 'A tenant signs in to one secure account.'); } },
-      { fn: () => type('#val-email', 'damilare@email.com') },
+      { fn: () => type('#val-email', 'adigun@example.com') },
       { fn: () => type('#val-pass', '••••••••') },
       { fn: () => tap('#tap-signin'), after: () => { showScreen('verify'); setCap('Verify it’s you', 'A one-time code keeps every account safe.'); }, gap: 500 },
       { fn: () => type('#tap-otp', '124863', { otp: true }) },
-      { fn: () => tap('#tap-confirm'), after: () => { showScreen('welcome'); setCap('Welcome 👋', 'Good evening, Damilare — straight to your dashboard.'); }, gap: 1500 },
+      { fn: () => tap('#tap-confirm'), after: () => { showScreen('welcome'); setCap('Welcome 👋', 'Good evening, Adigun — straight to your dashboard.'); }, gap: 1500 },
       { fn: () => tap('#tap-explore'), after: () => { showScreen('explore'); setCap('Explore', 'Browse verified homes — filter by rent, buy or land.'); }, gap: 1900 },
       { fn: () => tap('#tap-feat'), after: () => { showScreen('details'); setCap('Property details', 'Full photos, specs and a verified badge on every listing.'); }, gap: 1900 },
       { fn: () => tap('#tap-apply'), after: () => { showScreen('apply'); setCap('Apply securely', 'KYC, live selfie and guarantor checks — fraud-proof.'); }, gap: 2000 },

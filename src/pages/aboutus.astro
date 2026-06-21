@@ -4,13 +4,20 @@ import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 
 const does = [
-  'Discover available properties with ease',
-  'List residential and commercial properties',
-  'Connect tenants with agents and property owners',
-  'Manage property inquiries and offers',
-  'Schedule property viewings',
-  'Communicate directly within the platform',
-  'Simplify the rental journey from search to agreement',
+  'Browse only verified listings, checked for real documents and real owners',
+  'List residential, commercial and land properties',
+  'Connect tenants directly with identity-verified agents and landlords',
+  'Chat, schedule viewings and make offers, all inside the app',
+  'Pay rent and fees securely through escrow-style payments',
+  'Sign legally-binding digital tenancy agreements',
+  'Track rent, receipts and renewals from one dashboard',
+];
+
+const diff = [
+  { icon: 'fa-circle-check', title: 'Verified, always', text: 'Every listing is checked for real documents and owners, and every agent and landlord passes KYC. No ghosts, no fakes.' },
+  { icon: 'fa-shield-halved', title: 'Money protected', text: 'Rent and fees move through secure, escrow-style payments and are released only on a clean handover.' },
+  { icon: 'fa-file-signature', title: 'Everything digital', text: 'Legally-binding tenancy agreements you sign from your phone and access anytime, no paperwork.' },
+  { icon: 'fa-mobile-screen-button', title: 'All in one place', text: 'Search, chat, viewings, offers, payments and management for tenants, agents and landlords, in one app.' },
 ];
 
 const serve = [
@@ -40,9 +47,29 @@ const values = [
   <section class="section section--surface">
     <div class="container narrow">
       <div class="prose reveal">
-        <p>We created RentEase 9ja to solve the common problems people face in the housing market, delayed responses, scattered listings, poor communication, stressful searches, and a lack of trust in the renting process. Our goal is to bring landlords, agents, and tenants together on one reliable digital platform where renting and managing properties becomes simple and efficient.</p>
+        <p>RentEase 9ja was born out of a painful truth: renting in Nigeria is broken. Too many people lose money to fake listings, ghost agents and cash payments that simply vanish, with no agreements, no receipts, and no one to hold accountable.</p>
+        <p>So we set out to build the trust layer Nigerian real estate has always lacked, one platform where every listing is verified, every agent and landlord is identity-checked, every payment is protected, and every agreement is digital. From the first search to the signed lease, RentEase 9ja makes renting, buying and selling property safe, transparent and stress-free, for tenants, agents and landlords alike.</p>
       </div>
       <img src="/image1.webp" alt="The RentEase 9ja experience" class="media reveal" loading="lazy" width="900" height="540" />
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why RentEase 9ja</span>
+        <h2>Trust, built into every step</h2>
+        <p>We didn't just digitise property listings, we rebuilt the whole process around safety and accountability.</p>
+      </div>
+      <div class="grid grid-4">
+        {diff.map((d, i) => (
+          <div class="diff reveal" data-delay={i % 4}>
+            <div class="d-icon"><i class={`fas ${d.icon}`}></i></div>
+            <h3>{d.title}</h3>
+            <p>{d.text}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -51,11 +78,11 @@ const values = [
       <div class="grid grid-2 mv">
         <div class="mv-card card reveal">
           <span class="eyebrow">Our mission</span>
-          <p>To simplify real estate access in Nigeria by building a trusted digital platform that makes renting, listing, and managing properties smarter, safer, and more efficient for everyone.</p>
+          <p>To make property in Nigeria safe and accessible for everyone, by replacing fraud, guesswork and paperwork with verified listings, secure payments and digital agreements on one trusted platform.</p>
         </div>
         <div class="mv-card card reveal" data-delay="1">
           <span class="eyebrow">Our vision</span>
-          <p>To become one of the most trusted and widely used property technology platforms in Nigeria, helping millions find homes, secure spaces for business, and manage properties with confidence.</p>
+          <p>To become the most trusted property platform in Africa, where no one ever has to fear being defrauded when they look for a home, list a property, or close a deal.</p>
         </div>
       </div>
     </div>
@@ -138,6 +165,10 @@ const values = [
   .does { gap: 14px 30px; }
   .does li { display: flex; align-items: flex-start; gap: 12px; color: var(--text-2); font-weight: 500; }
   .does i { color: var(--brand-green); margin-top: 3px; }
+  .diff { text-align: center; }
+  .d-icon { width: 60px; height: 60px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--brand-gradient); margin: 0 auto 16px; box-shadow: var(--shadow-glow); }
+  .diff h3 { margin-bottom: 6px; font-size: 1.12rem; color: #fff; }
+  .diff p { color: var(--on-dark-2); font-size: .95rem; line-height: 1.65; }
   .serve { padding: 30px 28px; }
   .s-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 1.35rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 16px; }
   .serve h3 { margin-bottom: 8px; }
