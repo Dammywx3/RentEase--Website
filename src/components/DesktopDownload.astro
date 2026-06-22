@@ -1,41 +1,83 @@
 ---
 // Desktop app download cards (macOS / Windows / Linux) with OS auto-detection.
+// macOS ships as two builds (Apple silicon + Intel); the card defaults to Apple
+// silicon and auto-switches to Intel on Intel Macs, with an explicit alt link.
 // URLs come from src/config.ts; an empty URL shows that platform as "Coming soon".
 import { DESKTOP_DOWNLOADS, DESKTOP_VERSION, DESKTOP_RELEASES_URL } from '../config';
 
-const platforms = [
-  { key: 'mac', label: 'macOS', sub: 'Apple silicon & Intel · .dmg', icon: 'fa-apple', url: DESKTOP_DOWNLOADS.mac },
-  { key: 'windows', label: 'Windows', sub: '10 & 11, 64-bit · .msi', icon: 'fa-windows', url: DESKTOP_DOWNLOADS.windows },
-  { key: 'linux', label: 'Linux', sub: 'AppImage', icon: 'fa-linux', url: DESKTOP_DOWNLOADS.linux },
-];
-const anyAvailable = platforms.some((p) => p.url);
+const { macArm, macIntel, windows, linux } = DESKTOP_DOWNLOADS;
+const anyAvailable = !!(macArm || macIntel || windows || linux);
 ---
 <div class="dl" data-dl>
   <div class="dl-grid">
-    {platforms.map((p) => (
-      <a class="dl-card" data-os={p.key} href={p.url || undefined} aria-disabled={p.url ? 'false' : 'true'}>
-        <i class={`fab ${p.icon}`} aria-hidden="true"></i>
-        <span class="dl-label">{p.url ? `Download for ${p.label}` : p.label}</span>
-        <span class="dl-sub">{p.url ? p.sub : 'Coming soon'}</span>
-        <span class="dl-rec">For your device</span>
-      </a>
-    ))}
+    <a class="dl-card" data-os="mac" data-mac href={macArm || undefined} data-arm={macArm} data-intel={macIntel} aria-disabled={macArm ? 'false' : 'true'}>
+      <i class="fab fa-apple" aria-hidden="true"></i>
+      <span class="dl-label">{macArm ? 'Download for macOS' : 'macOS'}</span>
+      <span class="dl-sub" data-mac-sub>{macArm ? 'Apple silicon · .dmg' : 'Coming soon'}</span>
+      <span class="dl-rec">For your device</span>
+    </a>
+    <a class="dl-card" data-os="windows" href={windows || undefined} aria-disabled={windows ? 'false' : 'true'}>
+      <i class="fab fa-windows" aria-hidden="true"></i>
+      <span class="dl-label">{windows ? 'Download for Windows' : 'Windows'}</span>
+      <span class="dl-sub">{windows ? '10 & 11, 64-bit · .msi' : 'Coming soon'}</span>
+      <span class="dl-rec">For your device</span>
+    </a>
+    <a class="dl-card" data-os="linux" href={linux || undefined} aria-disabled={linux ? 'false' : 'true'}>
+      <i class="fab fa-linux" aria-hidden="true"></i>
+      <span class="dl-label">{linux ? 'Download for Linux' : 'Linux'}</span>
+      <span class="dl-sub">{linux ? 'AppImage · x86_64' : 'Coming soon'}</span>
+      <span class="dl-rec">For your device</span>
+    </a>
   </div>
+
+  {macArm && macIntel && (
+    <p class="dl-alt">
+      <a data-mac-alt href={macIntel} data-arm={macArm} data-intel={macIntel}>
+        <i class="fab fa-apple" aria-hidden="true"></i> On an Intel Mac? Get the Intel build
+      </a>
+    </p>
+  )}
+
   <p class="dl-meta">
     {DESKTOP_VERSION && <span>Version {DESKTOP_VERSION}</span>}
-    {DESKTOP_RELEASES_URL && <> · <a href={DESKTOP_RELEASES_URL} target="_blank" rel="noopener">Release notes</a></>}
+    {DESKTOP_RELEASES_URL && <> · <a href={DESKTOP_RELEASES_URL} target="_blank" rel="noopener">All releases &amp; notes</a></>}
     {!anyAvailable && <span>Desktop apps are on the way — <a href="/waitlist">join the waitlist</a> to be notified.</span>}
   </p>
 </div>
 
 <script is:inline>
-  document.querySelectorAll('[data-dl]').forEach(function (root) {
-    var s = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '') + ' ' + (navigator.userAgent || '');
-    var os = /Mac|iPhone|iPad/i.test(s) ? 'mac' : /Win/i.test(s) ? 'windows' : /Linux|X11|Android/i.test(s) ? 'linux' : '';
-    if (!os) return;
-    var card = root.querySelector('[data-os="' + os + '"]');
-    if (card) root.querySelectorAll('.dl-card').forEach(function (c) { c.classList.toggle('dl-primary', c === card); });
-  });
+  (function () {
+    function macArch() {
+      try {
+        var c = document.createElement('canvas');
+        var gl = c.getContext('webgl') || c.getContext('experimental-webgl');
+        if (!gl) return null;
+        var dbg = gl.getExtension('WEBGL_debug_renderer_info');
+        var r = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : '';
+        if (/apple/i.test(r)) return 'arm';
+        if (/intel|amd|radeon|nvidia|geforce/i.test(r)) return 'intel';
+      } catch (e) {}
+      return null;
+    }
+    document.querySelectorAll('[data-dl]').forEach(function (root) {
+      var s = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '') + ' ' + (navigator.userAgent || '');
+      var os = /Mac|iPhone|iPad/i.test(s) ? 'mac' : /Win/i.test(s) ? 'windows' : /Linux|X11|Android/i.test(s) ? 'linux' : '';
+      if (os) {
+        var card = root.querySelector('[data-os="' + os + '"]');
+        if (card) root.querySelectorAll('.dl-card').forEach(function (c) { c.classList.toggle('dl-primary', c === card); });
+      }
+      var mac = root.querySelector('[data-mac]');
+      if (mac && os === 'mac' && macArch() === 'intel') {
+        var intel = mac.getAttribute('data-intel');
+        if (intel) {
+          mac.setAttribute('href', intel);
+          var sub = mac.querySelector('[data-mac-sub]'); if (sub) sub.textContent = 'Intel · .dmg';
+          var alt = root.querySelector('[data-mac-alt]');
+          if (alt) { alt.setAttribute('href', alt.getAttribute('data-arm')); alt.lastChild.textContent = ' On Apple silicon? Get the Apple silicon build'; }
+        }
+      }
+    });
+  })();
 </script>
 
 <style>
@@ -49,7 +91,9 @@ const anyAvailable = platforms.some((p) => p.url);
   .dl-rec { display: none; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--brand-gradient); color: #fff; font-size: .68rem; font-weight: 800; letter-spacing: .03em; padding: 3px 10px; border-radius: var(--r-pill); white-space: nowrap; box-shadow: 0 6px 14px rgba(30,78,140,.3); }
   .dl-card.dl-primary { border-color: var(--brand-blue); box-shadow: var(--shadow-glow); }
   .dl-card.dl-primary .dl-rec { display: block; }
-  .dl-meta { text-align: center; color: var(--text-muted); font-size: .9rem; margin-top: 18px; }
+  .dl-alt { text-align: center; margin-top: 16px; }
+  .dl-alt a { color: var(--brand-blue); font-weight: 600; font-size: .92rem; }
+  .dl-meta { text-align: center; color: var(--text-muted); font-size: .9rem; margin-top: 14px; }
   .dl-meta a { color: var(--brand-blue); font-weight: 600; }
   @media (max-width: 640px) { .dl-grid { grid-template-columns: 1fr; } }
 </style>

@@ -14,10 +14,12 @@ export const WHATSAPP_NUMBER = '2347042421141';
 // Desktop app (agent/landlord workspace) installers.
 // Recommended: publish to GitHub Releases, then paste the direct asset URLs here.
 // Leave a URL empty to show that platform as "Coming soon".
-export const DESKTOP_VERSION = '';                 // e.g. 'v1.0.0' (shown on the download page; empty hides it)
-export const DESKTOP_RELEASES_URL = '';            // e.g. 'https://github.com/<owner>/<repo>/releases' (release-notes link)
+export const DESKTOP_VERSION = 'v0.1.0';
+export const DESKTOP_RELEASES_URL = 'https://github.com/Dammywx3/rentease-desktop-releases/releases';
 export const DESKTOP_DOWNLOADS = {
-  mac: '',      // .dmg  — e.g. '.../RentEase-9ja_1.0.0_universal.dmg'
-  windows: '',  // .msi or .exe
-  linux: '',    // .AppImage
+  // macOS ships as two separate builds (no universal): Apple silicon + Intel.
+  macArm:   'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_aarch64.dmg',
+  macIntel: 'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_x64.dmg',
+  windows:  'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_x64_en-US.msi',
+  linux:    'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_amd64.AppImage',
 };
