@@ -1,0 +1,55 @@
+---
+// Desktop app download cards (macOS / Windows / Linux) with OS auto-detection.
+// URLs come from src/config.ts; an empty URL shows that platform as "Coming soon".
+import { DESKTOP_DOWNLOADS, DESKTOP_VERSION, DESKTOP_RELEASES_URL } from '../config';
+
+const platforms = [
+  { key: 'mac', label: 'macOS', sub: 'Apple silicon & Intel · .dmg', icon: 'fa-apple', url: DESKTOP_DOWNLOADS.mac },
+  { key: 'windows', label: 'Windows', sub: '10 & 11, 64-bit · .msi', icon: 'fa-windows', url: DESKTOP_DOWNLOADS.windows },
+  { key: 'linux', label: 'Linux', sub: 'AppImage', icon: 'fa-linux', url: DESKTOP_DOWNLOADS.linux },
+];
+const anyAvailable = platforms.some((p) => p.url);
+---
+<div class="dl" data-dl>
+  <div class="dl-grid">
+    {platforms.map((p) => (
+      <a class="dl-card" data-os={p.key} href={p.url || undefined} aria-disabled={p.url ? 'false' : 'true'}>
+        <i class={`fab ${p.icon}`} aria-hidden="true"></i>
+        <span class="dl-label">{p.url ? `Download for ${p.label}` : p.label}</span>
+        <span class="dl-sub">{p.url ? p.sub : 'Coming soon'}</span>
+        <span class="dl-rec">For your device</span>
+      </a>
+    ))}
+  </div>
+  <p class="dl-meta">
+    {DESKTOP_VERSION && <span>Version {DESKTOP_VERSION}</span>}
+    {DESKTOP_RELEASES_URL && <> · <a href={DESKTOP_RELEASES_URL} target="_blank" rel="noopener">Release notes</a></>}
+    {!anyAvailable && <span>Desktop apps are on the way — <a href="/waitlist">join the waitlist</a> to be notified.</span>}
+  </p>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('[data-dl]').forEach(function (root) {
+    var s = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '') + ' ' + (navigator.userAgent || '');
+    var os = /Mac|iPhone|iPad/i.test(s) ? 'mac' : /Win/i.test(s) ? 'windows' : /Linux|X11|Android/i.test(s) ? 'linux' : '';
+    if (!os) return;
+    var card = root.querySelector('[data-os="' + os + '"]');
+    if (card) root.querySelectorAll('.dl-card').forEach(function (c) { c.classList.toggle('dl-primary', c === card); });
+  });
+</script>
+
+<style>
+  .dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .dl-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 7px; text-align: center; padding: 26px 18px; border-radius: var(--r-lg); border: 1px solid var(--border); background: var(--surface); box-shadow: var(--shadow-card); transition: var(--transition); color: var(--text); }
+  .dl-card[aria-disabled="true"] { opacity: .62; }
+  .dl-card:not([aria-disabled="true"]):hover { transform: translateY(-4px); border-color: rgba(30,78,140,.3); box-shadow: var(--shadow-lift); }
+  .dl-card i { font-size: 2.1rem; color: var(--text); }
+  .dl-label { font-weight: 700; font-size: 1rem; }
+  .dl-sub { color: var(--text-muted); font-size: .85rem; }
+  .dl-rec { display: none; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--brand-gradient); color: #fff; font-size: .68rem; font-weight: 800; letter-spacing: .03em; padding: 3px 10px; border-radius: var(--r-pill); white-space: nowrap; box-shadow: 0 6px 14px rgba(30,78,140,.3); }
+  .dl-card.dl-primary { border-color: var(--brand-blue); box-shadow: var(--shadow-glow); }
+  .dl-card.dl-primary .dl-rec { display: block; }
+  .dl-meta { text-align: center; color: var(--text-muted); font-size: .9rem; margin-top: 18px; }
+  .dl-meta a { color: var(--brand-blue); font-weight: 600; }
+  @media (max-width: 640px) { .dl-grid { grid-template-columns: 1fr; } }
+</style>

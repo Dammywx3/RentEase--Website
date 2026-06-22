@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import DesktopDownload from '../components/DesktopDownload.astro';
+import DeviceLaptop from '../components/DeviceLaptop.astro';
+
+const features = [
+  { icon: 'fa-bolt', title: 'Faster on desktop', text: 'A roomy, keyboard-first workspace for managing listings, leads and payouts at speed.' },
+  { icon: 'fa-table-columns', title: 'Everything in view', text: 'Dashboard, applications, viewings, registry and wallet, side by side on a big screen.' },
+  { icon: 'fa-bell', title: 'Native notifications', text: 'Get desktop alerts for new leads, applications and payments the moment they land.' },
+  { icon: 'fa-shield-halved', title: 'Same secure account', text: 'Signs in with your RentEase 9ja account, verified, encrypted, and always in sync.' },
+];
+const requirements = [
+  { os: 'macOS', detail: 'macOS 11 Big Sur or later · Apple silicon & Intel' },
+  { os: 'Windows', detail: 'Windows 10 or 11 · 64-bit' },
+  { os: 'Linux', detail: 'Most modern distros · AppImage (x86_64)' },
+];
+---
+<Base
+  title="Download the RentEase 9ja Desktop App | Mac, Windows & Linux"
+  description="Get the RentEase 9ja desktop workspace for agents and landlords. Available for macOS, Windows and Linux."
+  active="/download"
+>
+  <PageHero
+    eyebrow="Desktop app"
+    title="The agent workspace, <span class='gradient-text'>on your desktop.</span>"
+    subtitle="A full-screen workspace for agents and landlords, manage listings, leads, applications, viewings, payouts and registry, all from your computer."
+  />
+
+  <section class="section section--surface">
+    <div class="container narrow reveal">
+      <DesktopDownload />
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="dl-shot reveal"><DeviceLaptop /></div>
+    </div>
+  </section>
+
+  <section class="section section--mist">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why desktop</span>
+        <h2>Built for getting things done</h2>
+      </div>
+      <div class="grid grid-4">
+        {features.map((f, i) => (
+          <div class="dlf reveal" data-delay={i % 4}>
+            <div class="dlf-icon"><i class={`fas ${f.icon}`}></i></div>
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="container narrow">
+      <div class="section-head reveal">
+        <span class="eyebrow">System requirements</span>
+        <h2>What you need</h2>
+      </div>
+      <ul class="reqs reveal">
+        {requirements.map((r) => (<li><strong>{r.os}</strong><span>{r.detail}</span></li>))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow { max-width: 840px; }
+  .dl-shot { display: flex; justify-content: center; position: relative; z-index: 1; }
+  .dlf { text-align: center; }
+  .dlf-icon { width: 56px; height: 56px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.35rem; color: #fff; background: var(--brand-gradient); margin: 0 auto 14px; }
+  .dlf h3 { margin-bottom: 6px; font-size: 1.08rem; }
+  .dlf p { color: var(--text-muted); font-size: .92rem; }
+  .reqs { display: flex; flex-direction: column; gap: 12px; max-width: 620px; margin: 0 auto; }
+  .reqs li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); box-shadow: var(--shadow-sm); }
+  .reqs strong { color: var(--text); }
+  .reqs span { color: var(--text-muted); text-align: right; font-size: .92rem; }
+</style>

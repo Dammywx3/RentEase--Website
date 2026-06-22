@@ -220,8 +220,10 @@ const faqLd = {
         {appFeatures.map((f) => (<li><i class={`fas ${f.icon}`}></i> {f.text}</li>))}
       </ul>
       <div class="web-cta reveal" data-delay="2">
-        <a href="/waitlist" class="btn btn-light">Join the waitlist</a>
+        <a href="/download" class="btn btn-light">Download desktop app</a>
+        <a href="/waitlist" class="btn btn-on-dark">Join the waitlist</a>
       </div>
+      <p class="web-os reveal" data-delay="2"><i class="fab fa-apple"></i> macOS &nbsp;·&nbsp; <i class="fab fa-windows"></i> Windows &nbsp;·&nbsp; <i class="fab fa-linux"></i> Linux</p>
     </div>
   </section>
 
@@ -400,7 +402,9 @@ const faqLd = {
   .app-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; max-width: 760px; margin: 30px auto 0; }
   .app-chips li { display: inline-flex; align-items: center; gap: 8px; color: var(--on-dark); font-weight: 500; font-size: .9rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r-pill); padding: 8px 14px; }
   .app-chips i { color: #8FE3B9; }
-  .web-cta { display: flex; justify-content: center; margin-top: 28px; }
+  .web-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+  .web-os { text-align: center; margin-top: 14px; color: var(--on-dark-2); font-size: .9rem; font-weight: 600; }
+  .web-os i { color: #fff; }
   @media (max-width: 600px) { .app-chips li { font-size: .82rem; padding: 7px 12px; } }
 
   /* INVESTORS */
