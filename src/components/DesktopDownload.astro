@@ -5,7 +5,7 @@
 // URLs come from src/config.ts; an empty URL shows that platform as "Coming soon".
 import { DESKTOP_DOWNLOADS, DESKTOP_VERSION, DESKTOP_RELEASES_URL } from '../config';
 
-const { macArm, macIntel, windows, linux } = DESKTOP_DOWNLOADS;
+const { macArm, macIntel, windows, linux, linuxDeb, linuxRpm } = DESKTOP_DOWNLOADS;
 const anyAvailable = !!(macArm || macIntel || windows || linux);
 ---
 <div class="dl" data-dl>
@@ -35,6 +35,15 @@ const anyAvailable = !!(macArm || macIntel || windows || linux);
       <a data-mac-alt href={macIntel} data-arm={macArm} data-intel={macIntel}>
         <i class="fab fa-apple" aria-hidden="true"></i> On an Intel Mac? Get the Intel build
       </a>
+    </p>
+  )}
+
+  {(linuxDeb || linuxRpm) && (
+    <p class="dl-alt dl-alt-linux">
+      <i class="fab fa-linux" aria-hidden="true"></i> Other Linux formats:
+      {linuxDeb && <a href={linuxDeb}> Debian / Ubuntu (.deb)</a>}
+      {linuxDeb && linuxRpm && <span> · </span>}
+      {linuxRpm && <a href={linuxRpm}>Fedora / RHEL (.rpm)</a>}
     </p>
   )}
 

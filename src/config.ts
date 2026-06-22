@@ -22,4 +22,7 @@ export const DESKTOP_DOWNLOADS = {
   macIntel: 'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_x64.dmg',
   windows:  'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_x64_en-US.msi',
   linux:    'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_amd64.AppImage',
+  // Extra Linux formats (AppImage above is the universal default):
+  linuxDeb: 'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent_0.1.0_amd64.deb',
+  linuxRpm: 'https://github.com/Dammywx3/rentease-desktop-releases/releases/download/v0.1.0/RentEase.9ja.Agent-0.1.0-1.x86_64.rpm',
 };
