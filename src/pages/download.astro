@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import DesktopDownload from '../components/DesktopDownload.astro';
 import DeviceLaptop from '../components/DeviceLaptop.astro';
+import { WEB_APP_URL } from '../config';
 
 const features = [
   { icon: 'fa-bolt', title: 'Faster on desktop', text: 'A roomy, keyboard-first workspace for managing listings, leads and payouts at speed.' },
@@ -30,6 +31,18 @@ const requirements = [
   <section class="section section--surface">
     <div class="container narrow reveal">
       <DesktopDownload />
+
+      <div class="webapp">
+        <div class="webapp-or"><span>or, no install needed</span></div>
+        <a class="webapp-card" href={WEB_APP_URL} target="_blank" rel="noopener">
+          <span class="webapp-ic"><i class="fas fa-globe"></i></span>
+          <span class="webapp-txt">
+            <strong>Use the web app in your browser</strong>
+            <span>Sign up and start straight away, nothing to download or install.</span>
+          </span>
+          <i class="fas fa-arrow-up-right-from-square webapp-go"></i>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -87,6 +100,18 @@ const requirements = [
 
 <style>
   .narrow { max-width: 840px; }
+  .webapp { margin-top: 30px; }
+  .webapp-or { display: flex; align-items: center; gap: 14px; color: var(--text-muted); font-size: .82rem; margin-bottom: 18px; }
+  .webapp-or::before, .webapp-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .webapp-card { display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-radius: var(--r-lg); border: 1px solid var(--border); background: var(--brand-gradient-soft); box-shadow: var(--shadow-sm); transition: var(--transition); }
+  .webapp-card:hover { transform: translateY(-3px); border-color: rgba(30,78,140,.3); box-shadow: var(--shadow-card); }
+  .webapp-ic { flex: none; width: 46px; height: 46px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.25rem; color: #fff; background: var(--brand-gradient); }
+  .webapp-txt { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .webapp-txt strong { color: var(--text); font-size: 1.02rem; }
+  .webapp-txt span { color: var(--text-muted); font-size: .9rem; }
+  .webapp-go { color: var(--brand-blue); font-size: 1rem; }
+  @media (max-width: 480px) { .webapp-card { flex-wrap: wrap; } .webapp-go { display: none; } }
+
   .dl-shot { display: flex; justify-content: center; position: relative; z-index: 1; }
   .dlf { text-align: center; }
   .dlf-icon { width: 56px; height: 56px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.35rem; color: #fff; background: var(--brand-gradient); margin: 0 auto 14px; }

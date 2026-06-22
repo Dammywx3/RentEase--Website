@@ -4,6 +4,9 @@ export const API_BASE = (import.meta.env.PUBLIC_API_BASE || 'https://api.renteas
 
 export const WEB_APP_HOST = 'app.rentease9ja.com';
 
+// The live web app (sign up / use in the browser, no download needed).
+export const WEB_APP_URL = 'https://app.rentease9ja.com';
+
 // Support contact email (used by the contact modal).
 export const SUPPORT_EMAIL = 'support@rentease9ja.com';
 
