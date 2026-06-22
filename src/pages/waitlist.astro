@@ -264,10 +264,6 @@ const roles = [
     tick(); setInterval(tick, 1000);
   })();
 
-  document.getElementById('hamburger')?.addEventListener('click', () => {
-    document.getElementById('nav-menu')?.classList.toggle('open');
-  });
-
   const API_URL = (window.__API_BASE__ || API_BASE) + '/v1/waitlist';
 
   const showError = (msg) => {
