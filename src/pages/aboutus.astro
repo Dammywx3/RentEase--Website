@@ -73,6 +73,19 @@ const values = [
     </div>
   </section>
 
+  <section class="section section--surface">
+    <div class="container narrow">
+      <figure class="founder card reveal">
+        <img src="/team/damilare.webp" alt="Damilare V Adebayo, Founder & CEO of RentEase 9ja" class="founder-photo" width="120" height="120" loading="lazy" />
+        <div class="founder-body">
+          <span class="eyebrow">A note from our founder</span>
+          <blockquote>I've watched too many people in Nigeria lose their hard-earned money to fake listings and agents who vanish. I built RentEase 9ja so that never has to happen again, where every listing is verified, every naira is protected, and every agreement is real. This is more than an app to us; it's a promise.</blockquote>
+          <figcaption><strong>Damilare V Adebayo</strong><span>Founder, CEO &amp; CTO</span></figcaption>
+        </div>
+      </figure>
+    </div>
+  </section>
+
   <section class="section section--mist">
     <div class="container">
       <div class="grid grid-2 mv">
@@ -165,6 +178,13 @@ const values = [
   .does { gap: 14px 30px; }
   .does li { display: flex; align-items: flex-start; gap: 12px; color: var(--text-2); font-weight: 500; }
   .does i { color: var(--brand-green); margin-top: 3px; }
+  .founder { display: flex; gap: 30px; align-items: center; padding: 36px 34px; background: var(--brand-gradient-soft); border: 1px solid var(--border); }
+  .founder-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: var(--shadow-card); }
+  .founder-body blockquote { font-size: 1.14rem; line-height: 1.7; color: var(--text); font-style: italic; margin: 12px 0 16px; }
+  .founder figcaption strong { display: block; font-family: var(--font-display); font-weight: 800; color: var(--text); }
+  .founder figcaption span { color: var(--text-muted); font-size: .92rem; }
+  @media (max-width: 640px) { .founder { flex-direction: column; text-align: center; padding: 30px 24px; } }
+
   .diff { text-align: center; }
   .d-icon { width: 60px; height: 60px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--brand-gradient); margin: 0 auto 16px; box-shadow: var(--shadow-glow); }
   .diff h3 { margin-bottom: 6px; font-size: 1.12rem; color: #fff; }
