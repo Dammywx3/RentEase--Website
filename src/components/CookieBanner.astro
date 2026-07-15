@@ -37,6 +37,10 @@
 </script>
 
 <style>
+  /* The `hidden` attribute must win over the flex rule below — a bare
+     `.cookie-banner { display:flex }` overrides the UA `[hidden]` style, so
+     setting banner.hidden did nothing (Accept/Decline appeared to do nothing). */
+  .cookie-banner[hidden] { display: none !important; }
   .cookie-banner {
     position: fixed; z-index: 60; left: 16px; right: 16px; bottom: 16px;
     max-width: 640px; margin-inline: auto;
