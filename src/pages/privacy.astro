@@ -23,7 +23,7 @@ const sections = [
       <li><strong>Property data:</strong> Listing details, photos, videos, and address information provided by agents and landlords.</li>
       <li><strong>Financial data:</strong> Payment method details (processed by Paystack), wallet transaction history, escrow records, and payout account details.</li>
       <li><strong>Device &amp; usage data:</strong> Device model, OS version, app usage patterns, and crash logs for performance improvement.</li>
-      <li><strong>Communications:</strong> Messages sent between users within the app's encrypted chat system.</li>
+      <li><strong>Communications:</strong> Messages sent between users through the app's chat system.</li>
     </ul>` },
   { num: '02', id: 's2', title: 'How We Use Your Data', body: `
     <p>We use the information we collect solely to operate, improve, and secure the RentEase 9ja platform. Specifically:</p>
@@ -48,7 +48,7 @@ const sections = [
     <p>We implement industry-standard security measures to protect your information from unauthorised access, alteration, disclosure, or destruction:</p>
     <ul>
       <li>All data is encrypted in transit using TLS 1.3 and at rest using AES-256 encryption.</li>
-      <li>User messages are end-to-end encrypted. We cannot read the content of your private conversations.</li>
+      <li>Messages are encrypted in transit using TLS and stored securely on our servers. Our staff do not access message content in the ordinary course; access is limited to what is necessary for customer support, dispute resolution, fraud/safety investigations, or compliance with legal obligations.</li>
       <li>Payment data is handled exclusively by PCI-DSS compliant processors (Paystack). We never store raw card details.</li>
       <li>Multi-factor authentication (MFA) and biometric login options are available to all users.</li>
     </ul>
@@ -77,9 +77,14 @@ const sections = [
     <p>The app integrates with the following third-party services, each with their own privacy policies:</p>
     <ul>
       <li><strong>Paystack</strong>, Payment processing.</li>
+      <li><strong>Smile ID</strong>, Identity verification. Processes selfie/liveness images, ID documents, and BVN/NIN checks against government records as part of KYC.</li>
       <li><strong>ZegoCloud</strong>, In-app voice and video calls.</li>
       <li><strong>Cloudinary</strong>, Secure media (photo/video) storage.</li>
       <li><strong>Firebase</strong>, Push notifications.</li>
+      <li><strong>Resend</strong>, Transactional email delivery.</li>
+      <li><strong>Sentry</strong>, Error monitoring and crash reporting.</li>
+      <li><strong>Plausible</strong>, Privacy-friendly, cookieless website analytics.</li>
+      <li><strong>Tawk.to</strong>, Live-chat support widget on our website (loads only if you accept cookies).</li>
     </ul>
     <p>We only share data with these providers to the extent necessary to deliver our services. We require all third-party processors to treat your data in accordance with this policy.</p>` },
   { num: '09', id: 's9', title: 'Changes to This Policy', body: `
@@ -90,13 +95,13 @@ const sections = [
 ---
 <Legal
   title="Privacy Policy | RentEase 9ja"
-  description="How RentEase 9ja collects, uses, and protects your personal information, NDPR compliant."
+  description="How RentEase 9ja collects, uses, and protects your personal information."
   active="/privacy"
   heading="Privacy Policy"
   intro="How RentEase 9ja collects, uses, and protects your personal information."
-  effective="Effective February 24, 2026 · Applies to iOS & Android apps"
+  effective="Effective July 14, 2026 · Applies to iOS & Android apps"
   scope={{ title: 'Who this policy covers', text: "This Privacy Policy applies to all users of the RentEase 9ja app, including <strong>Tenants</strong>, <strong>Agents</strong>, and <strong>Landlords</strong>. By downloading or using the app, you agree to the practices described here." }}
   toc={toc}
   sections={sections}
-  contact={{ title: 'Get in touch', text: 'Our Data Protection team responds within 2 business days.', email: 'privacy@rentease9ja.com', note: 'RentEase 9ja · Lagos, Nigeria · NDPR Compliant' }}
+  contact={{ title: 'Get in touch', text: 'Our Data Protection team responds within 2 business days.', email: 'privacy@rentease9ja.com', note: 'RentEase 9ja Homes &amp; Property Ltd · RC 9527258 · Registered in Nigeria, 7 May 2026 · Akure, Ondo State, Nigeria' }}
 />

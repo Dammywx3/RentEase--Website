@@ -1,0 +1,65 @@
+---
+// Cookie consent banner. Gates the Tawk.to live-chat widget (which sets cookies).
+// Plausible analytics is cookieless and is NOT gated by this banner.
+// Choice persisted in localStorage as re9ja_cookie_consent = 'accepted' | 'declined'.
+---
+
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <p class="cookie-text">
+    We use cookies to power our live-chat support widget. Our website analytics are cookieless.
+    See our <a href="/privacy">Privacy Policy</a>.
+  </p>
+  <div class="cookie-actions">
+    <button type="button" id="cookie-decline" class="cookie-btn ghost">Decline</button>
+    <button type="button" id="cookie-accept" class="cookie-btn solid">Accept</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 're9ja_cookie_consent';
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+    var choice = null;
+    try { choice = localStorage.getItem(KEY); } catch (e) {}
+    if (!choice) banner.hidden = false;
+
+    function set(val) {
+      try { localStorage.setItem(KEY, val); } catch (e) {}
+      banner.hidden = true;
+      if (val === 'accepted' && typeof window.__loadTawk === 'function') window.__loadTawk();
+    }
+    var accept = document.getElementById('cookie-accept');
+    var decline = document.getElementById('cookie-decline');
+    if (accept) accept.addEventListener('click', function () { set('accepted'); });
+    if (decline) decline.addEventListener('click', function () { set('declined'); });
+  })();
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed; z-index: 60; left: 16px; right: 16px; bottom: 16px;
+    max-width: 640px; margin-inline: auto;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: 16px 18px; border-radius: 14px;
+    background: var(--navy-card, #0f1a2e); color: rgba(255, 255, 255, .9);
+    border: 1px solid var(--navy-border, rgba(255, 255, 255, .12));
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+  }
+  .cookie-text { margin: 0; font-size: .86rem; line-height: 1.5; flex: 1 1 260px; }
+  .cookie-text a { color: var(--brand-green, #22c55e); text-decoration: underline; }
+  .cookie-actions { display: flex; gap: 10px; margin-left: auto; }
+  .cookie-btn {
+    cursor: pointer; border-radius: 10px; padding: 9px 18px; font-size: .85rem; font-weight: 600;
+    border: 1px solid var(--navy-border, rgba(255, 255, 255, .18)); transition: opacity .15s ease;
+  }
+  .cookie-btn:hover { opacity: .85; }
+  .cookie-btn.ghost { background: transparent; color: rgba(255, 255, 255, .78); }
+  .cookie-btn.solid {
+    background: var(--brand-green, #22c55e); border-color: transparent; color: #04120a;
+  }
+  @media (max-width: 480px) {
+    .cookie-actions { width: 100%; }
+    .cookie-btn { flex: 1; }
+  }
+</style>
