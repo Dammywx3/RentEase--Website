@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" role="img" aria-label="RentEase 9ja">
+  <rect x="4" y="8" width="64" height="64" rx="8" fill="#fff"/>
+  <path d="M19 39 36 27l17 12v20H19Z" fill="none" stroke="#1E4E8C" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M31 59V45h10v14" fill="none" stroke="#1E4E8C" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M49 28v31" stroke="#2BB673" stroke-width="4"/>
+  <text x="86" y="54" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="700">RentEase <tspan fill="#8FE3B9">9ja</tspan></text>
+</svg>

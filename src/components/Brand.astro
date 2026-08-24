@@ -1,19 +1,15 @@
 ---
 const { inverse = false, compact = false } = Astro.props;
+const logoSrc = inverse ? '/brand-logo-light-v2.png' : '/brand-logo-v2.png';
 ---
-<span class:list={['brand-lockup', { inverse, compact }]}>
-  <span class="brand-mark" aria-hidden="true"><img src="/brand-mark.svg" alt="" width="38" height="38" /></span>
-  <span class="brand-name">RentEase <strong>9ja</strong></span>
+<span class:list={['brand-lockup', { compact }]}>
+  <img src={logoSrc} alt="RentEase 9ja" width="200" height="40" />
 </span>
 
 <style>
-  .brand-lockup { display: inline-flex; align-items: center; gap: 10px; color: var(--text); }
-  .brand-mark, .brand-mark img { width: 38px; height: 38px; display: block; flex: none; }
-  .brand-name { font-size: 1.12rem; font-weight: 750; line-height: 1; white-space: nowrap; }
-  .brand-name strong { color: var(--brand-green-dark); font-weight: 750; }
-  .inverse { color: #fff; }
-  .inverse .brand-mark { border-radius: 6px; outline: 1px solid rgba(255,255,255,.22); }
-  .inverse .brand-name strong { color: #8FE3B9; }
-  .compact .brand-mark, .compact .brand-mark img { width: 34px; height: 34px; }
-  .compact .brand-name { font-size: 1rem; }
+  .brand-lockup, .brand-lockup img { display: block; width: 200px; height: 40px; flex: none; }
+  .compact, .compact img { width: 175px; height: 35px; }
+  @media (max-width: 480px) {
+    .brand-lockup, .brand-lockup img { width: 175px; height: 35px; }
+  }
 </style>
