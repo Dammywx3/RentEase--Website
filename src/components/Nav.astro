@@ -1,6 +1,4 @@
 ---
-import Brand from './Brand.astro';
-
 const links = [
   { href: '/', label: 'Home' },
   { href: '/rent', label: 'Rent' },
@@ -17,7 +15,7 @@ const { active = '' } = Astro.props;
 <header class="site-header" id="site-header">
   <nav class="navbar container" aria-label="Primary">
     <a href="/" class="brand" aria-label="RentEase 9ja home">
-      <Brand />
+      <img src="/logo.webp" alt="RentEase 9ja" width="178" height="92" />
     </a>
 
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
@@ -46,6 +44,7 @@ const { active = '' } = Astro.props;
   .site-header.scrolled { box-shadow: var(--shadow-sm); }
   .navbar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .brand { display: inline-flex; align-items: center; }
+  .brand img { height: 54px; width: auto; display: block; }
   .nav-menu { display: flex; align-items: center; gap: 24px; }
   .nav-menu ul { display: flex; align-items: center; gap: 20px; }
   .nav-menu a { font-weight: 600; font-size: .88rem; color: var(--text-2); transition: var(--transition); }
