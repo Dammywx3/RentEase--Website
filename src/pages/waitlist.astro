@@ -1,37 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
-import { API_BASE } from '../config';
 
 const features = [
-  { icon: 'fa-id-card', title: 'Verified identity', text: 'Every agent and landlord passes strict KYC verification. No ghosts, no scams, just real properties and real people.' },
-  { icon: 'fa-shield-halved', title: 'Escrow protection', text: 'Rent and fees are held safely in a neutral escrow wallet, released only when the property is successfully handed over.' },
-  { icon: 'fa-file-signature', title: 'Digital contracts', text: 'Sign legally-binding tenancy agreements from your phone. Documents are stored securely in the cloud forever.' },
+  { icon: 'fa-id-card', title: 'Identity checks', text: 'Agent and landlord accounts complete KYC checks before they can use protected transaction workflows.' },
+  { icon: 'fa-shield-halved', title: 'Protected payments', text: 'The payment flow records agreed release conditions and produces a digital transaction history.' },
+  { icon: 'fa-file-signature', title: 'Digital contracts', text: 'Sign legally binding tenancy agreements from your phone. Documents remain securely available for the applicable retention period.' },
 ];
 
 const roles = [
-  { icon: 'fa-house-user', title: 'For tenants', text: 'Find your next home safely, without fear of being defrauded.', perks: ['View only verified listings', 'Pay securely via in-app escrow', 'Sign documents digitally', 'Log maintenance requests'] },
+  { icon: 'fa-house-user', title: 'For tenants', text: 'Search, communicate, and keep the rental process in one record.', perks: ['Review listing status', 'Use protected payment steps', 'Sign documents digitally', 'Log maintenance requests'] },
   { icon: 'fa-key', title: 'For landlords', text: 'Automate your portfolio, track payments, and manage properties.', perks: ['Automated rent reminders', 'Screened & verified tenants', 'Dashboard for property metrics', 'Direct payouts to your bank'] },
   { icon: 'fa-briefcase', title: 'For agents', text: 'Close deals faster and build a verifiable digital reputation.', perks: ['Built-in CRM for leads', 'Verified blue badge', 'Digital scheduling & viewings', 'Secure commission payouts'] },
 ];
 ---
 <Base
   title="Join the RentEase 9ja Waitlist | Early Access"
-  description="Join 1,200+ Nigerians on the RentEase 9ja waitlist. Be first to access Nigeria's safest, fully digital property platform, verified listings, escrow payments, digital leases."
+  description="Join 800+ Nigerians on the RentEase 9ja waitlist. Get early access to a safer digital property platform with verified listings, protected payments, and digital leases."
   active="/waitlist"
 >
   <section class="wl-hero">
-    <div class="wl-glow" aria-hidden="true"></div>
     <div class="container wl-grid">
       <div class="wl-copy reveal">
-        <span class="eyebrow"><span class="dot"></span> Beta launching soon</span>
-        <h1>Rent with <span class="gradient-text">transparency</span> & peace of mind</h1>
-        <p>Nigeria's first fully digital, fraud-proof property platform. Tenants rent safely, agents earn securely, and landlords stay in control.</p>
-        <div class="wl-countdown" id="countdown" aria-label="Time until launch">
-          <div class="cd-u"><span class="cd-n" id="cd-d">00</span><span class="cd-l">Days</span></div>
-          <div class="cd-u"><span class="cd-n" id="cd-h">00</span><span class="cd-l">Hrs</span></div>
-          <div class="cd-u"><span class="cd-n" id="cd-m">00</span><span class="cd-l">Min</span></div>
-          <div class="cd-u"><span class="cd-n" id="cd-s">00</span><span class="cd-l">Sec</span></div>
-        </div>
+        <span class="eyebrow">Early access</span>
+        <h1>Join early access for clearer property transactions.</h1>
+        <p>Get product updates and priority onboarding for RentEase 9ja across tenant, agent, and landlord accounts.</p>
         <ul class="wl-badges">
           <li><i class="fas fa-circle-check"></i> Verified listings</li>
           <li><i class="fas fa-lock"></i> Escrow payments</li>
@@ -39,35 +31,35 @@ const roles = [
         </ul>
       </div>
 
-      <div class="form-card reveal" data-delay="1">
-        <div id="form-content">
-          <h3>Secure early access</h3>
-          <div class="error-banner" id="error-banner"></div>
+      <div class="form-card reveal" id="waitlist-form-card" data-delay="1">
+        <form id="form-content" novalidate>
+          <h3>Register your interest</h3>
+          <div class="error-banner" id="error-banner" role="alert" aria-live="polite"></div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="fname">First name</label>
-              <input type="text" id="fname" placeholder="e.g. Chuka" autocomplete="given-name" />
+              <input type="text" id="fname" name="fname" placeholder="e.g. Chuka" autocomplete="given-name" required aria-describedby="error-banner" />
             </div>
             <div class="form-group">
               <label for="lname">Last name</label>
-              <input type="text" id="lname" placeholder="e.g. Obi" autocomplete="family-name" />
+              <input type="text" id="lname" name="lname" placeholder="e.g. Obi" autocomplete="family-name" />
             </div>
           </div>
 
           <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" id="email" placeholder="chuka@example.com" autocomplete="email" />
+            <input type="email" id="email" name="email" placeholder="chuka@example.com" autocomplete="email" required aria-describedby="error-banner" />
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="phone">Phone number</label>
-              <input type="tel" id="phone" placeholder="0800 000 0000" autocomplete="tel" inputmode="tel" />
+              <label for="phone">Phone number <span class="optional">(optional)</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="0800 000 0000" autocomplete="tel" inputmode="tel" />
             </div>
             <div class="form-group">
               <label for="role">I am a...</label>
-              <select id="role">
+              <select id="role" name="role" required aria-describedby="error-banner">
                 <option value="" disabled selected>Select account type</option>
                 <option value="Tenant">Tenant</option>
                 <option value="Landlord">Landlord</option>
@@ -76,23 +68,23 @@ const roles = [
             </div>
           </div>
 
-          <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">
-            <span class="btn-text">Join the waitlist, free</span>
+          <button class="submit-btn" id="submit-btn" type="submit">
+            <span class="btn-text">Join the waitlist</span>
             <span class="btn-spinner" aria-hidden="true"></span>
           </button>
-          <p class="form-note">Join <span>1,200+</span> Nigerians already on the list. No spam.</p>
-        </div>
+          <p class="form-note"><span>800+</span> early-access registrations. Product updates only.</p>
+        </form>
 
-        <div class="success-state" id="success-state">
+        <div class="success-state" id="success-state" role="status" aria-live="polite" tabindex="-1">
           <span class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.3"/><path d="m9 11 3 3L22 4"/></svg></span>
           <div class="success-title">You're in, <span class="success-name" id="success-name"></span>!</div>
-          <p class="success-sub">Welcome to the future of real estate in Nigeria.<br /><strong>Check your inbox for your confirmation.</strong></p>
+          <p class="success-sub">Your early-access registration is recorded.<br /><strong>Check your inbox for confirmation.</strong></p>
           <div class="success-email-box">
             <div class="seb-label">Confirmation sent to</div>
             <div class="seb-val" id="success-email-display"></div>
           </div>
           <div class="success-tags">
-            <span class="stag"><i class="fas fa-crown"></i> VIP status</span>
+            <span class="stag"><i class="fas fa-bolt"></i> Early access</span>
             <span class="stag"><i class="fas fa-ticket"></i> Spot reserved</span>
           </div>
           <a class="share-btn" id="whatsapp-share" href="#" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Share via WhatsApp</a>
@@ -104,9 +96,9 @@ const roles = [
   <section class="section section--surface">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">The standard you deserve</span>
-        <h2>Built entirely on trust</h2>
-        <p>We removed the middle-man stress and replaced it with verified data and secure systems.</p>
+        <span class="eyebrow">Transaction controls</span>
+        <h2>A record for the important steps</h2>
+        <p>Identity, payment, and document workflows are designed to give each party clearer evidence.</p>
       </div>
       <div class="grid grid-3">
         {features.map((f, i) => (
@@ -142,49 +134,42 @@ const roles = [
   <section class="section section--surface">
     <div class="container">
       <div class="referral reveal">
-        <div class="ref-icon"><i class="fas fa-gift"></i></div>
+        <div class="ref-icon"><i class="fas fa-people-group"></i></div>
         <div class="ref-body">
-          <span class="eyebrow">Refer & earn</span>
-          <h2>Sign up, invite friends, earn rewards</h2>
-          <p>Join the waitlist and you get a personal invite link. Every friend who signs up moves you up the list and unlocks launch perks, free months and fee waivers for early Founding Members.</p>
+          <span class="eyebrow">Early access</span>
+          <h2>Join early and bring your community</h2>
+          <p>Reserve your place on the waitlist, then share RentEase 9ja with people who want a safer, simpler way to rent, buy, or manage property.</p>
         </div>
-        <a href="#top" class="btn btn-primary ref-cta" onclick="document.getElementById('fname')?.focus()">Get my invite link <i class="fas fa-arrow-right"></i></a>
+        <a href="#waitlist-form-card" class="btn btn-primary ref-cta" data-focus-waitlist>Join the waitlist <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
 
   <section class="wl-bottom">
     <div class="container reveal">
-      <h2>Don't miss the launch</h2>
-      <p>Early members get priority onboarding, zero platform fees for the first 3 months, and the "Founding Member" badge.</p>
-      <a href="#top" class="btn btn-light" onclick="document.getElementById('fname')?.focus()">Claim your spot now</a>
+      <h2>Stay informed about early access</h2>
+      <p>Join now for launch updates and priority onboarding when early access opens.</p>
+      <a href="#waitlist-form-card" class="btn btn-light" data-focus-waitlist>Join the waitlist</a>
     </div>
   </section>
 </Base>
 
 <style>
-  .wl-hero { position: relative; overflow: hidden; background: radial-gradient(120% 120% at 80% 0%, var(--navy-800), var(--navy-900)); color: var(--on-dark); padding-block: clamp(56px, 8vw, 96px); }
-  .wl-glow { position: absolute; top: -20%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(43,182,115,.16), transparent 70%); pointer-events: none; }
+  .wl-hero { position: relative; overflow: hidden; background: var(--navy-900); color: var(--on-dark); padding-block: clamp(56px, 8vw, 88px); }
   .wl-grid { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(30px, 5vw, 64px); align-items: center; }
   .wl-copy h1 { color: #fff; margin: 18px 0 16px; }
   .wl-copy > p { color: var(--on-dark-2); font-size: 1.12rem; max-width: 480px; }
-  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-green); box-shadow: 0 0 0 4px rgba(43,182,115,.2); animation: blink 1.6s ease-in-out infinite; }
-  .wl-countdown { display: flex; gap: 10px; margin: 22px 0 4px; }
-  .cd-u { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); border-radius: 12px; padding: 11px 6px; width: 72px; text-align: center; }
-  .cd-n { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; color: #fff; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .cd-l { display: block; font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: var(--on-dark-2); margin-top: 6px; }
-  @media (max-width: 900px) { .wl-countdown { justify-content: center; } }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
   .wl-badges { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 26px; }
   .wl-badges li { color: var(--on-dark); font-weight: 600; font-size: .92rem; }
   .wl-badges i { color: var(--brand-green); margin-right: 6px; }
 
-  .form-card { background: var(--surface); border-radius: var(--r-xl); padding: clamp(28px, 4vw, 44px); box-shadow: 0 30px 60px rgba(0,0,0,.3); }
+  .form-card { background: var(--surface); border-radius: var(--r-xl); padding: clamp(28px, 4vw, 44px); box-shadow: 0 14px 32px rgba(0,0,0,.18); }
   .form-card h3 { font-size: 1.4rem; margin-bottom: 22px; }
   .form-row { display: flex; gap: 16px; }
   .form-row .form-group { flex: 1; }
   .form-group { margin-bottom: 16px; text-align: left; }
   label { display: block; font-size: .82rem; font-weight: 600; color: var(--text-2); margin-bottom: 7px; }
+  .optional { color: var(--text-muted); font-weight: 500; }
   input, select { width: 100%; padding: 13px 15px; border: 1px solid var(--border); border-radius: var(--r-md); font: inherit; font-size: .95rem; background: var(--surface-2); color: var(--text); outline: none; transition: var(--transition); appearance: none; }
   select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236F7785' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 38px; }
   input:focus, select:focus { border-color: var(--brand-blue); background: #fff; box-shadow: 0 0 0 4px rgba(30,78,140,.12); }
@@ -194,8 +179,8 @@ const roles = [
   .error-banner { display: none; background: #FEF2F2; border-left: 4px solid var(--danger); color: #B91C1C; font-size: .88rem; padding: 11px 14px; border-radius: var(--r-sm); margin-bottom: 16px; }
   .error-banner.show { display: block; }
 
-  .submit-btn { width: 100%; margin-top: 6px; background: var(--brand-gradient); color: #fff; font-family: var(--font-body); font-weight: 700; font-size: 1rem; padding: 15px; border-radius: var(--r-md); box-shadow: var(--shadow-glow); transition: var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
-  .submit-btn:hover { transform: translateY(-2px); }
+  .submit-btn { width: 100%; margin-top: 6px; background: var(--brand-blue); color: #fff; font-family: var(--font-body); font-weight: 700; font-size: 1rem; padding: 15px; border-radius: var(--r-md); box-shadow: var(--shadow-sm); transition: var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+  .submit-btn:hover { background: #173F74; }
   .submit-btn:disabled { opacity: .75; cursor: not-allowed; transform: none; }
   .btn-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
   .submit-btn.loading .btn-text { display: none; }
@@ -215,16 +200,16 @@ const roles = [
   .seb-val { font-weight: 700; color: var(--text); margin-top: 4px; }
   .success-tags { display: flex; gap: 10px; justify-content: center; margin-bottom: 18px; }
   .stag { background: var(--brand-gradient-soft); color: var(--brand-blue); font-size: .8rem; font-weight: 700; padding: 6px 12px; border-radius: var(--r-pill); }
-  .share-btn { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: #fff; font-weight: 700; padding: 12px 22px; border-radius: var(--r-pill); transition: var(--transition); }
-  .share-btn:hover { transform: translateY(-2px); }
+  .share-btn { display: inline-flex; align-items: center; gap: 8px; background: #16813E; color: #fff; font-weight: 700; padding: 12px 22px; border-radius: var(--r-md); transition: var(--transition); }
+  .share-btn:hover { background: #116932; }
 
   .feature { padding: 30px 28px; }
-  .f-icon { width: 56px; height: 56px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.35rem; color: #fff; background: var(--brand-gradient); margin-bottom: 18px; }
+  .f-icon { width: 42px; height: 42px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: #fff; background: var(--brand-blue); margin-bottom: 18px; }
   .feature h3 { margin-bottom: 8px; }
   .feature p { color: var(--text-muted); }
 
   .role { padding: 30px 28px; }
-  .r-icon { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; font-size: 1.25rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 16px; }
+  .r-icon { width: 42px; height: 42px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 16px; }
   .role h3 { margin-bottom: 8px; }
   .role > p { color: var(--text-muted); margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
   .role ul { display: flex; flex-direction: column; gap: 10px; }
@@ -232,39 +217,26 @@ const roles = [
   .role li i { color: var(--brand-green); margin-right: 8px; }
 
   .referral { display: flex; align-items: center; gap: 28px; background: var(--brand-gradient-soft); border: 1px solid var(--border); border-radius: var(--r-xl); padding: clamp(28px, 4vw, 44px); }
-  .ref-icon { flex-shrink: 0; width: 64px; height: 64px; border-radius: var(--r-lg); display: grid; place-items: center; font-size: 1.6rem; color: #fff; background: var(--brand-gradient); box-shadow: var(--shadow-glow); }
+  .ref-icon { flex-shrink: 0; width: 46px; height: 46px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: #fff; background: var(--brand-blue); }
   .ref-body { flex: 1; }
-  .ref-body h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 10px 0 8px; }
+  .ref-body h2 { font-size: 1.9rem; margin: 10px 0 8px; }
   .ref-body p { color: var(--text-2); max-width: 640px; }
   .ref-cta { flex-shrink: 0; }
   @media (max-width: 760px) { .referral { flex-direction: column; text-align: center; align-items: center; } .ref-body p { margin-inline: auto; } }
 
-  .wl-bottom { background: var(--brand-gradient); color: #fff; text-align: center; padding-block: clamp(56px, 8vw, 90px); }
+  .wl-bottom { background: var(--brand-blue); color: #fff; text-align: center; padding-block: clamp(56px, 8vw, 84px); }
   .wl-bottom h2 { color: #fff; }
   .wl-bottom p { color: rgba(255,255,255,.92); max-width: 600px; margin: 14px auto 28px; font-size: 1.08rem; }
 
   @media (max-width: 900px) { .wl-grid { grid-template-columns: 1fr; } .wl-copy { text-align: center; } .wl-copy > p { margin-inline: auto; } .wl-badges { justify-content: center; } }
-  @media (max-width: 520px) { .form-row { flex-direction: column; gap: 0; } }
+  @media (max-width: 520px) { .form-row { flex-direction: column; gap: 0; } .ref-body h2 { font-size: 1.6rem; } }
 </style>
 
-<script is:inline define:vars={{ API_BASE }}>
-  // Launch countdown — set your real launch date/time here:
-  var LAUNCH_DATE = new Date('2026-11-19T09:00:00+01:00');
-  (function () {
-    var d = document.getElementById('cd-d'), h = document.getElementById('cd-h'), m = document.getElementById('cd-m'), s = document.getElementById('cd-s');
-    if (!d) return;
-    var pad = (n) => String(n).padStart(2, '0');
-    function tick() {
-      var sec = Math.max(0, Math.floor((LAUNCH_DATE - new Date()) / 1000));
-      d.textContent = pad(Math.floor(sec / 86400));
-      h.textContent = pad(Math.floor((sec % 86400) / 3600));
-      m.textContent = pad(Math.floor((sec % 3600) / 60));
-      s.textContent = pad(sec % 60);
-    }
-    tick(); setInterval(tick, 1000);
-  })();
+<script>
+  // @ts-nocheck
+  import { API_BASE } from '../config';
 
-  const API_URL = (window.__API_BASE__ || API_BASE) + '/v1/waitlist';
+  const API_URL = API_BASE + '/v1/waitlist';
 
   const showError = (msg) => {
     const banner = document.getElementById('error-banner');
@@ -286,12 +258,10 @@ const roles = [
     const fields = {
       fname: document.getElementById('fname').value.trim(),
       email: document.getElementById('email').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
       role: document.getElementById('role').value,
     };
     if (!fields.fname) { markError('fname', 'First name is required.'); return false; }
     if (!fields.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) { markError('email', 'Please provide a valid email address.'); return false; }
-    if (!fields.phone) { markError('phone', 'Phone number is required.'); return false; }
     if (!fields.role) { markError('role', 'Please select your account type.'); return false; }
     return true;
   };
@@ -299,9 +269,9 @@ const roles = [
     if (!validateForm()) return;
     const payload = {
       fname: document.getElementById('fname').value.trim(),
-      lname: document.getElementById('lname').value.trim(),
+      lname: document.getElementById('lname').value.trim() || undefined,
       email: document.getElementById('email').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
+      phone: document.getElementById('phone').value.trim() || undefined,
       role: document.getElementById('role').value,
     };
     const btn = document.getElementById('submit-btn');
@@ -316,9 +286,10 @@ const roles = [
       }
       document.getElementById('form-content').style.display = 'none';
       document.getElementById('success-state').style.display = 'block';
+      document.getElementById('success-state').focus();
       document.getElementById('success-name').textContent = payload.fname;
       document.getElementById('success-email-display').textContent = payload.email;
-      const shareText = encodeURIComponent(`I just secured my spot on the RentEase 9ja waitlist 🚀\n\nNigeria's first fully digital property platform is launching soon. Say goodbye to agent fraud and missing deposits.\n\nJoin the VIP list here: rentease9ja.com/waitlist`);
+      const shareText = encodeURIComponent(`I joined the RentEase 9ja early-access waitlist. It is a digital property platform for safer renting, buying, and property management in Nigeria.\n\nJoin here: https://rentease9ja.com/waitlist`);
       document.getElementById('whatsapp-share').href = `https://wa.me/?text=${shareText}`;
     } catch (err) {
       showError('Network error. Please check your connection and try again.');
@@ -327,5 +298,11 @@ const roles = [
       btn.disabled = false; btn.classList.remove('loading');
     }
   }
-  window.handleSubmit = handleSubmit;
+  document.getElementById('form-content')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    handleSubmit();
+  });
+  document.querySelectorAll('[data-focus-waitlist]').forEach((link) => {
+    link.addEventListener('click', () => setTimeout(() => document.getElementById('fname')?.focus(), 0));
+  });
 </script>

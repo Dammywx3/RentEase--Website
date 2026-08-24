@@ -1,5 +1,18 @@
 ---
-const { image, price, title, location, kind = 'rent', verified = true, meta = [] } = Astro.props;
+interface ListingMeta {
+  icon: string;
+  label: string;
+}
+
+const { image, price, title, location, kind = 'rent', verified = false, meta = [] } = Astro.props as {
+  image: string;
+  price: string;
+  title: string;
+  location: string;
+  kind?: 'rent' | 'buy' | 'land';
+  verified?: boolean;
+  meta?: ListingMeta[];
+};
 const kindLabel = kind === 'rent' ? 'For Rent' : kind === 'land' ? 'For Sale' : 'For Sale';
 ---
 <a class="listing card" href="/waitlist">
@@ -28,12 +41,12 @@ const kindLabel = kind === 'rent' ? 'For Rent' : kind === 'land' ? 'For Sale' : 
     position: absolute; font-size: .72rem; font-weight: 700; color: #fff;
     padding: 6px 11px; border-radius: var(--r-sm); display: inline-flex; align-items: center; gap: 5px;
   }
-  .verified { top: 12px; left: 12px; background: var(--brand-gradient); box-shadow: 0 4px 10px rgba(30,78,140,.3); }
+  .verified { top: 12px; left: 12px; background: var(--brand-blue); }
   .kind { bottom: 12px; left: 12px; }
   .kind.rent { background: var(--brand-green); }
   .kind.buy, .kind.land { background: var(--brand-blue); }
   .body { padding: 18px 20px 22px; }
-  .price { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--text); letter-spacing: -.02em; }
+  .price { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--text); letter-spacing: 0; }
   .title { color: var(--text-2); font-weight: 600; margin-top: 4px; }
   .loc { color: var(--text-muted); font-size: .9rem; margin-top: 6px; }
   .meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: .85rem; color: var(--text-2); }

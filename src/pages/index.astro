@@ -5,22 +5,22 @@ import HeroPhones from '../components/HeroPhones.astro';
 import DeviceLaptop from '../components/DeviceLaptop.astro';
 
 const stats = [
-  { value: '800+', label: 'On the waitlist' },
-  { value: '14', label: 'Cities at launch' },
-  { value: '100%', label: 'Listings verified' },
-  { value: '24/7', label: 'In-app support' },
+  { value: '800+', label: 'Early-access registrations' },
+  { value: 'KYC', label: 'Participant identity checks' },
+  { value: 'Escrow', label: 'Protected payment flow' },
+  { value: 'Digital', label: 'Agreements and receipts' },
 ];
 
 const steps = [
-  { icon: 'fa-magnifying-glass', title: 'Discover verified homes', text: 'Browse listings that are checked for real documents and real owners, no ghost agents, no fake photos.' },
-  { icon: 'fa-comments', title: 'Chat & book a viewing', text: 'Message verified agents in-app, schedule viewings, and make offers, everything in one thread.' },
-  { icon: 'fa-shield-halved', title: 'Pay & move in safely', text: 'Pay rent and fees through secure escrow-style payments with digital agreements that protect both sides.' },
+  { icon: 'fa-magnifying-glass', title: 'Review the property record', text: 'See listing information, available verification details, and the person responsible for the property.' },
+  { icon: 'fa-comments', title: 'Keep the conversation together', text: 'Message, schedule a viewing, and record offers in the same transaction thread.' },
+  { icon: 'fa-shield-halved', title: 'Document payment and handover', text: 'Use the protected payment flow, digital agreements, and receipts to keep both sides accountable.' },
 ];
 
 const audiences = [
-  { icon: 'fa-house-user', title: 'Renters & Buyers', text: 'Find a verified home without the runaround or the scams.', perks: ['Verified listings only', 'In-app chat & viewings', 'Secure rent payments', 'Digital tenancy agreements'], href: '/rent', cta: 'Find a home' },
-  { icon: 'fa-building-user', title: 'Landlords & Agents', text: 'List once, reach thousands of serious, verified seekers.', perks: ['Free verified listings', 'Qualified leads & offers', 'Manage units & tenants', 'On-time digital rent collection'], href: '/waitlist', cta: 'List a property' },
-  { icon: 'fa-helmet-safety', title: 'Property Developers', text: 'Sell estates and plots faster with trust built in.', perks: ['Showcase whole estates', 'Document-verified plots', 'Buyer demand analytics', 'Dedicated sales support'], href: '/for-developers', cta: 'Partner with us' },
+  { icon: 'fa-house-user', title: 'Renters and buyers', text: 'Review properties, communicate, and keep a record of each step.', perks: ['Property and participant checks', 'In-app chat and viewings', 'Protected payment flow', 'Digital agreements'], href: '/rent', cta: 'Explore the preview' },
+  { icon: 'fa-building-user', title: 'Landlords and agents', text: 'Manage listings, enquiries, viewings, and tenancy records.', perks: ['Listing management', 'Lead and offer tracking', 'Unit and tenant records', 'Digital rent collection'], href: '/waitlist', cta: 'Join early access' },
+  { icon: 'fa-helmet-safety', title: 'Property developers', text: 'Present estates and plots with documents and structured buyer workflows.', perks: ['Estate inventory', 'Document records', 'Buyer demand reporting', 'Sales support'], href: '/for-developers', cta: 'Discuss a partnership' },
 ];
 
 const listings = [
@@ -35,15 +35,13 @@ const appFeatures = [
   { icon: 'fa-wallet', text: 'Secure wallet & rent payments' },
   { icon: 'fa-file-signature', text: 'Digital tenancy agreements' },
   { icon: 'fa-bell', text: 'Rent reminders & receipts' },
-  { icon: 'fa-headset', text: '24/7 in-app support' },
+  { icon: 'fa-headset', text: 'In-app support' },
 ];
 
-// Illustrative persona quotes (pre-launch). Replace with real, attributable
-// testimonials once you have live users.
-const testimonials = [
-  { quote: 'For the first time I could tell a flat was real, chat with a verified agent, and pay rent safely. No cash hand-offs, no agents that vanish. This is how renting in Nigeria should feel.', name: 'Adaeze O.', role: 'Tenant, Lagos' },
-  { quote: 'Every enquiry is a real, verified seeker, so I stop chasing time-wasters. With escrow and digital agreements, I know I get paid on a clean handover.', name: 'Tunde A.', role: 'Agent, Abuja' },
-  { quote: 'Listing our estate with verified documents gave buyers instant confidence, and the demand analytics showed us exactly which units to push.', name: 'Grace E.', role: 'Property Developer' },
+const transactionControls = [
+  { number: '01', title: 'Know who you are dealing with', text: 'Identity checks help connect each agent, landlord, and applicant to a platform account.' },
+  { number: '02', title: 'Keep the transaction record', text: 'Messages, viewing details, offers, agreements, and receipts stay attached to the property journey.' },
+  { number: '03', title: 'Use defined payment terms', text: 'Protected payment and handover steps make the expected release conditions visible to both sides.' },
 ];
 
 const faqs = [
@@ -68,30 +66,22 @@ const faqLd = {
 <Base active="/">
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
     <div class="container hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow reveal"><span class="dot"></span> Launching soon · onboarding agents now</span>
-        <h1 class="reveal" data-delay="1">Rent, buy & sell property in Nigeria, <span class="gradient-text">the safe way.</span></h1>
-        <p class="reveal" data-delay="2"><strong>Nigeria's first end-to-end digital property platform.</strong> Verified listings, real agents, secure rent payments, and digital agreements, all in one trusted app.</p>
+        <span class="eyebrow reveal">Early access for Nigeria</span>
+        <h1 class="reveal" data-delay="1">Rent, buy, and manage property in Nigeria.</h1>
+        <p class="reveal" data-delay="2">RentEase 9ja brings participant checks, property records, protected payment flows, and digital agreements into one transaction workspace.</p>
         <div class="hero-cta reveal" data-delay="3">
           <a href="/waitlist" class="btn btn-primary">Join the waitlist <i class="fas fa-arrow-right"></i></a>
           <a href="/rent" class="btn btn-ghost">Explore listings</a>
         </div>
-        <div class="hero-rating reveal" data-delay="3">
-          <span class="hr-stars" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-          </span>
-          <span class="hr-text"><strong>800+</strong> Nigerians already on the waitlist</span>
+        <div class="hero-proof reveal" data-delay="3">
+          <strong>800+</strong><span>early-access registrations</span>
         </div>
         <ul class="hero-trust reveal" data-delay="4">
-          <li><i class="fas fa-circle-check"></i> Verified listings</li>
-          <li><i class="fas fa-lock"></i> Secure payments</li>
-          <li><i class="fas fa-user-shield"></i> Real, vetted agents</li>
+          <li><i class="fas fa-circle-check"></i> Listing review</li>
+          <li><i class="fas fa-lock"></i> Payment records</li>
+          <li><i class="fas fa-user-shield"></i> Identity checks</li>
         </ul>
       </div>
       <div class="hero-media reveal" data-delay="2">
@@ -105,7 +95,7 @@ const faqLd = {
     <div class="container grid grid-4">
       {stats.map((s, i) => (
         <div class="stat reveal" data-delay={i}>
-          <div class="stat-val gradient-text count-up">{s.value}</div>
+          <div class="stat-val">{s.value}</div>
           <div class="stat-label">{s.label}</div>
         </div>
       ))}
@@ -116,13 +106,13 @@ const faqLd = {
   <section class="section section--mist">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">The problem</span>
-        <h2>Renting in Nigeria is broken. We fixed it.</h2>
-        <p>Fake listings, ghost agents, cash that disappears, and zero accountability. RentEase 9ja replaces all of it with trust by design.</p>
+        <span class="eyebrow">Why RentEase</span>
+        <h2>A clearer process for every property transaction</h2>
+        <p>Property deals often move across calls, cash payments, and disconnected documents. RentEase 9ja gives each step a visible record.</p>
       </div>
       <div class="grid grid-2 ps-grid">
         <div class="ps-card pain reveal">
-          <h3><i class="fas fa-triangle-exclamation"></i> The old way</h3>
+          <h3><i class="fas fa-triangle-exclamation"></i> Without a transaction record</h3>
           <ul>
             <li>Fake photos & listings that don't exist</li>
             <li>Agents you can't verify or trust</li>
@@ -132,7 +122,7 @@ const faqLd = {
           </ul>
         </div>
         <div class="ps-card gain reveal" data-delay="1">
-          <h3><i class="fas fa-circle-check"></i> The RentEase 9ja way</h3>
+          <h3><i class="fas fa-circle-check"></i> With RentEase 9ja</h3>
           <ul>
             <li>Every listing checked for real docs & owners</li>
             <li>Identity-verified agents and landlords</li>
@@ -169,8 +159,8 @@ const faqLd = {
   <section class="section section--mist">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Built for everyone</span>
-        <h2>One platform, every side of the deal</h2>
+        <span class="eyebrow">Who it serves</span>
+        <h2>One record across every side of the transaction</h2>
       </div>
       <div class="grid grid-3">
         {audiences.map((a, i) => (
@@ -192,13 +182,13 @@ const faqLd = {
   <section class="section section--surface">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Featured</span>
-        <h2>A taste of what's inside</h2>
-        <p>Verified homes and land across Nigeria. Full details, chat, and booking live in the app.</p>
+        <span class="eyebrow">Marketplace preview</span>
+        <h2>Example listing experience</h2>
+        <p>Illustrative inventory shown for product preview. Live availability and verification status will appear in the app.</p>
       </div>
       <div class="grid grid-3">
         {listings.map((l, i) => (
-          <div class="reveal" data-delay={i}><ListingCard {...l} /></div>
+          <div class="reveal" data-delay={i}><ListingCard {...l} verified={false} /></div>
         ))}
       </div>
       <div class="center-cta reveal"><a href="/rent" class="btn btn-ghost">Browse all listings <i class="fas fa-arrow-right"></i></a></div>
@@ -231,15 +221,15 @@ const faqLd = {
   <section class="section section--mist">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Traction & vision</span>
-        <h2>Building the trust layer for Nigerian real estate</h2>
-        <p>Nigeria's housing market is huge, fragmented, and starved of trust. RentEase 9ja is building the verified, end-to-end platform to own that gap.</p>
+        <span class="eyebrow">Platform scope</span>
+        <h2>Designed for a fragmented property market</h2>
+        <p>RentEase 9ja connects the people, records, payments, and agreements that currently sit across separate channels.</p>
       </div>
       <div class="grid grid-4 invest-stats">
-        <div class="i-stat reveal"><div class="i-val gradient-text count-up">$3B+</div><div class="i-label">Annual rental market</div></div>
-        <div class="i-stat reveal" data-delay="1"><div class="i-val gradient-text count-up">800+</div><div class="i-label">Waitlist signups</div></div>
-        <div class="i-stat reveal" data-delay="2"><div class="i-val gradient-text count-up">14</div><div class="i-label">Cities at launch</div></div>
-        <div class="i-stat reveal" data-delay="3"><div class="i-val gradient-text count-up">35%</div><div class="i-label">Month-over-month growth</div></div>
+        <div class="i-stat reveal"><div class="i-val">800+</div><div class="i-label">Early-access registrations</div></div>
+        <div class="i-stat reveal" data-delay="1"><div class="i-val">3</div><div class="i-label">Client platforms</div></div>
+        <div class="i-stat reveal" data-delay="2"><div class="i-val">4</div><div class="i-label">Property roles supported</div></div>
+        <div class="i-stat reveal" data-delay="3"><div class="i-val">1</div><div class="i-label">Shared transaction record</div></div>
       </div>
       <div class="invest-cta reveal">
         <a href="/investor-access" class="btn btn-primary">Request investor deck</a>
@@ -248,29 +238,20 @@ const faqLd = {
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
+  <!-- TRANSACTION CONTROLS -->
   <section class="section section--surface">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Built for every property journey</span>
-        <h2>Trust you can feel</h2>
+        <span class="eyebrow">Transaction controls</span>
+        <h2>Trust built from visible records</h2>
       </div>
       <div class="grid grid-3">
-        {testimonials.map((t, i) => (
-          <figure class="quote card reveal" data-delay={i}>
-            <div class="stars" aria-label="Rated 5 out of 5">
-              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.6 5.8 21 7 14.1 2 9.3 8.9 8.6"/></svg>
-            </div>
-            <blockquote>{t.quote}</blockquote>
-            <figcaption>
-              <div class="q-av" aria-hidden="true">{t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}</div>
-              <div class="q-meta"><strong>{t.name}</strong><span>{t.role}</span></div>
-            </figcaption>
-          </figure>
+        {transactionControls.map((item, i) => (
+          <article class="control reveal" data-delay={i}>
+            <span>{item.number}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -292,7 +273,7 @@ const faqLd = {
         ))}
       </div>
     </div>
-    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqLd)} />
   </section>
 
   <!-- TRUST & SECURITY -->
@@ -305,7 +286,7 @@ const faqLd = {
       <div class="grid grid-4 trust-band">
         <div class="tb-item reveal"><span class="tb-ic"><i class="fas fa-shield-halved"></i></span><h3>Escrow-secured</h3><p>Rent &amp; fees are held safely and released only on a clean handover.</p></div>
         <div class="tb-item reveal" data-delay="1"><span class="tb-ic"><i class="fas fa-id-card"></i></span><h3>Identity verified</h3><p>Every agent and landlord passes strict KYC verification.</p></div>
-        <div class="tb-item reveal" data-delay="2"><span class="tb-ic"><i class="fas fa-lock"></i></span><h3>Bank-grade encryption</h3><p>Your data and payments are encrypted end to end.</p></div>
+        <div class="tb-item reveal" data-delay="2"><span class="tb-ic"><i class="fas fa-lock"></i></span><h3>Protected data</h3><p>Data is encrypted in transit and protected by access controls and secure infrastructure.</p></div>
         <div class="tb-item reveal" data-delay="3"><span class="tb-ic"><i class="fas fa-file-shield"></i></span><h3>NDPA-aligned</h3><p>Personal data is handled to Nigerian data-protection standards.</p></div>
       </div>
     </div>
@@ -314,8 +295,8 @@ const faqLd = {
   <!-- FINAL CTA -->
   <section class="final-cta">
     <div class="container final-inner reveal">
-      <h2>Find your next home the safe way.</h2>
-      <p>Join thousands of Nigerians getting first access to RentEase 9ja.</p>
+      <h2>Get early access to RentEase 9ja.</h2>
+      <p>Join the waitlist for product updates and onboarding.</p>
       <div class="final-actions">
         <a href="/waitlist" class="btn btn-light">Join the waitlist <i class="fas fa-arrow-right"></i></a>
         <a href="/how-it-works" class="btn btn-on-dark">See how it works</a>
@@ -326,20 +307,13 @@ const faqLd = {
 
 <style>
   /* HERO */
-  .hero { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--bg), var(--mist)); padding-block: clamp(34px, 4.4vw, 58px); }
-  .hero-glow { position: absolute; top: -30%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(43,182,115,.16), transparent 65%); pointer-events: none; }
-  .hero-glow::after { content: ''; position: absolute; bottom: -40%; left: -30%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(30,78,140,.14), transparent 65%); }
+  .hero { position: relative; overflow: hidden; background: var(--bg); padding-block: clamp(48px, 6vw, 72px); border-bottom: 1px solid var(--border); }
   .hero-inner { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(30px, 5vw, 70px); }
-  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-green); box-shadow: 0 0 0 4px rgba(43,182,115,.18); animation: pulse 1.6s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-  .hero-copy h1 { margin: 16px 0 14px; font-size: clamp(1.45rem, 2.7vw, 2.3rem); }
+  .hero-copy h1 { margin: 18px 0 16px; font-size: 2.75rem; max-width: 650px; }
   .hero-copy > p { font-size: 1.05rem; color: var(--text-2); max-width: 500px; }
   .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 24px 0 16px; }
-  .hero-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
-  .hr-stars { display: inline-flex; gap: 2px; color: #F5A623; }
-  .hr-stars svg { width: 15px; height: 15px; }
-  .hr-text { font-size: .9rem; color: var(--text-2); }
-  .hr-text strong { color: var(--text); font-weight: 800; }
+  .hero-proof { display: flex; align-items: baseline; gap: 8px; margin-bottom: 18px; color: var(--text-muted); font-size: .9rem; }
+  .hero-proof strong { color: var(--text); font-size: 1.35rem; }
   .hero-trust { display: flex; align-items: center; gap: 18px; flex-wrap: nowrap; color: var(--text-2); font-weight: 600; font-size: .86rem; }
   .hero-trust li { display: inline-flex; align-items: center; white-space: nowrap; }
   .hero-trust i { color: var(--brand-green); margin-right: 6px; }
@@ -349,19 +323,26 @@ const faqLd = {
     .hero-copy > p { margin-inline: auto; }
     .hero-cta, .hero-trust { justify-content: center; }
     .hero-trust { flex-wrap: wrap; row-gap: 8px; }
-    .hero-media { order: -1; margin-bottom: 10px; padding-block: 20px 8px; }
+    .hero-media { margin-top: 6px; padding-block: 8px 0; }
+  }
+  @media (max-width: 720px) {
+    .hero-copy h1 { font-size: 2.15rem; }
+    .hero-inner { gap: 22px; }
+    .hero-trust { display: none; }
+    .hero-media { max-height: 110px; overflow: hidden; align-items: flex-start; }
+    .hero-proof { justify-content: center; margin-bottom: 0; }
   }
 
   /* STATS */
   .stats-sec { padding-block: clamp(40px, 5vw, 64px); }
-  .stat { text-align: center; }
-  .stat-val { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -.03em; }
+  .stat { text-align: left; border-top: 2px solid var(--brand-blue); padding-top: 18px; }
+  .stat-val { font-family: var(--font-display); font-weight: 700; font-size: 1.7rem; letter-spacing: 0; color: var(--text); }
   .stat-label { color: var(--text-muted); font-weight: 600; margin-top: 6px; font-size: .95rem; }
 
   /* TRUST & SECURITY band */
   .trust-band { gap: clamp(16px, 2.4vw, 28px); }
-  .tb-item { text-align: center; padding: 8px; }
-  .tb-ic { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; margin: 0 auto 16px; font-size: 1.4rem; color: var(--brand-blue); background: var(--brand-gradient-soft); border: 1px solid var(--border); }
+  .tb-item { text-align: left; padding: 8px 0; border-top: 1px solid var(--border); }
+  .tb-ic { width: 36px; height: 36px; border-radius: 4px; display: grid; place-items: center; margin: 16px 0; font-size: 1rem; color: var(--brand-blue); background: var(--brand-gradient-soft); }
   .tb-item h3 { margin-bottom: 8px; font-size: 1.05rem; }
   .tb-item p { color: var(--text-muted); font-size: .92rem; line-height: 1.6; }
 
@@ -373,20 +354,20 @@ const faqLd = {
   .ps-card.pain { background: #fff; }
   .ps-card.pain h3 i { color: var(--danger); }
   .ps-card.pain li { opacity: .85; }
-  .ps-card.gain { background: var(--surface); box-shadow: var(--shadow-card); }
+  .ps-card.gain { background: var(--surface); border-top: 3px solid var(--brand-green); }
   .ps-card.gain h3 i { color: var(--brand-green); }
   .ps-card.gain li { font-weight: 500; color: var(--text); }
 
   /* STEPS */
-  .step { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 34px 28px; box-shadow: var(--shadow-card); }
+  .step { position: relative; background: var(--surface); border-top: 2px solid var(--brand-blue); padding: 30px 24px; }
   .step-num { position: absolute; top: 22px; right: 26px; font-family: var(--font-display); font-weight: 800; font-size: 2rem; color: var(--border); line-height: 1; }
-  .step-icon { width: 58px; height: 58px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--brand-gradient); margin-bottom: 20px; }
+  .step-icon { width: 42px; height: 42px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: #fff; background: var(--brand-blue); margin-bottom: 20px; }
   .step h3 { margin-bottom: 10px; }
   .step p { color: var(--text-muted); }
 
   /* AUDIENCES */
   .aud { padding: 32px 28px; display: flex; flex-direction: column; }
-  .aud-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 1.4rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 18px; }
+  .aud-icon { width: 40px; height: 40px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 18px; }
   .aud h3 { margin-bottom: 8px; }
   .aud > p { color: var(--text-muted); margin-bottom: 18px; }
   .aud ul { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
@@ -400,7 +381,7 @@ const faqLd = {
   /* WEB WORKSPACE SHOWCASE */
   .web-shot { position: relative; z-index: 1; }
   .app-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; max-width: 760px; margin: 30px auto 0; }
-  .app-chips li { display: inline-flex; align-items: center; gap: 8px; color: var(--on-dark); font-weight: 500; font-size: .9rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r-pill); padding: 8px 14px; }
+  .app-chips li { display: inline-flex; align-items: center; gap: 8px; color: var(--on-dark); font-weight: 500; font-size: .9rem; border-bottom: 1px solid rgba(255,255,255,.2); padding: 8px 4px; }
   .app-chips i { color: #8FE3B9; }
   .web-cta { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
   .web-os { text-align: center; margin-top: 14px; color: var(--on-dark-2); font-size: .9rem; font-weight: 600; }
@@ -409,21 +390,16 @@ const faqLd = {
 
   /* INVESTORS */
   .invest-stats { margin-bottom: 40px; }
-  .i-stat { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 26px 18px; box-shadow: var(--shadow-sm); }
-  .i-val { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.55rem, 2.8vw, 2.1rem); letter-spacing: -.03em; }
+  .i-stat { text-align: left; border-top: 2px solid var(--brand-blue); padding: 22px 0; }
+  .i-val { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; letter-spacing: 0; color: var(--text); }
   .i-label { color: var(--text-muted); font-size: .9rem; margin-top: 6px; }
   .invest-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-  /* TESTIMONIALS */
-  .quote { padding: 30px 28px; display: flex; flex-direction: column; }
-  .stars { display: flex; gap: 3px; color: #F5A623; margin-bottom: 14px; }
-  .stars svg { width: 16px; height: 16px; }
-  .quote blockquote { font-size: 1.05rem; color: var(--text); line-height: 1.6; margin-bottom: 20px; }
-  .quote figcaption { margin-top: auto; display: flex; align-items: center; gap: 12px; }
-  .q-av { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-gradient); color: #fff; font-weight: 800; font-size: .85rem; display: grid; place-items: center; flex-shrink: 0; }
-  .q-meta { display: flex; flex-direction: column; }
-  .quote figcaption strong { color: var(--text); }
-  .quote figcaption span { color: var(--text-muted); font-size: .88rem; }
+  /* TRANSACTION CONTROLS */
+  .control { border-top: 2px solid var(--brand-blue); padding: 24px 0; }
+  .control > span { display: block; color: var(--brand-green-dark); font-size: .78rem; font-weight: 700; margin-bottom: 18px; }
+  .control h3 { margin-bottom: 10px; }
+  .control p { color: var(--text-muted); line-height: 1.65; }
 
   /* FAQ */
   .faq-wrap { max-width: 820px; }
@@ -435,7 +411,7 @@ const faqLd = {
   .faq details p { color: var(--text-muted); padding: 0 0 20px; line-height: 1.7; }
 
   /* FINAL CTA */
-  .final-cta { background: var(--brand-gradient); color: #fff; padding-block: clamp(56px, 8vw, 96px); text-align: center; }
+  .final-cta { background: var(--brand-blue); color: #fff; padding-block: clamp(56px, 8vw, 88px); text-align: center; }
   .final-inner h2 { color: #fff; }
   .final-inner p { color: rgba(255,255,255,.9); font-size: 1.12rem; margin: 14px 0 28px; }
   .final-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }

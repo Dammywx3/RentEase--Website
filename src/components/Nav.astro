@@ -1,4 +1,6 @@
 ---
+import Brand from './Brand.astro';
+
 const links = [
   { href: '/', label: 'Home' },
   { href: '/rent', label: 'Rent' },
@@ -15,7 +17,7 @@ const { active = '' } = Astro.props;
 <header class="site-header" id="site-header">
   <nav class="navbar container" aria-label="Primary">
     <a href="/" class="brand" aria-label="RentEase 9ja home">
-      <img src="/logo.webp" alt="RentEase 9ja" width="178" height="92" />
+      <Brand />
     </a>
 
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
@@ -28,7 +30,7 @@ const { active = '' } = Astro.props;
           <li><a href={l.href} class:list={[{ 'is-active': active === l.href }]}>{l.label}</a></li>
         ))}
       </ul>
-      <a href="/waitlist" class="btn btn-primary nav-cta">Join Waitlist</a>
+      <a href="/waitlist" class="btn btn-primary nav-cta">Join waitlist</a>
     </div>
   </nav>
 </header>
@@ -36,22 +38,22 @@ const { active = '' } = Astro.props;
 <style>
   .site-header {
     position: sticky; top: 0; z-index: 1000;
-    background: rgba(255,255,255,.78);
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     transition: box-shadow .3s ease;
   }
-  .site-header.scrolled { box-shadow: 0 6px 24px rgba(15,23,42,.07); }
-  .navbar { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+  .site-header.scrolled { box-shadow: var(--shadow-sm); }
+  .navbar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .brand { display: inline-flex; align-items: center; }
-  .brand img { height: 54px; width: auto; display: block; }
-  .nav-menu { display: flex; align-items: center; gap: 30px; }
-  .nav-menu ul { display: flex; align-items: center; gap: 26px; }
-  .nav-menu a { font-weight: 600; font-size: .95rem; color: var(--text-2); transition: var(--transition); }
+  .nav-menu { display: flex; align-items: center; gap: 24px; }
+  .nav-menu ul { display: flex; align-items: center; gap: 20px; }
+  .nav-menu a { font-weight: 600; font-size: .88rem; color: var(--text-2); transition: var(--transition); }
   .nav-menu a:hover, .nav-menu a.is-active { color: var(--brand-blue); }
-  .nav-cta { padding: 10px 20px; font-size: .9rem; }
+  .nav-menu .nav-cta { padding: 10px 18px; font-size: .86rem; color: #fff; border-bottom: 0; }
+  .nav-menu .nav-cta:hover { color: #fff; }
 
-  .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+  .hamburger { display: none; width: 44px; height: 44px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 0; }
   .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: var(--transition); }
   .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -61,18 +63,18 @@ const { active = '' } = Astro.props;
     .hamburger { display: flex; }
     .brand img { height: 44px; }
     .nav-menu {
-      position: absolute; top: 84px; left: 0; right: 0;
+      position: absolute; top: 72px; left: 0; right: 0;
       flex-direction: column; gap: 6px; align-items: stretch;
       background: var(--surface); border-bottom: 1px solid var(--border);
       padding: 14px var(--gutter) 24px;
-      box-shadow: 0 16px 30px rgba(15,23,42,.12);
+      box-shadow: var(--shadow-card);
       transform: translateY(-12px); opacity: 0; pointer-events: none;
       transition: var(--transition);
     }
     .nav-menu.open { transform: none; opacity: 1; pointer-events: auto; }
     .nav-menu ul { flex-direction: column; align-items: stretch; gap: 2px; }
     .nav-menu a { padding: 13px 6px; display: block; border-bottom: 1px solid var(--border); }
-    .nav-cta { margin-top: 12px; }
+    .nav-menu .nav-cta { margin-top: 12px; text-align: center; }
   }
 </style>
 
@@ -80,11 +82,30 @@ const { active = '' } = Astro.props;
   const header = document.getElementById('site-header');
   const burger = document.getElementById('hamburger');
   const menu = document.getElementById('nav-menu');
-  burger?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('open');
-    burger.setAttribute('aria-expanded', String(!!open));
+  const mobile = window.matchMedia('(max-width: 920px)');
+
+  const setMenu = (open: boolean, restoreFocus = false) => {
+    if (!burger || !menu) return;
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (mobile.matches && !open) menu.setAttribute('inert', '');
+    else menu.removeAttribute('inert');
+    document.body.style.overflow = open && mobile.matches ? 'hidden' : '';
+    if (restoreFocus) burger.focus();
+  };
+
+  const syncMenu = () => setMenu(false);
+  burger?.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('click', (event) => {
+    if (mobile.matches && menu?.classList.contains('open') && !header?.contains(event.target as Node)) setMenu(false);
   });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.classList.contains('open')) setMenu(false, true);
+  });
+  mobile.addEventListener('change', syncMenu);
+  syncMenu();
   const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });

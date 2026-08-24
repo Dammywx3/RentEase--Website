@@ -1,6 +1,17 @@
 ---
 // Reusable lead-capture form. Submits JSON to `endpoint` (e.g. an API like the
 // waitlist's). Fields are configurable. Shows an inline success state.
+interface LeadField {
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'select' | 'textarea';
+  placeholder?: string;
+  autocomplete?: string;
+  required?: boolean;
+  full?: boolean;
+  options?: string[];
+}
+
 const {
   endpoint,
   fields = [],
@@ -8,11 +19,18 @@ const {
   successTitle = 'Thank you!',
   successText = 'We have received your details and will be in touch shortly.',
   note = '',
-} = Astro.props;
+} = Astro.props as {
+  endpoint: string;
+  fields?: LeadField[];
+  submitLabel?: string;
+  successTitle?: string;
+  successText?: string;
+  note?: string;
+};
 ---
 <form class="lead-form" data-lead-form data-endpoint={endpoint} novalidate>
   <div data-content>
-    <div class="lf-error" data-error role="alert"></div>
+    <div class="lf-error" data-error role="alert" aria-live="polite"></div>
     <div class="lf-grid">
       {fields.map((f) => (
         <div class:list={['lf-group', { full: f.full }]}>
@@ -20,7 +38,7 @@ const {
           {f.type === 'select' ? (
             <select id={f.name} name={f.name} required={f.required}>
               <option value="" disabled selected>{f.placeholder || 'Select...'}</option>
-              {f.options.map((o) => <option value={o}>{o}</option>)}
+              {f.options?.map((o) => <option value={o}>{o}</option>)}
             </select>
           ) : f.type === 'textarea' ? (
             <textarea id={f.name} name={f.name} placeholder={f.placeholder} required={f.required} rows="4"></textarea>
@@ -37,7 +55,7 @@ const {
     {note && <p class="lf-note" set:html={note} />}
   </div>
 
-  <div class="lf-success" data-success>
+  <div class="lf-success" data-success role="status" aria-live="polite" tabindex="-1">
     <span class="lf-success-ico"><i class="fas fa-circle-check"></i></span>
     <h3>{successTitle}</h3>
     <p>{successText}</p>
@@ -93,7 +111,7 @@ const {
       e.preventDefault();
       const data: Record<string, string> = {};
       let invalid: HTMLElement | null = null;
-      form.querySelectorAll<HTMLInputElement>('[name]').forEach((el) => {
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[name]').forEach((el) => {
         el.classList.remove('error');
         const v = (el.value || '').trim();
         data[el.name] = v;
@@ -112,6 +130,7 @@ const {
         }
         content.style.display = 'none';
         success.style.display = 'block';
+        success.focus();
       } catch (err) {
         showErr('Network error. Please check your connection and try again.');
       } finally {

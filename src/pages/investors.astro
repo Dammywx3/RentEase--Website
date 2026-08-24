@@ -3,36 +3,36 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 
 const market = [
-  { value: '$3B+', label: 'Annual rental market in Nigeria', note: 'verify' },
-  { value: '200M+', label: 'Population, rapidly urbanising' },
-  { value: '75%+', label: 'Renters without trusted tools', note: 'verify' },
-  { value: '90%+', label: 'Market still offline & informal', note: 'verify' },
+  { value: '4', label: 'Property roles supported' },
+  { value: '3', label: 'Client platforms' },
+  { value: '1', label: 'Shared transaction record' },
+  { value: 'NG', label: 'Initial operating market' },
 ];
 
 const traction = [
-  { value: '800+', label: 'Waitlist signups' },
-  { value: '14', label: 'Cities at launch' },
-  { value: '35%', label: 'Month-over-month growth', note: 'verify' },
-  { value: '120+', label: 'Agents & landlords onboarding', note: 'verify' },
+  { value: '800+', label: 'Early-access registrations' },
+  { value: 'Mobile', label: 'Tenant and property workflows' },
+  { value: 'Desktop', label: 'Agent operating workspace' },
+  { value: 'Admin', label: 'Platform oversight tools' },
 ];
 
 const pillars = [
-  { icon: 'fa-shield-halved', title: 'Trust as the moat', text: 'Verification, escrow-style payments, and digital agreements create defensibility competitors can’t copy overnight.' },
-  { icon: 'fa-layer-group', title: 'End-to-end platform', text: 'Search, chat, viewings, payments, and contracts in one app, capturing the full transaction, not just leads.' },
-  { icon: 'fa-coins', title: 'Multiple revenue lines', text: 'Listing & subscription fees, transaction take-rate, premium developer tools, and embedded financial services.' },
-  { icon: 'fa-arrow-trend-up', title: 'Network effects', text: 'More verified listings attract more seekers, which attracts more agents and developers, a compounding flywheel.' },
+  { icon: 'fa-shield-halved', title: 'Transaction controls', text: 'Participant checks, protected payment steps, and digital agreements preserve evidence across the property journey.' },
+  { icon: 'fa-layer-group', title: 'Connected workflow', text: 'Search, communication, viewings, payments, and agreements use one shared transaction record.' },
+  { icon: 'fa-coins', title: 'Commercial model', text: 'Planned revenue includes subscriptions, transaction services, and tools for professional property operators.' },
+  { icon: 'fa-arrow-trend-up', title: 'Multi-role product', text: 'Tenants, agents, landlords, and developers participate in the same property network through role-specific interfaces.' },
 ];
 ---
 <Base
   title="Investors | Building the Trust Layer for Nigerian Real Estate | RentEase 9ja"
-  description="RentEase 9ja is building the verified, end-to-end property platform for Nigeria. Explore the market opportunity, traction, and how to request our investor deck."
+  description="RentEase 9ja is building a property transaction platform for Nigeria. Review the product scope and request investor materials."
   active="/investors"
 >
   <PageHero
     variant="dark"
     eyebrow="Investors"
-    title="Building the trust layer for <span class='gradient-text'>Nigerian real estate.</span>"
-    subtitle="A massive, fragmented market starved of trust, and the end-to-end platform built to own it."
+    title="A transaction platform for <span class='gradient-text'>Nigerian property.</span>"
+    subtitle="RentEase 9ja connects discovery, communication, payment records, agreements, and property operations across one product system."
   >
     <div class="hero-actions">
       <a href="/investor-access" class="btn btn-primary">Request investor deck <i class="fas fa-arrow-right"></i></a>
@@ -43,27 +43,26 @@ const pillars = [
   <section class="section section--surface">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">The opportunity</span>
-        <h2>A huge market, ready for trust</h2>
-        <p>Nigerian real estate is enormous and overwhelmingly offline, informal, and fraud-prone. Whoever makes it safe and digital wins.</p>
+        <span class="eyebrow">Product scope</span>
+        <h2>One system across the transaction</h2>
+        <p>The public page shows current product scope only. Sourced market analysis and commercial assumptions are available in the investor materials.</p>
       </div>
       <div class="grid grid-4">
         {market.map((m, i) => (
           <div class="m-stat reveal" data-delay={i % 4}>
-            <div class="m-val gradient-text count-up">{m.value}</div>
+            <div class="m-val">{m.value}</div>
             <div class="m-label">{m.label}</div>
           </div>
         ))}
       </div>
-      <p class="disclaimer reveal">Market sizing figures are working estimates. Confirm them against a cited source before sharing publicly.</p>
     </div>
   </section>
 
   <section class="section section--mist">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Why we win</span>
-        <h2>A defensible, compounding platform</h2>
+        <span class="eyebrow">Operating model</span>
+        <h2>Product foundations for long-term value</h2>
       </div>
       <div class="grid grid-2">
         {pillars.map((p, i) => (
@@ -85,7 +84,7 @@ const pillars = [
       <div class="grid grid-4">
         {traction.map((t, i) => (
           <div class="m-stat reveal" data-delay={i % 4}>
-            <div class="m-val gradient-text count-up">{t.value}</div>
+            <div class="m-val">{t.value}</div>
             <div class="m-label">{t.label}</div>
           </div>
         ))}
@@ -95,16 +94,16 @@ const pillars = [
 
   <section class="invest-cta-band">
     <div class="container reveal">
-      <h2>Let's build the future of housing in Nigeria.</h2>
-      <p>We're raising to accelerate launch and onboarding. Request the deck and let's talk.</p>
+      <h2>Review the investment materials.</h2>
+      <p>Request access to the sourced market analysis, operating model, and current fundraising information.</p>
       <a href="/investor-access" class="btn btn-light">Request investor deck <i class="fas fa-arrow-right"></i></a>
     </div>
   </section>
 </Base>
 
 <style>
-  .m-stat { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 30px 18px; box-shadow: var(--shadow-sm); }
-  .m-val { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.55rem, 3vw, 2.1rem); letter-spacing: -.03em; }
+  .m-stat { text-align: left; border-top: 2px solid var(--brand-blue); padding: 24px 0; }
+  .m-val { font-family: var(--font-display); font-weight: 700; font-size: 1.7rem; letter-spacing: 0; color: var(--text); }
   .m-label { color: var(--text-muted); font-size: .92rem; margin-top: 8px; }
   .disclaimer { text-align: center; color: var(--text-muted); font-size: .85rem; margin-top: 28px; }
   .disclaimer code { background: var(--surface-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 6px; }
@@ -112,7 +111,7 @@ const pillars = [
   .p-icon { flex-shrink: 0; width: 52px; height: 52px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.25rem; color: #fff; background: var(--brand-gradient); }
   .pillar h3 { margin-bottom: 6px; }
   .pillar p { color: var(--text-muted); }
-  .invest-cta-band { background: var(--brand-gradient); color: #fff; padding-block: clamp(56px, 8vw, 96px); text-align: center; }
+  .invest-cta-band { background: var(--brand-blue); color: #fff; padding-block: clamp(56px, 8vw, 88px); text-align: center; }
   .invest-cta-band h2 { color: #fff; }
   .invest-cta-band p { color: rgba(255,255,255,.92); font-size: 1.1rem; margin: 14px 0 28px; }
 </style>

@@ -1,12 +1,12 @@
 ---
-// Three faithful app-screen mockups shown side by side in the hero, recreated
+// Product preview recreated from the live tenant Explore screen (behind login).
 // from the live app screens (which are behind login):
 //   Tenant  → Explore         (lib/features/tenant/explore/explore_screen.dart)
 //   Agent   → Agent Workspace  (lib/features/agent/dashboard/agent_dashboard_screen.dart)
 //   Landlord→ My Portfolio      (lib/features/landlord/dashboard/landlord_dashboard_screen.dart)
 // Content uses realistic demo data modelled on real listings/stats.
 ---
-<div class="hp" role="img" aria-label="RentEase 9ja app screens: tenant Explore, agent Workspace, and landlord Portfolio dashboards">
+<div class="hp" role="img" aria-label="RentEase 9ja tenant app showing the property Explore screen">
   <!-- TENANT — Explore -->
   <article class="hp-phone hp-left" style="--ac:#2BB673;">
     <span class="hp-tag">Tenant</span>
@@ -70,7 +70,7 @@
       <div class="hp-sb"><span>9:41</span><span class="hp-sb-i"><i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-full"></i></span></div>
       <div class="hp-pad">
         <div class="hp-thd"><span class="hp-av ph"></span><strong>My Portfolio</strong><span class="hp-licons"><i class="fas fa-chart-line"></i><i class="fas fa-rotate"></i><span class="hp-bell ac"><i class="fas fa-bell"></i><i class="hp-dot"></i></span></span></div>
-        <div class="hp-greet">Good morning, Okoro 👋</div>
+        <div class="hp-greet">Good morning, Okoro</div>
         <div class="hp-sub">Here's your property overview</div>
         <div class="hp-income">
           <span class="hp-il"><i class="fas fa-wallet"></i> EST. MONTHLY INCOME</span>
@@ -95,17 +95,16 @@
 </div>
 
 <style>
-  .hp { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 0; perspective: 1600px; width: 100%; }
+  .hp { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; }
   .hp-phone {
-    position: relative; width: clamp(158px, 15vw, 192px); flex: none;
-    background: linear-gradient(160deg, #1a2336, #0b1020);
-    border-radius: 26px; padding: 6px; box-shadow: 0 30px 60px -18px rgba(15,23,42,.5), 0 0 0 1px rgba(255,255,255,.05) inset;
+    position: relative; width: 238px; flex: none;
+    background: #111827;
+    border-radius: 26px; padding: 6px; box-shadow: 0 18px 40px rgba(15,23,42,.18), 0 0 0 1px rgba(255,255,255,.06) inset;
   }
   .hp-phone::after { content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 32%; height: 11px; background: #0b1020; border-radius: 0 0 8px 8px; z-index: 3; }
-  .hp-mid  { z-index: 3; transform: translateY(-20px); }
-  .hp-left  { z-index: 2; transform: rotate(-7deg) translateX(22px) scale(.92); transform-origin: bottom right; }
-  .hp-right { z-index: 2; transform: rotate(7deg) translateX(-22px) scale(.92); transform-origin: bottom left; }
-  .hp-tag { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); z-index: 4; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: var(--ac); padding: 3px 11px; border-radius: 999px; white-space: nowrap; box-shadow: 0 6px 14px rgba(15,23,42,.3); }
+  .hp-mid, .hp-right { display: none; }
+  .hp-left { z-index: 1; }
+  .hp-tag { position: absolute; top: 18px; left: -58px; z-index: 4; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-blue); background: #fff; border: 1px solid var(--border); padding: 6px 10px; border-radius: 4px; white-space: nowrap; box-shadow: var(--shadow-sm); }
 
   .hp-screen { position: relative; border-radius: 20px; overflow: hidden; background: #F4F5FA; aspect-ratio: 9 / 19.3; display: flex; flex-direction: column; font-size: 8px; line-height: 1.25; color: #0F172A; }
   .hp-sb { display: flex; justify-content: space-between; align-items: center; padding: 6px 11px 1px; font-size: 7px; font-weight: 700; }
@@ -126,7 +125,7 @@
   .hp-dot { position: absolute; top: 1px; right: 2px; width: 4px; height: 4px; border-radius: 50%; background: #EF4444; }
   .hp-licons { display: inline-flex; gap: 5px; align-items: center; color: var(--ac); font-size: 8px; }
 
-  .hp-greet { font-size: 11px; font-weight: 800; margin: 5px 0 1px; letter-spacing: -.01em; }
+  .hp-greet { font-size: 11px; font-weight: 800; margin: 5px 0 1px; letter-spacing: 0; }
   .hp-sub { color: #6F7785; font-size: 7.2px; }
 
   .hp-search { display: flex; align-items: center; gap: 6px; background: #fff; border-radius: 9px; padding: 6px 8px; margin: 7px 0; box-shadow: 0 2px 8px rgba(15,23,42,.05); }
@@ -256,21 +255,11 @@
   .hp-nav i { font-size: 9px; }
   .hp-nav .on { color: var(--ac); }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .hp-phone { transition: transform .4s cubic-bezier(.2,.7,.2,1); }
-    .hp:hover .hp-mid { transform: translateY(-28px); }
-    .hp:hover .hp-left { transform: rotate(-9deg) translateX(16px) scale(.92); }
-    .hp:hover .hp-right { transform: rotate(9deg) translateX(-16px) scale(.92); }
-  }
   @media (max-width: 920px) {
-    .hp-phone { width: clamp(116px, 30vw, 158px); }
-    .hp-left  { transform: rotate(-6deg) translateX(16px) scale(.9); }
-    .hp-right { transform: rotate(6deg) translateX(-16px) scale(.9); }
-    .hp-mid   { transform: translateY(-12px); }
+    .hp-phone { width: 220px; }
   }
   @media (max-width: 440px) {
-    .hp-phone { width: 32vw; }
-    .hp-left  { transform: rotate(-5deg) translateX(10px) scale(.88); }
-    .hp-right { transform: rotate(5deg) translateX(-10px) scale(.88); }
+    .hp-phone { width: 170px; }
+    .hp-tag { left: -42px; }
   }
 </style>

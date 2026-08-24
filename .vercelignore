@@ -19,6 +19,7 @@ scripts
 
 # Editor / OS noise
 .vscode
+.claude
 .DS_Store
 **/.DS_Store
 Thumbs.db

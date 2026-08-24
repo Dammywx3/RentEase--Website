@@ -4,8 +4,6 @@ import PageHero from '../components/PageHero.astro';
 import ListingCard from '../components/ListingCard.astro';
 import CtaBand from '../components/CtaBand.astro';
 
-const filters = ['All', 'Residential', 'Commercial', 'Agricultural', 'C of O', 'Lagos', 'Abuja'];
-
 const listings = [
   { image: 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=900', price: '₦8,500,000', title: '600sqm Residential Plot', location: 'Ibeju-Lekki, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '600 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
   { image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900', price: '₦120,000,000', title: '1,200sqm Commercial Land', location: 'Wuse II, Abuja', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '1,200 sqm' }, { icon: 'fa-file-contract', label: 'R of O' }] },
@@ -16,37 +14,34 @@ const listings = [
 ];
 ---
 <Base
-  title="Buy Verified Land in Nigeria | RentEase 9ja"
-  description="Invest in document-verified land across Nigeria, residential, commercial, and agricultural plots with C of O and registered surveys, on RentEase 9ja."
+  title="Land Marketplace Preview | RentEase 9ja"
+  description="Preview how land and plots will be presented in RentEase 9ja, including property details, document records, and transaction workflows."
   active="/land"
 >
   <PageHero
     eyebrow="Land & plots"
-    title="Invest in land with <span class='gradient-text'>verified documents.</span>"
-    subtitle="C of O, R of O, registered surveys, every plot is document-checked so your investment is built on solid ground."
+    title="Preview land and <span class='gradient-text'>plot listings.</span>"
+    subtitle="See how plot details, available document records, communication, offers, and payment steps will appear in RentEase 9ja."
   >
     <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
   </PageHero>
 
   <section class="section section--mist">
     <div class="container">
-      <div class="filters reveal">
-        {filters.map((f, i) => (<button class:list={['chip', { active: i === 0 }]}>{f}</button>))}
-      </div>
-      <div class="grid grid-3" style="margin-top: 30px;">
+      <p class="preview-note reveal"><strong>Product preview:</strong> these example listings demonstrate the marketplace interface and are not live inventory.</p>
+      <div class="grid grid-3 listings-grid">
         {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
       </div>
-      <p class="note reveal">Showing a sample of verified plots. Full inventory and document checks live in the app.</p>
+      <p class="note reveal">Live availability and document-check status will be shown after marketplace onboarding.</p>
     </div>
   </section>
 
-  <CtaBand title="Secure your piece of the future." text="Join the waitlist to browse verified plots and view documents in-app." />
+  <CtaBand title="Get access when land onboarding opens." text="Join the waitlist for marketplace availability and product updates." />
 </Base>
 
 <style>
-  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-  .chip { padding: 9px 18px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--surface); color: var(--text-2); font-weight: 600; font-size: .9rem; transition: var(--transition); }
-  .chip:hover { border-color: rgba(30,78,140,.3); color: var(--brand-blue); }
-  .chip.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+  .preview-note { max-width: 720px; margin: 0 auto 30px; padding: 14px 16px; border-left: 3px solid var(--brand-blue); background: var(--surface); color: var(--text-muted); font-size: .92rem; }
+  .preview-note strong { color: var(--text); }
+  .listings-grid { margin-top: 30px; }
   .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
 </style>

@@ -2,7 +2,6 @@
 const { eyebrow, title, subtitle, variant = 'light' } = Astro.props;
 ---
 <section class:list={['page-hero', variant]}>
-  <div class="ph-glow" aria-hidden="true"></div>
   <div class="container ph-inner reveal">
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
     <h1 set:html={title} />
@@ -12,11 +11,10 @@ const { eyebrow, title, subtitle, variant = 'light' } = Astro.props;
 </section>
 
 <style>
-  .page-hero { position: relative; overflow: hidden; padding-block: clamp(56px, 8vw, 96px); text-align: center; }
-  .page-hero.light { background: linear-gradient(180deg, var(--bg), var(--mist)); }
-  .page-hero.dark { background: radial-gradient(120% 120% at 80% 0%, var(--navy-800), var(--navy-900)); color: var(--on-dark); }
+  .page-hero { position: relative; overflow: hidden; padding-block: clamp(56px, 7vw, 84px); text-align: center; border-bottom: 1px solid var(--border); }
+  .page-hero.light { background: var(--bg); }
+  .page-hero.dark { background: var(--navy-900); color: var(--on-dark); border-bottom-color: var(--navy-border); }
   .page-hero.dark h1 { color: #fff; }
-  .ph-glow { position: absolute; top: -40%; right: -10%; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(43,182,115,.14), transparent 65%); pointer-events: none; }
   .ph-inner { position: relative; max-width: 760px; }
   .ph-inner h1 { margin: 18px 0 16px; }
   .ph-inner p { font-size: 1.15rem; color: var(--text-2); max-width: 620px; margin: 0 auto; }

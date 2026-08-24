@@ -54,7 +54,8 @@ const anyAvailable = !!(macArm || macIntel || windows || linux);
   </p>
 </div>
 
-<script is:inline>
+<script>
+  // @ts-nocheck
   (function () {
     function macArch() {
       try {
@@ -69,7 +70,7 @@ const anyAvailable = !!(macArm || macIntel || windows || linux);
       return null;
     }
     document.querySelectorAll('[data-dl]').forEach(function (root) {
-      var s = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '') + ' ' + (navigator.userAgent || '');
+      var s = navigator.userAgent || '';
       var os = /Mac|iPhone|iPad/i.test(s) ? 'mac' : /Win/i.test(s) ? 'windows' : /Linux|X11|Android/i.test(s) ? 'linux' : '';
       if (os) {
         var card = root.querySelector('[data-os="' + os + '"]');

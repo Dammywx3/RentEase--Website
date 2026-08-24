@@ -61,7 +61,7 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
           <div class="dscreen" data-screen="welcome">
             <Fragment set:html={sb} />
             <div class="dwelcome">
-              <h3 class="dwelcome-h">Good evening, Adigun <span class="dwave">👋</span></h3>
+              <h3 class="dwelcome-h">Good evening, Adigun</h3>
               <p class="dmuted dctr">You're logged in as a Tenant.</p>
               <div class="dwel-card">
                 <span class="dpill grey">TENANT</span>
@@ -258,7 +258,7 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
   .dpad { flex: 1; padding: 14px 16px 0; overflow: hidden; } .dpad.det { padding-top: 12px; }
 
   .dmuted { color: var(--text-muted); } .dxs { font-size: 10.5px; } .dctr { text-align: center; } .dctr-h { text-align: center; flex: 1; }
-  .dh { font-family: var(--font-display); font-weight: 800; font-size: 21px; color: var(--text); letter-spacing: -.02em; }
+  .dh { font-family: var(--font-display); font-weight: 800; font-size: 21px; color: var(--text); letter-spacing: 0; }
   .dh-top { margin: 2px 0 2px; }
   .dhead-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
   .dhicons { display: flex; gap: 10px; font-size: 14px; color: var(--text-2); }
@@ -427,7 +427,8 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
   @media (prefers-reduced-motion: reduce) { .dscreen, .demo-hand { transition: none; } }
 </style>
 
-<script is:inline>
+<script>
+  // @ts-nocheck
   (function () {
     const vp = document.getElementById('demo-viewport');
     if (!vp) return;
@@ -490,10 +491,10 @@ const houseC = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3
       { fn: () => type('#val-pass', '••••••••') },
       { fn: () => tap('#tap-signin'), after: () => { showScreen('verify'); setCap('Verify it’s you', 'A one-time code keeps every account safe.'); }, gap: 500 },
       { fn: () => type('#tap-otp', '124863', { otp: true }) },
-      { fn: () => tap('#tap-confirm'), after: () => { showScreen('welcome'); setCap('Welcome 👋', 'Good evening, Adigun — straight to your dashboard.'); }, gap: 1500 },
+      { fn: () => tap('#tap-confirm'), after: () => { showScreen('welcome'); setCap('Welcome', 'Good evening, Adigun. Straight to your dashboard.'); }, gap: 1500 },
       { fn: () => tap('#tap-explore'), after: () => { showScreen('explore'); setCap('Explore', 'Browse verified homes — filter by rent, buy or land.'); }, gap: 1900 },
       { fn: () => tap('#tap-feat'), after: () => { showScreen('details'); setCap('Property details', 'Full photos, specs and a verified badge on every listing.'); }, gap: 1900 },
-      { fn: () => tap('#tap-apply'), after: () => { showScreen('apply'); setCap('Apply securely', 'KYC, live selfie and guarantor checks — fraud-proof.'); }, gap: 2000 },
+      { fn: () => tap('#tap-apply'), after: () => { showScreen('apply'); setCap('Apply securely', 'KYC, live selfie and guarantor checks help reduce fraud.'); }, gap: 2000 },
       { fn: () => tap('#tap-begin'), after: () => { showScreen('tenancy'); setCap('Your tenancy', 'Once approved, track rent, status and your landlord.'); }, gap: 2000 },
       { fn: () => tap('#tap-payrent'), after: () => { showScreen('invoice'); setCap('Rent invoice', 'Clear breakdown — no hidden fees.'); }, gap: 1700 },
       { fn: () => tap('#tap-pay'), after: () => { showScreen('payment'); setCap('Pay your way', 'Paystack, wallet or bank transfer.'); }, gap: 1700 },

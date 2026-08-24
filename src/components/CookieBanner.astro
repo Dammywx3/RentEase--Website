@@ -15,7 +15,8 @@
   </div>
 </div>
 
-<script is:inline>
+<script>
+  // @ts-nocheck
   (function () {
     var KEY = 're9ja_cookie_consent';
     var banner = document.getElementById('cookie-banner');
@@ -45,7 +46,7 @@
     position: fixed; z-index: 60; left: 16px; right: 16px; bottom: 16px;
     max-width: 640px; margin-inline: auto;
     display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    padding: 16px 18px; border-radius: 14px;
+    padding: 16px 18px; border-radius: var(--r-lg);
     background: var(--navy-card, #0f1a2e); color: rgba(255, 255, 255, .9);
     border: 1px solid var(--navy-border, rgba(255, 255, 255, .12));
     box-shadow: 0 12px 40px rgba(0, 0, 0, .35);

@@ -7,23 +7,21 @@ import CookieBanner from '../components/CookieBanner.astro';
 
 const {
   title = 'RentEase 9ja: Rent, Buy & Sell Property in Nigeria, Safely',
-  description = "Nigeria's safest, most trusted property platform. Verified listings, real agents, secure rent payments, and digital agreements, all in one app.",
+  description = "A trusted digital property platform for Nigeria. Verified listings, real agents, protected rent payments, and digital agreements, all in one app.",
   active = '',
   ogImage = '/og-cover.png',
   noFooter = false,
+  noIndex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://rentease9ja.com').href;
-
-// API base is centralized in src/config.ts (set window.__API_BASE__ for client scripts).
-import { API_BASE } from '../config';
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'RentEase 9ja',
   url: 'https://rentease9ja.com',
-  logo: 'https://rentease9ja.com/logo.webp',
+  logo: 'https://rentease9ja.com/brand-mark.svg',
   description,
   sameAs: [
     'https://x.com/rentease9ja',
@@ -39,19 +37,18 @@ const jsonLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script is:inline>document.documentElement.classList.add('js');</script>
-    <script is:inline define:vars={{ API_BASE }}>window.__API_BASE__ = API_BASE;</script>
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#1E4E8C" />
 
     <!-- Privacy-friendly analytics (no cookies). Activate by adding the domain in Plausible. -->
     <script defer data-domain="rentease9ja.com" src="https://plausible.io/js/script.js" is:inline></script>
 
-    <!-- Favicons (multi-size .ico is authoritative for the browser tab; ?v bust forces past aggressive favicon caching) -->
-    <link rel="icon" href="/favicon.ico?v=6" sizes="16x16 32x32 48x48 64x64" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=6" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6" />
+    <link rel="icon" type="image/svg+xml" href="/brand-mark.svg?v=7" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=7" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7" />
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website" />
@@ -62,17 +59,19 @@ const jsonLd = {
     <meta property="og:image" content={new URL(ogImage, Astro.site ?? 'https://rentease9ja.com').href} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rentease9ja" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site ?? 'https://rentease9ja.com').href} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
-    <!-- Self-hosted Font Awesome (no third-party CDN; loaded non-render-blocking) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Self-hosted Font Awesome (no third-party CDN). -->
     <link rel="preload" href="/vendor/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/vendor/fontawesome/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css" /></noscript>
+    <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
@@ -95,46 +94,13 @@ const jsonLd = {
         els.forEach((el) => io.observe(el));
       }
 
-      // Count-up for stat numbers (parses a leading number, keeps prefix/suffix)
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const counters = document.querySelectorAll('.count-up');
-      const runCount = (el) => {
-        const raw = (el.textContent || '').trim();
-        const m = raw.match(/^(\D*)([\d.,]+)(.*)$/);
-        if (!m) { el.classList.add('counted'); return; }
-        const prefix = m[1], suffix = m[3];
-        const clean = m[2].replace(/,/g, '');
-        const target = parseFloat(clean);
-        const decimals = clean.includes('.') ? (clean.split('.')[1] || '').length : 0;
-        const hasComma = m[2].includes(',');
-        const fmt = (n) => {
-          let s = decimals ? n.toFixed(decimals) : Math.round(n).toString();
-          if (hasComma) s = Number(s).toLocaleString('en-US');
-          return prefix + s + suffix;
-        };
-        el.classList.add('counted');
-        if (prefersReduced || !isFinite(target)) { el.textContent = raw; return; }
-        const dur = 1200, start = performance.now();
-        const tick = (t) => {
-          const p = Math.min(1, (t - start) / dur);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = fmt(target * eased);
-          if (p < 1) requestAnimationFrame(tick); else el.textContent = raw;
-        };
-        requestAnimationFrame(tick);
-      };
-      if (counters.length) {
-        const cio = new IntersectionObserver((entries) => {
-          entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); } });
-        }, { threshold: 0.5 });
-        counters.forEach((el) => cio.observe(el));
-      }
     </script>
 
     <CookieBanner />
 
     <!-- Adigun: RentEase 9ja AI assistant (Tawk.to). Loads ONLY after cookie consent (Tawk.to sets cookies). -->
-    <script is:inline>
+    <script>
+      // @ts-nocheck
       (function () {
         function loadTawk() {
           if (window.__tawkLoaded) return;
@@ -144,7 +110,6 @@ const jsonLd = {
           var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
           s1.async = true;
           s1.src = 'https://embed.tawk.to/6a2eb6a6ccc4ac1d4891bba9/1jre12fk6';
-          s1.charset = 'UTF-8';
           s1.setAttribute('crossorigin', '*');
           s0.parentNode.insertBefore(s1, s0);
         }

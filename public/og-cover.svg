@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="RentEase 9ja property transaction platform">
+  <rect width="1200" height="630" fill="#0B1020"/>
+  <rect x="84" y="86" width="74" height="74" rx="8" fill="#fff"/>
+  <path d="M101 120 121 106l20 14v23h-40Z" fill="none" stroke="#1E4E8C" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M116 143v-15h10v15" fill="none" stroke="#1E4E8C" stroke-width="5"/>
+  <path d="M137 108v35" stroke="#2BB673" stroke-width="5"/>
+  <text x="180" y="140" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="700">RentEase <tspan fill="#8FE3B9">9ja</tspan></text>
+  <rect x="84" y="226" width="56" height="5" fill="#2BB673"/>
+  <text x="84" y="310" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700">Property transactions,</text>
+  <text x="84" y="380" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700">with clearer records.</text>
+  <text x="84" y="457" fill="#B7C2D3" font-family="Inter, Arial, sans-serif" font-size="26">Search, communication, payment records, and</text>
+  <text x="84" y="495" fill="#B7C2D3" font-family="Inter, Arial, sans-serif" font-size="26">digital agreements in one platform for Nigeria.</text>
+</svg>

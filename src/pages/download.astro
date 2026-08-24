@@ -85,14 +85,14 @@ const requirements = [
   <section class="section section--mist">
     <div class="container narrow">
       <div class="section-head reveal">
-        <span class="eyebrow">First time opening the app?</span>
-        <h2>Getting past the security prompt</h2>
-        <p>Our early builds aren't code-signed yet, so your system may warn you the first time you open it. It's safe — here's how.</p>
+        <span class="eyebrow">Download safely</span>
+        <h2>Verify before you install</h2>
+        <p>Only install RentEase 9ja from this website or the official GitHub release linked above.</p>
       </div>
       <div class="help">
-        <div class="help-row reveal"><span class="help-os"><i class="fab fa-apple" aria-hidden="true"></i> macOS</span><p>Right-click (or Control-click) the app and choose <strong>Open</strong>, then <strong>Open</strong> again in the dialog. You only need to do this once.</p></div>
-        <div class="help-row reveal" data-delay="1"><span class="help-os"><i class="fab fa-windows" aria-hidden="true"></i> Windows</span><p>If a Windows SmartScreen prompt appears, click <strong>More info</strong>, then <strong>Run anyway</strong>.</p></div>
-        <div class="help-row reveal" data-delay="2"><span class="help-os"><i class="fab fa-linux" aria-hidden="true"></i> Linux</span><p>Make the AppImage executable (<code>chmod +x</code>, or Properties → Permissions → Allow executing), then run it. Or install the <strong>.deb</strong> / <strong>.rpm</strong> with your package manager.</p></div>
+        <div class="help-row reveal"><span class="help-os"><i class="fas fa-shield-halved" aria-hidden="true"></i> System warning</span><p>If your operating system reports an unsigned or unrecognized build, do not bypass the warning. Use the browser app or wait for a signed release.</p></div>
+        <div class="help-row reveal" data-delay="1"><span class="help-os"><i class="fas fa-link" aria-hidden="true"></i> Source</span><p>Confirm that the download comes from the official RentEase 9ja GitHub release. Do not install copies shared through messages or file-hosting sites.</p></div>
+        <div class="help-row reveal" data-delay="2"><span class="help-os"><i class="fas fa-headset" aria-hidden="true"></i> Need help?</span><p>Contact <a href="#contact" data-contact data-contact-subject="Desktop app download">support</a> if a download looks unexpected or your system blocks it.</p></div>
       </div>
     </div>
   </section>
@@ -127,5 +127,6 @@ const requirements = [
   .help-os i { font-size: 1.1rem; }
   .help-row p { color: var(--text-2); font-size: .95rem; line-height: 1.6; }
   .help-row code { background: var(--surface-2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; font-size: .88em; }
+  .help-row a { color: var(--brand-blue); font-weight: 700; }
   @media (max-width: 560px) { .help-row { flex-direction: column; gap: 8px; } .help-os { width: auto; } }
 </style>

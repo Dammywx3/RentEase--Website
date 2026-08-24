@@ -3,10 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 
-// NOTE: Replace names, roles, bios, photos and links with real data.
-// For photos, drop images in public/team/ and set `photo: '/team/name.webp'`.
 const founders = [
-  { initials: 'DA', name: 'Damilare V Adebayo', role: 'Founder, CEO & CTO', bio: 'Founder of RentEase 9ja and the engineer behind the entire platform, from the verified listings and in-app chat to escrow-style payments and digital agreements. Building the trust layer Nigerian real estate has always lacked, so no tenant loses money to fraud again.', photo: '/team/damilare.webp', x: 'https://x.com/damilareomoadebayo', instagram: 'https://instagram.com/damilareomoadebayo' },
+  { initials: 'DA', name: 'Damilare V Adebayo', role: 'Founder and Chief Executive', bio: 'Founder of RentEase 9ja, leading product and engineering across listing workflows, communication, payment records, and digital agreements. His focus is reducing fraud risk and making property transactions easier to follow.', photo: '/team/damilare.webp', x: 'https://x.com/damilareomoadebayo', instagram: 'https://instagram.com/damilareomoadebayo' },
   { initials: 'OB', name: 'Ola Ben Olowasogo', role: 'Co-founder & COO', bio: 'Co-founder of RentEase 9ja, focused on bringing the vision to market and growing a trusted network of agents, landlords, and tenants across Nigeria.', photo: '/team/ola.webp', x: 'https://x.com/ola_ben_', instagram: 'https://www.instagram.com/olaben_8' },
 ];
 
@@ -22,21 +20,16 @@ const team = [
   { initials: 'TA', name: 'Timileyin V Amodu', role: 'Head of Property Partnership', photo: '/team/timileyin.webp' },
 ];
 
-const posts = [
-  { tag: 'Update', date: 'Launch series', title: 'Why we are building RentEase 9ja', excerpt: 'Renting in Nigeria runs on trust that too often breaks: fake listings, agents who vanish, and deposits paid in cash with no receipts. We are building a platform where every property deal is verified, documented, and protected from search to signing.', href: '#' },
-  { tag: 'Product', date: 'Launch series', title: 'How verification works on RentEase 9ja', excerpt: 'Before a listing goes live we check ownership and title documents, and every agent and landlord passes identity (KYC) verification. Payments move through a secure, escrow-style flow released only on key handover, and every deal is backed by a digital agreement.', href: '#' },
-  { tag: 'Community', date: 'Launch series', title: 'Meet the agents joining at launch', excerpt: 'We are onboarding verified agents and landlords across 14 cities ahead of launch. Founding agents earn a verified blue badge, receive qualified leads, and pay zero platform fees for their first months, building a network seekers can finally trust.', href: '#' },
-];
 ---
 <Base
   title="Meet the Team | RentEase 9ja"
-  description="Meet the founders and team building RentEase 9ja, the first end-to-end digital property platform in Nigeria."
+  description="Meet the founders and team building the RentEase 9ja property transaction platform in Nigeria."
   active="/team"
 >
   <PageHero
     eyebrow="Our people"
-    title="The team building the future of <span class='gradient-text'>renting in Nigeria.</span>"
-    subtitle="A small, focused team obsessed with making property safe, simple, and transparent for every Nigerian."
+    title="The team building <span class='gradient-text'>RentEase 9ja.</span>"
+    subtitle="A focused product and operations team working to make Nigerian property transactions clearer and easier to document."
   />
 
   <section class="section section--surface">
@@ -72,7 +65,7 @@ const posts = [
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">The team</span>
-        <h2>Builders, designers & operators</h2>
+        <h2>Product, operations, and partnerships</h2>
       </div>
       <div class="grid grid-3 team-grid">
         {team.map((t, i) => (
@@ -83,26 +76,6 @@ const posts = [
             <h3>{t.name}</h3>
             <p class="role">{t.role}</p>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--surface">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">From the team</span>
-        <h2>Notes, updates & stories</h2>
-        <p>Follow our build in public. Posts and product updates land here and on our socials.</p>
-      </div>
-      <div class="grid grid-3">
-        {posts.map((p, i) => (
-          <a class="post card reveal" data-delay={i % 3} href={p.href}>
-            <div class="post-top"><span class="post-tag">{p.tag}</span><span class="post-date">{p.date}</span></div>
-            <h3>{p.title}</h3>
-            <p>{p.excerpt}</p>
-            <span class="post-link">Read more <i class="fas fa-arrow-right"></i></span>
-          </a>
         ))}
       </div>
     </div>
@@ -122,33 +95,23 @@ const posts = [
   .founders { gap: clamp(20px, 3vw, 32px); }
   .founder { display: flex; gap: 22px; align-items: flex-start; padding: 30px 28px; }
   .f-body h3 { margin-bottom: 2px; }
-  .avatar { width: 96px; height: 96px; border-radius: 50%; flex-shrink: 0; object-fit: cover; box-shadow: var(--shadow-card); }
-  .avatar--initials { display: grid; place-items: center; background: var(--brand-gradient); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; letter-spacing: -.02em; }
+  .avatar { width: 96px; height: 96px; border-radius: 6px; flex-shrink: 0; object-fit: cover; box-shadow: var(--shadow-sm); }
+  .avatar--initials { display: grid; place-items: center; background: var(--brand-gradient); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; letter-spacing: 0; }
   .avatar--initials.sm { width: 88px; height: 88px; font-size: 1.6rem; margin: 0 auto 16px; }
   .role { color: var(--brand-blue); font-weight: 700; font-size: .92rem; margin-bottom: 12px; }
   .bio { color: var(--text-muted); font-size: .95rem; line-height: 1.65; margin-bottom: 14px; }
   .f-socials { display: flex; gap: 10px; }
-  .f-socials a { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--border); color: var(--brand-blue); transition: var(--transition); }
-  .f-socials a:hover { background: var(--brand-gradient); color: #fff; border-color: transparent; transform: translateY(-2px); }
+  .f-socials a { width: 38px; height: 38px; border-radius: 4px; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--border); color: var(--brand-blue); transition: var(--transition); }
+  .f-socials a:hover { background: var(--brand-blue); color: #fff; border-color: var(--brand-blue); }
 
   /* Flex (not grid) so any count centers cleanly — no orphaned last-row card */
   .team-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(20px, 2.4vw, 36px); max-width: 860px; margin-inline: auto; }
   .member { flex: 0 0 200px; max-width: 200px; }
   @media (max-width: 480px) { .member { flex-basis: 72%; max-width: 72%; } }
   .member { text-align: center; }
-  /* Circular avatar, same size as the initials avatars, centered — consistent across cards */
-  .member .avatar { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; display: block; }
+  .member .avatar { width: 88px; height: 88px; border-radius: 6px; object-fit: cover; margin: 0 auto 16px; display: block; }
   .member h3 { font-size: 1.1rem; margin-bottom: 2px; }
   .member .role { margin-bottom: 0; }
-
-  .post { padding: 28px 26px; display: flex; flex-direction: column; }
-  .post-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .post-tag { background: var(--brand-gradient-soft); color: var(--brand-blue); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 5px 11px; border-radius: var(--r-pill); }
-  .post-date { color: var(--text-muted); font-size: .82rem; }
-  .post h3 { font-size: 1.2rem; margin-bottom: 8px; }
-  .post p { color: var(--text-muted); font-size: .95rem; margin-bottom: 16px; }
-  .post-link { margin-top: auto; color: var(--brand-blue); font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); }
-  .post:hover .post-link { gap: 12px; }
 
   @media (max-width: 560px) { .founder { flex-direction: column; align-items: center; text-align: center; } .f-socials { justify-content: center; } }
 </style>

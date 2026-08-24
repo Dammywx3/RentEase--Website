@@ -4,8 +4,6 @@ import PageHero from '../components/PageHero.astro';
 import ListingCard from '../components/ListingCard.astro';
 import CtaBand from '../components/CtaBand.astro';
 
-const filters = ['All', 'Lagos', 'Abuja', 'Duplex', 'Bungalow', 'Mansion', 'Penthouse'];
-
 const listings = [
   { image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=900', price: '₦45,000,000', title: 'Modern 4-Bedroom Duplex', location: 'Lekki, Lagos', kind: 'buy', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-ruler-combined', label: '450 sqm' }] },
   { image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=900', price: '₦250,000,000', title: 'Luxury 5-Bedroom Mansion', location: 'Maitama, Abuja', kind: 'buy', meta: [{ icon: 'fa-bed', label: '5 beds' }, { icon: 'fa-car', label: 'BQ + Parking' }] },
@@ -16,37 +14,34 @@ const listings = [
 ];
 ---
 <Base
-  title="Buy Property in Nigeria with Confidence | RentEase 9ja"
-  description="Buy verified homes across Nigeria. Every listing is document-checked, every seller verified, with secure transactions on RentEase 9ja."
+  title="Property Marketplace Preview | RentEase 9ja"
+  description="Preview how homes for sale will be presented in RentEase 9ja, including property details, document records, and transaction workflows."
   active="/buy"
 >
   <PageHero
     eyebrow="For sale"
-    title="Buy property with <span class='gradient-text'>real confidence.</span>"
-    subtitle="Every home is document-verified and every seller identity-checked, so you invest without the fear of fraud."
+    title="Preview homes <span class='gradient-text'>for sale.</span>"
+    subtitle="See how property details, document records, communication, offers, and payment steps will appear in RentEase 9ja."
   >
     <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
   </PageHero>
 
   <section class="section section--mist">
     <div class="container">
-      <div class="filters reveal">
-        {filters.map((f, i) => (<button class:list={['chip', { active: i === 0 }]}>{f}</button>))}
-      </div>
-      <div class="grid grid-3" style="margin-top: 30px;">
+      <p class="preview-note reveal"><strong>Product preview:</strong> these example listings demonstrate the marketplace interface and are not live inventory.</p>
+      <div class="grid grid-3 listings-grid">
         {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
       </div>
-      <p class="note reveal">Showing a sample of verified homes for sale. Full inventory and secure offers live in the app.</p>
+      <p class="note reveal">Live availability and document-check status will be shown after marketplace onboarding.</p>
     </div>
   </section>
 
-  <CtaBand title="Buy your next property the safe way." text="Join the waitlist for full listings, document checks, and secure transactions." />
+  <CtaBand title="Get access when sales onboarding opens." text="Join the waitlist for marketplace availability and product updates." />
 </Base>
 
 <style>
-  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-  .chip { padding: 9px 18px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--surface); color: var(--text-2); font-weight: 600; font-size: .9rem; transition: var(--transition); }
-  .chip:hover { border-color: rgba(30,78,140,.3); color: var(--brand-blue); }
-  .chip.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+  .preview-note { max-width: 720px; margin: 0 auto 30px; padding: 14px 16px; border-left: 3px solid var(--brand-blue); background: var(--surface); color: var(--text-muted); font-size: .92rem; }
+  .preview-note strong { color: var(--text); }
+  .listings-grid { margin-top: 30px; }
   .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
 </style>

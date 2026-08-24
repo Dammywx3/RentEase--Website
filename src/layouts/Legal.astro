@@ -1,10 +1,25 @@
 ---
 import Base from './Base.astro';
-const { title, description, active, heading, intro, effective, scope, toc = [], sections = [], contact } = Astro.props;
+interface TocItem { id: string; label: string; }
+interface PolicySection { id: string; num: string; title: string; body: string; }
+interface Scope { title: string; text: string; }
+interface Contact { title: string; text: string; email: string; note?: string; }
+
+const { title, description, active, heading, intro, effective, scope, toc = [], sections = [], contact } = Astro.props as {
+  title: string;
+  description: string;
+  active?: string;
+  heading: string;
+  intro?: string;
+  effective?: string;
+  scope?: Scope;
+  toc?: TocItem[];
+  sections?: PolicySection[];
+  contact?: Contact;
+};
 ---
 <Base title={title} description={description} active={active}>
   <section class="page-hero light">
-    <div class="ph-glow" aria-hidden="true"></div>
     <div class="container ph-inner reveal">
       <h1>{heading}</h1>
       {intro && <p>{intro}</p>}
@@ -46,11 +61,10 @@ const { title, description, active, heading, intro, effective, scope, toc = [], 
 </Base>
 
 <style>
-  .page-hero { position: relative; overflow: hidden; padding-block: clamp(48px, 7vw, 80px); text-align: center; background: linear-gradient(180deg, var(--bg), var(--mist)); }
-  .ph-glow { position: absolute; top: -40%; right: -10%; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(43,182,115,.12), transparent 65%); pointer-events: none; }
+  .page-hero { position: relative; overflow: hidden; padding-block: clamp(48px, 7vw, 76px); text-align: center; background: var(--bg); border-bottom: 1px solid var(--border); }
   .ph-inner { position: relative; max-width: 760px; }
   .ph-inner p { font-size: 1.12rem; color: var(--text-2); margin: 14px auto 0; max-width: 600px; }
-  .meta { display: inline-block; margin-top: 20px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: .88rem; font-weight: 600; padding: 8px 16px; border-radius: var(--r-pill); }
+  .meta { display: inline-block; margin-top: 20px; color: var(--text-muted); font-size: .88rem; font-weight: 600; padding-top: 12px; border-top: 1px solid var(--border); }
 
   .policy { max-width: 860px; padding-block: clamp(40px, 6vw, 72px); }
   .scope { display: flex; gap: 16px; align-items: flex-start; background: var(--surface-2); border: 1px solid var(--border); border-left: 4px solid var(--brand-blue); border-radius: var(--r-md); padding: 22px 24px; margin-bottom: 40px; }
@@ -80,8 +94,8 @@ const { title, description, active, heading, intro, effective, scope, toc = [], 
   .contact-box { background: var(--brand-gradient); color: #fff; border-radius: var(--r-xl); padding: 40px; text-align: center; margin-top: 56px; }
   .contact-box h3 { color: #fff; font-size: 1.6rem; margin-bottom: 10px; }
   .contact-box > p { color: rgba(255,255,255,.85); margin-bottom: 22px; }
-  .contact-link { display: inline-block; background: #fff; color: var(--brand-blue); font-weight: 700; padding: 13px 28px; border-radius: var(--r-pill); transition: var(--transition); }
-  .contact-link:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.2); }
+  .contact-link { display: inline-block; background: #fff; color: var(--brand-blue); font-weight: 700; padding: 13px 28px; border-radius: var(--r-md); transition: var(--transition); }
+  .contact-link:hover { background: #F1F5F9; }
   .cnote { margin-top: 20px; font-size: .9rem; color: rgba(255,255,255,.7); }
 
   @media (max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }

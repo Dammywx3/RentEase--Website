@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 
 const does = [
-  'Browse only verified listings, checked for real documents and real owners',
+  'Browse listings with visible review and document status',
   'List residential, commercial and land properties',
   'Connect tenants directly with identity-verified agents and landlords',
   'Chat, schedule viewings and make offers, all inside the app',
@@ -14,8 +14,8 @@ const does = [
 ];
 
 const diff = [
-  { icon: 'fa-circle-check', title: 'Verified, always', text: 'Every listing is checked for real documents and owners, and every agent and landlord passes KYC. No ghosts, no fakes.' },
-  { icon: 'fa-shield-halved', title: 'Money protected', text: 'Rent and fees move through secure, escrow-style payments and are released only on a clean handover.' },
+  { icon: 'fa-circle-check', title: 'Visible review status', text: 'Property records and participant checks make it clearer what has been reviewed and who is responsible.' },
+  { icon: 'fa-shield-halved', title: 'Recorded payment terms', text: 'Protected payment workflows keep release conditions and receipts attached to the transaction.' },
   { icon: 'fa-file-signature', title: 'Everything digital', text: 'Legally-binding tenancy agreements you sign from your phone and access anytime, no paperwork.' },
   { icon: 'fa-mobile-screen-button', title: 'All in one place', text: 'Search, chat, viewings, offers, payments and management for tenants, agents and landlords, in one app.' },
 ];
@@ -47,10 +47,9 @@ const values = [
   <section class="section section--surface">
     <div class="container narrow">
       <div class="prose reveal">
-        <p>RentEase 9ja was born out of a painful truth: renting in Nigeria is broken. Too many people lose money to fake listings, ghost agents and cash payments that simply vanish, with no agreements, no receipts, and no one to hold accountable.</p>
-        <p>So we set out to build the trust layer Nigerian real estate has always lacked, one platform where every listing is verified, every agent and landlord is identity-checked, every payment is protected, and every agreement is digital. From the first search to the signed lease, RentEase 9ja makes renting, buying and selling property safe, transparent and stress-free, for tenants, agents and landlords alike.</p>
+        <p>Property transactions in Nigeria often move across calls, informal payments, and disconnected documents. That makes it difficult for tenants, agents, and landlords to know what was agreed or to recover a reliable record when something goes wrong.</p>
+        <p>RentEase 9ja brings property information, participant checks, communication, payment records, and digital agreements into one workflow. The goal is practical: make each transaction easier to follow and give every party clearer evidence.</p>
       </div>
-      <img src="/image1.webp" alt="The RentEase 9ja experience" class="media reveal" loading="lazy" width="900" height="540" />
     </div>
   </section>
 
@@ -59,7 +58,7 @@ const values = [
       <div class="section-head reveal">
         <span class="eyebrow">Why RentEase 9ja</span>
         <h2>Trust, built into every step</h2>
-        <p>We didn't just digitise property listings, we rebuilt the whole process around safety and accountability.</p>
+        <p>The platform connects the records and controls that property transactions need.</p>
       </div>
       <div class="grid grid-4">
         {diff.map((d, i) => (
@@ -79,8 +78,8 @@ const values = [
         <img src="/team/damilare.webp" alt="Damilare V Adebayo, Founder & CEO of RentEase 9ja" class="founder-photo" width="120" height="120" loading="lazy" />
         <div class="founder-body">
           <span class="eyebrow">A note from our founder</span>
-          <blockquote>I've watched too many people in Nigeria lose their hard-earned money to fake listings and agents who vanish. I built RentEase 9ja so that never has to happen again, where every listing is verified, every naira is protected, and every agreement is real. This is more than an app to us; it's a promise.</blockquote>
-          <figcaption><strong>Damilare V Adebayo</strong><span>Founder, CEO &amp; CTO</span></figcaption>
+          <blockquote>RentEase 9ja started from a simple question: how can every participant in a property deal keep the information, decisions, and payment records they need in one place? That question still guides the product.</blockquote>
+          <figcaption><strong>Damilare V Adebayo</strong><span>Founder and Chief Executive</span></figcaption>
         </div>
       </figure>
     </div>
@@ -91,11 +90,11 @@ const values = [
       <div class="grid grid-2 mv">
         <div class="mv-card card reveal">
           <span class="eyebrow">Our mission</span>
-          <p>To make property in Nigeria safe and accessible for everyone, by replacing fraud, guesswork and paperwork with verified listings, secure payments and digital agreements on one trusted platform.</p>
+          <p>To make Nigerian property transactions clearer and more accessible by connecting property records, participant checks, payment workflows, and digital agreements.</p>
         </div>
         <div class="mv-card card reveal" data-delay="1">
           <span class="eyebrow">Our vision</span>
-          <p>To become the most trusted property platform in Africa, where no one ever has to fear being defrauded when they look for a home, list a property, or close a deal.</p>
+          <p>To become a trusted transaction platform for African property markets, with reliable records and practical safeguards for every participant.</p>
         </div>
       </div>
     </div>
@@ -135,8 +134,8 @@ const values = [
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">What we stand for</span>
-        <h2>The future of renting in Nigeria</h2>
-        <p>We are not just building another property app, we are building a smarter, more trusted rental ecosystem.</p>
+        <h2>Principles for a dependable platform</h2>
+        <p>These principles guide how the product and service are developed.</p>
       </div>
       <div class="grid grid-4">
         {values.map((v, i) => (
@@ -172,29 +171,28 @@ const values = [
 <style>
   .narrow { max-width: 860px; }
   .prose p { font-size: 1.15rem; color: var(--text-2); line-height: 1.8; }
-  .media { width: 100%; border-radius: var(--r-xl); margin-top: 32px; box-shadow: var(--shadow-card); aspect-ratio: 5 / 3; object-fit: cover; }
   .mv-card { padding: 34px 30px; }
   .mv-card p { color: var(--text-2); font-size: 1.08rem; line-height: 1.7; margin-top: 14px; }
   .does { gap: 14px 30px; }
   .does li { display: flex; align-items: flex-start; gap: 12px; color: var(--text-2); font-weight: 500; }
   .does i { color: var(--brand-green); margin-top: 3px; }
   .founder { display: flex; gap: 30px; align-items: center; padding: 36px 34px; background: var(--brand-gradient-soft); border: 1px solid var(--border); }
-  .founder-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: var(--shadow-card); }
+  .founder-photo { width: 120px; height: 120px; border-radius: 6px; object-fit: cover; flex: none; box-shadow: var(--shadow-sm); }
   .founder-body blockquote { font-size: 1.14rem; line-height: 1.7; color: var(--text); font-style: italic; margin: 12px 0 16px; }
   .founder figcaption strong { display: block; font-family: var(--font-display); font-weight: 800; color: var(--text); }
   .founder figcaption span { color: var(--text-muted); font-size: .92rem; }
   @media (max-width: 640px) { .founder { flex-direction: column; text-align: center; padding: 30px 24px; } }
 
-  .diff { text-align: center; }
-  .d-icon { width: 60px; height: 60px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--brand-gradient); margin: 0 auto 16px; box-shadow: var(--shadow-glow); }
+  .diff { text-align: left; border-top: 1px solid rgba(255,255,255,.2); padding-top: 20px; }
+  .d-icon { width: 38px; height: 38px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: #fff; background: var(--brand-blue-soft); margin-bottom: 16px; }
   .diff h3 { margin-bottom: 6px; font-size: 1.12rem; color: #fff; }
   .diff p { color: var(--on-dark-2); font-size: .95rem; line-height: 1.65; }
   .serve { padding: 30px 28px; }
-  .s-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-size: 1.35rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 16px; }
+  .s-icon { width: 40px; height: 40px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: var(--brand-blue); background: var(--brand-gradient-soft); margin-bottom: 16px; }
   .serve h3 { margin-bottom: 8px; }
   .serve p { color: var(--text-muted); }
-  .value { text-align: center; }
-  .v-icon { width: 60px; height: 60px; border-radius: var(--r-md); display: grid; place-items: center; font-size: 1.4rem; color: #fff; background: var(--brand-gradient); margin: 0 auto 16px; }
+  .value { text-align: left; border-top: 2px solid var(--brand-blue); padding-top: 20px; }
+  .v-icon { width: 38px; height: 38px; border-radius: 4px; display: grid; place-items: center; font-size: 1rem; color: #fff; background: var(--brand-blue); margin-bottom: 16px; }
   .value h3 { margin-bottom: 6px; font-size: 1.15rem; }
   .value p { color: var(--text-muted); font-size: .95rem; }
   .contact { padding: 40px 36px; }
