@@ -1,5 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/messages/:id", "destination": "https://api.rentease9ja.com/messages/:id", "permanent": false },
+    { "source": "/deal/:id", "destination": "https://api.rentease9ja.com/deal/:id", "permanent": false },
+    { "source": "/listing/:id", "destination": "https://api.rentease9ja.com/listing/:id", "permanent": false },
+    { "source": "/property/:id", "destination": "https://api.rentease9ja.com/property/:id", "permanent": false },
+    { "source": "/notifications", "destination": "https://api.rentease9ja.com/notifications", "permanent": false },
+    { "source": "/wallet", "destination": "https://api.rentease9ja.com/wallet", "permanent": false },
+    { "source": "/referrals", "destination": "https://api.rentease9ja.com/referrals", "permanent": false },
+    { "source": "/maintenance", "destination": "https://api.rentease9ja.com/maintenance", "permanent": false },
+    { "source": "/verification", "destination": "https://api.rentease9ja.com/verification", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
