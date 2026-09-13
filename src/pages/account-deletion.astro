@@ -1,0 +1,71 @@
+---
+import Legal from '../layouts/Legal.astro';
+
+const toc = [
+  { id: 'delete-in-app', label: 'Delete in the app' },
+  { id: 'delete-web', label: 'Request deletion on the web' },
+  { id: 'what-deletes', label: 'What is deleted' },
+  { id: 'what-retains', label: 'What may be retained' },
+  { id: 'timing', label: 'Timing and confirmation' },
+];
+
+const email = 'privacy@rentease9ja.com';
+const subject = encodeURIComponent('RentEase 9ja account deletion request');
+const body = encodeURIComponent(
+  'Please delete my RentEase 9ja account.\n\nRegistered email or phone:\nAccount role (tenant, agent, or landlord):\n\nI understand that legally required transaction and compliance records may be retained for the periods described on this page.'
+);
+
+const sections = [
+  { num: '01', id: 'delete-in-app', title: 'Delete in the app', body: `
+    <p>Sign in to RentEase 9ja, open <strong>Me</strong>, choose <strong>Security settings</strong>, then choose <strong>Delete account</strong>. Review the consequences and complete the confirmation shown in the app.</p>
+    <p>This is the fastest route because you are already authenticated. It is available to tenant, agent, and landlord accounts.</p>` },
+  { num: '02', id: 'delete-web', title: 'Request deletion on the web', body: `
+    <p>If you cannot access the app, use the secure support pathway below. Send the request from the email address registered to your RentEase account so our Privacy team can verify ownership before processing it.</p>
+    <p><a class="delete-request" href="mailto:${email}?subject=${subject}&body=${body}">Start an account deletion request</a></p>
+    <p>Do not include your password, transaction PIN, card number, BVN, NIN, or identity-document images in the email. We may ask for limited verification information through an approved channel.</p>` },
+  { num: '03', id: 'what-deletes', title: 'What is deleted or anonymised', body: `
+    <p>After verification, RentEase disables the account and removes or anonymises information that is no longer needed, including the public profile, active sessions, saved searches, saved listings, device tokens, and unpublished listing content.</p>
+    <p>Listings connected to an active tenancy, purchase, payment, dispute, or legal obligation may first be restricted from public view while the underlying record is preserved as required.</p>` },
+  { num: '04', id: 'what-retains', title: 'What may be retained', body: `
+    <p>Some records cannot be erased immediately because RentEase must protect users, resolve disputes, prevent fraud, and comply with Nigerian financial and identity-verification obligations.</p>
+    <ul>
+      <li><strong>Transaction and settlement records:</strong> retained for up to 7 years where financial-record rules apply.</li>
+      <li><strong>KYC and compliance records:</strong> retained for up to 5 years where anti-money-laundering rules apply.</li>
+      <li><strong>Security, fraud, dispute, and legal records:</strong> retained only for the period needed to resolve the matter or meet a legal obligation.</li>
+    </ul>
+    <p>Retained records are access-restricted and are not used to keep your public account active.</p>` },
+  { num: '05', id: 'timing', title: 'Timing and confirmation', body: `
+    <p>We acknowledge web requests within 2 business days. After ownership is verified, account deactivation begins promptly and eligible personal data is deleted or anonymised within 30 days. We send confirmation to the registered email address when processing is complete.</p>
+    <p>Questions or corrections can be sent to <a href="mailto:${email}">${email}</a>.</p>` },
+];
+---
+<Legal
+  title="Delete Your RentEase Account | RentEase 9ja"
+  description="Request deletion of a RentEase 9ja tenant, agent, or landlord account and understand what data is deleted or legally retained."
+  active="/account-deletion"
+  heading="Delete your RentEase account"
+  intro="A direct route to permanently close your tenant, agent, or landlord account."
+  effective="Last reviewed September 10, 2026"
+  scope={{ title: 'RentEase 9ja account deletion', text: 'This page applies to the <strong>RentEase 9ja</strong> mobile application operated by RentEase 9ja Homes &amp; Property Ltd (RC 9527258).' }}
+  toc={toc}
+  sections={sections}
+  contact={{ title: 'Privacy support', text: 'Use your registered email address so we can verify and process your request safely.', email, note: 'Never send passwords, PINs, full bank details, BVN, NIN, or identity images by email.' }}
+/>
+
+<style>
+  :global(.delete-request) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 11px 18px;
+    border-radius: 8px;
+    background: var(--brand-green-dark);
+    color: #fff !important;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  :global(.delete-request:focus-visible) {
+    outline: 3px solid var(--brand-blue);
+    outline-offset: 3px;
+  }
+</style>
