@@ -11,13 +11,17 @@ const { eyebrow, title, subtitle, variant = 'light' } = Astro.props;
 </section>
 
 <style>
-  .page-hero { position: relative; overflow: hidden; padding-block: clamp(56px, 7vw, 84px); text-align: center; border-bottom: 1px solid var(--border); }
+  .page-hero { position: relative; overflow: hidden; padding-block: 44px; text-align: center; border-bottom: 1px solid var(--border); }
   .page-hero.light { background: var(--bg); }
   .page-hero.dark { background: var(--navy-900); color: var(--on-dark); border-bottom-color: var(--navy-border); }
   .page-hero.dark h1 { color: #fff; }
   .ph-inner { position: relative; max-width: 760px; }
-  .ph-inner h1 { margin: 18px 0 16px; }
-  .ph-inner p { font-size: 1.15rem; color: var(--text-2); max-width: 620px; margin: 0 auto; }
+  .ph-inner h1 { margin: 12px 0 10px; }
+  .ph-inner p { font-size: 1rem; line-height: 1.5; color: var(--text-2); max-width: 620px; margin: 0 auto; }
   .page-hero.dark p { color: var(--on-dark-2); }
   .ph-inner :global(.hero-actions) { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+  @media (max-width: 720px) {
+    .page-hero { padding-block: 28px; }
+    .ph-inner h1 { margin-top: 8px; }
+  }
 </style>
