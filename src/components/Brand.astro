@@ -1,15 +1,14 @@
 ---
-const { inverse = false, compact = false } = Astro.props;
-const logoSrc = inverse ? '/brand-logo-light-v2.png' : '/brand-logo-v2.png';
+const { compact = false } = Astro.props;
 ---
 <span class:list={['brand-lockup', { compact }]}>
-  <img src={logoSrc} alt="RentEase 9ja" width="200" height="40" />
+  <img src="/logo.webp" alt="RentEase 9ja" width="200" height="104" />
 </span>
 
 <style>
-  .brand-lockup, .brand-lockup img { display: block; width: 200px; height: 40px; flex: none; }
-  .compact, .compact img { width: 175px; height: 35px; }
+  .brand-lockup, .brand-lockup img { display: block; width: 200px; height: auto; flex: none; }
+  .compact, .compact img { width: 175px; height: auto; }
   @media (max-width: 480px) {
-    .brand-lockup, .brand-lockup img { width: 175px; height: 35px; }
+    .brand-lockup, .brand-lockup img { width: 175px; height: auto; }
   }
 </style>
