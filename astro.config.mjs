@@ -16,7 +16,7 @@ export default defineConfig({
         "base-uri 'self'",
         "object-src 'none'",
         "form-action 'self'",
-        "img-src 'self' data: https://images.unsplash.com https://*.tawk.to https://*.tawk.link",
+        "img-src 'self' data: https://images.unsplash.com https://res.cloudinary.com https://api.rentease9ja.com https://*.tawk.to https://*.tawk.link",
         "font-src 'self' data: https://fonts.gstatic.com https://*.tawk.to",
         "connect-src 'self' https://api.rentease9ja.com https://plausible.io https://*.tawk.to https://*.tawk.link wss://*.tawk.to",
         "frame-src https://*.tawk.to https://*.tawk.link",

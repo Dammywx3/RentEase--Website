@@ -1,47 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import ListingCard from '../components/ListingCard.astro';
-import CtaBand from '../components/CtaBand.astro';
-
-const listings = [
-  { image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=900', price: '₦800,000 / yr', title: 'Self-Contain Studio', location: 'Port Harcourt, Rivers', kind: 'rent', meta: [{ icon: 'fa-bed', label: '1 bed' }, { icon: 'fa-bath', label: '1 bath' }] },
-  { image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=900', price: '₦1,200,000 / yr', title: 'Modern 2-Bedroom Flat', location: 'Lekki, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '2 beds' }, { icon: 'fa-bath', label: '2 baths' }] },
-  { image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=900', price: '₦2,500,000 / yr', title: 'Modern 3-Bedroom Flat', location: 'Wuse II, Abuja', kind: 'rent', meta: [{ icon: 'fa-bed', label: '3 beds' }, { icon: 'fa-bath', label: '3 baths' }] },
-  { image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=900', price: '₦1,800,000 / yr', title: 'Serviced 2-Bedroom Apartment', location: 'Victoria Island, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '2 beds' }, { icon: 'fa-couch', label: 'Furnished' }] },
-  { image: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=900', price: '₦3,500,000 / yr', title: 'Luxury 4-Bedroom Terrace', location: 'Maitama, Abuja', kind: 'rent', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-car', label: 'Parking' }] },
-  { image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=900', price: '₦950,000 / yr', title: 'Cosy Mini Flat', location: 'Yaba, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '1 bed' }, { icon: 'fa-bath', label: '1 bath' }] },
-];
+import PublicListings from '../components/PublicListings.astro';
 ---
-<Base
-  title="Rental Marketplace Preview | RentEase 9ja"
-  description="Preview how rental homes will be presented in RentEase 9ja, including property details, participant checks, messaging, and payment records."
-  active="/rent"
->
-  <PageHero
-    eyebrow="Rentals"
-    title="Preview the <span class='gradient-text'>rental marketplace.</span>"
-    subtitle="See how property details, viewing requests, communication, payment records, and agreements will come together in RentEase 9ja."
-  >
-    <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
-  </PageHero>
-
+<Base title="Homes for rent | RentEase 9ja" description="Browse current public rental listings from RentEase agents and landlords." active="/rent">
+  <PageHero eyebrow="Marketplace" title="Homes for rent" subtitle="Browse current public rental listings from RentEase agents and landlords." />
   <section class="section section--mist">
     <div class="container">
-      <p class="preview-note reveal"><strong>Product preview:</strong> these example listings demonstrate the marketplace interface and are not live inventory.</p>
-      <div class="grid grid-3 listings-grid">
-        {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
-      </div>
-      <p class="note reveal">Live availability and verification status will be shown after marketplace onboarding.</p>
+      <PublicListings type="rent" category="" />
     </div>
   </section>
-
-  <CtaBand title="Get access when rental onboarding opens." text="Join the waitlist for marketplace availability and viewing updates." />
 </Base>
-
-<style>
-  .preview-note { max-width: 720px; margin: 0 auto 30px; padding: 14px 16px; border-left: 3px solid var(--brand-blue); background: var(--surface); color: var(--text-muted); font-size: .92rem; }
-  .preview-note strong { color: var(--text); }
-  .listings-grid { margin-top: 30px; }
-  .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
-</style>

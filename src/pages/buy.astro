@@ -1,47 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import ListingCard from '../components/ListingCard.astro';
-import CtaBand from '../components/CtaBand.astro';
-
-const listings = [
-  { image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=900', price: '₦45,000,000', title: 'Modern 4-Bedroom Duplex', location: 'Lekki, Lagos', kind: 'buy', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-ruler-combined', label: '450 sqm' }] },
-  { image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=900', price: '₦250,000,000', title: 'Luxury 5-Bedroom Mansion', location: 'Maitama, Abuja', kind: 'buy', meta: [{ icon: 'fa-bed', label: '5 beds' }, { icon: 'fa-car', label: 'BQ + Parking' }] },
-  { image: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?q=80&w=900', price: '₦15,000,000', title: '3-Bedroom Bungalow', location: 'Ibadan, Oyo', kind: 'buy', meta: [{ icon: 'fa-bed', label: '3 beds' }, { icon: 'fa-ruler-combined', label: '300 sqm' }] },
-  { image: 'https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=900', price: '₦85,000,000', title: 'Luxury Penthouse', location: 'Victoria Island, Lagos', kind: 'buy', meta: [{ icon: 'fa-bed', label: '3 beds' }, { icon: 'fa-couch', label: 'Furnished' }] },
-  { image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900', price: '₦120,000,000', title: 'Contemporary 5-Bed Villa', location: 'Banana Island, Lagos', kind: 'buy', meta: [{ icon: 'fa-bed', label: '5 beds' }, { icon: 'fa-water-ladder', label: 'Pool' }] },
-  { image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=900', price: '₦38,000,000', title: '4-Bedroom Semi-Detached', location: 'Gwarinpa, Abuja', kind: 'buy', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-ruler-combined', label: '350 sqm' }] },
-];
+import PublicListings from '../components/PublicListings.astro';
 ---
-<Base
-  title="Property Marketplace Preview | RentEase 9ja"
-  description="Preview how homes for sale will be presented in RentEase 9ja, including property details, document records, and transaction workflows."
-  active="/buy"
->
-  <PageHero
-    eyebrow="For sale"
-    title="Preview homes <span class='gradient-text'>for sale.</span>"
-    subtitle="See how property details, document records, communication, offers, and payment steps will appear in RentEase 9ja."
-  >
-    <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
-  </PageHero>
-
+<Base title="Properties for sale | RentEase 9ja" description="Browse current public properties for sale and open the exact listing in RentEase." active="/buy">
+  <PageHero eyebrow="Marketplace" title="Properties for sale" subtitle="Browse current public properties for sale and open the exact listing in RentEase." />
   <section class="section section--mist">
     <div class="container">
-      <p class="preview-note reveal"><strong>Product preview:</strong> these example listings demonstrate the marketplace interface and are not live inventory.</p>
-      <div class="grid grid-3 listings-grid">
-        {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
-      </div>
-      <p class="note reveal">Live availability and document-check status will be shown after marketplace onboarding.</p>
+      <PublicListings type="sale" category="" />
     </div>
   </section>
-
-  <CtaBand title="Get access when sales onboarding opens." text="Join the waitlist for marketplace availability and product updates." />
 </Base>
-
-<style>
-  .preview-note { max-width: 720px; margin: 0 auto 30px; padding: 14px 16px; border-left: 3px solid var(--brand-blue); background: var(--surface); color: var(--text-muted); font-size: .92rem; }
-  .preview-note strong { color: var(--text); }
-  .listings-grid { margin-top: 30px; }
-  .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
-</style>

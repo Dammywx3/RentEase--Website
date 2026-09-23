@@ -1,47 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import ListingCard from '../components/ListingCard.astro';
-import CtaBand from '../components/CtaBand.astro';
-
-const listings = [
-  { image: 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=900', price: '₦8,500,000', title: '600sqm Residential Plot', location: 'Ibeju-Lekki, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '600 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
-  { image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=900', price: '₦120,000,000', title: '1,200sqm Commercial Land', location: 'Wuse II, Abuja', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '1,200 sqm' }, { icon: 'fa-file-contract', label: 'R of O' }] },
-  { image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=900', price: '₦8,500,000 / acre', title: '10 Acres Farmland', location: 'Ewekoro, Ogun', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '10 acres' }, { icon: 'fa-file-contract', label: 'Reg. Survey' }] },
-  { image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=900', price: '₦25,000,000', title: '800sqm Estate Plot', location: 'Epe, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '800 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
-  { image: 'https://images.unsplash.com/photo-1500076656116-558758c991c1?q=80&w=900', price: '₦15,000,000', title: '500sqm Residential Plot', location: 'Kuje, Abuja', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '500 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
-  { image: 'https://images.unsplash.com/photo-1542621334-a254cf47733d?q=80&w=900', price: '₦60,000,000', title: '1 Acre Waterfront Land', location: 'Ikoyi, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '1 acre' }, { icon: 'fa-water', label: 'Waterfront' }] },
-];
+import PublicListings from '../components/PublicListings.astro';
 ---
-<Base
-  title="Land Marketplace Preview | RentEase 9ja"
-  description="Preview how land and plots will be presented in RentEase 9ja, including property details, document records, and transaction workflows."
-  active="/land"
->
-  <PageHero
-    eyebrow="Land & plots"
-    title="Preview land and <span class='gradient-text'>plot listings.</span>"
-    subtitle="See how plot details, available document records, communication, offers, and payment steps will appear in RentEase 9ja."
-  >
-    <div class="hero-actions"><a href="/waitlist" class="btn btn-primary">Get the app <i class="fas fa-arrow-right"></i></a></div>
-  </PageHero>
-
+<Base title="Land for sale | RentEase 9ja" description="Explore public land listings with the area and price supplied by the lister." active="/land">
+  <PageHero eyebrow="Marketplace" title="Land for sale" subtitle="Explore public land listings with the area and price supplied by the lister." />
   <section class="section section--mist">
     <div class="container">
-      <p class="preview-note reveal"><strong>Product preview:</strong> these example listings demonstrate the marketplace interface and are not live inventory.</p>
-      <div class="grid grid-3 listings-grid">
-        {listings.map((l, i) => (<div class="reveal" data-delay={i % 3}><ListingCard {...l} /></div>))}
-      </div>
-      <p class="note reveal">Live availability and document-check status will be shown after marketplace onboarding.</p>
+      <PublicListings type="sale" category="land" />
     </div>
   </section>
-
-  <CtaBand title="Get access when land onboarding opens." text="Join the waitlist for marketplace availability and product updates." />
 </Base>
-
-<style>
-  .preview-note { max-width: 720px; margin: 0 auto 30px; padding: 14px 16px; border-left: 3px solid var(--brand-blue); background: var(--surface); color: var(--text-muted); font-size: .92rem; }
-  .preview-note strong { color: var(--text); }
-  .listings-grid { margin-top: 30px; }
-  .note { text-align: center; color: var(--text-muted); margin-top: 36px; font-size: .95rem; }
-</style>

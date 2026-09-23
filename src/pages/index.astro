@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import ListingCard from '../components/ListingCard.astro';
+import PublicListings from '../components/PublicListings.astro';
 import HeroPhones from '../components/HeroPhones.astro';
 import DeviceLaptop from '../components/DeviceLaptop.astro';
 
@@ -21,12 +21,6 @@ const audiences = [
   { icon: 'fa-house-user', title: 'Renters and buyers', text: 'Review properties, communicate, and keep a record of each step.', perks: ['Property and participant checks', 'In-app chat and viewings', 'Protected payment flow', 'Digital agreements'], href: '/rent', cta: 'Explore the preview' },
   { icon: 'fa-building-user', title: 'Landlords and agents', text: 'Manage listings, enquiries, viewings, and tenancy records.', perks: ['Listing management', 'Lead and offer tracking', 'Unit and tenant records', 'Digital rent collection'], href: '/waitlist', cta: 'Join early access' },
   { icon: 'fa-helmet-safety', title: 'Property developers', text: 'Present estates and plots with documents and structured buyer workflows.', perks: ['Estate inventory', 'Document records', 'Buyer demand reporting', 'Sales support'], href: '/for-developers', cta: 'Discuss a partnership' },
-];
-
-const listings = [
-  { image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900', price: '₦1,200,000 / yr', title: 'Modern 2-Bedroom Flat', location: 'Lekki, Lagos', kind: 'rent', meta: [{ icon: 'fa-bed', label: '2 beds' }, { icon: 'fa-bath', label: '2 baths' }] },
-  { image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=900', price: '₦45,000,000', title: 'Modern 4-Bedroom Duplex', location: 'Maitama, Abuja', kind: 'buy', meta: [{ icon: 'fa-bed', label: '4 beds' }, { icon: 'fa-ruler-combined', label: '450 sqm' }] },
-  { image: 'https://images.unsplash.com/photo-1592595896551-12b371d546d5?q=80&w=900', price: '₦8,500,000', title: '600sqm Residential Plot', location: 'Ibeju-Lekki, Lagos', kind: 'land', meta: [{ icon: 'fa-ruler-combined', label: '600 sqm' }, { icon: 'fa-file-contract', label: 'C of O' }] },
 ];
 
 const appFeatures = [
@@ -182,15 +176,11 @@ const faqLd = {
   <section class="section section--surface">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Marketplace preview</span>
-        <h2>Example listing experience</h2>
-        <p>Illustrative inventory shown for product preview. Live availability and verification status will appear in the app.</p>
+        <span class="eyebrow">Marketplace</span>
+        <h2>Latest available properties</h2>
+        <p>Current public listings from RentEase agents and landlords.</p>
       </div>
-      <div class="grid grid-3">
-        {listings.map((l, i) => (
-          <div class="reveal" data-delay={i}><ListingCard {...l} verified={false} /></div>
-        ))}
-      </div>
+      <PublicListings limit={3} compact />
       <div class="center-cta reveal"><a href="/rent" class="btn btn-ghost">Browse all listings <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
