@@ -15,7 +15,7 @@ dist
 # Not needed for the build — source images are pre-optimized into /public
 raw-assets
 legacy
-scripts
+/scripts
 
 # Editor / OS noise
 .vscode
