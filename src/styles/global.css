@@ -52,7 +52,7 @@
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
   /* --- Layout --- */
-  --container: 1200px;
+  --container: 1440px;
   --gutter: clamp(20px, 5vw, 64px);
   --section-y: clamp(64px, 8vw, 96px);
 
