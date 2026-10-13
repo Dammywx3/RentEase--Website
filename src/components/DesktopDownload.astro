@@ -3,7 +3,7 @@
 // macOS ships as two builds (Apple silicon + Intel); the card defaults to Apple
 // silicon and auto-switches to Intel on Intel Macs, with an explicit alt link.
 // URLs come from src/config.ts; an empty URL shows that platform as "Coming soon".
-import { DESKTOP_DOWNLOADS, DESKTOP_VERSION, DESKTOP_RELEASES_URL } from '../config';
+import { DESKTOP_DOWNLOADS, DESKTOP_VERSION, DESKTOP_RELEASES_URL, WEB_APP_URL } from '../config';
 
 const { macArm, macIntel, windows, linux, linuxDeb, linuxRpm } = DESKTOP_DOWNLOADS;
 const anyAvailable = !!(macArm || macIntel || windows || linux);
@@ -19,7 +19,7 @@ const anyAvailable = !!(macArm || macIntel || windows || linux);
     <a class="dl-card" data-os="windows" href={windows || undefined} aria-disabled={windows ? 'false' : 'true'}>
       <i class="fab fa-windows" aria-hidden="true"></i>
       <span class="dl-label">{windows ? 'Download for Windows' : 'Windows'}</span>
-      <span class="dl-sub">{windows ? '10 & 11, 64-bit · .msi' : 'Coming soon'}</span>
+      <span class="dl-sub">{windows ? '10 & 11, 64-bit · .exe' : 'Coming soon'}</span>
       <span class="dl-rec">For your device</span>
     </a>
     <a class="dl-card" data-os="linux" href={linux || undefined} aria-disabled={linux ? 'false' : 'true'}>
@@ -52,6 +52,7 @@ const anyAvailable = !!(macArm || macIntel || windows || linux);
     {DESKTOP_RELEASES_URL && <> · <a href={DESKTOP_RELEASES_URL} target="_blank" rel="noopener">All releases &amp; notes</a></>}
     {!anyAvailable && <span>Desktop apps are on the way — <a href="/waitlist">join the waitlist</a> to be notified.</span>}
   </p>
+  {anyAvailable && <p class="dl-meta">Mac notarization and Windows signing are pending. If your system blocks installation, use the <a href={WEB_APP_URL}>browser app</a>.</p>}
 </div>
 
 <script>
